@@ -17,19 +17,32 @@
                 app:showAsAction="ifRoom"
                 android:title="Tareas" />
 
-            <item android:id="@+id/sincronizarUsuario"
-                android:icon="@drawable/ic_action_refresh"
+            <item android:id="@+id/retoUsuario"
+                android:icon="@android:drawable/ic_delete"
                 app:showAsAction="ifRoom"
-                android:title="Sincronizar" />
+                android:title="Reto" />
+
+            <item android:id="@+id/eventosUsuario"
+                android:icon="@drawable/ic_action_go_to_today"
+                app:showAsAction="ifRoom"
+                android:title="Evento" />
+
+            <item
+                android:id="@+id/eliminarUsuario"
+                android:icon="@drawable/ic_action_discard"
+                android:orderInCategory="10"
+                app:showAsAction="ifRoom|withText"
+                android:title="Eliminar"/>
+
 
         </menu>
 
     </item>
 
+    <item android:id="@+id/sincronizarUsuario"
+        android:icon="@drawable/ic_action_refresh"
+        app:showAsAction="ifRoom"
+        android:title="Sincronizar" />
 
-    <item android:title=""
-        android:id="@+id/eliminar"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:orderInCategory="10"
-        app:showAsAction="ifRoom|withText"/>
+
 </menu>

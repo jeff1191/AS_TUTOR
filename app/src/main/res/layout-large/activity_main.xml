@@ -12,28 +12,25 @@
             android:layout_height="match_parent"
 			android:baselineAligned="false">
 
-			<fragment
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:name="es.ucm.as_tutor.FragmentSeleccion"
-                android:id="@+id/FrgSeleccion" />
-
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <fragment class="es.ucm.as_tutor.FragmentListado"
+                <fragment class="es.ucm.as_tutor.presentacion.FragmentListado"
     android:id="@+id/FrgListado"
                     android:layout_width="280dp"
     android:layout_height="match_parent"
-                    android:layout_gravity="left|center_vertical" />
+                    android:layout_gravity="left|center_vertical"
+                    android:tag="FRAGMENT_LISTADO" />
             </FrameLayout>
 
-            <fragment class="es.ucm.as_tutor.FragmentDetalle"
-            android:id="@+id/FrgDetalle"
+            <fragment
+                android:id="@+id/FrgDetalle"
             android:layout_weight="70"
-            android:layout_width="0px"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+                android:name="es.ucm.as_tutor.presentacion.FragmentDetalle"
+                android:tag="FRAGMENT_DETALLE" />
 
         </LinearLayout>
     <ListView android:id="@+id/lista"

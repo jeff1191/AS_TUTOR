@@ -11,13 +11,13 @@
 		android:name="es.ucm.as_tutor.FragmentSeleccion"
 		android:id="@+id/fragment" />
 
-	<fragment class="es.ucm.as_tutor.FragmentListado"
+	<fragment class="es.ucm.as_tutor.presentacion.FragmentListado"
 		android:id="@+id/FrgListado"
 		android:layout_weight="30"
 		android:layout_width="0px"
 		android:layout_height="match_parent" />
 
-	<fragment class="es.ucm.as_tutor.FragmentDetalle"
+	<fragment class="es.ucm.as_tutor.presentacion.FragmentDetalle"
 		android:id="@+id/FrgDetalle"
 		android:layout_weight="70"
 		android:layout_width="0px"

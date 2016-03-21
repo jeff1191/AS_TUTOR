@@ -1,15 +1,24 @@
-package es.ucm.as_tutor;
+package es.ucm.as_tutor.presentacion;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-public class FragmentSeleccion extends Fragment {
+import es.ucm.as_tutor.R;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link FragmentDetalleTarea.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link FragmentDetalleTarea#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class FragmentDetalleTarea extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -19,14 +28,23 @@ public class FragmentSeleccion extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private SeleccionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
-    public FragmentSeleccion() {
+    public FragmentDetalleTarea() {
         // Required empty public constructor
     }
 
-    public static FragmentSeleccion newInstance(String param1, String param2) {
-        FragmentSeleccion fragment = new FragmentSeleccion();
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FragmentDetalleTarea.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static FragmentDetalleTarea newInstance(String param1, String param2) {
+        FragmentDetalleTarea fragment = new FragmentDetalleTarea();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,16 +65,10 @@ public class FragmentSeleccion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_seleccion, container, false);
+        return inflater.inflate(R.layout.fragment_detalle_tarea, container, false);
     }
-/*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-*/
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -73,15 +85,8 @@ public class FragmentSeleccion extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface SeleccionListener {
-        void onSeleccionListener(String opt);
-    }
-
-    public void setSeleccionListener(SeleccionListener listener) {
-        this.mListener=listener;
-    }
-    public void pruebaFragment(String prueba){
-       // TextView ttt = (TextView)getView().findViewById(R.id.prueba);
-      //  ttt.setText(prueba);
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

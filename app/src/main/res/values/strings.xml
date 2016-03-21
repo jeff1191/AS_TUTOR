@@ -9,16 +9,14 @@
 
     <!-- Lista de titulos de navegacion-->
     <string-array name="nav_options">
-        <item>Home</item>
-        <item>Perfil</item>
-        <item>Configuración</item>
+        <item>Usuarios</item>
+        <item>Eventos</item>
         <item>Acerca de</item>
     </string-array>
     <!-- Lista de iconos de navegacion-->
     <array name="navigation_iconos">
-        <item>@drawable/ic_action_home</item>
-        <item>@drawable/ic_action_person</item>
-        <item>@drawable/ic_action_settings</item>
+        <item>@drawable/ic_action_group</item>
+        <item>@drawable/ic_action_go_to_today_dark</item>
         <item>@drawable/ic_action_about</item>
     </array>
 </resources>

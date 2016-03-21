@@ -1,12 +1,10 @@
-package es.ucm.as_tutor;
+package es.ucm.as_tutor.presentacion;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.nfc.Tag;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,18 +20,22 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import es.ucm.as_tutor.R;
+
 public class MainActivity extends AppCompatActivity
-        implements FragmentListado.ListadoListener,FragmentSeleccion.SeleccionListener {
+        implements FragmentListado.ListadoListener {
     private String[] titulos;
     private DrawerLayout NavDrawerLayout;
     private ListView NavList;
     private ArrayList<Item_Navegacion> NavItms;
     private TypedArray NavIcons;
     private ActionBarDrawerToggle mDrawerToggle;
-    AdaptadorNavegacion NavAdapter;
+    private AdaptadorNavegacion NavAdapter;
     private ImageButton tareas;
     private ImageButton usuarios;
     private String panelActivo="usuarios";
+    private Menu menuActionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
+     
+
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavList = (ListView) findViewById(R.id.lista);
@@ -51,16 +55,12 @@ public class MainActivity extends AppCompatActivity
         titulos = getResources().getStringArray(R.array.nav_options);
         NavItms = new ArrayList<Item_Navegacion>();
 
-        //Home
+        //Usuarios
         NavItms.add(new Item_Navegacion(titulos[0], NavIcons.getResourceId(0, -1)));
-        //Perfil
+        //Eventos
         NavItms.add(new Item_Navegacion(titulos[1], NavIcons.getResourceId(1, -1)));
-        //Configuracion
-        NavItms.add(new Item_Navegacion(titulos[2], NavIcons.getResourceId(2, -1)));
         //Acerca de
-        NavItms.add(new Item_Navegacion(titulos[3], NavIcons.getResourceId(3, -1)));
-
-
+        NavItms.add(new Item_Navegacion(titulos[2], NavIcons.getResourceId(2, -1)));
         NavAdapter= new AdaptadorNavegacion(this,NavItms);
         NavList.setAdapter(NavAdapter);
 
@@ -100,109 +100,21 @@ public class MainActivity extends AppCompatActivity
         });
 
         //Cuando la aplicacion cargue por defecto mostrar la opcion Home
-        MostrarFragment(1);
+        //MostrarFragment(1);
+        /* cuando inicia empieza con el listado del usuario */
+        Bundle arguments = new Bundle();
+        arguments.putBoolean("activoListadoUsuario", true);
+        FragmentListado frgListado =new FragmentListado();
+        frgListado.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListado).commit();
 
-
-        final FragmentListado frgListado =
-                (FragmentListado)getSupportFragmentManager()
-                        .findFragmentById(R.id.FrgListado);
-
-        usuarios =(ImageButton)findViewById(R.id.imageButtonUsuarios);
-        tareas =(ImageButton)findViewById(R.id.imageButtonTareas);
-
-        usuarios.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /* FragmentListado frgListado =
-                        (FragmentListado)getSupportFragmentManager()
-                                .findFragmentById(R.id.FrgListado);*/
-
-                /*if(panelActivo.equals("usuarios")){
-                    usuarios.setImageResource(R.drawable.ic_action_group);
-                    usuarios.setBackgroundColor(Color.parseColor("#eae8e8"));
-
-                    tareas.setImageResource(R.drawable.ic_action_go_to_today);
-                    tareas.setBackgroundColor(Color.parseColor("#dad6d6"));
-
-                }else{
-                    usuarios.setImageResource(R.drawable.ic_action_go_to_today);
-                    usuarios.setBackgroundColor(Color.parseColor("#eae8e8"));
-
-                    tareas.setImageResource(R.drawable.ic_action_group);
-                    tareas.setBackgroundColor(Color.parseColor("#dad6d6"));
-                }
-*/
-                if(panelActivo.equals("tareas")) { // si el panel activo es tareas, hacemos el swap
-                    usuarios.setBackgroundColor(Color.parseColor("#eae8e8")); //boton Activo
-                    tareas.setBackgroundColor(Color.parseColor("#dad6d6")); //boton Inactivo*/
-                    float posXusuarios = usuarios.getX();
-                    float posYusuarios = usuarios.getY();
-                    float posXtareas = tareas.getX();
-                    float posYtareas = tareas.getY();
-
-                    tareas.setX(posXusuarios);
-                    tareas.setY(posYusuarios);
-
-                    usuarios.setX(posXtareas);
-                    usuarios.setY(posYtareas);
-                }
-
-
-                panelActivo="usuarios";
-
-            }
-        });
-
-        tareas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /*FragmentListado frgListado =
-                        (FragmentListado) getSupportFragmentManager()
-                                .findFragmentById(R.id.FrgListado);*/
-
-
-               // Activar Fragments o rellenar fragments con la nueva info*/
-            if(panelActivo.equals("usuarios")) {
-                tareas.setBackgroundColor(Color.parseColor("#eae8e8")); //boton Activo
-                usuarios.setBackgroundColor(Color.parseColor("#dad6d6")); //boton Inactivo
-                float posXusuarios = usuarios.getX();
-                float posYusuarios = usuarios.getY();
-                float posXtareas = tareas.getX();
-                float posYtareas = tareas.getY();
-
-                tareas.setX(posXusuarios);
-                tareas.setY(posYusuarios);
-
-                usuarios.setX(posXtareas);
-                usuarios.setY(posYtareas);
-            }
-            ///////////////////cambio de fragmento de tareas ///////////////////////////////////
-
-
-               // FragmentSeleccion fragment = new FragmentSeleccion();
-                //fragment.setArguments(arguments);
-                //getSupportFragmentManager().beginTransaction().replace(R.id.LstListado, fragment).commit();
-                /*
-                ((FragmentSeleccion)getSupportFragmentManager()
-                        .findFragmentById(R.id.FrgSeleccion)).pruebaFragment("HHH");*/
-
-               /* FragmentSeleccion fragment2 = (FragmentSeleccion) getSupportFragmentManager().findFragmentById(R.id.FrgSeleccion);
-                if(fragment != null)
-                    getSupportFragmentManager().beginTransaction().remove(fragment2).commit();
-                */
-                /////////////////////////////////////////////////////////////////////////////////
-
-                panelActivo="tareas";
-            }
-        });
-
-        frgListado.setListadoListener(this);
+        //frgListado.setListadoListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        menuActionBar = menu;
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -228,8 +140,14 @@ public class MainActivity extends AppCompatActivity
                 (getSupportFragmentManager().findFragmentById(R.id.FrgDetalle) != null);
 
         if(hayDetalle) {
-            ((FragmentDetalle)getSupportFragmentManager()
-                    .findFragmentById(R.id.FrgDetalle)).mostrarDetalle(c);
+            /*((FragmentDetalle)getSupportFragmentManager() //Primera manera de pasar datos al fragment
+                    .findFragmentById(R.id.FrgDetalle)).mostrarDetalle(c);*/
+            //2da manera de pasar datos al fragment
+            Bundle arguments = new Bundle();
+            arguments.putString("campoApasar", "123");
+            FragmentDetalle detalle = new FragmentDetalle();
+            detalle.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, detalle).commit();
         }
         else {
             Intent i = new Intent(this, DetalleActivity.class);
@@ -238,34 +156,57 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-    @Override
-    public void onSeleccionListener(String opt) {
-
-    }
-
-
-    /*Pasando la posicion de la opcion en el menu nos mostrara el Fragment correspondiente*/
     private void MostrarFragment(int position) {
-        // update the main content by replacing fragments
         Fragment fragment = null;
         switch (position) {
-            case 1:
-             //   fragment = new HomeFragment();
+            case 1: // Usuarios
+                menuActionBar.clear();
+                getMenuInflater().inflate(R.menu.menu_main, menuActionBar);
+                FragmentDetalle fragmentDetalleUsuarios= new FragmentDetalle();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleUsuarios).commit();
+
+
+                Bundle arguments = new Bundle();
+                arguments.putBoolean("activoListadoUsuario", true);
+                FragmentListado fragmentListaUsuario =new FragmentListado();
+                fragmentListaUsuario.setArguments(arguments);
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaUsuario).commit();
+                NavList.setItemChecked(position, true);
+                NavList.setSelection(position);
+                //Cambiamos el titulo en donde decia "
+                setTitle(titulos[position-1]);
+                //Cerramos el menu deslizable
+                NavDrawerLayout.closeDrawer(NavList);
                 break;
-            case 2:
-               // fragment = new ProfileFragment();
+            case 2: // Eventos
+                menuActionBar.clear();
+                getMenuInflater().inflate(R.menu.menu_main_tareas, menuActionBar);
+
+                FragmentDetalleTarea fragmentDetalleTarea = new FragmentDetalleTarea();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
+
+
+                FragmentListadoTarea fragmentListaTarea = new FragmentListadoTarea();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaTarea).commit();
+                NavList.setItemChecked(position, true);
+                NavList.setSelection(position);
+                //Cambiamos el titulo en donde decia "
+                setTitle(titulos[position-1]);
+                //Cerramos el menu deslizable
+                NavDrawerLayout.closeDrawer(NavList);
                 break;
 
 
             default:
                 //si no esta la opcion mostrara un toast y nos mandara a Home
                 Toast.makeText(getApplicationContext(), "Opcion " + titulos[position - 1] + "no disponible!", Toast.LENGTH_SHORT).show();
-          //      fragment = new HomeFragment();
+
                 position=1;
                 break;
         }
-        //Validamos si el fragment no es nulo
         if (fragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             //fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -305,5 +246,6 @@ public class MainActivity extends AppCompatActivity
         // Handle your other action bar items...
         return super.onOptionsItemSelected(item);
     }
+
 
 }

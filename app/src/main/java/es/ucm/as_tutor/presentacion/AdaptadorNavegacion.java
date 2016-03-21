@@ -1,4 +1,4 @@
-package es.ucm.as_tutor;
+package es.ucm.as_tutor.presentacion;
 
 /**
  * Created by Jeffer on 20/03/2016.
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import es.ucm.as_tutor.R;
 
 public class AdaptadorNavegacion extends BaseAdapter {
     private Activity activity;
