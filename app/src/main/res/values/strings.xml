@@ -1,8 +1,24 @@
 <resources>
-    <string name="app_name">AS_TUTOR</string>
+    <string name="app_name">AS</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_detalle_activity">Detalle_activity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Lista de titulos de navegacion-->
+    <string-array name="nav_options">
+        <item>Home</item>
+        <item>Perfil</item>
+        <item>Configuración</item>
+        <item>Acerca de</item>
+    </string-array>
+    <!-- Lista de iconos de navegacion-->
+    <array name="navigation_iconos">
+        <item>@drawable/ic_action_home</item>
+        <item>@drawable/ic_action_person</item>
+        <item>@drawable/ic_action_settings</item>
+        <item>@drawable/ic_action_about</item>
+    </array>
 </resources>

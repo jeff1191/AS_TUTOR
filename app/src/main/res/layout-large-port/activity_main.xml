@@ -4,17 +4,23 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	
-	<fragment class="net.sgoliver.android.fragments.FragmentListado"
+
+	<fragment
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:name="es.ucm.as_tutor.FragmentSeleccion"
+		android:id="@+id/fragment" />
+
+	<fragment class="es.ucm.as_tutor.FragmentListado"
 		android:id="@+id/FrgListado"
-		android:layout_weight="40"
-		android:layout_width="match_parent"
-		android:layout_height="0px" />
-	
-	<fragment class="net.sgoliver.android.fragments.FragmentDetalle"
+		android:layout_weight="30"
+		android:layout_width="0px"
+		android:layout_height="match_parent" />
+
+	<fragment class="es.ucm.as_tutor.FragmentDetalle"
 		android:id="@+id/FrgDetalle"
-		android:layout_weight="60"
-		android:layout_width="match_parent"
-		android:layout_height="0px" />
+		android:layout_weight="70"
+		android:layout_width="0px"
+		android:layout_height="match_parent" />
 		
 </LinearLayout>

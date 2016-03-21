@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class FragmentSeleccion extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -18,21 +19,12 @@ public class FragmentSeleccion extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private SeleccionListener mListener;
 
     public FragmentSeleccion() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSeleccion.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FragmentSeleccion newInstance(String param1, String param2) {
         FragmentSeleccion fragment = new FragmentSeleccion();
         Bundle args = new Bundle();
@@ -57,14 +49,14 @@ public class FragmentSeleccion extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_seleccion, container, false);
     }
-
+/*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+*/
     @Override
     public void onDetach() {
         super.onDetach();
@@ -81,8 +73,15 @@ public class FragmentSeleccion extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public interface SeleccionListener {
+        void onSeleccionListener(String opt);
+    }
+
+    public void setSeleccionListener(SeleccionListener listener) {
+        this.mListener=listener;
+    }
+    public void pruebaFragment(String prueba){
+       // TextView ttt = (TextView)getView().findViewById(R.id.prueba);
+      //  ttt.setText(prueba);
     }
 }

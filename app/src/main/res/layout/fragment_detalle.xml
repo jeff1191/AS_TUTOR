@@ -1,13 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFBBBBBB" >
+    android:background="#ffffff" >
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/listaImagenAvatar"
+            android:src="@drawable/avatar"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:onClick="cambiarImagenPerfil"
+            android:layout_marginStart="75dp"
+            android:layout_below="@+id/DetalleNombreUsuario"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="39dp" />
+
+        <TextView
+            android:id="@+id/DetalleNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:layout_marginStart="83dp"
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/listaImagenAvatar" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDetalleNombre"
+        android:text="Pepe"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignStart="@+id/DetalleNombreUsuario" />
 
     <TextView
-        android:id="@+id/TxtDetalle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/listaImagenAvatar"
+        android:layout_toStartOf="@+id/editTextDetalleNombre"
+        android:layout_marginTop="26dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DNI: "
+        android:id="@+id/textView2"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/editTextDetalleNombre"
+        android:layout_alignStart="@+id/textView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDetalleDni"
+        android:text="18175858V"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignEnd="@+id/editTextDetalleTelefono" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono: "
+        android:id="@+id/textView3"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/editTextDetalleDni"
+        android:layout_toStartOf="@+id/editTextDetalleDni" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDetalleTelefono"
+        android:text="651651651"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignStart="@+id/editTextDetalleNombre" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Información adicional"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/listaImagenAvatar"
+        android:layout_marginTop="47dp"
+        android:layout_alignStart="@+id/listaImagenAvatar"
+        android:textStyle="bold|italic" />
+
+
+</RelativeLayout>
