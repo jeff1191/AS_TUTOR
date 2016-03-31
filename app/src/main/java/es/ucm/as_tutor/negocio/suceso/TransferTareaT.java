@@ -1,7 +1,7 @@
 /**
  * 
  */
-package es.ucm.as_tutor.negocio.tarea;
+package es.ucm.as_tutor.negocio.suceso;
 
 import java.sql.Timestamp;
 import java.util.Collection;

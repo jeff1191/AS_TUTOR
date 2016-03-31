@@ -5,7 +5,7 @@ package es.ucm.as_tutor.negocio.usuario.imp;
 
 import java.util.Collection;
 
-import es.ucm.as_tutor.negocio.tarea.Reto;
+import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;

@@ -5,7 +5,7 @@ package es.ucm.as_tutor.negocio.usuario;
 
 import java.util.Collection;
 
-import es.ucm.as_tutor.negocio.tarea.Reto;
+import es.ucm.as_tutor.negocio.suceso.Reto;
 
 /** 
  * <!-- begin-UML-doc -->

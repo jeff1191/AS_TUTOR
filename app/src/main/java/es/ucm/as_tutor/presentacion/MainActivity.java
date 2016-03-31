@@ -5,10 +5,10 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +18,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.integracion.DBHelper;
 
 public class MainActivity extends AppCompatActivity
         implements FragmentListado.ListadoListener {
@@ -35,16 +40,42 @@ public class MainActivity extends AppCompatActivity
     private ImageButton usuarios;
     private String panelActivo="usuarios";
     private Menu menuActionBar;
+    private DBHelper mDBHelper = null;
+
+    private DBHelper getHelper() {
+        if (mDBHelper == null) {
+            mDBHelper = OpenHelperManager.getHelper(this, DBHelper.class);
+        }
+        return mDBHelper;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDBHelper != null) {
+            OpenHelperManager.releaseHelper();
+            mDBHelper = null;
+        }
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        //mDBHelper= getHelper();
         setContentView(R.layout.activity_main);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
-     
+        try {
+            Dao<es.ucm.as_tutor.negocio.suceso.Tarea, Integer> a = getHelper().getTareaDao();
+            a.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

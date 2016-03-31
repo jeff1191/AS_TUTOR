@@ -1,7 +1,7 @@
 
-package es.ucm.as_tutor.negocio.tarea.imp;
+package es.ucm.as_tutor.negocio.suceso.imp;
 
-import es.ucm.as_tutor.negocio.tarea.SATarea;
+import es.ucm.as_tutor.negocio.suceso.SASuceso;
 
 /**
  * <!-- begin-UML-doc -->
@@ -9,10 +9,10 @@ import es.ucm.as_tutor.negocio.tarea.SATarea;
  * @author Jeffer
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class SATareaImp implements SATarea {
+public class SASucesoImp implements SASuceso {
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#crearTarea()
+	 * @see SASuceso#crearTarea()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void crearTarea() {
@@ -24,7 +24,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#editarTarea()
+	 * @see SASuceso#editarTarea()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void editarTarea() {
@@ -36,7 +36,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#consultarTareasPermamentes()
+	 * @see SASuceso#consultarTareasPermamentes()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void consultarTareasPermamentes() {
@@ -48,7 +48,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#consultarTareasPuntuales()
+	 * @see SASuceso#consultarTareasPuntuales()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void consultarTareasPuntuales() {
@@ -60,7 +60,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#eliminarTareaReto()
+	 * @see SASuceso#eliminarTareaReto()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void eliminarTareaReto() {
@@ -72,7 +72,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#asignarUsuarios()
+	 * @see SASuceso#asignarUsuarios()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void asignarUsuarios() {
@@ -84,7 +84,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#crearReto()
+	 * @see SASuceso#crearReto()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void crearReto() {
@@ -96,7 +96,7 @@ public class SATareaImp implements SATarea {
 
 	/** 
 	 * (sin Javadoc)
-	 * @see SATarea#consultarRetos()
+	 * @see SASuceso#consultarRetos()
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
 	public void consultarRetos() {

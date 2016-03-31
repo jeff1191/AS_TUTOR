@@ -1,7 +1,10 @@
 /**
  * 
  */
-package es.ucm.as_tutor.negocio.tarea;
+package es.ucm.as_tutor.negocio.suceso;
+
+import java.util.Collection;
+import java.sql.Timestamp;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -9,26 +12,32 @@ package es.ucm.as_tutor.negocio.tarea;
  * @author Jeffer
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class TareaPermanente extends Tarea {
+public class TransferRetoT {
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer mejorar;
+	private Collection usuarios;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private Integer frecuencia;
+	private String nombre;
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	private Timestamp fechaIni;
 
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void getMejorar() {
+	public void getUsuarios() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
@@ -40,7 +49,7 @@ public class TareaPermanente extends Tarea {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void getFrecuencia() {
+	public void getNombre() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
@@ -52,7 +61,7 @@ public class TareaPermanente extends Tarea {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setMejorar() {
+	public void getFechaIni() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
@@ -64,7 +73,31 @@ public class TareaPermanente extends Tarea {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void setFrecuencia() {
+	public void setUsuarios() {
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void setNombre() {
+		// begin-user-code
+		// TODO Ap�ndice de m�todo generado autom�ticamente
+
+		// end-user-code
+	}
+
+	/** 
+	 * <!-- begin-UML-doc -->
+	 * <!-- end-UML-doc -->
+	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	 */
+	public void setFechaIni() {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
