@@ -214,12 +214,12 @@ public class MainActivity extends AppCompatActivity
                 menuActionBar.clear();
                 getMenuInflater().inflate(R.menu.menu_main_tareas, menuActionBar);
 
-                FragmentDetalleTarea fragmentDetalleTarea = new FragmentDetalleTarea();
+                FragmentDetalleEvento fragmentDetalleTarea = new FragmentDetalleEvento();
                 //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
 
 
-                FragmentListadoTarea fragmentListaTarea = new FragmentListadoTarea();
+                FragmentListadoEvento fragmentListaTarea = new FragmentListadoEvento();
                 //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaTarea).commit();
                 NavList.setItemChecked(position, true);

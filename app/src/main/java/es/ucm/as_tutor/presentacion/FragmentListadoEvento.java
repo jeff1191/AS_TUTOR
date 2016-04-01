@@ -12,7 +12,7 @@ import android.widget.ListView;
 import es.ucm.as_tutor.R;
 
 
-public class FragmentListadoTarea extends Fragment {
+public class FragmentListadoEvento extends Fragment {
     private Tarea[] datos =
             new Tarea[]{
                     new Tarea("Tarea 1", "1 feb", "1 agosto"),
@@ -23,7 +23,7 @@ public class FragmentListadoTarea extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentListadoTarea() {
+    public FragmentListadoEvento() {
         // Required empty public constructor
     }
 

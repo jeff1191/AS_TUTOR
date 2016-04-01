@@ -13,12 +13,12 @@ import es.ucm.as_tutor.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentDetalleTarea.OnFragmentInteractionListener} interface
+ * {@link FragmentDetalleEvento.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentDetalleTarea#newInstance} factory method to
+ * Use the {@link FragmentDetalleEvento#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentDetalleTarea extends Fragment {
+public class FragmentDetalleEvento extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class FragmentDetalleTarea extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentDetalleTarea() {
+    public FragmentDetalleEvento() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class FragmentDetalleTarea extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentDetalleTarea.
+     * @return A new instance of fragment FragmentDetalleEvento.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentDetalleTarea newInstance(String param1, String param2) {
-        FragmentDetalleTarea fragment = new FragmentDetalleTarea();
+    public static FragmentDetalleEvento newInstance(String param1, String param2) {
+        FragmentDetalleEvento fragment = new FragmentDetalleEvento();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

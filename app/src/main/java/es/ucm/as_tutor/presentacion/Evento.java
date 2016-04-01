@@ -3,11 +3,11 @@ package es.ucm.as_tutor.presentacion;
 /**
  * Created by Jeffer on 21/03/2016.
  */
-public class Tarea {
+public class Evento {
     private String nombre;
     private String horaIni;
     private String horaFin;
-    public Tarea(String nombre, String horaIni,String horaFin) {
+    public Evento(String nombre, String horaIni,String horaFin) {
         this.nombre = nombre;
         this.horaIni = horaIni;
         this.horaFin=horaFin;
