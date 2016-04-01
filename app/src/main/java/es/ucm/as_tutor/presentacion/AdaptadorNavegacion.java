@@ -23,7 +23,7 @@ public class AdaptadorNavegacion extends BaseAdapter {
     public AdaptadorNavegacion(Activity activity, ArrayList<Item_Navegacion> listarry) {
         super();
         this.activity = activity;
-        this.arrayitms=listarry;
+        this.arrayitms = listarry;
     }
     //Retorna objeto Item_Navegacion del array list
     @Override

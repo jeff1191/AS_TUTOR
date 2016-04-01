@@ -28,6 +28,13 @@
                 android:title="Evento" />
 
             <item
+                android:id="@+id/enviarCorreo"
+                android:icon="@drawable/ic_action_discard"
+                android:orderInCategory="10"
+                app:showAsAction="ifRoom"
+                android:title="Enviar informe"/>
+
+            <item
                 android:id="@+id/eliminarUsuario"
                 android:icon="@drawable/ic_action_discard"
                 android:orderInCategory="10"

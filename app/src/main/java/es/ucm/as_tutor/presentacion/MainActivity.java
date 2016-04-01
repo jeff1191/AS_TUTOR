@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuActionBar = menu;
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_usuarios, menu);
         return true;
     }
 
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity
         switch (position) {
             case 1: // Usuarios
                 menuActionBar.clear();
-                getMenuInflater().inflate(R.menu.menu_main, menuActionBar);
+                getMenuInflater().inflate(R.menu.menu_main_usuarios, menuActionBar);
                 FragmentDetalleUsuario fragmentDetalleUsuarios= new FragmentDetalleUsuario();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleUsuarios).commit();
 
