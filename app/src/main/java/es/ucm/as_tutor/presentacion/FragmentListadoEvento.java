@@ -13,13 +13,13 @@ import es.ucm.as_tutor.R;
 
 
 public class FragmentListadoEvento extends Fragment {
-    private Tarea[] datos =
-            new Tarea[]{
-                    new Tarea("Tarea 1", "1 feb", "1 agosto"),
-                    new Tarea("Tarea 2", "1 mar", "1 junio"),
-                    new Tarea("Tarea 3", "1 abril", "1 dic"),
-                    new Tarea("Tarea 4", "1 mayo", "1 nov")};
-    private ListView listadoTarea;
+    private Evento[] datos =
+            new Evento[]{
+                    new Evento("Evento 1", "1 feb", "1 agosto"),
+                    new Evento("Evento 2", "1 mar", "1 junio"),
+                    new Evento("Evento 3", "1 abril", "1 dic"),
+                    new Evento("Evento 4", "1 mayo", "1 nov")};
+    private ListView listadoEvento;
 
     private OnFragmentInteractionListener mListener;
 
@@ -32,11 +32,11 @@ public class FragmentListadoEvento extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        listadoTarea = (ListView)getView().findViewById(R.id.ListadoTareas);
+        listadoEvento = (ListView)getView().findViewById(R.id.ListadoTareas);
 
-        listadoTarea.setAdapter(new AdaptadorTareas(this, datos));
+        listadoEvento.setAdapter(new AdaptadorEventos(this, datos));
 
-        listadoTarea.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listadoEvento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
               /*  if (listener != null) {
@@ -51,7 +51,7 @@ public class FragmentListadoEvento extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listado_tarea, container, false);
+        return inflater.inflate(R.layout.fragment_listado_evento, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
