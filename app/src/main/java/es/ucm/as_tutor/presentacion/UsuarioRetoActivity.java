@@ -5,6 +5,5 @@ import android.app.Activity;
 /**
  * Created by msalitu on 01/04/2016.
  */
-public class TareasUsuario extends Activity {
-
+public class UsuarioRetoActivity extends Activity{
 }

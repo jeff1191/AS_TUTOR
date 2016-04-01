@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
 
-public class FragmentDetalle extends Fragment {
+public class FragmentDetalleUsuario extends Fragment {
     String textViewNombre;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class FragmentDetalle extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detalle, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detalle_usuario, container, false);
 
         //Mostramos el contenido al usuario
         if (textViewNombre != null) {

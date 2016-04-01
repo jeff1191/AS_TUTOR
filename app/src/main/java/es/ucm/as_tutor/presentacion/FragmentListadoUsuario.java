@@ -11,7 +11,7 @@ import android.widget.ListView;
 import es.ucm.as_tutor.R;
 
 
-public class FragmentListado extends Fragment {
+public class FragmentListadoUsuario extends Fragment {
 
 	private Usuario[] datos =
 			new Usuario[]{
@@ -37,7 +37,7 @@ public class FragmentListado extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 							 ViewGroup container,
 							 Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_listado, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_listado_usuario, container, false);
 		if(rootView != null && activadoFrg){
 			lstListado = (ListView)rootView.findViewById(R.id.LstListado);
 			lstListado.setAdapter(new AdaptadorUsuarios(this, datos));

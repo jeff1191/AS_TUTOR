@@ -28,7 +28,7 @@ import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
 
 public class MainActivity extends AppCompatActivity
-        implements FragmentListado.ListadoListener {
+        implements FragmentListadoUsuario.ListadoListener {
     private String[] titulos;
     private DrawerLayout NavDrawerLayout;
     private ListView NavList;
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         /* cuando inicia empieza con el listado del usuario */
         Bundle arguments = new Bundle();
         arguments.putBoolean("activoListadoUsuario", true);
-        FragmentListado frgListado =new FragmentListado();
+        FragmentListadoUsuario frgListado =new FragmentListadoUsuario();
         frgListado.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListado).commit();
 
@@ -171,12 +171,12 @@ public class MainActivity extends AppCompatActivity
                 (getSupportFragmentManager().findFragmentById(R.id.FrgDetalle) != null);
 
         if(hayDetalle) {
-            /*((FragmentDetalle)getSupportFragmentManager() //Primera manera de pasar datos al fragment
+            /*((FragmentDetalleUsuario)getSupportFragmentManager() //Primera manera de pasar datos al fragment
                     .findFragmentById(R.id.FrgDetalle)).mostrarDetalle(c);*/
             //2da manera de pasar datos al fragment
             Bundle arguments = new Bundle();
             arguments.putString("campoApasar", "123");
-            FragmentDetalle detalle = new FragmentDetalle();
+            FragmentDetalleUsuario detalle = new FragmentDetalleUsuario();
             detalle.setArguments(arguments);
             getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, detalle).commit();
         }
@@ -193,13 +193,13 @@ public class MainActivity extends AppCompatActivity
             case 1: // Usuarios
                 menuActionBar.clear();
                 getMenuInflater().inflate(R.menu.menu_main, menuActionBar);
-                FragmentDetalle fragmentDetalleUsuarios= new FragmentDetalle();
+                FragmentDetalleUsuario fragmentDetalleUsuarios= new FragmentDetalleUsuario();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleUsuarios).commit();
 
 
                 Bundle arguments = new Bundle();
                 arguments.putBoolean("activoListadoUsuario", true);
-                FragmentListado fragmentListaUsuario =new FragmentListado();
+                FragmentListadoUsuario fragmentListaUsuario =new FragmentListadoUsuario();
                 fragmentListaUsuario.setArguments(arguments);
                 //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaUsuario).commit();
