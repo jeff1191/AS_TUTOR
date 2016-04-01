@@ -247,24 +247,26 @@ public class MainActivity extends AppCompatActivity
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.tareasUsuario:
-                Intent intent = new Intent(this.getApplicationContext(), UsuarioTareasActivity.class);
+                Intent intent = new Intent(this, UsuarioTareasActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.retoUsuario:
-                Intent intentReto = new Intent(this.getApplicationContext(), UsuarioRetoActivity.class);
+                Intent intentReto = new Intent(this, UsuarioRetoActivity.class);
                 startActivity(intentReto);
                 return true;
             case R.id.eventosUsuario:
-                Intent intentEventos = new Intent(this.getApplicationContext(), UsuarioEventosActivity.class);
+                Intent intentEventos = new Intent(this, UsuarioEventosActivity.class);
                 startActivity(intentEventos);
             case R.id.enviarCorreo:
                 // aquí habrá que ejecutar el comando de enviar correo
