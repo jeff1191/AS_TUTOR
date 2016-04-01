@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.UsuarioEvento;
 
 public class MainActivity extends AppCompatActivity
         implements FragmentListadoUsuario.ListadoListener {
@@ -150,21 +151,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @Override
     public void onUsuarioSeleccionado(Usuario c) {
         boolean hayDetalle =
@@ -246,12 +232,12 @@ public class MainActivity extends AppCompatActivity
             NavList.setItemChecked(position, true);
             NavList.setSelection(position);
             //Cambiamos el titulo en donde decia "
-            setTitle(titulos[position-1]);
+            setTitle(titulos[position - 1]);
             //Cerramos el menu deslizable
             NavDrawerLayout.closeDrawer(NavList);
         } else {
             //Si el fragment es nulo mostramos un mensaje de error.
-            Log.e("Error  ", "MostrarFragment"+position);
+            Log.e("Error  ", "MostrarFragment" + position);
         }
     }
 
@@ -268,15 +254,58 @@ public class MainActivity extends AppCompatActivity
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            Log.e("mDrawerToggle pushed", "x");
-            return true;
+        switch (item.getItemId()){
+            case R.id.tareasUsuario:
+                Intent intent = new Intent(this.getApplicationContext(), UsuarioTareasActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.retoUsuario:
+                Intent intentReto = new Intent(this.getApplicationContext(), UsuarioRetoActivity.class);
+                startActivity(intentReto);
+                return true;
+            case R.id.eventosUsuario:
+                Intent intentEventos = new Intent(this.getApplicationContext(), UsuarioEventosActivity.class);
+                startActivity(intentEventos);
+            case R.id.enviarCorreo:
+                // aquí habrá que ejecutar el comando de enviar correo
+                return true;
+            case R.id.eliminarUsuario:
+                //aqui habrá que ejecutar el comando de eliminar usuario
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        // Handle your other action bar items...
-        return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

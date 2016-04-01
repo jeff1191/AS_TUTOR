@@ -8,7 +8,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentacion.MainActivity" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +18,15 @@
             android:name=".presentacion.DetalleActivity"
             android:label="@string/title_activity_detalle_activity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".presentacion.UsuarioEventosActivity"/>
+        <activity android:name=".presentacion.UsuarioRetoActivity"/>
+        <activity android:name=".presentacion.UsuarioTareasActivity"/>
     </application>
 
+    <!-- Permisos requeridos-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Final permisos requeridos-->
 </manifest>
