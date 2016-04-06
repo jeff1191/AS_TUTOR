@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/eliminarTarea"
+        android:id="@+id/eliminarEvento"
         android:icon="@drawable/ic_action_discard_dark"
         android:orderInCategory="10"
         app:showAsAction="ifRoom|withText"

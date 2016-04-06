@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
-import es.ucm.as_tutor.negocio.UsuarioEvento;
 
 public class MainActivity extends AppCompatActivity
         implements FragmentListadoUsuario.ListadoListener {
@@ -198,7 +197,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 2: // Eventos
                 menuActionBar.clear();
-                getMenuInflater().inflate(R.menu.menu_main_tareas, menuActionBar);
+                getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);
 
                 FragmentDetalleEvento fragmentDetalleTarea = new FragmentDetalleEvento();
                 //fragment.setArguments(arguments);

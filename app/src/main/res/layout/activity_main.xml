@@ -40,7 +40,7 @@
         android:layout_height="fill_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@color/colorPrimaryDark"
+        android:divider="@color/shadow_mid_color"
         android:dividerHeight="2dp"
         android:background="@color/colorPrimary"
         />
