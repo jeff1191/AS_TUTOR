@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.75"
+        android:layout_weight="0.5"
         android:text="TAREA"
         android:gravity="center" />
 
@@ -50,7 +50,7 @@
                     android:layout_height="0dp"
                     android:id="@+id/timePickerAlarma"
                     android:gravity="center"
-                    android:layout_weight="10"
+                    android:layout_weight="11"
                     android:layout_gravity="center_horizontal"
                     android:paddingTop="20dp" />
 
@@ -84,7 +84,7 @@
                     android:layout_height="0dp"
                     android:id="@+id/timePickerPregunta"
                     android:gravity="center"
-                    android:layout_weight="10"
+                    android:layout_weight="11"
                     android:layout_gravity="center_horizontal"
                     android:paddingTop="20dp" />
 
@@ -98,8 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
+        android:orientation="horizontal">
 
         <!-- Frecuencia -->
         <LinearLayout
@@ -223,5 +222,49 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Seccion botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <!-- Espacio izquierdo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <!-- Boton cancelar-->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/botonCancelar"
+            android:text="Cancelar"
+            android:layout_marginRight="10dp" />
+
+        <!-- Boton guardar-->
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/botonAceptar"
+            android:text="ACEPTAR"
+            android:layout_marginLeft="10dp" />
+
+        <!-- Espacio derecho -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        </LinearLayout>
 
 </LinearLayout>
