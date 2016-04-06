@@ -51,6 +51,28 @@
             android:layout_weight="1"
             android:id="@+id/barra">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/cont"
+                android:text="8/30"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:max="30"
+                android:progressDrawable="@drawable/our_progress_bar"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
