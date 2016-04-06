@@ -19,8 +19,6 @@ public class UsuarioTareaDetalleActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_tarea_detalle);
-        ActionBar actionBar = getActionBar();
-        actionBar.show();
 
         // Spinner de frecuencia
         final Spinner frecuenciaSpinner = (Spinner) findViewById(R.id.frecuencia);
