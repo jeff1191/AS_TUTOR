@@ -25,4 +25,6 @@
         <item>Semanal</item>
         <item>Mensual</item>
     </string-array>
+    <string name="title_activity_bienvenido">Bienvenido</string>
+    <string name="title_activity_registro">Registro</string>
 </resources>
