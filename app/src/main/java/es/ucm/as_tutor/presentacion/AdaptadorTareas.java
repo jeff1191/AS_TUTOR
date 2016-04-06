@@ -87,7 +87,7 @@ public class AdaptadorTareas extends BaseAdapter {
         frecuencia = (TextView) itemView.findViewById(R.id.frecuencia);
         habilitada = (CheckBox) itemView.findViewById(R.id.habilitada);
 
-        // Dar valores a cada fila
+        // Dar valores a cada columna de la fila
         txtTitle.setText(textosAlarma.get(position));
         horaAlarma.setText(horasAlarma.get(position));
         txtPregunta.setText(textosPreguntas.get(position));
@@ -112,7 +112,6 @@ public class AdaptadorTareas extends BaseAdapter {
         horaPregunta.setTextColor(Color.BLACK);
         sit.setTextColor(Color.BLACK);
         not.setTextColor(Color.BLACK);
-        total.setTextColor(Color.BLACK);
         frecuencia.setTextColor(Color.BLACK);
         habilitada.setTextColor(Color.BLACK);
 
