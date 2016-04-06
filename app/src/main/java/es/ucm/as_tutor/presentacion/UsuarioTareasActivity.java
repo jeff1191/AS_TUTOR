@@ -1,5 +1,6 @@
 package es.ucm.as_tutor.presentacion;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,6 +36,8 @@ public class UsuarioTareasActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_tareas);
+        ActionBar actionBar = getActionBar();
+        actionBar.show();
 
         /*// Coge de la BBDD
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");

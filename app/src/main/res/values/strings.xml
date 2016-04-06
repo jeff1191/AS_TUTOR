@@ -19,4 +19,10 @@
         <item>@drawable/ic_action_go_to_today_dark</item>
         <item>@drawable/ic_action_about</item>
     </array>
+    <!-- Lista de frecuencias para el spinner de tarea-->
+    <string-array name="frecuencias_array">
+        <item>Diaria</item>
+        <item>Semanal</item>
+        <item>Mensual</item>
+    </string-array>
 </resources>

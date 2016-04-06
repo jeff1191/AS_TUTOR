@@ -1,60 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentacion.UsuarioTareaDetalleActivity"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Titulo pantalla -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.75"
         android:text="TAREA"
         android:gravity="center" />
 
-
+    <!-- Layout con el texto y la hora para alarmas y preguntas-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:id="@+id/alarma">
+        android:layout_weight="4"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Texto alarma"
-            android:layout_weight="1"
-            android:gravity="center_vertical|right"
-            android:paddingRight="10dp" />
+        <!-- Alarma -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/textoAlarma"
-            android:layout_weight="1"
-            android:gravity="center_vertical|left"
-            android:paddingLeft="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Alarma"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Texto alarma"
-            android:layout_weight="1"
-            android:gravity="center_vertical|right"
-            android:paddingRight="10dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/textoAlarma"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
-        <TimePicker
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/timePicker"
-            android:gravity="center_vertical|left"
-            android:layout_weight="1" />
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/timePickerAlarma"
+                    android:gravity="center"
+                    android:layout_weight="10"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="20dp" />
 
+            </LinearLayout>
+
+        <!-- Pregunta -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Pregunta"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/textoPregunta"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
+
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/timePickerPregunta"
+                    android:gravity="center"
+                    android:layout_weight="10"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="20dp" />
+
+            </LinearLayout>
 
     </LinearLayout>
 
 
+    <!-- Seccion inferior con frecuencia y respuestas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <!-- Frecuencia -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Frecuencia"
+                android:layout_weight="1"
+                android:gravity="center|bottom" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:id="@+id/frecuencia"/>
+
+        </LinearLayout>
+
+
+        <!-- Mejora -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Mejora"
+                android:layout_weight="1"
+                android:gravity="center|bottom" />
+
+            <EditText
+                android:textAlignment="center"
+                android:layout_width="60dp"
+                android:layout_height="0dp"
+                android:inputType="number"
+                android:id="@+id/mejora"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Respuestas -->
+        <!-- Si -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Respuesta SI"
+                android:layout_weight="1"
+                android:gravity="center|bottom" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/si"/>
+
+        </LinearLayout>
+
+        <!-- No -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Respuesta NO"
+                android:layout_weight="1"
+                android:gravity="center|bottom" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/no"/>
+
+        </LinearLayout>
+
+        <!-- Total -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Total respuestas"
+                android:layout_weight="1"
+                android:gravity="center|bottom" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/total"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
