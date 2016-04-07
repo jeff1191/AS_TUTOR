@@ -1,9 +1,8 @@
 package es.ucm.as_tutor.presentacion;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import es.ucm.as_tutor.R;
 /**
  * Created by msalitu on 01/04/2016.
  */
-public class UsuarioRetoActivity extends Activity{
+public class UsuarioRetoActivity extends AppCompatActivity {
 
     private ProgressBar progreso;
     private Integer contInt;    // contador del reto
@@ -24,7 +23,7 @@ public class UsuarioRetoActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_reto);
-
+/*
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null){
@@ -52,7 +51,7 @@ public class UsuarioRetoActivity extends Activity{
                 sup.setTextColor(Color.GRAY);
             }
 
-        }
+        }*/
     }
 
     // Metodo on click del boton "+" material design

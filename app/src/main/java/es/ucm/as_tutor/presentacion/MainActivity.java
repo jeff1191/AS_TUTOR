@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity
         //Establecemos que el ActionBar muestre el Boton Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);*/
+        //android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayShowHomeEnabled(true);
 
         //Establecemos la accion al clickear sobre cualquier item del menu.
         //De la misma forma que hariamos en una app comun con un listview.
