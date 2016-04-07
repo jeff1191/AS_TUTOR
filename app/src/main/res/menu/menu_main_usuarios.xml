@@ -7,7 +7,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="101"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:icon="@drawable/ic_more_vert_white_48dp"
         android:title="@string/action_settings">
 
         <menu>
@@ -19,7 +19,7 @@
                 />
 
             <item android:id="@+id/retoUsuario"
-                android:icon="@android:drawable/ic_delete"
+                android:icon="@drawable/ic_flag_gray_48dp"
                 app:showAsAction="ifRoom"
                 android:title="Reto" />
 
@@ -30,7 +30,7 @@
 
             <item
                 android:id="@+id/enviarCorreo"
-                android:icon="@drawable/ic_action_discard"
+                android:icon="@drawable/ic_send_gray_48dp"
                 android:orderInCategory="10"
                 app:showAsAction="ifRoom"
                 android:title="Enviar informe"/>
