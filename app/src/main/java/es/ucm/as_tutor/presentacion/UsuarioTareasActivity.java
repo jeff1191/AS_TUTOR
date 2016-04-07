@@ -40,7 +40,10 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_tareas);
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.logo);
 
         /*// Coge de la BBDD
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
@@ -108,7 +111,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
-        //getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
     }
 
