@@ -2,12 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.ucm.as_tutor">
 
+    <!-- Permisos requeridos -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Final permisos requeridos -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentacion.MainActivity" >
+        <activity
+            android:name=".presentacion.Bienvenido"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,17 +27,16 @@
         <activity
             android:name=".presentacion.DetalleActivity"
             android:label="@string/title_activity_detalle_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".presentacion.MainActivity" />
+        <activity android:name=".presentacion.UsuarioEventosActivity" />
+        <activity android:name=".presentacion.UsuarioRetoActivity" />
+        <activity android:name=".presentacion.UsuarioTareasActivity" />
+        <activity android:name=".presentacion.Decision" />
+        <activity
+            android:name=".presentacion.Registro"
+            android:label="@string/title_activity_registro"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".presentacion.UsuarioEventosActivity"/>
-        <activity android:name=".presentacion.UsuarioRetoActivity"/>
-        <activity android:name=".presentacion.UsuarioTareasActivity"/>
-        <activity android:name=".presentacion.UsuarioTareaDetalleActivity"/>
     </application>
 
-    <!-- Permisos requeridos-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Final permisos requeridos-->
 </manifest>
