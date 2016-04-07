@@ -29,5 +29,6 @@ public class UsuarioRetoDetalleActivity extends Activity {
 
     public void cancelarNuevoReto(View view){
         //volver a la pantalla del usuario
+        finish();
     }
 }
