@@ -265,8 +265,11 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent);
                     break;
                 case R.id.retoUsuario:
-                    Intent intentReto = new Intent(this, UsuarioRetoActivity.class);
-                    startActivity(intentReto);
+                    //Aqui iria un if/else
+                   FragmentDetalleReto fragmentReto = new FragmentDetalleReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
+                    /* FragmentDetalleNuevoReto fragmentNuevoReto = new FragmentDetalleNuevoReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();*/
                     break;
                 case R.id.eventosUsuario:
                     Intent intentEventos = new Intent(this, UsuarioEventosActivity.class);
