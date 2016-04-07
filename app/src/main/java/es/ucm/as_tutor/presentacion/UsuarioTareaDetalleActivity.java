@@ -79,7 +79,7 @@ public class UsuarioTareaDetalleActivity extends Activity{
 
         // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
         Bundle bundle = getIntent().getExtras();
-        if (bundle.getString("txtAlarma")!=null){
+        if (bundle != null){
             textoAlarma.setText(bundle.getString("txtAlarma"));
             textoPregunta.setText(bundle.getString("txtPregunta"));
             si.setText(bundle.get("si").toString());

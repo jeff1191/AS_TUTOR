@@ -255,25 +255,31 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.tareasUsuario:
-                Intent intent = new Intent(this, UsuarioTareasActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.retoUsuario:
-                Intent intentReto = new Intent(this, UsuarioRetoActivity.class);
-                startActivity(intentReto);
-                return true;
-            case R.id.eventosUsuario:
-                Intent intentEventos = new Intent(this, UsuarioEventosActivity.class);
-                startActivity(intentEventos);
-            case R.id.enviarCorreo:
-                // aquí habrá que ejecutar el comando de enviar correo
-                return true;
-            case R.id.eliminarUsuario:
-                //aqui habrá que ejecutar el comando de eliminar usuario
-            default:
-                return super.onOptionsItemSelected(item);
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+         }else {
+            switch (item.getItemId()) {
+                case R.id.tareasUsuario:
+                    Intent intent = new Intent(this, UsuarioTareasActivity.class);
+                    startActivity(intent);
+                    return true;
+                case R.id.retoUsuario:
+                    Intent intentReto = new Intent(this, UsuarioRetoActivity.class);
+                    startActivity(intentReto);
+                    return true;
+                case R.id.eventosUsuario:
+                    Intent intentEventos = new Intent(this, UsuarioEventosActivity.class);
+                    startActivity(intentEventos);
+                case R.id.enviarCorreo:
+                    // aquí habrá que ejecutar el comando de enviar correo
+                    return true;
+                case R.id.eliminarUsuario:
+                    //aqui habrá que ejecutar el comando de eliminar usuario
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
     }
 
