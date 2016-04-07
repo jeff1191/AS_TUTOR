@@ -1,6 +1,7 @@
 package es.ucm.as_tutor.presentacion;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -52,5 +53,11 @@ public class UsuarioRetoActivity extends Activity{
             }
 
         }
+    }
+
+    // Metodo on click del boton "+" material design
+    public void nuevoReto(View view){
+        Intent intent = new Intent(getApplicationContext(), UsuarioRetoDetalleActivity.class);
+        startActivity(intent);
     }
 }

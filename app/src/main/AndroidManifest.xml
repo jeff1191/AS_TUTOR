@@ -21,6 +21,7 @@
 
         <activity android:name=".presentacion.UsuarioEventosActivity"/>
         <activity android:name=".presentacion.UsuarioRetoActivity"/>
+        <activity android:name=".presentacion.UsuarioRetoDetalleActivity"/>
         <activity android:name=".presentacion.UsuarioTareasActivity"/>
         <activity android:name=".presentacion.UsuarioTareaDetalleActivity"/>
     </application>
