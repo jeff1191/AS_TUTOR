@@ -32,7 +32,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     private Spinner frecuenciaSpinner;
     private TextView total;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
