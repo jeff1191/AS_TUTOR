@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -103,6 +105,21 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 mostrarMenuTarea(view, position);
             }
         });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        //getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     // Muestra el menú con las opciones para la tarea seleccionada
