@@ -2,7 +2,11 @@ package es.ucm.as_tutor.presentacion;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +20,7 @@ import es.ucm.as_tutor.R;
 /**
  * Created by msalitu on 06/04/2016.
  */
-public class UsuarioTareaDetalleActivity extends Activity{
+public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private EditText textoAlarma;
     private EditText textoPregunta;
@@ -28,11 +32,15 @@ public class UsuarioTareaDetalleActivity extends Activity{
     private Spinner frecuenciaSpinner;
     private TextView total;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_tarea_detalle);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.logo);
 
         // Se buscan las views por su id
         this.textoAlarma = (EditText) findViewById(R.id.textoAlarma);
@@ -79,13 +87,28 @@ public class UsuarioTareaDetalleActivity extends Activity{
 
         // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
         Bundle bundle = getIntent().getExtras();
-        if (bundle.getString("txtAlarma")!=null){
+        if (bundle != null){
             textoAlarma.setText(bundle.getString("txtAlarma"));
             textoPregunta.setText(bundle.getString("txtPregunta"));
             si.setText(bundle.get("si").toString());
             no.setText(bundle.get("no").toString());
             mejorar.setText(bundle.get("mejorar").toString());
             total.setText(bundle.get("total").toString());
+        }
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
