@@ -42,7 +42,6 @@
                 app:showAsAction="ifRoom|withText"
                 android:title="Eliminar"/>
 
-
         </menu>
 
     </item>
