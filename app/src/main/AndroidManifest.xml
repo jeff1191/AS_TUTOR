@@ -30,7 +30,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".presentacion.MainActivity" />
         <activity android:name=".presentacion.UsuarioEventosActivity" />
-        <activity android:name=".presentacion.UsuarioRetoActivity" />
         <activity android:name=".presentacion.UsuarioTareasActivity" />
         <activity android:name=".presentacion.Decision" />
         <activity
