@@ -11,7 +11,7 @@
     <string-array name="nav_options">
         <item>Usuarios</item>
         <item>Eventos</item>
-        <item>Acerca de</item>
+        <item>Ayuda</item>
     </string-array>
     <!-- Lista de iconos de navegacion-->
     <array name="navigation_iconos">
@@ -21,4 +21,10 @@
     </array>
     <string name="title_activity_bienvenido">Bienvenido</string>
     <string name="title_activity_registro">Registro</string>
+    <!-- FAQs-->
+    <string-array name="faq">
+        <item>¿Cómo añadir un nuevo usuario?</item>
+        <item>¿Cómo invitar un usuario a un evento?</item>
+        <item>¿Cómo crear una tarea para un usuario?</item>
+    </string-array>
 </resources>

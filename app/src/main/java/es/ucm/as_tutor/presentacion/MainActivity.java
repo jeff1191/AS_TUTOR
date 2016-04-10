@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         NavItms.add(new Item_Navegacion(titulos[0], NavIcons.getResourceId(0, -1)));
         //Eventos
         NavItms.add(new Item_Navegacion(titulos[1], NavIcons.getResourceId(1, -1)));
-        //Acerca de
+        //Ayuda
         NavItms.add(new Item_Navegacion(titulos[2], NavIcons.getResourceId(2, -1)));
         NavAdapter = new AdaptadorNavegacion(this, NavItms);
         NavList.setAdapter(NavAdapter);
@@ -214,6 +213,22 @@ public class MainActivity extends AppCompatActivity
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
 
+            case 3: // Ayuda
+                menuActionBar.clear();
+
+                FragmentDetalleAyuda fragmentDetalleAyuda = new FragmentDetalleAyuda();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleAyuda).commit();
+
+                FragmentListadoAyuda fragmentListadoAyuda = new FragmentListadoAyuda();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoAyuda).commit();
+
+                NavList.setItemChecked(position, true);
+                NavList.setSelection(position);
+                setTitle(titulos[position - 1]);
+                NavDrawerLayout.closeDrawer(NavList);
+                break;
 
             default:
                 //si no esta la opcion mostrara un toast y nos mandara a Home
