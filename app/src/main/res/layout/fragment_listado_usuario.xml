@@ -16,7 +16,7 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="134dp"
-        android:src="@drawable/ic_add_black_48dp"
+        android:src="@drawable/ic_add_white_48dp"
         android:layout_marginTop="50dp"
         android:onClick="nuevoUsuario"
         android:layout_marginRight="10dp"
