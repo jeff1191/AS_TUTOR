@@ -12,6 +12,7 @@ import es.ucm.as_tutor.R;
 
 public class FragmentDetalleUsuario extends Fragment {
     String textViewNombre;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class FragmentDetalleUsuario extends Fragment {
 
         //Mostramos el contenido al usuario
         if (textViewNombre != null) {
-            ((TextView) rootView.findViewById(R.id.DetalleNombreUsuario)).setText(textViewNombre);
+            ((TextView) rootView.findViewById(R.id.nombreUsuario)).setText(textViewNombre);
 
         }
 
@@ -38,13 +39,11 @@ public class FragmentDetalleUsuario extends Fragment {
     }
 
     public void mostrarDetalle(Usuario usuario) {
-        TextView txtNombre =(TextView)getView().findViewById(R.id.DetalleNombreUsuario);
-        EditText txtUsuario =(EditText)getView().findViewById(R.id.editTextDetalleNombre);
-        EditText txtDni=(EditText)getView().findViewById(R.id.editTextDetalleDni);
-        EditText txtTelefono=(EditText)getView().findViewById(R.id.editTextDetalleTelefono);
+        TextView txtNombre =(TextView)getView().findViewById(R.id.nombreUsuario);
+        EditText txtDni=(EditText)getView().findViewById(R.id.dniUsuario);
+        EditText txtTelefono=(EditText)getView().findViewById(R.id.telefonoUsuario);
 
-        txtNombre.setText(usuario.getTexto());
-        txtUsuario.setText(usuario.getNombre());
+        txtNombre.setText(usuario.getNombre());
         txtDni.setText(usuario.getDni());
         txtTelefono.setText(usuario.getTel());
     }
