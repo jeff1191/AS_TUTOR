@@ -88,9 +88,7 @@ public class FragmentDetalleEvento extends Fragment {
         String[] items = { "Pepe",
                 "Juan",
                 "Pedro",
-                "Alfonso",
-                "Juliano",
-                "Pepa"};
+                "Alfonso"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getBaseContext(),
                 android.R.layout.simple_list_item_1, items);
@@ -103,7 +101,9 @@ public class FragmentDetalleEvento extends Fragment {
 
 //Initialize calendar with date
         Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
-
+        currentCalendar.set(Calendar.DAY_OF_MONTH, 15);
+        currentCalendar.set(Calendar.MONTH, 7 - 1);
+        currentCalendar.set(Calendar.YEAR, 2016);
 //Show Monday as first date of week
         calendarView.setFirstDayOfWeek(Calendar.MONDAY);
 

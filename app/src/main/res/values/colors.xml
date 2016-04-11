@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="botonActivo">#c1c0c0</color>
+    <color name="listado">#f4f3f3</color>
     <color name="textoNormal">#8e8d8d</color>
 </resources>

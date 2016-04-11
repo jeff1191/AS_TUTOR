@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Evento X"
-        android:id="@+id/DetalleNombreTarea"
+        android:id="@+id/DetalleNombreEvento"
         android:textSize="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="6">
+        android:layout_weight="6"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -56,6 +57,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
+                        android:text="Evento X"
                         android:id="@+id/editTextNombreEvento"/>
                     <!-- Fin Nombre Evento-->
 
@@ -79,6 +81,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="6"
+                        android:text="12:00"
                         android:inputType="date"
                         android:id="@+id/editTextHoraEvento" />
                     <!-- Fin Hora evento -->
@@ -103,6 +106,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="6"
                         android:inputType="date"
+                        android:text="12:00"
                         android:id="@+id/editTextHoraAlarma"/>
                     <!-- Fin  Hora alarma -->
                 </LinearLayout>
@@ -115,13 +119,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Usuarios: "
-                android:gravity="center_horizontal"
-                android:id="@+id/textView8"/>
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@color/listado"
+                android:id="@+id/textView8"
+                android:textStyle="bold" />
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
+                android:background="@color/listado"
                 android:id="@+id/listViewUsuariosEvento" />
             <!-- Usuarios evento -->
 
@@ -161,5 +169,38 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Guardar"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:id="@+id/botonEvento"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </LinearLayout>
