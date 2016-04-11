@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-                menuActionBar.clear();
+                menuActionBar.clear(); //poner otro menu
                 getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);
 
                 FragmentDetalleEvento fragmentDetalleTarea = new FragmentDetalleEvento();
@@ -285,5 +285,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return true;
+    }
+    public void nuevoEvento(View view){
+
     }
 }
