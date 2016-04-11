@@ -13,9 +13,9 @@
         android:id="@+id/nombreUsuario"
         android:text="Carlos"
         android:gravity="center"
-        android:textSize="40dp"
         android:textAlignment="center"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/Base.TextAppearance.AppCompat.Large" />
 
     <LinearLayout
         android:orientation="horizontal"

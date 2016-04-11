@@ -357,14 +357,9 @@ public class MainActivity extends AppCompatActivity
         adapterListadoUsuarios.addItem(new ItemUsuarioEvento(6, "Pepa", "Tipo D"));
         adapterListadoUsuarios.addItem(new ItemUsuarioEvento(7, "Juliano", "Tipo D"));
 
-
-
         listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
         boton_nuevo.setText("Crear");
-
-
-
-        //Calendar
+   //Calendar
         //Initialize CustomCalendarView from layout
         final CustomCalendarView calendarView = (CustomCalendarView) findViewById(R.id.calendar_view);
         final Calendar calendarioVista =calendarView.getCurrentCalendar();
@@ -404,7 +399,6 @@ public class MainActivity extends AppCompatActivity
         boton_nuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(MainActivity.this,"CREANDO EL NUEVO EVENTO...FECHA("+calendarioVista.getTime()+")", Toast.LENGTH_SHORT).show();
             }
         });
