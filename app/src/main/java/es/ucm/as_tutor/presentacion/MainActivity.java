@@ -9,21 +9,32 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imanoweb.calendarview.CalendarListener;
+import com.imanoweb.calendarview.CustomCalendarView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
@@ -194,7 +205,7 @@ public class MainActivity extends AppCompatActivity
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-                menuActionBar.clear();
+                menuActionBar.clear(); //poner otro menu
                 getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);
 
                 FragmentDetalleEvento fragmentDetalleTarea = new FragmentDetalleEvento();
@@ -280,22 +291,127 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent);
                     break;
                 case R.id.retoUsuario:
-                    Intent intentReto = new Intent(this, UsuarioRetoActivity.class);
-                    startActivity(intentReto);
+                    //Aqui iria un if/else
+                   FragmentDetalleReto fragmentReto = new FragmentDetalleReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
+                    /* FragmentDetalleNuevoReto fragmentNueoReto = new FragmentDetalleNuevoReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();*/
                     break;
                 case R.id.eventosUsuario:
-                    Intent intentEventos = new Intent(this, UsuarioEventosActivity.class);
-                    startActivity(intentEventos);
+                    FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
                     break;
                 case R.id.enviarCorreo:
                     // aquí habrá que ejecutar el comando de enviar correo
                     break;
                 case R.id.eliminarUsuario:
                     //aqui habrá que ejecutar el comando de eliminar usuario
+
+                case R.id.editarListaUsuariosEventos:
+
+                    AdaptadorEventoUsuarios adapter = new AdaptadorEventoUsuarios(5,this);
+                    adapter.addItem(new ItemUsuarioEvento(1,"Pepe", "Tipo A" ));
+                    adapter.addItem(new ItemUsuarioEvento(2,"Juan", "Tipo A" ));
+                    adapter.addItem(new ItemUsuarioEvento(3,"Pedro", "Tipo B" ));
+                    adapter.addItem(new ItemUsuarioEvento(4,"Pepa", "Tipo C" ));
+                    adapter.addItem(new ItemUsuarioEvento(5,"Alfredo", "Tipo D" ));
+                    //String names[] ={"Alberto","Berta","Carlos","Daniel","Julian","Alfredo"};
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                    LayoutInflater inflater = getLayoutInflater();
+                    View convertView = (View) inflater.inflate(R.layout.evento_listado_usuarios, null);
+                    alertDialog.setView(convertView);
+                    alertDialog.setTitle("Usuarios");
+                    ListView lv = (ListView) convertView.findViewById(R.id.listView1);
+                    //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
+                    lv.setAdapter(adapter);
+                    alertDialog.show();
+
+                break;
+
                 default:
                     return super.onOptionsItemSelected(item);
             }
         }
         return true;
+    }
+    public void nuevoEvento(View view){
+        TextView nuevoEv = (TextView) findViewById(R.id.DetalleNombreEvento);
+        nuevoEv.setText("Nuevo evento");
+
+        EditText nuevoNombre = (EditText) findViewById(R.id.editTextNombreEvento);
+        EditText nuevaHoraEvento = (EditText) findViewById(R.id.editTextHoraEvento);
+        EditText nuevaHoraAlarma = (EditText) findViewById(R.id.editTextHoraAlarma);
+        ListView listaEventoUsuarios = (ListView) findViewById(R.id.listViewUsuariosEvento);
+        Button boton_nuevo= (Button) findViewById(R.id.botonEvento);
+
+        nuevoNombre.setText("");
+        nuevaHoraEvento.setText("");
+        nuevaHoraAlarma.setText("");
+
+        AdaptadorEventoUsuarios adapterListadoUsuarios = new AdaptadorEventoUsuarios(7,this);
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(1, "Pepe", "Tipo A" ));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(2, "Juan", "Tipo A" ));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(3, "Pedro", "Tipo B"));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(4, "Pepa", "Tipo C"));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(5, "Alfredo", "Tipo D"));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(6, "Pepa", "Tipo D"));
+        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(7, "Juliano", "Tipo D"));
+
+
+
+        listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
+        boton_nuevo.setText("Crear");
+
+
+
+        //Calendar
+        //Initialize CustomCalendarView from layout
+        final CustomCalendarView calendarView = (CustomCalendarView) findViewById(R.id.calendar_view);
+        final Calendar calendarioVista =calendarView.getCurrentCalendar();
+        calendarioVista.set(Calendar.DAY_OF_MONTH, 15);
+        calendarioVista.set(Calendar.MONTH, 2 - 1);
+        calendarioVista.set(Calendar.YEAR, 2016);
+
+//Initialize calendar with date
+        Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
+
+
+//Show Monday as first date of week
+        calendarView.setFirstDayOfWeek(Calendar.MONDAY);
+
+//Show/hide overflow days of a month
+        calendarView.setShowOverflowDate(false);
+
+//call refreshCalendar to update calendar the view
+        calendarView.refreshCalendar(calendarioVista);
+
+//Handling custom calendar events
+        calendarView.setCalendarListener(new CalendarListener() {
+            @Override
+            public void onDateSelected(Date date) {
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                Toast.makeText(MainActivity.this, "NUEVO: " + df.format(date), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onMonthChanged(Date date) {
+                SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
+                Toast.makeText(MainActivity.this,"NUEVO: " + df.format(date), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        boton_nuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(MainActivity.this,"CREANDO EL NUEVO EVENTO...FECHA("+calendarioVista.getTime()+")", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void enviarUsuarios(View view){
+        Log.e("USR","asda");
     }
 }

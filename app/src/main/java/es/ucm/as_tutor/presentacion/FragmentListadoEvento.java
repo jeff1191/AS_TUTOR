@@ -32,7 +32,7 @@ public class FragmentListadoEvento extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        listadoEvento = (ListView)getView().findViewById(R.id.ListadoTareas);
+        listadoEvento = (ListView)getView().findViewById(R.id.ListadoEventos);
 
         listadoEvento.setAdapter(new AdaptadorEventos(this, datos));
 
@@ -81,4 +81,6 @@ public class FragmentListadoEvento extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

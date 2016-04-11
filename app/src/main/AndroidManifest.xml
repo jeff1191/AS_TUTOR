@@ -29,8 +29,6 @@
             android:label="@string/title_activity_detalle_activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".presentacion.MainActivity" />
-        <activity android:name=".presentacion.UsuarioEventosActivity" />
-        <activity android:name=".presentacion.UsuarioRetoActivity" />
         <activity android:name=".presentacion.UsuarioTareasActivity" />
         <activity android:name=".presentacion.Decision" />
         <activity
@@ -38,7 +36,6 @@
             android:label="@string/title_activity_registro"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".presentacion.UsuarioTareaDetalleActivity"/>
-        <activity android:name=".presentacion.UsuarioRetoDetalleActivity"/>
     </application>
 
 </manifest>
