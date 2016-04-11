@@ -21,10 +21,22 @@
     </array>
     <string name="title_activity_bienvenido">Bienvenido</string>
     <string name="title_activity_registro">Registro</string>
+
     <!-- FAQs-->
     <string-array name="faq">
-        <item>¿Cómo añadir un nuevo usuario?</item>
+        <item>¿Cómo añado un nuevo usuario?</item>
+        <item>¿Cómo invito un usuario a un evento?</item>
+        <item>¿Cómo creo una tarea para un usuario?</item>
+    </string-array>
+
+    <!-- Respuestas FAQs-->
+    <string-array name="respuestasFaq">
+        <item>En la sección USUARIOS debes pulsar sobre el botón rosa que aparece en la parte
+        inferior del listado. Entonces se abrirá una ventana donde rellenar todos los campos de tu nuevo
+        usuario. Cuando termines, pulsa el botón ACEPTAR para guardar los cambios.
+            ¡Ya tienes un nuevo usuario!</item>
         <item>¿Cómo invitar un usuario a un evento?</item>
         <item>¿Cómo crear una tarea para un usuario?</item>
     </string-array>
+
 </resources>

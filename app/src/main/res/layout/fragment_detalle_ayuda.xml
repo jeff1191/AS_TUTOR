@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,37 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
         android:text="Titulo pregunta"
-        android:id="@+id/pregunta"
+        android:id="@+id/titulo"
         android:gravity="center" />
 
-    <!-- Explicacion y pantallazo-->
-    <LinearLayout
+    <!-- Explicacion -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="Respuesta a la pregunta"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/explicacion" />
+
+    <!-- Pantallazo descriptivo -->
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:orientation="horizontal">
-
-        <!-- Respuesta a la pregunta -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Respuesta a la pregunta"
-            android:paddingLeft="20dp"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/repuesta" />
-
-        <!-- Pantallazo descriptivo -->
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/pantallazo"
-            android:layout_gravity="center_horizontal" />
-
-    </LinearLayout>
+        android:id="@+id/pantallazo"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>

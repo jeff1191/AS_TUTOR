@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
 
@@ -18,6 +20,10 @@ public class FragmentDetalleAyuda extends Fragment {
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
+
+    private TextView titulo;
+    private TextView explicacion;
+    private ImageView pantallazo;
 
     public FragmentDetalleAyuda() {}
 
@@ -33,6 +39,7 @@ public class FragmentDetalleAyuda extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -42,8 +49,17 @@ public class FragmentDetalleAyuda extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_ayuda, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_detalle_ayuda, container, false);
+        titulo = (TextView) rootView.findViewById(R.id.titulo);
+        explicacion = (TextView) rootView.findViewById(R.id.explicacion);
+        pantallazo = (ImageView) rootView.findViewById(R.id.pantallazo);
+        String[] faq = getResources().getStringArray(R.array.faq);
+        titulo.setText(faq[0]);
+        String[] respuestasFaq = getResources().getStringArray(R.array.respuestasFaq);
+        explicacion.setText(respuestasFaq[0]);
+        seleccionarPantallazo(0);
+        return rootView;
     }
 
     @Override
@@ -54,5 +70,16 @@ public class FragmentDetalleAyuda extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void seleccionarPantallazo(Integer position){
+        switch (position){
+            case 0:
+                pantallazo.setImageResource(R.drawable.a1);
+                break;
+            default:
+                pantallazo.setImageResource(R.drawable.a1);
+                break;
+        }
     }
 }
