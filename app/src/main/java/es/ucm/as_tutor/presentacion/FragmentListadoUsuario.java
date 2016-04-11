@@ -39,7 +39,7 @@ public class FragmentListadoUsuario extends Fragment {
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_listado_usuario, container, false);
 		if(rootView != null && activadoFrg){
-			lstListado = (ListView)rootView.findViewById(R.id.LstListado);
+			lstListado = (ListView)rootView.findViewById(R.id.ListadoUsuarios);
 			lstListado.setAdapter(new AdaptadorUsuarios(this, datos));
 
 			lstListado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
