@@ -59,16 +59,16 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         textosAlarma.add("Meter las cosas en la mochila");
 
         this.horasAlarma = new ArrayList<>();
-        horasAlarma.add("22.00");
-        horasAlarma.add("8.30");
+        horasAlarma.add("22:00");
+        horasAlarma.add("08:30");
 
         this.textosPreguntas = new ArrayList<>();
         textosPreguntas.add("¿Te has lavado los dientes?");
         textosPreguntas.add("¿Has metido las cosas en la mochila?");
 
         this.horasPregunta = new ArrayList<>();
-        horasPregunta.add("22.00");
-        horasPregunta.add("8.30");
+        horasPregunta.add("22:10");
+        horasPregunta.add("08:40");
 
         this.si = new ArrayList<>();
         si.add(1);

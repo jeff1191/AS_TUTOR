@@ -1,7 +1,5 @@
 package es.ucm.as_tutor.presentacion;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
 
@@ -31,6 +31,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     private TimePicker horaPregunta;
     private Spinner frecuenciaSpinner;
     private TextView total;
+    private String[] frecuencias = {"Diaria", "Semanal", "Mensual"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +54,38 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.frecuenciaSpinner = (Spinner) findViewById(R.id.frecuencia);
         this.total = (TextView) findViewById(R.id.total);
 
-        // Valroes para el spinner de frecuencia
-        ArrayAdapter<CharSequence> adapter_frecuencia = ArrayAdapter.createFromResource(this,
-                R.array.frecuencias_array, android.R.layout.simple_spinner_item);
+        // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            textoAlarma.setText(bundle.getString("txtAlarma"));
+            textoPregunta.setText(bundle.getString("txtPregunta"));
+            si.setText(bundle.get("si").toString());
+            no.setText(bundle.get("no").toString());
+            mejorar.setText(bundle.get("mejorar").toString());
+            total.setText(bundle.get("total").toString());
+            // TimePicker hora alarma
+            String horaLargo = bundle.getString("horaAlarma");
+            String horas = horaLargo.substring(0, 2);
+            String mins = horaLargo.substring(3, 5);
+            Integer hora = Integer.parseInt(horas);
+            Integer min = Integer.parseInt(mins);
+            horaAlarma.setCurrentHour(hora);
+            horaAlarma.setCurrentMinute(min);
+            // TimePicker hora pregunta
+            horaLargo = bundle.getString("horaPregunta");
+            horas = horaLargo.substring(0, 2);
+            mins = horaLargo.substring(3, 5);
+            hora = Integer.parseInt(horas);
+            min = Integer.parseInt(mins);
+            horaPregunta.setCurrentHour(hora);
+            horaPregunta.setCurrentMinute(min);
+            // Frecuencia
+            cambiarOrdenFrecuencias(bundle.getString("frecuencia"));
+        }
+
+        // Spinner de frecuencia
+        ArrayAdapter<String> adapter_frecuencia = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, frecuencias);
         adapter_frecuencia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frecuenciaSpinner.setAdapter(adapter_frecuencia);
         frecuenciaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,22 +108,32 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
                         break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+    }
 
-        // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            textoAlarma.setText(bundle.getString("txtAlarma"));
-            textoPregunta.setText(bundle.getString("txtPregunta"));
-            si.setText(bundle.get("si").toString());
-            no.setText(bundle.get("no").toString());
-            mejorar.setText(bundle.get("mejorar").toString());
-            total.setText(bundle.get("total").toString());
+    // Este metodo es necesario para que se muestre como primera opcion del spinner la frecuencia
+    // de la tarea seleccionada
+    private void cambiarOrdenFrecuencias(String frecuencia) {
+        switch (frecuencia){
+            case "Diaria":
+                this.frecuencias[0] = "Diaria";
+                this.frecuencias[1] = "Semanal";
+                this.frecuencias[2] = "Mensual";
+                break;
+            case "Semanal":
+                this.frecuencias[0] = "Semanal";
+                this.frecuencias[1] = "Mensual";
+                this.frecuencias[2] = "Diaria";
+                break;
+            case "Mensual":
+                this.frecuencias[0] = "Mensual";
+                this.frecuencias[1] = "Diaria";
+                this.frecuencias[2] = "Semanal";
+                break;
         }
     }
 
