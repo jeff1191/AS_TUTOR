@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
@@ -27,7 +26,7 @@ public class FragmentDetalleUsuario extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detalle_usuario, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detalle_nuevo_usuario, container, false);
 
         //Mostramos el contenido al usuario
         if (textViewNombre != null) {

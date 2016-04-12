@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center"
-    android:background="#ffffff">
 
     <!-- Contenedor global -->
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center"
+        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <!-- Seccion informacion principal + imagen -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <!-- Imagen y puntuacion -->
+            <!-- Imagen,  puntuacion y notas usuario-->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -61,15 +51,39 @@
                                 android:layout_weight="1" />
 
                         </LinearLayout> <!-- Fin puntuacion  -->
-                </LinearLayout>
 
-            <!-- Informacion principal -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+                <!-- Notas extras usuario-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/notas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Notas" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout> <!-- Fin imagen,  puntuacion y notas usuario-->
+
+
+
+
+        <!-- Seccion de informacioin -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingRight="20dp">
 
 
                 <!-- Nombre usuario -->
@@ -142,20 +156,27 @@
                                 android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:paddingLeft="10dp">
-                                <android.support.design.widget.TextInputLayout
+
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_weight="1">
-                                    <EditText
-                                        android:id="@+id/perfil"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:singleLine="true"
-                                        android:hint="Perfil" />
-                                </android.support.design.widget.TextInputLayout>
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:text="Perfil"
+                                    android:gravity="center"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:text="Perfil A"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:id="@+id/perfil" />
+
                             </LinearLayout>
 
-                    </LinearLayout> <!-- Fin fila dni, telefono y perfil -->
+                </LinearLayout> <!-- Fin fila dni, telefono y perfil -->
 
 
                 <!-- Fila direccion y correo -->
@@ -210,13 +231,265 @@
 
                 </LinearLayout> <!-- Fin fila direccion y correo -->
 
-            </LinearLayout> <!-- Fin informacion principal -->
+                <!-- Fila centro de estudios -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-        </LinearLayout><!-- fin informacion principal + imagen -->
+                    <!-- Centro de estudios -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:paddingRight="10dp">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
 
-    </LinearLayout> <!-- fin contenedor global -->
+                            <EditText
+                                android:id="@+id/colegio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:hint="Centro de estudios" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
 
-</ScrollView>
+                    <!-- Estudios -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/estudios"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:hint="Estudios" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Estudios -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/curso"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:hint="Curso" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout> <!-- Fin fila centro de estudios -->
+
+            <!-- Fila padre -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:text="Datos del padre"
+                        android:gravity="center" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <!-- Nombre padre -->
+                    <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/nombrePadre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Nombre del padre" />
+                    </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+
+                <!-- Telefono del padre -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/telefonoPadre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Teléfono del padre" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!-- Correo padre -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/correoPadre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Correo del padre" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout><!-- Fin fila padre -->
+
+                <!-- Fila madre -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:text="Datos de la madre"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <!-- Nombre madre -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingRight="10dp">
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+
+                                <EditText
+                                    android:id="@+id/nombreMadre"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:hint="Nombre de la madre" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+
+                        <!-- Telefono madre -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp">
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+
+                                <EditText
+                                    android:id="@+id/telefonoMadre"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:hint="Teléfono de la madre" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Correo madre -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp">
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+
+                                <EditText
+                                    android:id="@+id/correoMadre"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:hint="Correo de la madre" />
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+            </LinearLayout> <!-- Fin fila madre -->
+
+        </LinearLayout> <!-- Fin informacion usuario -->
+
+</LinearLayout>
+
+
+
+
+
 
 
 
