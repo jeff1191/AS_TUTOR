@@ -1,368 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
     android:background="#ffffff">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/nombreUsuario"
-        android:text="Carlos"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_weight="1"
-        style="@style/Base.TextAppearance.AppCompat.Large" />
-
+    <!-- Contenedor global -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/datosGeneralesUsuario">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:id="@+id/imagenUsuario"
-            android:src="@drawable/avatar"
-            android:layout_weight="1" />
-
+        <!-- Seccion informacion principal + imagen -->
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
+            <!-- Imagen y puntuacion -->
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                        <!-- Imagen usuario -->
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:id="@+id/imagenUsuario"
+                            android:src="@drawable/avatar"
+                            android:layout_weight="5"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
 
+                        <!-- Puntuacion -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/iconoPuntuacion"
+                                android:src="@drawable/puntuacion"
+                                android:layout_weight="1"
+                                android:gravity="right|center"
+                                android:scaleType="fitEnd" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/puntuacion"
+                                android:text="8/10"
+                                android:gravity="left|center"
+                                android:layout_weight="1" />
+
+                        </LinearLayout> <!-- Fin puntuacion  -->
+                </LinearLayout>
+
+            <!-- Informacion principal -->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:id="@+id/datosUsuario">
+                android:orientation="vertical">
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dniUsuario"
-                    android:ems="7"
-                    android:text="DNI"
-                    android:layout_weight="1" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"></LinearLayout>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:ems="7"
-                    android:id="@+id/telefonoUsuario"
-                    android:text="TelefonoUsuario"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"></LinearLayout>
-
-                <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:ems="7"
-                        android:id="@+id/emailUsuario"
-                        android:text="CorreoUsuario"
-                        android:layout_weight="1" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"></LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:id="@+id/datosPuntuacion">
-
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinner"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
-
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/puntuacionImg"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/avatar"
-                    android:gravity="center" />
-
+                <!-- Nombre usuario -->
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/puntuacionUsuario"
+                    android:id="@+id/nombre"
+                    android:text="Carlos Perez"
                     android:gravity="center"
-                    android:text="10/10"
-                    android:textAlignment="center" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"></LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"></LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/datosAdiccionalesUsuario"
-        android:layout_weight="3">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Informacion adicional"
-                android:id="@+id/infoAdicional"
-                android:textSize="30dp"
-                android:textAlignment="center"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.75"></LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4.5"
-                android:id="@+id/infoPadres">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Padres"
-                    android:id="@+id/textView4"
                     android:layout_weight="1" />
 
+
+                <!-- Fila dni, telefono y correo -->
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3"
-                    android:id="@+id/padres">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
+                            <!-- DNI -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingRight="10dp">
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+                                    <EditText
+                                        android:id="@+id/dni"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:hint="DNI" />
+                                </android.support.design.widget.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <!-- Telefono -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp">
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+                                    <EditText
+                                        android:id="@+id/telefono"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:hint="Teléfono" />
+                                </android.support.design.widget.TextInputLayout>
+                            </LinearLayout>
+
+                            <!-- Correo electronico -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:orientation="vertical"
+                                android:paddingRight="20dp"
+                                android:paddingLeft="10dp">
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+                                    <EditText
+                                        android:id="@+id/correo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:hint="Correo" />
+                                </android.support.design.widget.TextInputLayout>
+                            </LinearLayout>
+
+                    </LinearLayout> <!-- Fin fila dni, telefono y correo -->
+
+
+                <!-- Fila direccion y perfil -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <!-- Direccion -->
                     <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:orientation="vertical"
+                        android:paddingRight="10dp">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/direccion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:hint="Direccion" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <!-- Perfil -->
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/infoPadre">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:text="NombrePadre"
-                            android:ems="10"
-                            android:id="@+id/nombrePadre"
-                            android:layout_weight="1" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:ems="10"
-                            android:id="@+id/telefonoPadre"
-                            android:text="TelefonoPadre"
-                            android:layout_weight="1" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress"
-                            android:ems="10"
-                            android:id="@+id/emailPadre"
-                            android:text="EmailPadre"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/infoMadre"
-                        android:layout_weight="1">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:text="NombreMadre"
-                            android:ems="10"
-                            android:id="@+id/nombreMadre"
-                            android:layout_weight="1" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:ems="10"
-                            android:id="@+id/telefonoMadre"
-                            android:text="TelefonoMadre"
-                            android:layout_weight="1" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress"
-                            android:ems="10"
-                            android:id="@+id/emailMadre"
-                            android:text="EmailMadre"
-                            android:layout_weight="1" />
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+                            <EditText
+                                android:id="@+id/perfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:hint="Perfil" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                </LinearLayout>
-            </LinearLayout>
+                </LinearLayout> <!-- Fin fila direccion y perfil -->
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/infoColegio"
-                android:layout_weight="2">
+            </LinearLayout> <!-- Fin informacion principal -->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Centro de estudios"
-                    android:id="@+id/textView3"
-                    android:layout_weight="1" />
+        </LinearLayout><!-- fin informacion principal + imagen -->
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/colegioUsuario"
-                    android:ems="10"
-                    android:text="ColegioUsuario"
-                    android:layout_weight="1" />
+    </LinearLayout> <!-- fin contenedor global -->
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/cursoUsuario"
-                    android:text="CursoUsuario"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:id="@+id/infoExtraUsuario">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Notas"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:ems="10"
-                    android:id="@+id/notasUsuario"
-                    android:text="NotasUsuario"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.75"></LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.25"></LinearLayout>
+</ScrollView>
 
 
-</LinearLayout>
+
