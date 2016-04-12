@@ -75,10 +75,10 @@ public class FragmentDetalleAyuda extends Fragment {
     private void seleccionarPantallazo(Integer position){
         switch (position){
             case 0:
-                pantallazo.setImageResource(R.drawable.a1);
+               // pantallazo.setImageResource(R.drawable.a1);
                 break;
             default:
-                pantallazo.setImageResource(R.drawable.a1);
+               // pantallazo.setImageResource(R.drawable.a1);
                 break;
         }
     }
