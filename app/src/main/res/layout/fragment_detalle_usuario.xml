@@ -82,7 +82,7 @@
                     android:layout_weight="1" />
 
 
-                <!-- Fila dni, telefono y correo -->
+                <!-- Fila dni, telefono y perfil -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -134,32 +134,31 @@
                                 </android.support.design.widget.TextInputLayout>
                             </LinearLayout>
 
-                            <!-- Correo electronico -->
+                            <!-- Perfil -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="2"
+                                android:layout_weight="1"
                                 android:orientation="vertical"
-                                android:paddingRight="20dp"
-                                android:paddingLeft="10dp">
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp">
                                 <android.support.design.widget.TextInputLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1">
-
                                     <EditText
-                                        android:id="@+id/correo"
+                                        android:id="@+id/perfil"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:singleLine="true"
-                                        android:hint="Correo" />
+                                        android:hint="Perfil" />
                                 </android.support.design.widget.TextInputLayout>
                             </LinearLayout>
 
-                    </LinearLayout> <!-- Fin fila dni, telefono y correo -->
+                    </LinearLayout> <!-- Fin fila dni, telefono y perfil -->
 
 
-                <!-- Fila direccion y perfil -->
+                <!-- Fila direccion y correo -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -170,7 +169,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:paddingRight="10dp">
                         <android.support.design.widget.TextInputLayout
@@ -187,28 +186,30 @@
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!-- Perfil -->
+                    <!-- Correo electronico -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp">
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
+
                             <EditText
-                                android:id="@+id/perfil"
+                                android:id="@+id/correo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:hint="Perfil" />
+                                android:hint="Correo" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                </LinearLayout> <!-- Fin fila direccion y perfil -->
+
+                </LinearLayout> <!-- Fin fila direccion y correo -->
 
             </LinearLayout> <!-- Fin informacion principal -->
 
