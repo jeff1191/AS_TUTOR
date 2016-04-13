@@ -28,7 +28,10 @@
                             android:src="@drawable/avatar"
                             android:layout_weight="5"
                             android:gravity="center"
-                            android:paddingTop="10dp"/>
+                            android:paddingTop="10dp"
+                            android:clickable="true"
+                            android:onClick="cambiarImagenPerfil"
+                            android:nestedScrollingEnabled="false" />
 
                         <!-- Puntuacion -->
                         <LinearLayout

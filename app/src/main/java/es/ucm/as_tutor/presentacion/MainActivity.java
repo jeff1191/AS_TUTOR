@@ -2,6 +2,7 @@ package es.ucm.as_tutor.presentacion;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -20,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,10 @@ import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_IMAGE_CAPTURE =3;
+    private static final int SELECCIONAR_GALERIA = 2;
+    private static final int CAMARA = 1;
+
     private String[] titulos;
     private DrawerLayout NavDrawerLayout;
     private ListView NavList;
@@ -677,6 +683,68 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void infoPadre(View view){
+        AlertDialog a = createInfoProgenitoresDialogo("padre");
+        a.show();
+    }
 
+    public void infoMadre(View view){
+        AlertDialog a = createInfoProgenitoresDialogo("madre");
+        a.show();
+    }
+
+    public AlertDialog createInfoProgenitoresDialogo(String who) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_info_padres, null);
+
+        EditText name = (EditText) v.findViewById(R.id.name);
+        EditText phone = (EditText) v.findViewById(R.id.phone);
+        EditText mail = (EditText) v.findViewById(R.id.mail);
+        builder.setView(v);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones
+            }
+        });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        if (who.equals("padre"))
+            builder.setTitle("Información del padre");
+        else
+            builder.setTitle("Información de la madre");
+        return builder.create();
+    }
+
+    public void cambiarImagenPerfil(View v) {
+        final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Hacer foto")) {
+                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, CAMARA);
+                } else if (items[item].equals("Elegir de la galeria")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            SELECCIONAR_GALERIA);
+                } else if (items[item].equals("Imagen por defecto")) {
+                    ImageView iv = (ImageView) findViewById(R.id.avatar);
+                    iv.setImageResource(R.drawable.avatar);
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 }

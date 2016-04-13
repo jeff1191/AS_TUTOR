@@ -1,5 +1,7 @@
 package es.ucm.as_tutor.presentacion;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import es.ucm.as_tutor.R;
 
 public class FragmentDetalleUsuario extends Fragment {
+
+
     private TextView nombreV;
     private TextView sincronizacionV;
     private TextView perfilV;
@@ -123,5 +127,8 @@ public class FragmentDetalleUsuario extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
 }
