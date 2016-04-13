@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -31,6 +32,7 @@ import com.imanoweb.calendarview.CustomCalendarView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -572,6 +574,31 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.enviarCorreo:
                     // aquí habrá que ejecutar el comando de enviar correo
+
+                    // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
+                    //Instanciamos un Intent del tipo ACTION_SEND
+                    Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    //Definimos la tipologia de datos del contenido dle Email en este caso text/html
+                    emailIntent.setType("application/pdf");
+                    // Indicamos con un Array de tipo String las direcciones de correo a las cuales
+                    //queremos enviar el texto
+                    //emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
+                    // Definimos un titulo para el Email
+                    emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
+                    // Definimos un Asunto para el Email
+                    emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
+                    // Obtenemos la referencia al texto y lo pasamos al Email Intent
+                    emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
+                            "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
+                            + "\n¡Ánimo!" + "\n\nEnviado desde AS");
+
+                    Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
+                    emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+
+                    getApplicationContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////
+
                     break;
                 case R.id.eliminarUsuario:
                     //aqui habrá que ejecutar el comando de eliminar usuario

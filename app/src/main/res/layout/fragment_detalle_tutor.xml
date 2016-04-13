@@ -136,7 +136,6 @@
             android:id="@+id/aceptarTutor"
             android:layout_weight="1" />
 
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
