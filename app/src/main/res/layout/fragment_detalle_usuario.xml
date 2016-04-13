@@ -2,9 +2,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".presentacion.FragmentDetalleUsuario"
     android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+            <!-- Nombre usuario -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/nombre"
+                android:text="Carlos Perez"
+                android:gravity="center"
+                android:layout_weight="4" />
+
+        <!-- Perfil y sincronizacion-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Sincronización: VIC001"
+                android:gravity="center|right"
+                android:layout_weight="1"
+                android:id="@+id/sincronizacion" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Perfil A"
+                android:gravity="center|right"
+                android:layout_weight="1"
+                android:id="@+id/perfil" />
+
+        </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="7">
 
             <!-- Imagen,  puntuacion e info padres-->
             <LinearLayout
@@ -55,11 +106,7 @@
 
                         </LinearLayout> <!-- Fin puntuacion  -->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
+                <!-- Info padres -->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -98,9 +145,8 @@
                         android:layout_weight="1"
                         android:textStyle="bold"
                         android:orientation="vertical"></LinearLayout>
-                    </LinearLayout>
 
-            </LinearLayout> <!-- Fin imagen,  puntuacion y notas usuario-->
+            </LinearLayout> <!-- Fin imagen,  puntuacion e info padres-->
 
 
         <!-- Seccion de informacioin -->
@@ -111,53 +157,7 @@
             android:orientation="vertical"
             android:paddingRight="20dp">
 
-
-            <!-- Nombre, perfil y sincronizacion -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-                <!-- Nombre usuario -->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/nombre"
-                    android:text="Carlos Perez"
-                    android:gravity="center"
-                    android:layout_weight="3" />
-
-                        <!-- Perfil y sincronizacion-->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:paddingRight="20dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Sincronización: VIC001"
-                                android:gravity="center|right"
-                                android:layout_weight="1"
-                                android:id="@+id/sincronizacion" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Perfil A"
-                                android:gravity="center|right"
-                                android:layout_weight="1"
-                                android:id="@+id/perfil" />
-
-                        </LinearLayout>
-                </LinearLayout>
-
-                <!-- Fila dni, telefono y perfil -->
+                <!-- Fila dni, y correo -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -210,7 +210,7 @@
                 </LinearLayout> <!-- Fin fila dni, telefono y perfil -->
 
 
-                <!-- Fila direccion y correo -->
+                <!-- Fila telf y direccion -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -313,7 +313,7 @@
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!-- Estudios -->
+                    <!-- Curso -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -359,6 +359,8 @@
         </LinearLayout> <!-- Fin informacion usuario -->
 
 </LinearLayout>
+</LinearLayout>
+
 
 
 

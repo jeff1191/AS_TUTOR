@@ -42,7 +42,7 @@ import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_IMAGE_CAPTURE =3;
+    private static final int REQUEST_IMAGE_CAPTURE = 3;
     private static final int SELECCIONAR_GALERIA = 2;
     private static final int CAMARA = 1;
 
@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private TypedArray NavIcons;
     private ActionBarDrawerToggle mDrawerToggle;
     private AdaptadorNavegacion NavAdapter;
-    private ImageButton tareas;
-    private ImageButton usuarios;
-    private String panelActivo = "usuarios";
     private Menu menuActionBar;
     private DBHelper mDBHelper = null;
 
@@ -630,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
 
         listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
         boton_nuevo.setText("Crear");
-   //Calendar
+        //Calendar
         //Initialize CustomCalendarView from layout
         final CustomCalendarView calendarView = (CustomCalendarView) findViewById(R.id.calendar_view);
         final Calendar calendarioVista =calendarView.getCurrentCalendar();
@@ -638,20 +635,20 @@ public class MainActivity extends AppCompatActivity {
         calendarioVista.set(Calendar.MONTH, 2 - 1);
         calendarioVista.set(Calendar.YEAR, 2016);
 
-//Initialize calendar with date
+        //Initialize calendar with date
         Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
 
 
-//Show Monday as first date of week
+        //Show Monday as first date of week
         calendarView.setFirstDayOfWeek(Calendar.MONDAY);
 
-//Show/hide overflow days of a month
+        //Show/hide overflow days of a month
         calendarView.setShowOverflowDate(false);
 
-//call refreshCalendar to update calendar the view
+        //call refreshCalendar to update calendar the view
         calendarView.refreshCalendar(calendarioVista);
 
-//Handling custom calendar events
+        //Handling custom calendar events
         calendarView.setCalendarListener(new CalendarListener() {
             @Override
             public void onDateSelected(Date date) {

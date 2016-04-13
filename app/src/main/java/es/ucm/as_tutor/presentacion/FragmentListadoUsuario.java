@@ -85,7 +85,6 @@ public class FragmentListadoUsuario extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
 				Bundle bundle = new Bundle();
-				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
 
 				bundle.putString("nombre", nombres.get(pos));
 				bundle.putInt("avatar", imagenes.get(pos));
@@ -106,6 +105,7 @@ public class FragmentListadoUsuario extends Fragment {
 				bundle.putString("perfiles", perfiles.get(pos));
 				bundle.putString("sincronizaciones", sincronizaciones.get(pos));
 
+				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
 				frgUsuario.setArguments(bundle);
 				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgUsuario).commit();
 			}
