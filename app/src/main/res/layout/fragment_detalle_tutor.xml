@@ -26,7 +26,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:id="@+id/cambios">
 
         <LinearLayout
@@ -41,22 +41,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <TextView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Correo"
-                android:id="@+id/textView11"
-                android:layout_weight="1"
-                android:textAlignment="center" />
+                android:layout_weight="0.5"></LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:inputType="textEmailAddress"
-                android:ems="10"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:id="@+id/correoTutor"
-                android:layout_weight="1" />
+                android:hint="Correo"/>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -71,21 +73,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <TextView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Código sincronizacion"
-                android:id="@+id/textView12"
-                android:textAlignment="center" />
+                android:layout_weight="0.5"></LinearLayout>
 
-            <EditText
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:id="@+id/codigoTutor"
-                android:ems="10"/>
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:id="@+id/codigoTutor"
+                    android:hint="Código sincronizacion"/>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
