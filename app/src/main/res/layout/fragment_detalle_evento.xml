@@ -29,8 +29,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="0.75"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
 
 
             <LinearLayout
@@ -39,99 +40,89 @@
                 android:layout_weight="3"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+
                     <!-- Nombre Evento -->
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="Nombre: "
-                        android:layout_weight="2"
-                        android:id="@+id/textView5"
-                        android:gravity="center" />
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
 
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:text="Evento X"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nombre Evento"
                         android:id="@+id/editTextNombreEvento"/>
                     <!-- Fin Nombre Evento-->
+                    </android.support.design.widget.TextInputLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
                     <!-- Hora evento -->
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="Hora Evento: "
-                        android:gravity="center"
-                        android:layout_weight="2"
-                        android:id="@+id/textView6"/>
-
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:text="12:00"
-                        android:inputType="date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Hora Evento"
+                        android:inputType="datetime"
                         android:id="@+id/editTextHoraEvento" />
+                    </android.support.design.widget.TextInputLayout>
                     <!-- Fin Hora evento -->
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
                     <!-- Hora alarma -->
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:text="Hora Alarma: "
-                        android:gravity="center"
-                        android:layout_weight="2"
-                        android:id="@+id/textView7" />
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        >
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:inputType="date"
-                        android:text="12:00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime"
+                        android:paddingTop="2dp"
+                        android:hint="Hora Alarma"
                         android:id="@+id/editTextHoraAlarma"/>
+                    </android.support.design.widget.TextInputLayout>
                     <!-- Fin  Hora alarma -->
-                </LinearLayout>
+
             </LinearLayout>
+
 
 
             <!-- Usuarios evento -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:text="Usuarios: "
                 android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@color/listado"
                 android:id="@+id/textView8"
                 android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"></LinearLayout>
             <ListView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="@color/listado"
+                android:choiceMode="singleChoice"
                 android:id="@+id/listViewUsuariosEvento" />
-            <!-- Usuarios evento -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"></LinearLayout>
+
+        </LinearLayout>
+
+            <!-- Fin Usuarios evento -->
 
         </LinearLayout>
 
@@ -142,14 +133,22 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.175"
+                android:orientation="vertical">
+            </LinearLayout>
+
             <com.imanoweb.calendarview.CustomCalendarView
                 android:id="@+id/calendar_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:background="@android:color/white"
                 app:calendarBackgroundColor="@android:color/white"
                 app:calendarTitleTextColor="@color/black"
                 app:currentDayOfMonthColor="@color/black"
+                android:layout_weight="0.9"
                 app:dayOfMonthTextColor="@color/textoNormal"
                 app:dayOfWeekTextColor="@color/textoNormal"
                 app:disabledDayBackgroundColor="@color/botonActivo"
@@ -159,12 +158,7 @@
                 app:weekLayoutBackgroundColor="@android:color/white">
             </com.imanoweb.calendarview.CustomCalendarView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-            </LinearLayout>
+
 
         </LinearLayout>
 

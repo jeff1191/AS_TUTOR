@@ -2,80 +2,93 @@ package es.ucm.as_tutor.presentacion;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
 
-/**
- * Created by Jeffer on 11/04/2016.
- */
 public class AdaptadorEventoUsuarios  extends BaseAdapter {
 
+    private ArrayList<String> nombresUsuarios = new ArrayList<String>();
+    private ArrayList<Boolean> usuariosActivos = new ArrayList<Boolean>();
+    private LayoutInflater inflater;
 
-        private ArrayList<ItemUsuarioEvento> items = new ArrayList<ItemUsuarioEvento>();
-        private LayoutInflater inflater;
-        private boolean[] itemSelection;
+    public AdaptadorEventoUsuarios(int size,Activity context) {
+        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        public AdaptadorEventoUsuarios(int size,Activity actividad) {
-            inflater = (LayoutInflater)actividad.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.itemSelection = new boolean[size];
-        }
+    }
 
-        public void addItem(final ItemUsuarioEvento item) {
-            items.add(item);
-            notifyDataSetChanged();
-        }
+    public void addItem(final String item, boolean activado, int i) {
+        nombresUsuarios.add(item);
+        //itemSelection[i]=activado;
+        usuariosActivos.add(i,activado);
+        notifyDataSetChanged();
+    }
 
-        @Override
-        public int getCount() {
-            return items.size();
-        }
+    @Override
+    public int getCount() {
+        return nombresUsuarios.size();
+    }
 
-        @Override
-        public String getItem(int position) {
-            return items.get(position).getNombre();
-        }
+    @Override
+    public String getItem(int position) {
+        return nombresUsuarios.get(position);
+    }
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            convertView = inflater.inflate(R.layout.row_evento_listado_usuarios, null);
-            final ViewHolder holder = new ViewHolder();
-            holder.chkItem = (CheckBox)convertView.findViewById(R.id.chkItem);
-            holder.chkItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    itemSelection[position] = holder.chkItem.isChecked();
-                }
-            });
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        convertView = inflater.inflate(R.layout.row_evento_listado_usuarios, null);
+        final ViewHolder holder = new ViewHolder();
+        holder.chkItem = (CheckBox)convertView.findViewById(R.id.chkItem);
+        TextView nombreUsuario = (TextView) convertView.findViewById(R.id.eventoNombreUsuario);
+        holder.chkItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                usuariosActivos.set(position, holder.chkItem.isChecked());
+            }
+        });
+        holder.chkItem.setChecked(usuariosActivos.get(position));
+        convertView.setTag(holder);
+        nombreUsuario.setText(getItem(position));
+        return convertView;
+    }
 
-            holder.chkItem.setChecked(itemSelection[position]);
-            convertView.setTag(holder);
-            holder.chkItem.setText(getItem(position));
-            return convertView;
-        }
+    public int getItemsLength() {
+        if(usuariosActivos == null) return 0;
+        return usuariosActivos.size();
+    }
 
-        public int getItemsLength() {
-            if(itemSelection == null) return 0;
-            return itemSelection.length;
-        }
+    public void cambiaCheck(int i/*, boolean b*/) {
+   // itemSelection[i] = !itemSelection[i] ;
+        usuariosActivos.set(i,!usuariosActivos.get(i));
+        notifyDataSetChanged();
+    }
 
-        public void set(int i, boolean b) {
-            itemSelection[i] = b;
-        }
+    public void setDatos(ArrayList<String> usuarioEventos) {
+        nombresUsuarios=usuarioEventos;
+        notifyDataSetChanged();
+    }
 
-        public static class ViewHolder {
+    public void setDatosCheck(ArrayList<Boolean> activos) {
+        usuariosActivos=activos;
+        notifyDataSetChanged();
+    }
+
+    public static class ViewHolder {
             public CheckBox chkItem;
         }
 }

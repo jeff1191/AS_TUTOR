@@ -6,12 +6,12 @@ package es.ucm.as_tutor.presentacion;
 public class ItemUsuarioEvento {
     private int id;
     private String nombre;
-    private String description;
+    private String tipo;
 
-    public ItemUsuarioEvento(int pID, String nombre, String descripcion) {
+    public ItemUsuarioEvento(int pID, String nombre,String tipo) {
         id = pID;
         this.nombre=nombre;
-        description = descripcion;
+        this.tipo=tipo;
     }
 
     public int getId() {
@@ -30,11 +30,11 @@ public class ItemUsuarioEvento {
         this.nombre = nombre;
     }
 
-    public String getDescription() {
-        return description;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

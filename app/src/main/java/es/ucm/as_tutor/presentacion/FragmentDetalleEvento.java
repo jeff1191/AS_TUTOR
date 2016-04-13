@@ -1,13 +1,29 @@
 package es.ucm.as_tutor.presentacion;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imanoweb.calendarview.CalendarListener;
@@ -22,78 +38,80 @@ import java.util.Locale;
 import es.ucm.as_tutor.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentDetalleEvento.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentDetalleEvento#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentDetalleEvento extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private FragmentListadoEvento.OnFragmentInteractionListener mListener;
-    private ListView listViewUsuariosEvento;
+    private ListView listaEventoUsuarios;
     private CustomCalendarView calendarView;
+    private AdaptadorEventoUsuarios adapterListadoUsuarios;
+    private Button aceptar;
+    private String nombreEvento;
+    private String horaEvento;
+    private String horaAlarma;
+    private  View rootView;
 
-    public FragmentDetalleEvento() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentDetalleEvento.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentDetalleEvento newInstance(String param1, String param2) {
-        FragmentDetalleEvento fragment = new FragmentDetalleEvento();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public FragmentDetalleEvento(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        setHasOptionsMenu(true);
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            ArrayList<String> listaUsuarios = bundle.getStringArrayList("listaUsuarios");
+            ArrayList<Integer> listaUsuariosActivos = bundle.getIntegerArrayList("listaUsuariosActivos");
+            nombreEvento = bundle.getString("nombreEvento");
+            horaEvento = bundle.getString("horaEvento");
+            horaAlarma = bundle.getString("horaAlarma");
+            adapterListadoUsuarios = new AdaptadorEventoUsuarios(7,getActivity());
+            adapterListadoUsuarios.setDatos(listaUsuarios);
+
+            ArrayList<Boolean> usuariosActivos = new ArrayList<Boolean>();
+            for(int i = 0; i < listaUsuariosActivos.size();i++){
+                if(listaUsuariosActivos.get(i) == 1)
+                    usuariosActivos.add(true);
+                else
+                    usuariosActivos.add(false);
+            }
+
+            adapterListadoUsuarios.setDatosCheck(usuariosActivos);
         }
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
+        rootView = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
+       listaEventoUsuarios = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
+        View header = inflater.inflate(R.layout.evento_usuarios_header, listaEventoUsuarios, false);
+        aceptar= (Button) rootView.findViewById(R.id.botonEvento);
+        TextView textViewNombreEvento = (TextView) rootView.findViewById(R.id.DetalleNombreEvento);
+        EditText editTextNombreEvento = (EditText) rootView.findViewById(R.id.editTextNombreEvento);
+        EditText editTextHoraAlarma = (EditText) rootView.findViewById(R.id.editTextHoraAlarma);
+        EditText editTextHoraEvento = (EditText) rootView.findViewById(R.id.editTextHoraEvento);
 
-        listViewUsuariosEvento = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
+        textViewNombreEvento.setText(nombreEvento);
+        editTextNombreEvento.setText(nombreEvento);
+        editTextHoraAlarma.setText(horaAlarma);
+        editTextHoraEvento.setText(horaEvento);
 
-        String[] items = { "Pepe",
-                "Juan",
-                "Pedro",
-                "Alfonso"};
+        listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
+        listaEventoUsuarios.addHeaderView(header, null, false);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getBaseContext(),
-                android.R.layout.simple_list_item_1, items);
+        listaEventoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapterListadoUsuarios.cambiaCheck(position - 1); // Si tienes header sino cambiaCheck(position);
+               // Toast.makeText(getActivity(), "POSITION: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        listViewUsuariosEvento.setAdapter(adapter);
+        // Fin Listado de usuarios del evento*/
+
+
+
+
 
         //CALENDARIO
         //Initialize CustomCalendarView from layout
@@ -117,41 +135,47 @@ public class FragmentDetalleEvento extends Fragment {
             @Override
             public void onDateSelected(Date date) {
                 SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                Toast.makeText(getActivity(), df.format(date), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), df.format(date), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onMonthChanged(Date date) {
                 SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
-                Toast.makeText(getActivity(), df.format(date), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });
         ////
 
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.mostrarProgreso(getActivity(), "Cargando", "Guardando evento...", 2);
+// To dismiss the dialog
+
+            }
+        });
 
 
         return rootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear(); //poner otro menu
+        inflater.inflate(R.menu.menu_main_eventos, menu);
+    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.eliminarEvento:
+                DialogEliminarEvento alertDialog = DialogEliminarEvento.newInstance(nombreEvento);
+                alertDialog.show(getActivity().getFragmentManager(), "Eliminar evento");
+                break;
+        }
+        return true;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

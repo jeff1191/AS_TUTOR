@@ -208,14 +208,55 @@ public class MainActivity extends AppCompatActivity
                 menuActionBar.clear(); //poner otro menu
                 getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);
 
-                FragmentDetalleEvento fragmentDetalleTarea = new FragmentDetalleEvento();
-                //fragment.setArguments(arguments);
+                //Fragmento en blanco
+                BlankFragment fragmentDetalleTarea = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
 
+                FragmentListadoEvento fragmentListadoEvento = new FragmentListadoEvento();
 
-                FragmentListadoEvento fragmentListaTarea = new FragmentListadoEvento();
-                //fragment.setArguments(arguments);
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaTarea).commit();
+                ArrayList<String> nombresEventos = new ArrayList<String>();
+                ArrayList<String> fechaEventos = new ArrayList<String>();
+                ArrayList<String> horaEventos = new ArrayList<String>();
+                ArrayList<String> horaAlarma= new ArrayList<String>();
+                //ArrayList<ArrayList<String>> listaUsuarios = new ArrayList<>();
+
+
+                nombresEventos.add("Ir a las barcas");
+                fechaEventos.add("12 Febrero 2016");
+                horaAlarma.add("12:00");
+                horaEventos.add("12:30");
+
+                nombresEventos.add("Ir al retiro");
+                fechaEventos.add("21 Mayo 2016");
+                horaAlarma.add("2:00");
+                horaEventos.add("2:10");
+
+                nombresEventos.add("Esquiar ");
+                fechaEventos.add("04 Abril 2016");
+                horaAlarma.add("11:00");
+                horaEventos.add("12:30");
+
+                nombresEventos.add("Jugar al rugby");
+                fechaEventos.add("15 Noviembre 2016");
+                horaAlarma.add("17:00");
+                horaEventos.add("18:30");
+
+                nombresEventos.add("Jugar al fútbol");
+                fechaEventos.add("07 Marzo 2016");
+                horaAlarma.add("21:00");
+                horaEventos.add("21:30");
+
+
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("listaEventos", nombresEventos);
+                bundle.putStringArrayList("fechasEventos", fechaEventos);
+                bundle.putStringArrayList("horaEventos", horaEventos);
+                bundle.putStringArrayList("horaAlarmas", horaAlarma);
+
+
+                fragmentListadoEvento.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoEvento).commit();
+
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
                 //Cambiamos el titulo en donde decia "
@@ -307,7 +348,7 @@ public class MainActivity extends AppCompatActivity
                 case R.id.eliminarUsuario:
                     //aqui habrá que ejecutar el comando de eliminar usuario
 
-                case R.id.editarListaUsuariosEventos:
+               /* case R.id.editarListaUsuariosEventos:
 
                     AdaptadorEventoUsuarios adapter = new AdaptadorEventoUsuarios(5,this);
                     adapter.addItem(new ItemUsuarioEvento(1,"Pepe", "Tipo A" ));
@@ -326,7 +367,7 @@ public class MainActivity extends AppCompatActivity
                     lv.setAdapter(adapter);
                     alertDialog.show();
 
-                break;
+                break;*/
 
                 default:
                     return super.onOptionsItemSelected(item);
@@ -349,13 +390,31 @@ public class MainActivity extends AppCompatActivity
         nuevaHoraAlarma.setText("");
 
         AdaptadorEventoUsuarios adapterListadoUsuarios = new AdaptadorEventoUsuarios(7,this);
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(1, "Pepe", "Tipo A" ));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(2, "Juan", "Tipo A" ));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(3, "Pedro", "Tipo B"));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(4, "Pepa", "Tipo C"));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(5, "Alfredo", "Tipo D"));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(6, "Pepa", "Tipo D"));
-        adapterListadoUsuarios.addItem(new ItemUsuarioEvento(7, "Juliano", "Tipo D"));
+        ArrayList<String> nombresUsuarios = new ArrayList<String>();
+        ArrayList<Boolean> usuariosActivos  = new ArrayList<Boolean>();
+
+
+        nombresUsuarios.add("Juan Perez");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Maria Salgado");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Julian Iturrino");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Juan Luis Armas");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("David Guess");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Alfredo Almache");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Jeff Gordon");
+        usuariosActivos.add(false);
+        nombresUsuarios.add("Andres Hamilton");
+        usuariosActivos.add(false);
+
+
+
+        adapterListadoUsuarios.setDatos(nombresUsuarios);
+        adapterListadoUsuarios.setDatosCheck(usuariosActivos);
 
         listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
         boton_nuevo.setText("Crear");
@@ -395,11 +454,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
         boton_nuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"CREANDO EL NUEVO EVENTO...FECHA("+calendarioVista.getTime()+")", Toast.LENGTH_SHORT).show();
+                Util.mostrarProgreso(MainActivity.this, "Cargando", "Creando el evento...", 2);
             }
         });
 
