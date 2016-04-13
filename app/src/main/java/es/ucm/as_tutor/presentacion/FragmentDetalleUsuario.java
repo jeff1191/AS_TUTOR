@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
@@ -27,11 +26,11 @@ public class FragmentDetalleUsuario extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detalle_usuario, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detalle_nuevo_usuario, container, false);
 
         //Mostramos el contenido al usuario
         if (textViewNombre != null) {
-            ((TextView) rootView.findViewById(R.id.nombreUsuario)).setText(textViewNombre);
+            ((TextView) rootView.findViewById(R.id.nombre)).setText(textViewNombre);
 
         }
 
@@ -39,12 +38,12 @@ public class FragmentDetalleUsuario extends Fragment {
     }
 
     public void mostrarDetalle(Usuario usuario) {
-        TextView txtNombre =(TextView)getView().findViewById(R.id.nombreUsuario);
-        EditText txtDni=(EditText)getView().findViewById(R.id.dniUsuario);
+        TextView txtNombre =(TextView)getView().findViewById(R.id.nombre);
+        /*EditText txtDni=(EditText)getView().findViewById(R.id.dniUsuario);
         EditText txtTelefono=(EditText)getView().findViewById(R.id.telefonoUsuario);
 
         txtNombre.setText(usuario.getNombre());
         txtDni.setText(usuario.getDni());
-        txtTelefono.setText(usuario.getTel());
+        txtTelefono.setText(usuario.getTel());*/
     }
 }

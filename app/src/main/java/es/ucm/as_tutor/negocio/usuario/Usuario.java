@@ -38,6 +38,9 @@ public class Usuario {
     @DatabaseField(columnName = "DNI")
 	private String dni;
 
+    @DatabaseField(columnName = "DIRECCION")
+    private String direccion;
+
     @DatabaseField(columnName = "TIPO_PERFIL", dataType = DataType.ENUM_STRING)
 	private Perfil tipoPerfil;
 
@@ -221,5 +224,13 @@ public class Usuario {
 
     public void setTareas(ForeignCollection<Tarea> tareas) {
         this.tareas = tareas;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
