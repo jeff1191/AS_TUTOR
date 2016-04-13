@@ -92,14 +92,28 @@
 
 
                 <!-- Nombre usuario -->
-                <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingRight="10dp">
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/nombre"
-                    android:text="Carlos Perez"
-                    android:gravity="center"
-                    android:layout_weight="1" />
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:hint="Nombre nuevo usuario"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
 
 
                 <!-- Fila dni, telefono y perfil -->

@@ -39,8 +39,7 @@ import java.util.Locale;
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
 
-public class MainActivity extends AppCompatActivity
-        implements FragmentListadoUsuario.ListadoListener {
+public class MainActivity extends AppCompatActivity {
     private String[] titulos;
     private DrawerLayout NavDrawerLayout;
     private ListView NavList;
@@ -143,13 +142,125 @@ public class MainActivity extends AppCompatActivity
         //Cuando la aplicacion cargue por defecto mostrar la opcion Home
         //MostrarFragment(1);
         /* cuando inicia empieza con el listado del usuario */
+
+        ArrayList<String> nombres = new ArrayList<String>();
+        ArrayList<Integer> imagenes = new ArrayList<Integer>();
+        ArrayList<String> dnis = new ArrayList<String>();
+        ArrayList<String> direcciones = new ArrayList<String>();
+        ArrayList<String> telefonos = new ArrayList<String>();
+        ArrayList<String> correos = new ArrayList<String>();
+        ArrayList<String> colegios = new ArrayList<String>();
+        ArrayList<String> estudios = new ArrayList<String>();
+        ArrayList<String> cursos = new ArrayList<String>();
+        ArrayList<String> notas = new ArrayList<String>();
+        ArrayList<String> nombrePadres = new ArrayList<String>();
+        ArrayList<String> nombreMadres = new ArrayList<String>();
+        ArrayList<String> telfPadres = new ArrayList<String>();
+        ArrayList<String> telfMadres = new ArrayList<String>();
+        ArrayList<String> correoPadres = new ArrayList<String>();
+        ArrayList<String> correoMadres = new ArrayList<String>();
+        ArrayList<String> perfiles = new ArrayList<String>();
+        ArrayList<String> sincronizaciones = new ArrayList<String>();
+
+        nombres.add("María Salgado");
+        imagenes.add(R.drawable.avatar);
+        dnis.add("12345678Q");
+        direcciones.add("C/ Alacala 46, 6ºA");
+        telefonos.add("678 678 678");
+        correos.add("correo@gmail.com");
+        colegios.add("Pilar");
+        estudios.add("ESO");
+        cursos.add("4");
+        notas.add("Alergia al huevo");
+        nombrePadres.add("Manuel");
+        nombreMadres.add("Carmen");
+        telfPadres.add("666 666 666");
+        telfMadres.add("666 666 666");
+        correoPadres.add("correo@gmail.com");
+        correoMadres.add("correo@gmail.com");
+        perfiles.add("Perfil A");
+        sincronizaciones.add("VIC001");
+
+        nombres.add("Juanlu Armas");
+        imagenes.add(R.drawable.avatar);
+        dnis.add("12345678Q");
+        direcciones.add("C/ Alacala 46, 6ºA");
+        telefonos.add("678 678 678");
+        correos.add("correo@gmail.com");
+        colegios.add("Pilar");
+        estudios.add("ESO");
+        cursos.add("4");
+        notas.add("Alergia al huevo");
+        nombrePadres.add("Manuel");
+        nombreMadres.add("Carmen");
+        telfPadres.add("666 666 666");
+        telfMadres.add("666 666 666");
+        correoPadres.add("correo@gmail.com");
+        correoMadres.add("correo@gmail.com");
+        perfiles.add("Perfil A");
+        sincronizaciones.add("VIC001");
+
+        nombres.add("Jefferson Almache");
+        imagenes.add(R.drawable.avatar);
+        dnis.add("12345678Q");
+        direcciones.add("C/ Alacala 46, 6ºA");
+        telefonos.add("678 678 678");
+        correos.add("correo@gmail.com");
+        colegios.add("Pilar");
+        estudios.add("ESO");
+        cursos.add("4");
+        notas.add("Alergia al huevo");
+        nombrePadres.add("Manuel");
+        nombreMadres.add("Carmen");
+        telfPadres.add("666 666 666");
+        telfMadres.add("666 666 666");
+        correoPadres.add("correo@gmail.com");
+        correoMadres.add("correo@gmail.com");
+        perfiles.add("Perfil A");
+        sincronizaciones.add("VIC001");
+
+        nombres.add("Marta García");
+        imagenes.add(R.drawable.avatar);
+        dnis.add("12345678Q");
+        direcciones.add("C/ Alacala 46, 6ºA");
+        telefonos.add("678 678 678");
+        correos.add("correo@gmail.com");
+        colegios.add("Pilar");
+        estudios.add("ESO");
+        cursos.add("4");
+        notas.add("Alergia al huevo");
+        nombrePadres.add("Manuel");
+        nombreMadres.add("Carmen");
+        telfPadres.add("666 666 666");
+        telfMadres.add("666 666 666");
+        correoPadres.add("correo@gmail.com");
+        correoMadres.add("correo@gmail.com");
+        perfiles.add("Perfil A");
+        sincronizaciones.add("VIC001");
+
         Bundle arguments = new Bundle();
-        arguments.putBoolean("activoListadoUsuario", true);
+        arguments.putStringArrayList("nombres", nombres);
+        arguments.putIntegerArrayList("imagenes", imagenes);
+        arguments.putStringArrayList("dnis", dnis);
+        arguments.putStringArrayList("direcciones", direcciones);
+        arguments.putStringArrayList("telefonos", telefonos);
+        arguments.putStringArrayList("correos", correos);
+        arguments.putStringArrayList("colegios", colegios);
+        arguments.putStringArrayList("estudios", estudios);
+        arguments.putStringArrayList("cursos", cursos);
+        arguments.putStringArrayList("notas", notas);
+        arguments.putStringArrayList("nombrePadres", nombrePadres);
+        arguments.putStringArrayList("nombreMadres", nombreMadres);
+        arguments.putStringArrayList("telfPadres", telfPadres);
+        arguments.putStringArrayList("telfMadres", telfMadres);
+        arguments.putStringArrayList("correoPadres", correoPadres);
+        arguments.putStringArrayList("correoMadres", correoMadres);
+        arguments.putStringArrayList("perfiles", perfiles);
+        arguments.putStringArrayList("sincronizaciones", sincronizaciones);
+
         FragmentListadoUsuario frgListado = new FragmentListadoUsuario();
         frgListado.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListado).commit();
-
-        //frgListado.setListadoListener(this);
     }
 
     @Override
@@ -160,26 +271,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onUsuarioSeleccionado(Usuario c) {
-        boolean hayDetalle =
-                (getSupportFragmentManager().findFragmentById(R.id.FrgDetalle) != null);
-
-        if (hayDetalle) {
-            /*((FragmentDetalleUsuario)getSupportFragmentManager() //Primera manera de pasar datos al fragment
-                    .findFragmentById(R.id.FrgDetalle)).mostrarDetalle(c);*/
-            //2da manera de pasar datos al fragment
-            Bundle arguments = new Bundle();
-            arguments.putString("campoApasar", "123");
-            FragmentDetalleUsuario detalle = new FragmentDetalleUsuario();
-            detalle.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, detalle).commit();
-        } else {
-            Intent i = new Intent(this, DetalleActivity.class);
-            i.putExtra("Detalle Texto", c.getTexto());
-            startActivity(i);
-        }
-    }
 
     private void MostrarFragment(int position) {
         Fragment fragment = null;
@@ -187,16 +278,129 @@ public class MainActivity extends AppCompatActivity
             case 1: // Usuarios
                 menuActionBar.clear();
                 getMenuInflater().inflate(R.menu.menu_main_usuarios, menuActionBar);
-                FragmentDetalleUsuario fragmentDetalleUsuarios = new FragmentDetalleUsuario();
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleUsuarios).commit();
+                //Fragmento en blanco
+                BlankFragment fragmentBlank = new BlankFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
+                ArrayList<String> nombres = new ArrayList<String>();
+                ArrayList<Integer> imagenes = new ArrayList<Integer>();
+                ArrayList<String> dnis = new ArrayList<String>();
+                ArrayList<String> direcciones = new ArrayList<String>();
+                ArrayList<String> telefonos = new ArrayList<String>();
+                ArrayList<String> correos = new ArrayList<String>();
+                ArrayList<String> colegios = new ArrayList<String>();
+                ArrayList<String> estudios = new ArrayList<String>();
+                ArrayList<String> cursos = new ArrayList<String>();
+                ArrayList<String> notas = new ArrayList<String>();
+                ArrayList<String> nombrePadres = new ArrayList<String>();
+                ArrayList<String> nombreMadres = new ArrayList<String>();
+                ArrayList<String> telfPadres = new ArrayList<String>();
+                ArrayList<String> telfMadres = new ArrayList<String>();
+                ArrayList<String> correoPadres = new ArrayList<String>();
+                ArrayList<String> correoMadres = new ArrayList<String>();
+                ArrayList<String> perfiles = new ArrayList<String>();
+                ArrayList<String> sincronizaciones = new ArrayList<String>();
+
+                nombres.add("María Salgado");
+                imagenes.add(R.drawable.avatar);
+                dnis.add("12345678Q");
+                direcciones.add("C/ Alacala 46, 6ºA");
+                telefonos.add("678 678 678");
+                correos.add("correo@gmail.com");
+                colegios.add("Pilar");
+                estudios.add("ESO");
+                cursos.add("4");
+                notas.add("Alergia al huevo");
+                nombrePadres.add("Manuel");
+                nombreMadres.add("Carmen");
+                telfPadres.add("666 666 666");
+                telfMadres.add("666 666 666");
+                correoPadres.add("correo@gmail.com");
+                correoMadres.add("correo@gmail.com");
+                perfiles.add("Perfil A");
+                sincronizaciones.add("VIC001");
+
+                nombres.add("Juanlu Armas");
+                imagenes.add(R.drawable.avatar);
+                dnis.add("12345678Q");
+                direcciones.add("C/ Alacala 46, 6ºA");
+                telefonos.add("678 678 678");
+                correos.add("correo@gmail.com");
+                colegios.add("Pilar");
+                estudios.add("ESO");
+                cursos.add("4");
+                notas.add("Alergia al huevo");
+                nombrePadres.add("Manuel");
+                nombreMadres.add("Carmen");
+                telfPadres.add("666 666 666");
+                telfMadres.add("666 666 666");
+                correoPadres.add("correo@gmail.com");
+                correoMadres.add("correo@gmail.com");
+                perfiles.add("Perfil A");
+                sincronizaciones.add("VIC001");
+
+                nombres.add("Jefferson Almache");
+                imagenes.add(R.drawable.avatar);
+                dnis.add("12345678Q");
+                direcciones.add("C/ Alacala 46, 6ºA");
+                telefonos.add("678 678 678");
+                correos.add("correo@gmail.com");
+                colegios.add("Pilar");
+                estudios.add("ESO");
+                cursos.add("4");
+                notas.add("Alergia al huevo");
+                nombrePadres.add("Manuel");
+                nombreMadres.add("Carmen");
+                telfPadres.add("666 666 666");
+                telfMadres.add("666 666 666");
+                correoPadres.add("correo@gmail.com");
+                correoMadres.add("correo@gmail.com");
+                perfiles.add("Perfil A");
+                sincronizaciones.add("VIC001");
+
+                nombres.add("Marta García");
+                imagenes.add(R.drawable.avatar);
+                dnis.add("12345678Q");
+                direcciones.add("C/ Alacala 46, 6ºA");
+                telefonos.add("678 678 678");
+                correos.add("correo@gmail.com");
+                colegios.add("Pilar");
+                estudios.add("ESO");
+                cursos.add("4");
+                notas.add("Alergia al huevo");
+                nombrePadres.add("Manuel");
+                nombreMadres.add("Carmen");
+                telfPadres.add("666 666 666");
+                telfMadres.add("666 666 666");
+                correoPadres.add("correo@gmail.com");
+                correoMadres.add("correo@gmail.com");
+                perfiles.add("Perfil A");
+                sincronizaciones.add("VIC001");
 
                 Bundle arguments = new Bundle();
-                arguments.putBoolean("activoListadoUsuario", true);
+                arguments.putStringArrayList("nombres", nombres);
+                arguments.putIntegerArrayList("imagenes", imagenes);
+                arguments.putStringArrayList("dnis", dnis);
+                arguments.putStringArrayList("direcciones", direcciones);
+                arguments.putStringArrayList("telefonos", telefonos);
+                arguments.putStringArrayList("correos", correos);
+                arguments.putStringArrayList("colegios", colegios);
+                arguments.putStringArrayList("estudios", estudios);
+                arguments.putStringArrayList("cursos", cursos);
+                arguments.putStringArrayList("notas", notas);
+                arguments.putStringArrayList("nombrePadres", nombrePadres);
+                arguments.putStringArrayList("nombreMadres", nombreMadres);
+                arguments.putStringArrayList("telfPadres", telfPadres);
+                arguments.putStringArrayList("telfMadres", telfMadres);
+                arguments.putStringArrayList("correoPadres", correoPadres);
+                arguments.putStringArrayList("correoMadres", correoMadres);
+                arguments.putStringArrayList("perfiles", perfiles);
+                arguments.putStringArrayList("sincronizaciones", sincronizaciones);
+
                 FragmentListadoUsuario fragmentListaUsuario = new FragmentListadoUsuario();
                 fragmentListaUsuario.setArguments(arguments);
-                //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListaUsuario).commit();
+
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
                 //Cambiamos el titulo en donde decia "
@@ -464,6 +668,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void enviarUsuarios(View view){
-        Log.e("USR","asda");
+        Log.e("USR", "asda");
+    }
+
+    public void nuevoUsuario(View view){
+        FragmentDetalleNuevoUsuario fragmentNuevoUsuario = new FragmentDetalleNuevoUsuario();
+        getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoUsuario).commit();
+    }
+
+    public void infoPadre(View view){
+
     }
 }

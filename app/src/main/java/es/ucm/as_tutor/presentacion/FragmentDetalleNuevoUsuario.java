@@ -1,6 +1,5 @@
 package es.ucm.as_tutor.presentacion;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,14 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
 
-public class FragmentDetalleUsuario extends Fragment {
-    private TextView nombreV;
-    private TextView sincronizacionV;
-    private TextView perfilV;
+public class FragmentDetalleNuevoUsuario extends Fragment {
+    private EditText nombreV;
+    private Spinner perfilV;
     private EditText dniV;
     private EditText direccionV;
     private EditText telefonoV;
@@ -33,7 +32,6 @@ public class FragmentDetalleUsuario extends Fragment {
     private TextView infoMadreV;
 
     private String nombre;
-    private String sincronizacion;
     private String perfil;
     private String dni;
     private String direccion;
@@ -45,30 +43,20 @@ public class FragmentDetalleUsuario extends Fragment {
     private String notas;
     private String puntuacion;
     private Integer avatar;
-    private String infoPadre;
+    private String nombrePadre;
+    private String nombreMadre;
+    private String telfPadre;
+    private String telfMadre;
+    private String correoPadre;
+    private String correoMadre;
+
     private String infoMadre;
 
-    public FragmentDetalleUsuario(){}
+    public FragmentDetalleNuevoUsuario(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            nombre = bundle.getString("nombre");
-            sincronizacion = bundle.getString("sincronizaciones");
-            perfil = bundle.getString("perfiles");
-            dni = bundle.getString("dnis");
-            direccion = bundle.getString("direcciones");
-            telefono = bundle.getString("telefonos");
-            correo = bundle.getString("correos");
-            centroEstudios = bundle.getString("colegios");
-            estudios = bundle.getString("estudios");
-            curso = bundle.getString("cursos");
-            notas = bundle.getString("notas");
-            puntuacion = bundle.getString("puntuaciones");
-            avatar = bundle.getInt("avatar");
-        }
     }
 
 
@@ -76,11 +64,10 @@ public class FragmentDetalleUsuario extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_detalle_usuario, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_detalle_nuevo_usuario, container, false);
 
-            nombreV = (TextView) rootView.findViewById(R.id.nombre);
-            sincronizacionV = (TextView) rootView.findViewById(R.id.sincronizacion);
-            perfilV = (TextView) rootView.findViewById(R.id.perfil);
+            nombreV = (EditText) rootView.findViewById(R.id.nombre);
+            perfilV = (Spinner) rootView.findViewById(R.id.perfil);
             dniV = (EditText) rootView.findViewById(R.id.dni);
             direccionV = (EditText) rootView.findViewById(R.id.direccion);
             telefonoV = (EditText) rootView.findViewById(R.id.telefono);
@@ -93,20 +80,6 @@ public class FragmentDetalleUsuario extends Fragment {
             avatarV = (ImageView) rootView.findViewById(R.id.avatar);
             infoPadreV = (TextView) rootView.findViewById(R.id.infoPadre);
             infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
-
-            nombreV.setText(nombre);
-            sincronizacionV.setText(sincronizacion);
-            perfilV.setText(perfil);
-            dniV.setText(dni);
-            direccionV.setText(direccion);
-            telefonoV.setText(telefono);
-            correoV.setText(correo);
-            centroEstudiosV.setText(centroEstudios);
-            estudiosV.setText(estudios);
-            cursoV.setText(curso);
-            notasV.setText(notas);
-            puntuacionV.setText(puntuacion);
-           // avatarV.setImageResource(avatar);
 
             return rootView;
     }

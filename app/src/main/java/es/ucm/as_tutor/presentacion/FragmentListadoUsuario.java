@@ -2,94 +2,115 @@ package es.ucm.as_tutor.presentacion;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import es.ucm.as_tutor.R;
 
 
 public class FragmentListadoUsuario extends Fragment {
 
-	private Usuario[] datos =
-			new Usuario[]{
-					new Usuario("Usuario 1", "Tipo 1", "Usuario 1","651156498","98456214V"),
-					new Usuario("Usuario 2", "Tipo 2", "Usuario 2","654987789","18187448V"),
-					new Usuario("Usuario 3", "Tipo 3", "Usuario 3","123321123","98488944V"),
-					new Usuario("Usuario 4", "Tipo 4", "Usuario 4","123546456","98887452V"),
-					new Usuario("Usuario 5", "Tipo 5", "Usuario 5","789456012","26223562V")};
+	private ListView listadoUsuarios;
+	private AdaptadorUsuarios adaptadorUsuarios;
 
-	private ListView lstListado;
-	private boolean activadoFrg=false;
+	private ArrayList<String> nombres;
+	private ArrayList<Integer> imagenes;
+	private ArrayList<String> dnis;
+	private ArrayList<String> direcciones;
+	private ArrayList<String> telefonos;
+	private ArrayList<String> correos;
+	private ArrayList<String> colegios;
+	private ArrayList<String> estudios;
+	private ArrayList<String> cursos;
+	private ArrayList<String> notas;
+	private ArrayList<String> nombrePadres;
+	private ArrayList<String> nombreMadres;
+	private ArrayList<String> telfPadres;
+	private ArrayList<String> telfMadres;
+	private ArrayList<String> correoPadres;
+	private ArrayList<String> correoMadres;
+	ArrayList<String> perfiles;
+	ArrayList<String> sincronizaciones;
 
-	private ListadoListener listener;
+
+	public FragmentListadoUsuario() {
+		// Required empty public constructor
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null && getArguments().containsKey("activoListadoUsuario")) {
-			//Cargamos el contenido de la entrada con cierto ID seleccionado en la lista. Se recomiendo usar un Loader para cargar el contenido
-			activadoFrg= getArguments().getBoolean("activoListadoUsuario");
+
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			nombres = bundle.getStringArrayList("nombres");
+			imagenes = bundle.getIntegerArrayList("imagenes");
+			dnis = bundle.getStringArrayList("dnis");
+			direcciones = bundle.getStringArrayList("direcciones");
+			telefonos = bundle.getStringArrayList("telefonos");
+			correos = bundle.getStringArrayList("correos");
+			colegios = bundle.getStringArrayList("colegios");
+			estudios = bundle.getStringArrayList("estudios");
+			cursos = bundle.getStringArrayList("cursos");
+			notas = bundle.getStringArrayList("notas");
+			nombrePadres = bundle.getStringArrayList("nombrePadres");
+			nombreMadres = bundle.getStringArrayList("nombreMadres");
+			telfPadres = bundle.getStringArrayList("telfPadres");
+			telfMadres = bundle.getStringArrayList("telfMadres");
+			correoPadres = bundle.getStringArrayList("correoPadres");
+			correoMadres = bundle.getStringArrayList("correoMadres");
+			perfiles = bundle.getStringArrayList("perfiles");
+			sincronizaciones = bundle.getStringArrayList("sincronizaciones");
+
+			adaptadorUsuarios = new AdaptadorUsuarios(getActivity());
+			adaptadorUsuarios.setNombres(nombres);
+			adaptadorUsuarios.setImagenes(imagenes);
 		}
 	}
+
 	@Override
-	public View onCreateView(LayoutInflater inflater,
-							 ViewGroup container,
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_listado_usuario, container, false);
-		if(rootView != null && activadoFrg){
-			lstListado = (ListView)rootView.findViewById(R.id.ListadoUsuarios);
-			lstListado.setAdapter(new AdaptadorUsuarios(this, datos));
-
-			lstListado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-					if (listener!=null) {
-						listener.onUsuarioSeleccionado(
-								(Usuario) lstListado.getAdapter().getItem(pos));
-					}
-				}
-			});
-		}
-		return rootView;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle state) {
-		super.onActivityCreated(state);
-/*
-		lstListado = (ListView)getView().findViewById(R.id.LstListado);
-
-		lstListado.setAdapter(new AdaptadorUsuarios(this, datos));
-
-		lstListado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listadoUsuarios = (ListView)rootView.findViewById(R.id.listadoUsuarios);
+		listadoUsuarios.setAdapter(adaptadorUsuarios);
+		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-				if (listener!=null) {
-					listener.onUsuarioSeleccionado(
-							(Usuario) lstListado.getAdapter().getItem(pos));
-				}
+				Bundle bundle = new Bundle();
+				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
+
+				bundle.putString("nombre", nombres.get(pos));
+				bundle.putInt("avatar", imagenes.get(pos));
+				bundle.putString("dnis", dnis.get(pos));
+				bundle.putString("direcciones", direcciones.get(pos));
+				bundle.putString("telefonos", telefonos.get(pos));
+				bundle.putString("correos", correos.get(pos));
+				bundle.putString("colegios", colegios.get(pos));
+				bundle.putString("estudios", estudios.get(pos));
+				bundle.putString("cursos", cursos.get(pos));
+				bundle.putString("notas", notas.get(pos));
+				bundle.putString("nombrePadres", nombrePadres.get(pos));
+				bundle.putString("nombreMadres", nombreMadres.get(pos));
+				bundle.putString("telfPadres", telfPadres.get(pos));
+				bundle.putString("telfMadres", telfMadres.get(pos));
+				bundle.putString("correoPadres", correoPadres.get(pos));
+				bundle.putString("correoMadres", correoMadres.get(pos));
+				bundle.putString("perfiles", perfiles.get(pos));
+				bundle.putString("sincronizaciones", sincronizaciones.get(pos));
+
+				frgUsuario.setArguments(bundle);
+				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgUsuario).commit();
 			}
-		});*/
+		});
+
+		return rootView;
 	}
-
-
-
-	public interface ListadoListener {
-		void onUsuarioSeleccionado(Usuario c);
-	}
-
-	public void setListadoListener(ListadoListener listener) {
-		this.listener=listener;
-	}
-	public Usuario[] getUsuarios() {
-		return datos;
-	}
-
-	public void cambiarAdaptadorTareas(){
-
-	}
-
 }
 

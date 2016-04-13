@@ -6,13 +6,13 @@
     android:orientation="horizontal">
 
     <ListView
-        android:id="@+id/ListadoUsuarios"
+        android:id="@+id/listadoUsuarios"
         android:layout_width="match_parent"
-        android:paddingTop="12dp"
         android:choiceMode="singleChoice"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </ListView>
-<FrameLayout
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,9 +25,6 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="right|bottom" />
-
-
-</FrameLayout>
-
+    </FrameLayout>
 
 </FrameLayout>
