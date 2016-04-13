@@ -65,7 +65,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detalle_nuevo_usuario, container, false);
-
+/*
             nombreV = (EditText) rootView.findViewById(R.id.nombre);
             perfilV = (Spinner) rootView.findViewById(R.id.perfil);
             dniV = (EditText) rootView.findViewById(R.id.dni);
@@ -79,7 +79,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
             puntuacionV = (TextView) rootView.findViewById(R.id.puntuacion);
             avatarV = (ImageView) rootView.findViewById(R.id.avatar);
             infoPadreV = (TextView) rootView.findViewById(R.id.infoPadre);
-            infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
+            infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);*/
 
             return rootView;
     }

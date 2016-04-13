@@ -12,16 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></LinearLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="2"
+    android:orientation="horizontal">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Tutor"
-        android:id="@+id/textView9"
         android:gravity="center"
-        android:layout_weight="1.5"
-        android:textAlignment="center" />
+        android:id="@+id/textView9"
+        android:layout_weight="1.5" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/logo"
+            android:id="@+id/pantallazo"
+            android:gravity="center"/>
+
+</LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -34,11 +49,6 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -92,7 +102,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="1"/>
+                android:layout_weight="0.8"/>
         </LinearLayout>
 
 
@@ -109,12 +119,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/botones">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
 
         <Button
             android:layout_width="0dp"
