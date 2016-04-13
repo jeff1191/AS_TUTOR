@@ -11,12 +11,14 @@
     <string-array name="nav_options">
         <item>Usuarios</item>
         <item>Eventos</item>
+        <item>Mi perfil</item>
         <item>Ayuda</item>
     </string-array>
     <!-- Lista de iconos de navegacion-->
     <array name="navigation_iconos">
         <item>@drawable/ic_action_group</item>
         <item>@drawable/ic_action_go_to_today_dark</item>
+        <item>@drawable/ic_action_settings</item>
         <item>@drawable/ic_action_about</item>
     </array>
     <string name="title_activity_bienvenido">Bienvenido</string>

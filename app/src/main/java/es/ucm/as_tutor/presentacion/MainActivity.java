@@ -102,8 +102,10 @@ public class MainActivity extends AppCompatActivity {
         NavItms.add(new Item_Navegacion(titulos[0], NavIcons.getResourceId(0, -1)));
         //Eventos
         NavItms.add(new Item_Navegacion(titulos[1], NavIcons.getResourceId(1, -1)));
-        //Ayuda
+        //Mi perfil
         NavItms.add(new Item_Navegacion(titulos[2], NavIcons.getResourceId(2, -1)));
+        //Ayuda
+        NavItms.add(new Item_Navegacion(titulos[3], NavIcons.getResourceId(3, -1)));
         NavAdapter = new AdaptadorNavegacion(this, NavItms);
         NavList.setAdapter(NavAdapter);
 
@@ -473,8 +475,25 @@ public class MainActivity extends AppCompatActivity {
                 //Cerramos el menu deslizable
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
+            case 3: // Mi perfil
+                menuActionBar.clear();
 
-            case 3: // Ayuda
+                FragmentDetalleTutor fragmentDetalleTutor = new FragmentDetalleTutor();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTutor).commit();
+
+                FragmentListadoTutor fragmentListadoTutor = new FragmentListadoTutor();
+                //fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoTutor).commit();
+
+                NavList.setItemChecked(position, true);
+                NavList.setSelection(position);
+                //Cambiamos el titulo en donde decia "
+                setTitle(titulos[position - 1]);
+                //Cerramos el menu deslizable
+                NavDrawerLayout.closeDrawer(NavList);
+                break;
+            case 4: // Ayuda
                 menuActionBar.clear();
 
                 FragmentDetalleAyuda fragmentDetalleAyuda = new FragmentDetalleAyuda();
