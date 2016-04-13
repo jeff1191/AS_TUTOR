@@ -80,6 +80,7 @@ public class FragmentListadoUsuario extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_listado_usuario, container, false);
 		listadoUsuarios = (ListView)rootView.findViewById(R.id.listadoUsuarios);
 		listadoUsuarios.setAdapter(adaptadorUsuarios);
+
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {

@@ -263,6 +263,8 @@ public class MainActivity extends AppCompatActivity {
         arguments.putStringArrayList("correoMadres", correoMadres);
         arguments.putStringArrayList("perfiles", perfiles);
         arguments.putStringArrayList("sincronizaciones", sincronizaciones);
+        BlankFragment fragmentBlank = new BlankFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
         FragmentListadoUsuario frgListado = new FragmentListadoUsuario();
         frgListado.setArguments(arguments);
