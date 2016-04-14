@@ -33,5 +33,15 @@ public class Decision extends Activity {
             e.printStackTrace();
         }
         finish();*/
+
+
+            Intent intent = new Intent().setClass(Decision.this, Registro.class);
+            startActivity(intent);
+
+            //Pantalla de pin
+            //Intent intent = new Intent().setClass(Decision.this, Acceso.class);
+            //startActivity(intent);
+
+        finish();
     }
 }

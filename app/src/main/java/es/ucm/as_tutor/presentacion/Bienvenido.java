@@ -39,7 +39,7 @@ public class Bienvenido extends Activity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent().setClass(
-                        Bienvenido.this, /*Decision.class*/MainActivity.class);
+                        Bienvenido.this, Decision.class/*MainActivity.class*/);
                 startActivity(mainIntent);
                 finish();
             }
