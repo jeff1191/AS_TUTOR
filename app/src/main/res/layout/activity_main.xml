@@ -20,8 +20,9 @@
 
             <fragment class="es.ucm.as_tutor.presentacion.FragmentListadoUsuario"
                 android:id="@+id/FrgListado"
-                android:layout_width="280dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_gravity="left|center_vertical"
                 android:tag="FRAGMENT_LISTADO" />
         </FrameLayout>

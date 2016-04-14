@@ -21,44 +21,24 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
                         <!-- Imagen usuario -->
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:id="@+id/imagenUsuario"
-                            android:src="@drawable/avatar"
-                            android:layout_weight="5"
-                            android:gravity="center"
-                            android:paddingTop="10dp"
-                            android:clickable="true"
-                            android:onClick="cambiarImagenPerfil"
-                            android:nestedScrollingEnabled="false" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/imagenUsuario"
+                    android:src="@drawable/avatar"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:clickable="true"
+                    android:onClick="cambiarImagenPerfil"
+                    android:nestedScrollingEnabled="false" />
 
-                        <!-- Puntuacion -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:paddingTop="10dp">
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:id="@+id/iconoPuntuacion"
-                                android:src="@drawable/puntuacion"
-                                android:layout_weight="1"
-                                android:gravity="right|center"
-                                android:scaleType="fitEnd" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:id="@+id/puntuacion"
-                                android:text="8/10"
-                                android:gravity="left|center"
-                                android:layout_weight="1" />
-
-                        </LinearLayout> <!-- Fin puntuacion  -->
+                <!-- Espacio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"/>
 
                 <!-- Notas extras usuario-->
                 <LinearLayout

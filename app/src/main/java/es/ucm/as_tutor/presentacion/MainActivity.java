@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> estudios = new ArrayList<String>();
         ArrayList<String> cursos = new ArrayList<String>();
         ArrayList<String> notas = new ArrayList<String>();
-        ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
+        ArrayList<String> puntuaciones = new ArrayList<String>();
         ArrayList<String> nombrePadres = new ArrayList<String>();
         ArrayList<String> nombreMadres = new ArrayList<String>();
         ArrayList<String> telfPadres = new ArrayList<String>();
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         colegios.add("Pilar");
         estudios.add("ESO");
         cursos.add("4");
-        notas.add("Alergia al huevo");
+        notas.add("Le gusta el chocolate");
         nombrePadres.add("Manuel");
         nombreMadres.add("Carmen");
         telfPadres.add("666 666 666");
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
-        puntuaciones.add(9);
+        puntuaciones.add("9");
 
         nombres.add("Juanlu Armas");
         imagenes.add(R.drawable.avatar);
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
-        puntuaciones.add(9);
+        puntuaciones.add("9");
 
         nombres.add("Jefferson Almache");
         imagenes.add(R.drawable.avatar);
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
-        puntuaciones.add(9);
+        puntuaciones.add("9");
 
         nombres.add("Marta García");
         imagenes.add(R.drawable.avatar);
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
-        puntuaciones.add(9);
+        puntuaciones.add("9");
 
         Bundle arguments = new Bundle();
         arguments.putStringArrayList("nombres", nombres);
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         arguments.putStringArrayList("correoMadres", correoMadres);
         arguments.putStringArrayList("perfiles", perfiles);
         arguments.putStringArrayList("sincronizaciones", sincronizaciones);
-        arguments.putIntegerArrayList("puntuaciones", puntuaciones);
+        arguments.putStringArrayList("puntuaciones", puntuaciones);
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> correoPadres = new ArrayList<String>();
                 ArrayList<String> correoMadres = new ArrayList<String>();
                 ArrayList<String> perfiles = new ArrayList<String>();
-                ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
+                ArrayList<String> puntuaciones = new ArrayList<String>();
                 ArrayList<String> sincronizaciones = new ArrayList<String>();
 
                 nombres.add("María Salgado");
@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
-                puntuaciones.add(9);
+                puntuaciones.add("9");
 
                 nombres.add("Juanlu Armas");
                 imagenes.add(R.drawable.avatar);
@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
-                puntuaciones.add(9);
+                puntuaciones.add("9");
 
                 nombres.add("Jefferson Almache");
                 imagenes.add(R.drawable.avatar);
@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
-                puntuaciones.add(9);
+                puntuaciones.add("9");
 
                 nombres.add("Marta García");
                 imagenes.add(R.drawable.avatar);
@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
-                puntuaciones.add(9);
+                puntuaciones.add("9");
 
                 Bundle arguments = new Bundle();
                 arguments.putStringArrayList("nombres", nombres);
@@ -416,6 +416,7 @@ public class MainActivity extends AppCompatActivity {
                 arguments.putStringArrayList("correoMadres", correoMadres);
                 arguments.putStringArrayList("perfiles", perfiles);
                 arguments.putStringArrayList("sincronizaciones", sincronizaciones);
+                arguments.putStringArrayList("puntuaciones", puntuaciones);
 
                 FragmentListadoUsuario fragmentListaUsuario = new FragmentListadoUsuario();
                 fragmentListaUsuario.setArguments(arguments);
@@ -574,10 +575,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.retoUsuario:
                     //Aqui iria un if/else
-                   FragmentDetalleReto fragmentReto = new FragmentDetalleReto();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
-                    /* FragmentDetalleNuevoReto fragmentNueoReto = new FragmentDetalleNuevoReto();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();*/
+                   /*FragmentDetalleReto fragmentReto = new FragmentDetalleReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();*/
+                    FragmentDetalleNuevoReto fragmentNuevoReto = new FragmentDetalleNuevoReto();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();
                     break;
                 case R.id.eventosUsuario:
                     FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +48,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private String estudios;
     private String curso;
     private String notas;
-    private Integer puntuacion;
+    private String puntuacion;
     private Integer avatar;
     private String infoPadre;
     private String infoMadre;
@@ -70,7 +71,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudios = bundle.getString("estudios");
             curso = bundle.getString("cursos");
             notas = bundle.getString("notas");
-            puntuacion = bundle.getInt("puntuaciones");
+            puntuacion = bundle.getString("puntuaciones");
             avatar = bundle.getInt("avatar");
         }
     }
@@ -93,7 +94,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV = (EditText) rootView.findViewById(R.id.estudios);
             cursoV = (EditText) rootView.findViewById(R.id.curso);
             notasV = (EditText) rootView.findViewById(R.id.notas);
-            puntuacionV = (TextView) rootView.findViewById(R.id.puntuacion);
+            puntuacionV = (TextView) rootView.findViewById(R.id.puntuacionUsuario);
             avatarV = (ImageView) rootView.findViewById(R.id.avatar);
             infoPadreV = (TextView) rootView.findViewById(R.id.infoPadre);
             infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
@@ -109,7 +110,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV.setText(estudios);
             cursoV.setText(curso);
             notasV.setText(notas);
-            puntuacionV.setText(puntuacion.toString()+"/10");
+            puntuacionV.setText(puntuacion + "/10");
            // avatarV.setImageResource(avatar);
 
             return rootView;
