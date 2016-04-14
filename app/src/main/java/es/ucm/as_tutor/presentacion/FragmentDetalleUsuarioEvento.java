@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import es.ucm.as_tutor.R;
 
 /**
@@ -31,15 +33,28 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
 
         listViewEventos = (ListView) rootView.findViewById(R.id.listViewEventos);
 
-        String[] items = { "Ir al Barcas a las 12:00 - 14 feb 2016",
-                "Ir al Barcas a las 12:00 - 14 febrero de 2016",
-                "Ir al Sitio A a las 1:00 - 09 Marzo de 2016",
-                "Ir al Museo a las 15:00 - 11 abril de 2016",
-                "Ir al Sitio B a las 22:30 - 22 mayo de 2016",
-                "Ir a donde Pepe a las 08:30 - 12 diciembre de 2016"};
+        View header = inflater.inflate(R.layout.header_usuario_eventos, listViewEventos, false);
+        listViewEventos.addHeaderView(header, null, false);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, items);
+        ArrayList<String> items = new ArrayList<>();
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
+
+        ArrayList<String> asistencia = new ArrayList<>();
+        asistencia.add("Si");
+        asistencia.add("Si");
+        asistencia.add("Si");
+        asistencia.add("No");
+        asistencia.add("No");
+        asistencia.add("No");
+
+        AdaptadorUsuarioEventos adapter = new AdaptadorUsuarioEventos(getActivity());
+        adapter.setEventos(items);
+        adapter.setAsistencia(asistencia);
 
         listViewEventos.setAdapter(adapter);
 
