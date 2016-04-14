@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="es.ucm.as_tutor.presentacion.BlankFragment"
+    tools:context=".presentacion.vista.main.BlankFragment"
     android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->

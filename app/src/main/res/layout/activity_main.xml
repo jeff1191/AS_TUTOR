@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".presentacion.MainActivity">
+    tools:context=".presentacion.vista.main.MainActivity">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-            <fragment class="es.ucm.as_tutor.presentacion.FragmentListadoUsuario"
+            <fragment class="es.ucm.as_tutor.presentacion.vista.usuario.FragmentListadoUsuario"
                 android:id="@+id/FrgListado"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -32,7 +32,7 @@
             android:layout_weight="70"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:name="es.ucm.as_tutor.presentacion.FragmentDetalleUsuario"
+            android:name="es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleUsuario"
             android:tag="FRAGMENT_DETALLE" />
 
     </LinearLayout>

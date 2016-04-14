@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentacion.FragmentDetalleAyuda"
+    tools:context=".presentacion.vista.ayuda.FragmentDetalleAyuda"
     android:background="#ffffff">
 
     <LinearLayout

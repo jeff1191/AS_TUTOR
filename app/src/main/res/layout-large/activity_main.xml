@@ -17,7 +17,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <fragment class="es.ucm.as_tutor.presentacion.FragmentListadoUsuario"
+                <fragment class="es.ucm.as_tutor.presentacion.vista.usuario.FragmentListadoUsuario"
                     android:id="@+id/FrgListado"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_weight="3.5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:name="es.ucm.as_tutor.presentacion.FragmentDetalleUsuario"
+                android:name="es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleUsuario"
                 android:tag="FRAGMENT_DETALLE" />
 
         </LinearLayout>

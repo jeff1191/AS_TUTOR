@@ -21,13 +21,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            android:gravity="center|left"
+            android:gravity="center"
             android:text="Si" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
 
 </LinearLayout>
 
