@@ -4,6 +4,8 @@ package es.ucm.as_tutor.presentacion;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,11 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,5 +55,14 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
 
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear(); //poner otro menu
+        inflater.inflate(R.menu.menu_eventos_usuario, menu);
+    }
+
 
 }

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,6 +39,7 @@ public class FragmentListadoUsuario extends Fragment {
 	private ArrayList<String> correoMadres;
 	ArrayList<String> perfiles;
 	ArrayList<String> sincronizaciones;
+	private Menu menuActionBar;
 
 
 	public FragmentListadoUsuario() {
@@ -112,6 +115,13 @@ public class FragmentListadoUsuario extends Fragment {
 		});
 
 		return rootView;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		menuActionBar = menu;
+		getActivity().getMenuInflater().inflate(R.menu.menu_usuario, menu);
 	}
 }
 

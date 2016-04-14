@@ -1,16 +1,7 @@
 package es.ucm.as_tutor.presentacion;
 
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,13 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.imanoweb.calendarview.CalendarListener;
 import com.imanoweb.calendarview.CustomCalendarView;
@@ -59,12 +47,14 @@ public class FragmentDetalleEvento extends Fragment {
         Bundle bundle = getArguments();
         if(bundle != null) {
             ArrayList<String> listaUsuarios = bundle.getStringArrayList("listaUsuarios");
+            ArrayList<String> listaUsuariosAsistencia = bundle.getStringArrayList("listaUsuariosAsistencia");
             ArrayList<Integer> listaUsuariosActivos = bundle.getIntegerArrayList("listaUsuariosActivos");
             nombreEvento = bundle.getString("nombreEvento");
             horaEvento = bundle.getString("horaEvento");
             horaAlarma = bundle.getString("horaAlarma");
-            adapterListadoUsuarios = new AdaptadorEventoUsuarios(7,getActivity());
+            adapterListadoUsuarios = new AdaptadorEventoUsuarios(getActivity());
             adapterListadoUsuarios.setDatos(listaUsuarios);
+            adapterListadoUsuarios.setDatosAsistencia(listaUsuariosAsistencia);
 
             ArrayList<Boolean> usuariosActivos = new ArrayList<Boolean>();
             for(int i = 0; i < listaUsuariosActivos.size();i++){
@@ -84,7 +74,7 @@ public class FragmentDetalleEvento extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
        listaEventoUsuarios = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
-        View header = inflater.inflate(R.layout.evento_usuarios_header, listaEventoUsuarios, false);
+        View header = inflater.inflate(R.layout.row_evento_listado_header, listaEventoUsuarios, false);
         aceptar= (Button) rootView.findViewById(R.id.botonEvento);
         TextView textViewNombreEvento = (TextView) rootView.findViewById(R.id.DetalleNombreEvento);
         EditText editTextNombreEvento = (EditText) rootView.findViewById(R.id.editTextNombreEvento);

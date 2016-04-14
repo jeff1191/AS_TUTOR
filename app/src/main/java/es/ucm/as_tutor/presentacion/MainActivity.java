@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuActionBar = menu;
-        getMenuInflater().inflate(R.menu.menu_main_usuarios, menu);
+        getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
     }
 
@@ -285,8 +285,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         switch (position) {
             case 1: // Usuarios
-                menuActionBar.clear();
-                getMenuInflater().inflate(R.menu.menu_main_usuarios, menuActionBar);
                 //Fragmento en blanco
                 BlankFragment fragmentBlank = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
@@ -418,8 +416,8 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-                menuActionBar.clear(); //poner otro menu
-                getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);
+               /* menuActionBar.clear(); //poner otro menu
+                getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);*/
 
                 //Fragmento en blanco
                 BlankFragment fragmentDetalleTarea = new BlankFragment();
@@ -631,6 +629,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     public void nuevoEvento(View view){
+        menuActionBar.clear();
+        getMenuInflater().inflate(R.menu.menu_usuario, menuActionBar);
+
+
         TextView nuevoEv = (TextView) findViewById(R.id.DetalleNombreEvento);
         nuevoEv.setText("Nuevo evento");
 
@@ -644,32 +646,49 @@ public class MainActivity extends AppCompatActivity {
         nuevaHoraEvento.setText("");
         nuevaHoraAlarma.setText("");
 
-        AdaptadorEventoUsuarios adapterListadoUsuarios = new AdaptadorEventoUsuarios(7,this);
+        AdaptadorEventoUsuarios adapterListadoUsuarios = new AdaptadorEventoUsuarios(this);
         ArrayList<String> nombresUsuarios = new ArrayList<String>();
+        ArrayList<String> usuariosAsistencia = new ArrayList<String>();
         ArrayList<Boolean> usuariosActivos  = new ArrayList<Boolean>();
 
 
         nombresUsuarios.add("Juan Perez");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Maria Salgado");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Julian Iturrino");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Juan Luis Armas");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("David Guess");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Alfredo Almache");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Jeff Gordon");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
+
         nombresUsuarios.add("Andres Hamilton");
         usuariosActivos.add(false);
+        usuariosAsistencia.add("NO");
 
 
 
         adapterListadoUsuarios.setDatos(nombresUsuarios);
         adapterListadoUsuarios.setDatosCheck(usuariosActivos);
+       // adapterListadoUsuarios.setDatosAsistencia(usuariosAsistencia);
 
         listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
         boton_nuevo.setText("Crear");

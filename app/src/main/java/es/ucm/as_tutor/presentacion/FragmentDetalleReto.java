@@ -4,6 +4,8 @@ package es.ucm.as_tutor.presentacion;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -20,6 +22,7 @@ public class FragmentDetalleReto extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -35,4 +38,12 @@ public class FragmentDetalleReto extends Fragment {
 
         return rootView;
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear(); //poner otro menu
+        inflater.inflate(R.menu.menu_reto_usuario, menu);
+    }
+
 }

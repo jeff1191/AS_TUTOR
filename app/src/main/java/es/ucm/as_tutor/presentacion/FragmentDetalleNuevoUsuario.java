@@ -57,6 +57,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
 
@@ -89,7 +90,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
         // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_main_usuarios, menu);
+        inflater.inflate(R.menu.menu_usuario, menu);
     }
 
     @Override

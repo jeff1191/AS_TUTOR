@@ -19,10 +19,11 @@ import es.ucm.as_tutor.R;
 public class AdaptadorEventoUsuarios  extends BaseAdapter {
 
     private ArrayList<String> nombresUsuarios = new ArrayList<String>();
+    private ArrayList<String> usuariosAsistencia;
     private ArrayList<Boolean> usuariosActivos = new ArrayList<Boolean>();
     private LayoutInflater inflater;
 
-    public AdaptadorEventoUsuarios(int size,Activity context) {
+    public AdaptadorEventoUsuarios(Activity context) {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -55,6 +56,8 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         final ViewHolder holder = new ViewHolder();
         holder.chkItem = (CheckBox)convertView.findViewById(R.id.chkItem);
         TextView nombreUsuario = (TextView) convertView.findViewById(R.id.eventoNombreUsuario);
+        TextView usuarioAsistencia = (TextView) convertView.findViewById(R.id.eventoUsuarioAsistira);
+
         holder.chkItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -64,6 +67,11 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         holder.chkItem.setChecked(usuariosActivos.get(position));
         convertView.setTag(holder);
         nombreUsuario.setText(getItem(position));
+        if(usuariosAsistencia != null)
+            usuarioAsistencia.setText(usuariosAsistencia.get(position));
+        else{//Significa que estamos creando un nuevo evento
+            usuarioAsistencia.setText("-");
+        }
         return convertView;
     }
 
@@ -87,6 +95,12 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         usuariosActivos=activos;
         notifyDataSetChanged();
     }
+
+    public void setDatosAsistencia(ArrayList<String> asistencia) {
+        usuariosAsistencia=asistencia;
+        notifyDataSetChanged();
+    }
+
 
     public static class ViewHolder {
             public CheckBox chkItem;
