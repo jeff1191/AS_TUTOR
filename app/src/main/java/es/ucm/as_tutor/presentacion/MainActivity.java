@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> estudios = new ArrayList<String>();
         ArrayList<String> cursos = new ArrayList<String>();
         ArrayList<String> notas = new ArrayList<String>();
+        ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
         ArrayList<String> nombrePadres = new ArrayList<String>();
         ArrayList<String> nombreMadres = new ArrayList<String>();
         ArrayList<String> telfPadres = new ArrayList<String>();
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
+        puntuaciones.add(9);
 
         nombres.add("Juanlu Armas");
         imagenes.add(R.drawable.avatar);
@@ -206,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
+        puntuaciones.add(9);
 
         nombres.add("Jefferson Almache");
         imagenes.add(R.drawable.avatar);
@@ -225,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
+        puntuaciones.add(9);
 
         nombres.add("Marta García");
         imagenes.add(R.drawable.avatar);
@@ -244,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
         correoMadres.add("correo@gmail.com");
         perfiles.add("Perfil A");
         sincronizaciones.add("VIC001");
+        puntuaciones.add(9);
 
         Bundle arguments = new Bundle();
         arguments.putStringArrayList("nombres", nombres);
@@ -264,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
         arguments.putStringArrayList("correoMadres", correoMadres);
         arguments.putStringArrayList("perfiles", perfiles);
         arguments.putStringArrayList("sincronizaciones", sincronizaciones);
+        arguments.putIntegerArrayList("puntuaciones", puntuaciones);
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
@@ -308,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> correoPadres = new ArrayList<String>();
                 ArrayList<String> correoMadres = new ArrayList<String>();
                 ArrayList<String> perfiles = new ArrayList<String>();
+                ArrayList<Integer> puntuaciones = new ArrayList<Integer>();
                 ArrayList<String> sincronizaciones = new ArrayList<String>();
 
                 nombres.add("María Salgado");
@@ -328,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
+                puntuaciones.add(9);
 
                 nombres.add("Juanlu Armas");
                 imagenes.add(R.drawable.avatar);
@@ -347,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
+                puntuaciones.add(9);
 
                 nombres.add("Jefferson Almache");
                 imagenes.add(R.drawable.avatar);
@@ -366,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
+                puntuaciones.add(9);
 
                 nombres.add("Marta García");
                 imagenes.add(R.drawable.avatar);
@@ -385,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
                 correoMadres.add("correo@gmail.com");
                 perfiles.add("Perfil A");
                 sincronizaciones.add("VIC001");
+                puntuaciones.add(9);
 
                 Bundle arguments = new Bundle();
                 arguments.putStringArrayList("nombres", nombres);
@@ -712,7 +723,7 @@ public class MainActivity extends AppCompatActivity {
         boton_nuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.mostrarProgreso(MainActivity.this, "Cargando", "Creando el evento...", 2);
+
             }
         });
 

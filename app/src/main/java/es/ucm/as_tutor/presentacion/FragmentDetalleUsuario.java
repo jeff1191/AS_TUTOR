@@ -47,7 +47,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private String estudios;
     private String curso;
     private String notas;
-    private String puntuacion;
+    private Integer puntuacion;
     private Integer avatar;
     private String infoPadre;
     private String infoMadre;
@@ -70,7 +70,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudios = bundle.getString("estudios");
             curso = bundle.getString("cursos");
             notas = bundle.getString("notas");
-            puntuacion = bundle.getString("puntuaciones");
+            puntuacion = bundle.getInt("puntuaciones");
             avatar = bundle.getInt("avatar");
         }
     }
@@ -109,7 +109,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV.setText(estudios);
             cursoV.setText(curso);
             notasV.setText(notas);
-            puntuacionV.setText(puntuacion);
+            puntuacionV.setText(puntuacion.toString()+"/10");
            // avatarV.setImageResource(avatar);
 
             return rootView;
