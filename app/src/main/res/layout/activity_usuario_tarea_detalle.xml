@@ -131,7 +131,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
@@ -146,9 +147,10 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/mejora"
-                android:ems="10"
+                android:text="3"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
+                android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         </LinearLayout>
 
@@ -158,7 +160,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
@@ -167,15 +170,16 @@
                 android:layout_weight="1"
                 android:gravity="center|bottom" />
 
-            <EditText
+            <TextView
                 android:textAlignment="center"
                 android:layout_width="60dp"
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/si"
-                android:ems="10"
+                android:text="3"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
+                android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
         </LinearLayout>
 
@@ -184,7 +188,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
@@ -193,15 +198,17 @@
                 android:layout_weight="1"
                 android:gravity="center|bottom" />
 
-            <EditText
+            <TextView
                 android:textAlignment="center"
                 android:layout_width="60dp"
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/no"
-                android:ems="10"
+                android:text="3"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
+                android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            />
 
         </LinearLayout>
 
@@ -224,7 +231,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/total"/>
+                android:id="@+id/total"
+                android:text="0"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         </LinearLayout>
 

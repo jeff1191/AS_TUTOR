@@ -39,6 +39,7 @@ public class FragmentListadoUsuario extends Fragment {
 	private ArrayList<String> correoMadres;
 	ArrayList<String> perfiles;
 	ArrayList<String> sincronizaciones;
+	private ArrayList<String> puntuaciones;
 	private Menu menuActionBar;
 
 
@@ -70,6 +71,7 @@ public class FragmentListadoUsuario extends Fragment {
 			correoMadres = bundle.getStringArrayList("correoMadres");
 			perfiles = bundle.getStringArrayList("perfiles");
 			sincronizaciones = bundle.getStringArrayList("sincronizaciones");
+			puntuaciones = bundle.getStringArrayList("puntuaciones");
 
 			adaptadorUsuarios = new AdaptadorUsuarios(getActivity());
 			adaptadorUsuarios.setNombres(nombres);
@@ -107,6 +109,7 @@ public class FragmentListadoUsuario extends Fragment {
 				bundle.putString("correoMadres", correoMadres.get(pos));
 				bundle.putString("perfiles", perfiles.get(pos));
 				bundle.putString("sincronizaciones", sincronizaciones.get(pos));
+				bundle.putString("puntuaciones", puntuaciones.get(pos));
 
 				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
 				frgUsuario.setArguments(bundle);

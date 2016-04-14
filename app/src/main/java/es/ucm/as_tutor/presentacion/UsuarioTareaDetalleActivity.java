@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -25,8 +26,8 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
-    private EditText si;
-    private EditText no;
+    private TextView si;
+    private TextView no;
     private TimePicker horaAlarma;
     private TimePicker horaPregunta;
     private Spinner frecuenciaSpinner;
@@ -36,6 +37,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_usuario_tarea_detalle);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -46,13 +48,14 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         // Se buscan las views por su id
         this.textoAlarma = (EditText) findViewById(R.id.textoAlarma);
         this.textoPregunta = (EditText) findViewById(R.id.textoPregunta);
-        this.si = (EditText) findViewById(R.id.si);
-        this.no = (EditText) findViewById(R.id.no);
+        this.si = (TextView) findViewById(R.id.si);
+        this.no = (TextView) findViewById(R.id.no);
         this.mejorar = (EditText) findViewById(R.id.mejora);
         this.horaAlarma = (TimePicker) findViewById(R.id.horaAlarma);
         this.horaPregunta = (TimePicker) findViewById(R.id.horaPregunta);
         this.frecuenciaSpinner = (Spinner) findViewById(R.id.frecuencia);
         this.total = (TextView) findViewById(R.id.total);
+
 
         // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
         Bundle bundle = getIntent().getExtras();
@@ -84,7 +87,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         }
 
         // Spinner de frecuencia
-        ArrayAdapter<String> adapter_frecuencia = new ArrayAdapter(this,
+        ArrayAdapter<String> adapter_frecuencia = new ArrayAdapter(this.getApplicationContext(),
                 android.R.layout.simple_spinner_item, frecuencias);
         adapter_frecuencia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frecuenciaSpinner.setAdapter(adapter_frecuencia);

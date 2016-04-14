@@ -139,8 +139,8 @@ public class FragmentDetalleEvento extends Fragment {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.mostrarProgreso(getActivity(), "Cargando", "Guardando evento...", 2);
-// To dismiss the dialog
+
+                // To dismiss the dialog
 
             }
         });

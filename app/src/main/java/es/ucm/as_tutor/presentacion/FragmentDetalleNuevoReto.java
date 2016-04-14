@@ -28,9 +28,6 @@ public class FragmentDetalleNuevoReto extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detalle_nuevo_reto, container, false);
 
-        ((TextView) rootView.findViewById(R.id.retoNuevo)).setText("El usuario X no tiene todavia un reto");
-        ((TextView) rootView.findViewById(R.id.textoAux)).setText("Introduzca el texto del nuevo reto para el usuario");
-
         return rootView;
     }
 

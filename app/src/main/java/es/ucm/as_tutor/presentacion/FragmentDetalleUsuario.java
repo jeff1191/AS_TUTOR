@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,7 +95,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV = (EditText) rootView.findViewById(R.id.estudios);
             cursoV = (EditText) rootView.findViewById(R.id.curso);
             notasV = (EditText) rootView.findViewById(R.id.notas);
-            puntuacionV = (TextView) rootView.findViewById(R.id.puntuacion);
+            puntuacionV = (TextView) rootView.findViewById(R.id.puntuacionUsuario);
             avatarV = (ImageView) rootView.findViewById(R.id.avatar);
             infoPadreV = (TextView) rootView.findViewById(R.id.infoPadre);
             infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
@@ -110,7 +111,7 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV.setText(estudios);
             cursoV.setText(curso);
             notasV.setText(notas);
-            puntuacionV.setText(puntuacion);
+            puntuacionV.setText(puntuacion + "/10");
            // avatarV.setImageResource(avatar);
 
             return rootView;

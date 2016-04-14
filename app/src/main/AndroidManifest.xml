@@ -29,11 +29,18 @@
         <activity
             android:name=".presentacion.DetalleActivity"
             android:label="@string/title_activity_detalle_activity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".presentacion.MainActivity" />
-        <activity android:name=".presentacion.UsuarioTareasActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".presentacion.MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".presentacion.UsuarioTareasActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".presentacion.Decision" />
-        <activity android:name=".presentacion.Registro" />
+        <activity
+            android:name=".presentacion.Registro"
+            android:label="@string/title_activity_registro"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".presentacion.UsuarioTareaDetalleActivity"/>
         <activity android:name=".presentacion.Acceso"/>
     </application>
