@@ -9,9 +9,9 @@ import es.ucm.as_tutor.integracion.DBHelper;
 
 public interface SASuceso {
 
-	public void crearTarea();
+	public void crearTarea(TransferTareaT transferTarea);
 
-	public void editarTarea();
+	public void editarTarea(TransferTareaT transferTarea);
 
-	public void eliminarTarea();
+	public void eliminarTarea(TransferTareaT transferTarea);
 }

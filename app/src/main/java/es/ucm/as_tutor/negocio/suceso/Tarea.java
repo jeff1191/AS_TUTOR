@@ -50,6 +50,14 @@ public class Tarea {
 	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "USUARIO")
 	private Usuario usuario;
 
+	public Tarea(){
+		contador = 0;
+		numNo = 0;
+		numSi = 0;
+		habilitada = true;
+		frecuenciaTarea = Frecuencia.DIARIA;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -4,43 +4,33 @@
 package es.ucm.as_tutor.negocio.factoria.imp;
 
 
+import java.util.Collection;
+
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
+import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.SASuceso;
+import es.ucm.as_tutor.negocio.suceso.imp.SASucesoImp;
+import es.ucm.as_tutor.negocio.tutor.SATutor;
+import es.ucm.as_tutor.negocio.tutor.imp.SATutorImp;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.Usuario;
+import es.ucm.as_tutor.negocio.usuario.imp.SAUsuarioImp;
 
 public class FactoriaSAImp extends FactoriaSA {
-	/** 
-	 * (sin Javadoc)
-	 * @see FactoriaSA#nuevoSATutor()
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void nuevoSATutor() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
 
-		// end-user-code
+	@Override
+	public SATutor nuevoSATutor() {
+		return new SATutorImp();
 	}
 
-	/** 
-	 * (sin Javadoc)
-	 * @see FactoriaSA#nuevoSAUsuario()
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	@Override
 	public SAUsuario nuevoSAUsuario() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return new SAUsuarioImp();
 	}
 
-	/** 
-	 * (sin Javadoc)
-	 * @see FactoriaSA#nuevoSATarea()
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void nuevoSATarea() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	@Override
+	public SASuceso nuevoSASuceso() {
+		return new SASucesoImp();
 	}
 }

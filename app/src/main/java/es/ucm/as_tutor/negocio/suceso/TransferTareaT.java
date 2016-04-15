@@ -3,254 +3,166 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.query.In;
+
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+import es.ucm.as_tutor.negocio.usuario.Usuario;
+import es.ucm.as_tutor.negocio.utils.Frecuencia;
+
 public class TransferTareaT {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Integer id;
+
 	private String textoPregunta;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String textoAlarma;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Timestamp horaPregunta;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Timestamp horaAlarma;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Timestamp fechaIni;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Collection respuestas;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Date horaPregunta;
+
+	private Date horaAlarma;
+
+	private Integer contador;
+
+	private Frecuencia frecuenciaTarea;
+
 	private Integer mejorar;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Integer frecuencia;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTextoPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	private Integer numSi;
 
-		// end-user-code
+	private Integer numNo;
+
+	private Boolean habilitada;
+
+	private Usuario usuario;
+
+	public TransferTareaT(){ }
+
+    // Constructor sin id, adecuado para crear tareas
+    public TransferTareaT(String textoAlarma, Date horaAlarma,
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
+        this.textoAlarma = textoAlarma;
+        this.horaAlarma = horaAlarma;
+        this.textoPregunta = textoPregunta;
+        this.horaPregunta = horaPregunta;
+        this.mejorar = mejorar;
+        this.usuario = usuario;
+    }
+
+    // Constructor con id, adecuado para modificar tareas
+    public TransferTareaT(Integer id, String textoAlarma, Date horaAlarma,
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
+        this.id = id;
+        this.textoAlarma = textoAlarma;
+        this.horaAlarma = horaAlarma;
+        this.textoPregunta = textoPregunta;
+        this.horaPregunta = horaPregunta;
+        this.mejorar = mejorar;
+        this.usuario = usuario;
+        contador = 0;
+        frecuenciaTarea = Frecuencia.DIARIA;
+        numSi = 0;
+        numNo = 0;
+        habilitada = true;
+    }
+
+	public Integer getId() {
+		return id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTextoAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getHoraPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public String getTextoPregunta() {
+		return textoPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getHoraAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTextoPregunta(String textoPregunta) {
+		this.textoPregunta = textoPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public String getTextoAlarma() {
+		return textoAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getRespuestas() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTextoAlarma(String textoAlarma) {
+		this.textoAlarma = textoAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTextoPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Date getHoraPregunta() {
+		return horaPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTextoAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setHoraPregunta(Date horaPregunta) {
+		this.horaPregunta = horaPregunta;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setHoraPregunta() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Date getHoraAlarma() {
+		return horaAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setHoraAlarma() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setHoraAlarma(Date horaAlarma) {
+		this.horaAlarma = horaAlarma;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getContador() {
+		return contador;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setRespuestas() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setContador(Integer contador) {
+		this.contador = contador;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getMejorar() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Frecuencia getFrecuenciaTarea() {
+		return frecuenciaTarea;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getFrecuencia() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setFrecuenciaTarea(Frecuencia frecuenciaTarea) {
+		this.frecuenciaTarea = frecuenciaTarea;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setMejorar() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getMejorar() {
+		return mejorar;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFrecuencia() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	public void setMejorar(Integer mejorar) {
+		this.mejorar = mejorar;
+	}
 
-		// end-user-code
+	public Integer getNumSi() {
+		return numSi;
+	}
+
+	public void setNumSi(Integer numSi) {
+		this.numSi = numSi;
+	}
+
+	public Integer getNumNo() {
+		return numNo;
+	}
+
+	public void setNumNo(Integer numNo) {
+		this.numNo = numNo;
+	}
+
+	public Boolean getHabilitada() {
+		return habilitada;
+	}
+
+	public void setHabilitada(Boolean habilitada) {
+		this.habilitada = habilitada;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
