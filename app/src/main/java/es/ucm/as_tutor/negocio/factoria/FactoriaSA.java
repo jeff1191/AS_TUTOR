@@ -19,8 +19,8 @@ public abstract class FactoriaSA {
 	public abstract SASuceso nuevoSASuceso();
 
 	public static FactoriaSA getInstancia() {
-		if (instancia != null)
-			instancia = new FactoriaSAImp();
-		return instancia;
+		if (instancia == null)
+            instancia = new FactoriaSAImp();
+        return instancia;
 	}
 }

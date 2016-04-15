@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +16,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.sql.Time;
-
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
@@ -148,6 +146,19 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         }
     }
 
+    private Frecuencia frecuenciaSeleccionada(){
+        Frecuencia ret = Frecuencia.DIARIA;
+        switch (frecuenciaSpinner.getSelectedItem().toString()){
+            case "Diaria":
+                ret = Frecuencia.DIARIA;
+            case "Semanal":
+                ret = Frecuencia.SEMANAL;
+            case "Mensual":
+                ret = Frecuencia.MENSUAL;
+        }
+        return ret;
+    }
+
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
@@ -169,8 +180,13 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         TransferTareaT transfer = new TransferTareaT();
         transfer.setTextoAlarma(textoAlarma.getText().toString());
         transfer.setTextoPregunta(textoPregunta.getText().toString());
-        transfer.setHoraAlarma(ParserTime.toTime(alarm_hour));
-        transfer.setHoraPregunta(ParserTime.toTime(pregunta_hour));
+        transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));
+        transfer.setHoraPregunta(ParserTime.toDate(pregunta_hour));
+        transfer.setFrecuenciaTarea(frecuenciaSeleccionada());
+        transfer.setMejorar(Integer.parseInt(mejorar.getText().toString()));
+        transfer.setNumSi(Integer.parseInt(si.getText().toString()));
+        transfer.setNumNo(Integer.parseInt(no.getText().toString()));
+        transfer.setHabilitada(true);
 
         if (nuevaTarea){
            // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);

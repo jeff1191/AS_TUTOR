@@ -25,10 +25,10 @@ public class Tarea {
 	private String textoAlarma;
 
 	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "HH:mm")
-	private Time horaPregunta;
+	private Date horaPregunta;
 
 	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "HH:mm")
-	private Time horaAlarma;
+	private Date horaAlarma;
 
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
@@ -83,19 +83,19 @@ public class Tarea {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Time getHoraPregunta() {
+	public Date getHoraPregunta() {
 		return horaPregunta;
 	}
 
-	public void setHoraPregunta(Time horaPregunta) {
+	public void setHoraPregunta(Date horaPregunta) {
 		this.horaPregunta = horaPregunta;
 	}
 
-	public Time getHoraAlarma() {
+	public Date getHoraAlarma() {
 		return horaAlarma;
 	}
 
-	public void setHoraAlarma(Time horaAlarma) {
+	public void setHoraAlarma(Date horaAlarma) {
 		this.horaAlarma = horaAlarma;
 	}
 

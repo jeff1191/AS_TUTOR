@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
  * Created by msalitu on 01/04/2016.
@@ -38,6 +39,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Manager.getInstance().setActivity(this);
         setContentView(R.layout.activity_usuario_tareas);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

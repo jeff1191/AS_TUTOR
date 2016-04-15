@@ -24,7 +24,7 @@ public class DispatcherImp extends Dispatcher {
 
         switch(accion){
             case ListaComandos.CREAR_TAREA:
-                Intent iCrearTarea = new Intent(Manager.getInstance().getContext(), UsuarioTareaDetalleActivity.class);
+                Intent iCrearTarea = new Intent(Manager.getInstance().getContext(), UsuarioTareasActivity.class);
                 Manager.getInstance().getContext().startActivity(iCrearTarea);
                 break;
             case ListaComandos.EDITAR_TAREA:
@@ -33,6 +33,7 @@ public class DispatcherImp extends Dispatcher {
                 break;
             case ListaComandos.DESHABILITAR_TAREA:
                 break;
+
             case ListaComandos.CONSULTAR_TAREAS:
 
                 ArrayList<String> textosAlarma = new ArrayList<String>();

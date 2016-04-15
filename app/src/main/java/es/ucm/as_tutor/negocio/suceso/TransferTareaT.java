@@ -7,8 +7,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.query.In;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -23,9 +21,9 @@ public class TransferTareaT {
 
 	private String textoAlarma;
 
-	private Time horaPregunta;
+	private Date horaPregunta;
 
-	private Time horaAlarma;
+	private Date horaAlarma;
 
 	private Integer contador;
 
@@ -44,8 +42,8 @@ public class TransferTareaT {
 	public TransferTareaT(){ }
 
     // Constructor sin id, adecuado para crear tareas
-    public TransferTareaT(String textoAlarma, Time horaAlarma,
-                          String textoPregunta, Time horaPregunta, Integer mejorar, Usuario usuario){
+    public TransferTareaT(String textoAlarma, Date horaAlarma,
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
         this.textoPregunta = textoPregunta;
@@ -55,8 +53,8 @@ public class TransferTareaT {
     }
 
     // Constructor con id, adecuado para modificar tareas
-    public TransferTareaT(Integer id, String textoAlarma, Time horaAlarma,
-                          String textoPregunta, Time horaPregunta, Integer mejorar, Usuario usuario,
+    public TransferTareaT(Integer id, String textoAlarma, Date horaAlarma,
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario,
                           Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
                           Boolean habilitada){
         this.id = id;
@@ -97,19 +95,19 @@ public class TransferTareaT {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Time getHoraPregunta() {
+	public Date getHoraPregunta() {
 		return horaPregunta;
 	}
 
-	public void setHoraPregunta(Time horaPregunta) {
+	public void setHoraPregunta(Date horaPregunta) {
 		this.horaPregunta = horaPregunta;
 	}
 
-	public Time getHoraAlarma() {
+	public Date getHoraAlarma() {
 		return horaAlarma;
 	}
 
-	public void setHoraAlarma(Time horaAlarma) {
+	public void setHoraAlarma(Date horaAlarma) {
 		this.horaAlarma = horaAlarma;
 	}
 

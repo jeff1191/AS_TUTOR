@@ -44,7 +44,7 @@ public class SASucesoImp implements SASuceso {
                 tarea.setHabilitada(transferTarea.getHabilitada());
 
         try {
-            Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             daoTarea.create(tarea);
 
 		} catch (SQLException e) {
@@ -55,7 +55,7 @@ public class SASucesoImp implements SASuceso {
 	@Override
 	public void editarTarea(TransferTareaT transferTarea) {
 		try {
-			Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+			Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +64,7 @@ public class SASucesoImp implements SASuceso {
 	@Override
 	public void eliminarTarea(TransferTareaT transferTarea) {
 		try {
-			Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+			Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +73,7 @@ public class SASucesoImp implements SASuceso {
     @Override
     public void deshabilitarTarea(TransferTareaT datos) {
         try {
-            Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,10 +84,10 @@ public class SASucesoImp implements SASuceso {
         ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
         try {
             // Busca al usuario por su id
-            Dao<Usuario, Integer> daoUsuario = mDBHelper.getUsuarioDao();
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Usuario usuario = daoUsuario.queryForId(idUsuario);
             // Busca en la BBDD las tareas de ese usuario
-            Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             List<Tarea> tareas = daoTarea.queryForEq("USUARIO", usuario);
             // Las transformamos en transfers para devolverselas a la vista
             for(Tarea tarea : tareas){

@@ -25,12 +25,12 @@ public class ParserTime {
     }
 
     // Time realmente es el numero de milisegundos
-    public static Time toTime(String time){
+    public static Date toDate(String time){
         Integer hour = hour(time);
         Integer min = min(time);
-        Integer ret = hour*3600 + min*20;
-        Time t = new Time(ret);
-        return t;
+        long ret = hour*3600 + min*20;
+        Date d = new Date(ret);
+        return d;
     }
 
 }
