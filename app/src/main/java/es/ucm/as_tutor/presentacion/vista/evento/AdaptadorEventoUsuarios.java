@@ -23,7 +23,6 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
 
     public AdaptadorEventoUsuarios(Activity context) {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     public void addItem(final String item, boolean activado, int i) {

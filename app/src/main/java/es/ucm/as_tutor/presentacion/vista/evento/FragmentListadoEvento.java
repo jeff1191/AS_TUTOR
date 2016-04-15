@@ -19,19 +19,18 @@ public class FragmentListadoEvento extends Fragment {
 
     private ListView listadoEvento;
     private AdaptadorEventos adaptadorEventos;
-
     private ArrayList<String> listaEventos;
     private ArrayList<String> fechasEventos;
-    private ArrayList<String> horaEventos;
-    private ArrayList<String> horaAlarmas;
-    private String nombreEvento ;
-    private String horaAlarma ;
-    private String horaEvento ;
-    private Menu menuActionBar;
-    private String asistencia;
 
-    public FragmentListadoEvento() {
-        // Required empty public constructor
+    public static FragmentListadoEvento newInstance(ArrayList<String> nombresEventos, ArrayList<String> fechaEventos) {
+        FragmentListadoEvento frgEventoLista = new FragmentListadoEvento();
+        Bundle bundle = new Bundle();
+
+        bundle.putStringArrayList("listaEventos", nombresEventos);
+        bundle.putStringArrayList("fechasEventos", fechaEventos);
+        frgEventoLista.setArguments(bundle);
+
+        return frgEventoLista;
     }
 
     @Override
@@ -42,8 +41,6 @@ public class FragmentListadoEvento extends Fragment {
         if (bundle != null) {
             listaEventos = bundle.getStringArrayList("listaEventos");
             fechasEventos = bundle.getStringArrayList("fechasEventos");
-            horaEventos = bundle.getStringArrayList("horaEventos");
-            horaAlarmas = bundle.getStringArrayList("horaAlarmas");
             adaptadorEventos = new AdaptadorEventos(getActivity());
             adaptadorEventos.setEventos(listaEventos);
             adaptadorEventos.setFechasEventos(fechasEventos);
@@ -53,7 +50,6 @@ public class FragmentListadoEvento extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuActionBar = menu;
         getActivity().getMenuInflater().inflate(R.menu.menu_usuario, menu);
     }
     @Override
@@ -65,45 +61,19 @@ public class FragmentListadoEvento extends Fragment {
         listadoEvento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-                ////Cambio de menu
-        //        menuActionBar.clear();
-                
-                
-                
-                
-                
-                
-              /*  if (listener != null) {
-                    listener.onUsuarioSeleccionado(
-                            (Usuario) lstListado.getAdapter().getItem(pos));
-                }*/
-
-                /******AQUI SE LLAMA AL DISPATCHER QUE HARA TO/DO ESTO ********************/
-
 
                 ArrayList<String> nombresUsuarios = new ArrayList<String>();
                 ArrayList<String> asistenciaUsuarios = new ArrayList<String>();
                 ArrayList<Integer> usuariosActivos = new ArrayList<Integer>();
 
 
+                cargarDatos(pos, nombresUsuarios, usuariosActivos, asistenciaUsuarios);
 
 
-                cargarDatos(pos,nombresUsuarios,usuariosActivos,asistenciaUsuarios);
+                FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance("PEPE","12:00","13:00",nombresUsuarios,asistenciaUsuarios,usuariosActivos);
 
-                Bundle bundle = new Bundle();
-                FragmentDetalleEvento frgEvento = new FragmentDetalleEvento();
 
-                //datos
-                bundle.putString("nombreEvento", nombreEvento);
-                bundle.putString("horaAlarma", horaAlarma);
-                bundle.putString("horaEvento", horaEvento);
-
-                bundle.putStringArrayList("listaUsuarios", nombresUsuarios);
-                bundle.putIntegerArrayList("listaUsuariosActivos", usuariosActivos);
-                bundle.putStringArrayList("listaUsuariosAsistencia", asistenciaUsuarios);
-
-                frgEvento.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgEvento).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
 
                 /*************************************************************************/
             }
@@ -116,9 +86,7 @@ public class FragmentListadoEvento extends Fragment {
     public void cargarDatos(int pos,ArrayList<String> nombresUsuarios,
                             ArrayList<Integer> usuariosActivos,
                             ArrayList<String> usuariosAsistencia){
-        nombreEvento = listaEventos.get(pos);
-        horaAlarma = horaAlarmas.get(pos);
-        horaEvento = horaEventos.get(pos);
+
         switch (pos){
             case 0:
                 nombresUsuarios.add("Juan Perez");

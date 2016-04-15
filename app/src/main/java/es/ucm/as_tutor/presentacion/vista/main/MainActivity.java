@@ -439,56 +439,55 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-               /* menuActionBar.clear(); //poner otro menu
-                getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);*/
+
 
                 //Fragmento en blanco
                 BlankFragment fragmentDetalleTarea = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
 
-                FragmentListadoEvento fragmentListadoEvento = new FragmentListadoEvento();
+
 
                 ArrayList<String> nombresEventos = new ArrayList<String>();
                 ArrayList<String> fechaEventos = new ArrayList<String>();
-                ArrayList<String> horaEventos = new ArrayList<String>();
-                ArrayList<String> horaAlarma= new ArrayList<String>();
-                //ArrayList<ArrayList<String>> listaUsuarios = new ArrayList<>();
+               /* ArrayList<String> horaEventos = new ArrayList<String>();
+                ArrayList<String> horaAlarma= new ArrayList<String>();*/
 
 
                 nombresEventos.add("Ir a las barcas");
                 fechaEventos.add("12 Febrero 2016");
-                horaAlarma.add("12:00");
-                horaEventos.add("12:30");
+
+              /*  horaAlarma.add("12:00");
+                horaEventos.add("12:30");*/
 
                 nombresEventos.add("Ir al retiro");
                 fechaEventos.add("21 Mayo 2016");
-                horaAlarma.add("2:00");
-                horaEventos.add("2:10");
+
+                /*horaAlarma.add("2:00");
+                horaEventos.add("2:10");*/
 
                 nombresEventos.add("Esquiar ");
                 fechaEventos.add("04 Abril 2016");
-                horaAlarma.add("11:00");
-                horaEventos.add("12:30");
+            /* horaAlarma.add("11:00");
+                horaEventos.add("12:30");*/
 
                 nombresEventos.add("Jugar al rugby");
                 fechaEventos.add("15 Noviembre 2016");
-                horaAlarma.add("17:00");
-                horaEventos.add("18:30");
+
+               /* horaAlarma.add("17:00");
+                horaEventos.add("18:30");*/
 
                 nombresEventos.add("Jugar al fútbol");
                 fechaEventos.add("07 Marzo 2016");
-                horaAlarma.add("21:00");
-                horaEventos.add("21:30");
+
+               /* horaAlarma.add("21:00");
+                horaEventos.add("21:30");*/
 
 
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("listaEventos", nombresEventos);
-                bundle.putStringArrayList("fechasEventos", fechaEventos);
-                bundle.putStringArrayList("horaEventos", horaEventos);
-                bundle.putStringArrayList("horaAlarmas", horaAlarma);
 
+               /* bundle.putStringArrayList("horaEventos", horaEventos);
+                bundle.putStringArrayList("horaAlarmas", horaAlarma);*/
 
-                fragmentListadoEvento.setArguments(bundle);
+                FragmentListadoEvento fragmentListadoEvento = FragmentListadoEvento.newInstance(nombresEventos,fechaEventos);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoEvento).commit();
 
                 NavList.setItemChecked(position, true);

@@ -38,8 +38,27 @@ public class FragmentDetalleEvento extends Fragment {
     private String horaAlarma;
     private  View rootView;
 
-    public FragmentDetalleEvento(){}
 
+    public static FragmentDetalleEvento newInstance(String nombreEvento,
+                                                    String horaAlarma,
+                                                    String horaEvento,
+                                                    ArrayList<String> nombresUsuarios,
+                                                    ArrayList<String> asistenciaUsuarios,
+                                                    ArrayList<Integer> usuariosActivos) {
+        FragmentDetalleEvento frgEvento = new FragmentDetalleEvento();
+        Bundle bundle = new Bundle();
+        //datos
+        bundle.putString("nombreEvento", nombreEvento);
+        bundle.putString("horaAlarma", horaAlarma);
+        bundle.putString("horaEvento", horaEvento);
+
+        bundle.putStringArrayList("listaUsuarios", nombresUsuarios);
+        bundle.putIntegerArrayList("listaUsuariosActivos", usuariosActivos);
+        bundle.putStringArrayList("listaUsuariosAsistencia", asistenciaUsuarios);
+
+        frgEvento.setArguments(bundle);
+        return frgEvento;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,5 +186,6 @@ public class FragmentDetalleEvento extends Fragment {
         }
         return true;
     }
+
 
 }

@@ -35,8 +35,12 @@ public class Decision extends Activity {
         finish();*/
 
 
-            Intent intent = new Intent().setClass(Decision.this, Registro.class);
+            Intent intent = new Intent().setClass(Decision.this,/* Registro.class*/MainActivity.class);
             startActivity(intent);
+
+
+
+
 
             //Pantalla de pin
             //Intent intent = new Intent().setClass(Decision.this, Acceso.class);
