@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
-      /*  try {
+        try {
             Dao<es.ucm.as_tutor.negocio.suceso.Tarea, Integer> a = getHelper().getTareaDao();
             a.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
