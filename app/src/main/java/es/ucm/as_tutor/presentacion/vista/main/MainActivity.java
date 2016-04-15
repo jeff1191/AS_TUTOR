@@ -41,6 +41,8 @@ import java.util.Locale;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentDetalleAyuda;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentListadoAyuda;
 import es.ucm.as_tutor.presentacion.vista.evento.AdaptadorEventoUsuarios;
@@ -67,40 +69,17 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private AdaptadorNavegacion NavAdapter;
     private Menu menuActionBar;
-    private DBHelper mDBHelper = null;
-
-    private DBHelper getHelper() {
-        if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(this, DBHelper.class);
-        }
-        return mDBHelper;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mDBHelper != null) {
-            OpenHelperManager.releaseHelper();
-            mDBHelper = null;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //mDBHelper= getHelper();
+        Manager.getInstance().setActivity(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
-        try {
-            Dao<es.ucm.as_tutor.negocio.suceso.Tarea, Integer> a = getHelper().getTareaDao();
-            a.queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -445,50 +424,9 @@ public class MainActivity extends AppCompatActivity {
                 BlankFragment fragmentDetalleTarea = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
 
+                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS,null);
 
 
-                ArrayList<String> nombresEventos = new ArrayList<String>();
-                ArrayList<String> fechaEventos = new ArrayList<String>();
-               /* ArrayList<String> horaEventos = new ArrayList<String>();
-                ArrayList<String> horaAlarma= new ArrayList<String>();*/
-
-
-                nombresEventos.add("Ir a las barcas");
-                fechaEventos.add("12 Febrero 2016");
-
-              /*  horaAlarma.add("12:00");
-                horaEventos.add("12:30");*/
-
-                nombresEventos.add("Ir al retiro");
-                fechaEventos.add("21 Mayo 2016");
-
-                /*horaAlarma.add("2:00");
-                horaEventos.add("2:10");*/
-
-                nombresEventos.add("Esquiar ");
-                fechaEventos.add("04 Abril 2016");
-            /* horaAlarma.add("11:00");
-                horaEventos.add("12:30");*/
-
-                nombresEventos.add("Jugar al rugby");
-                fechaEventos.add("15 Noviembre 2016");
-
-               /* horaAlarma.add("17:00");
-                horaEventos.add("18:30");*/
-
-                nombresEventos.add("Jugar al fútbol");
-                fechaEventos.add("07 Marzo 2016");
-
-               /* horaAlarma.add("21:00");
-                horaEventos.add("21:30");*/
-
-
-
-               /* bundle.putStringArrayList("horaEventos", horaEventos);
-                bundle.putStringArrayList("horaAlarmas", horaAlarma);*/
-
-                FragmentListadoEvento fragmentListadoEvento = FragmentListadoEvento.newInstance(nombresEventos,fechaEventos);
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoEvento).commit();
 
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
@@ -622,27 +560,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.eliminarUsuario:
                     //aqui habrá que ejecutar el comando de eliminar usuario
-
-               /* case R.id.editarListaUsuariosEventos:
-
-                    AdaptadorEventoUsuarios adapter = new AdaptadorEventoUsuarios(5,this);
-                    adapter.addItem(new ItemUsuarioEvento(1,"Pepe", "Tipo A" ));
-                    adapter.addItem(new ItemUsuarioEvento(2,"Juan", "Tipo A" ));
-                    adapter.addItem(new ItemUsuarioEvento(3,"Pedro", "Tipo B" ));
-                    adapter.addItem(new ItemUsuarioEvento(4,"Pepa", "Tipo C" ));
-                    adapter.addItem(new ItemUsuarioEvento(5,"Alfredo", "Tipo D" ));
-                    //String names[] ={"Alberto","Berta","Carlos","Daniel","Julian","Alfredo"};
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View convertView = (View) inflater.inflate(R.layout.evento_listado_usuarios, null);
-                    alertDialog.setView(convertView);
-                    alertDialog.setTitle("Usuarios");
-                    ListView lv = (ListView) convertView.findViewById(R.id.listView1);
-                    //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
-                    lv.setAdapter(adapter);
-                    alertDialog.show();
-
-                break;*/
 
                 default:
                     return super.onOptionsItemSelected(item);

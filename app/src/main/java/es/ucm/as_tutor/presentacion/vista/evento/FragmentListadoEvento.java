@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 
 
 public class FragmentListadoEvento extends Fragment {
@@ -21,13 +25,24 @@ public class FragmentListadoEvento extends Fragment {
     private AdaptadorEventos adaptadorEventos;
     private ArrayList<String> listaEventos;
     private ArrayList<String> fechasEventos;
+    private ArrayList<Integer> idsEventos;
 
-    public static FragmentListadoEvento newInstance(ArrayList<String> nombresEventos, ArrayList<String> fechaEventos) {
+    public static FragmentListadoEvento newInstance(ArrayList<TransferEvento> eventos) {
         FragmentListadoEvento frgEventoLista = new FragmentListadoEvento();
         Bundle bundle = new Bundle();
+        ArrayList<String> nombresEventos = new ArrayList<String>();
+        ArrayList<String> fechaEventos= new ArrayList<String>();
+        ArrayList<Integer> idsEventos= new ArrayList<Integer>();
+
+        for(int i=0; i < eventos.size(); i++){
+            nombresEventos.add(eventos.get(i).getNombre());
+            fechaEventos.add(eventos.get(i).getHoraAlarma().toString());
+            idsEventos.add(eventos.get(i).getId());
+        }
 
         bundle.putStringArrayList("listaEventos", nombresEventos);
         bundle.putStringArrayList("fechasEventos", fechaEventos);
+        bundle.putIntegerArrayList("idsEventos", idsEventos);
         frgEventoLista.setArguments(bundle);
 
         return frgEventoLista;
@@ -41,6 +56,7 @@ public class FragmentListadoEvento extends Fragment {
         if (bundle != null) {
             listaEventos = bundle.getStringArrayList("listaEventos");
             fechasEventos = bundle.getStringArrayList("fechasEventos");
+            idsEventos = bundle.getIntegerArrayList("idsEventos");
             adaptadorEventos = new AdaptadorEventos(getActivity());
             adaptadorEventos.setEventos(listaEventos);
             adaptadorEventos.setFechasEventos(fechasEventos);
@@ -62,18 +78,24 @@ public class FragmentListadoEvento extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
 
-                ArrayList<String> nombresUsuarios = new ArrayList<String>();
+                /*ArrayList<String> nombresUsuarios = new ArrayList<String>();
                 ArrayList<String> asistenciaUsuarios = new ArrayList<String>();
                 ArrayList<Integer> usuariosActivos = new ArrayList<Integer>();
 
 
-                cargarDatos(pos, nombresUsuarios, usuariosActivos, asistenciaUsuarios);
+                cargarDatos(pos, nombresUsuarios, usuariosActivos, asistenciaUsuarios);*/
+                //Toast.makeText(getActivity().getApplicationContext(), "Opcion " + listaEventos.get(pos) + " ID: " + idsEventos.get(pos), Toast.LENGTH_SHORT).show();
+               /* Toast errorNombre =
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                "Opcion " + listaEventos.get(pos)+ " ID: " + idsEventos.get(pos) , Toast.LENGTH_SHORT);
+                errorNombre.show();*/
+                TransferEvento consultar = new TransferEvento();
+                consultar.setId(idsEventos.get(pos)); // Busco por id
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTO, consultar);
+                //  FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance("PEPE","12:00","13:00",nombresUsuarios,asistenciaUsuarios,usuariosActivos);
 
 
-                FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance("PEPE","12:00","13:00",nombresUsuarios,asistenciaUsuarios,usuariosActivos);
-
-
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
 
                 /*************************************************************************/
             }

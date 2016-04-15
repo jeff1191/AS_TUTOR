@@ -16,9 +16,9 @@ public class Decision extends Activity {
         super.onCreate(savedInstanceState);
        /* Contexto.getInstancia().setContext(this);
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario cargarUsuario;
+        TransferUsuarioT cargarUsuario;
         try {
-            cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
+            cargarUsuario = (TransferUsuarioT) c.ejecutaComando(null);
 
             if (cargarUsuario == null){
                 Intent intent = new Intent().setClass(Decision.this, Registro.class);

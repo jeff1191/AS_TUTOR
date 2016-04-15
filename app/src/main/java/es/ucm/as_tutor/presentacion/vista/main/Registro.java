@@ -41,7 +41,7 @@ public class Registro extends Activity {
         String clave = String.valueOf(claveAcceso.getText());
 
         if(datosValidos(codigoSync,correo,clave)){
-            /*TransferUsuario crearUsuario = new TransferUsuario();
+            /*TransferUsuarioT crearUsuario = new TransferUsuarioT();
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
             crearUsuario.setColor("AS_theme_azul");

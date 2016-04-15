@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import es.ucm.as_tutor.R;
-
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 
 
 public class FragmentDetalleEvento extends Fragment {
@@ -36,21 +36,19 @@ public class FragmentDetalleEvento extends Fragment {
     private String nombreEvento;
     private String horaEvento;
     private String horaAlarma;
-    private  View rootView;
+    private View rootView;
 
 
-    public static FragmentDetalleEvento newInstance(String nombreEvento,
-                                                    String horaAlarma,
-                                                    String horaEvento,
+    public static FragmentDetalleEvento newInstance(TransferEvento evento,
                                                     ArrayList<String> nombresUsuarios,
                                                     ArrayList<String> asistenciaUsuarios,
                                                     ArrayList<Integer> usuariosActivos) {
         FragmentDetalleEvento frgEvento = new FragmentDetalleEvento();
         Bundle bundle = new Bundle();
         //datos
-        bundle.putString("nombreEvento", nombreEvento);
-        bundle.putString("horaAlarma", horaAlarma);
-        bundle.putString("horaEvento", horaEvento);
+        bundle.putString("nombreEvento", evento.getNombre());
+        bundle.putString("horaAlarma", evento.getHoraAlarma().toString()); //PARSEAR
+        bundle.putString("horaEvento", evento.getHoraEvento().toString());
 
         bundle.putStringArrayList("listaUsuarios", nombresUsuarios);
         bundle.putIntegerArrayList("listaUsuariosActivos", usuariosActivos);
