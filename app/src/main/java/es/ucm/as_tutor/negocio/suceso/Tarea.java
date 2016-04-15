@@ -7,6 +7,7 @@ package es.ucm.as_tutor.negocio.suceso;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
+import java.sql.Time;
 import java.util.Date;
 
 import es.ucm.as_tutor.negocio.usuario.Usuario;
@@ -23,11 +24,11 @@ public class Tarea {
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
-	private Date horaPregunta;
+	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "HH:mm")
+	private Time horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
-	private Date horaAlarma;
+	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "HH:mm")
+	private Time horaAlarma;
 
 	@DatabaseField(columnName = "CONTADOR")
 	private Integer contador;
@@ -82,19 +83,19 @@ public class Tarea {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Date getHoraPregunta() {
+	public Time getHoraPregunta() {
 		return horaPregunta;
 	}
 
-	public void setHoraPregunta(Date horaPregunta) {
+	public void setHoraPregunta(Time horaPregunta) {
 		this.horaPregunta = horaPregunta;
 	}
 
-	public Date getHoraAlarma() {
+	public Time getHoraAlarma() {
 		return horaAlarma;
 	}
 
-	public void setHoraAlarma(Date horaAlarma) {
+	public void setHoraAlarma(Time horaAlarma) {
 		this.horaAlarma = horaAlarma;
 	}
 

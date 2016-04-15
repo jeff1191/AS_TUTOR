@@ -27,13 +27,13 @@ public class AdaptadorTareas extends BaseAdapter {
     ArrayList<Integer> si;
     ArrayList<Integer> no;
     ArrayList<String> frecuencias;
-    ArrayList<Boolean> habilitadas;
+    ArrayList<Integer> habilitadas;
     LayoutInflater inflater;
 
     public AdaptadorTareas(ArrayList<String> textosAlarma, ArrayList<String> horasAlarma,
                            ArrayList<String> textosPreguntas, ArrayList<String> horasPregunta,
                            ArrayList<Integer> si,ArrayList<Integer> no, ArrayList<String> frecuencias,
-                           ArrayList<Boolean> habilitadas, Context context) {
+                           ArrayList<Integer> habilitadas, Context context) {
         this.context = context;
         this.textosAlarma = textosAlarma;
         this.horasAlarma = horasAlarma;
@@ -103,7 +103,10 @@ public class AdaptadorTareas extends BaseAdapter {
             total.setTextColor(Color.RED);
         total.setText(t.toString());
         frecuencia.setText(frecuencias.get(position));
-        habilitada.setChecked(habilitadas.get(position));
+        if (habilitadas.get(position) == 1)
+            habilitada.setChecked(true);
+        else
+            habilitada.setChecked(false);
 
         // Poner el texto en color negro
         txtTitle.setTextColor(Color.BLACK);

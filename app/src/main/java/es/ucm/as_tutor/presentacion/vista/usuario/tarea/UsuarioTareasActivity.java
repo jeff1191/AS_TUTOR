@@ -16,12 +16,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 
 /**
  * Created by msalitu on 01/04/2016.
  */
 public class UsuarioTareasActivity extends AppCompatActivity {
 
+    private Integer idUsuario;
     private ArrayList<String> textosAlarma;
     private ArrayList<String> horasAlarma;
     private ArrayList<String> textosPreguntas;
@@ -30,7 +33,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     private ArrayList<Integer> no;
     private ArrayList<String> frecuencias;
     private ArrayList<Integer> mejorar;
-    private ArrayList<Boolean> habilitada;
+    private ArrayList<Integer> habilitada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +45,34 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
 
-        /*// Coge de la BBDD
+        /// Coge de la BBDD
+/*
+        textosAlarma = new ArrayList<>();
+        horasAlarma = new ArrayList<>();
+        textosPreguntas = new ArrayList<>();
+        horasPregunta = new ArrayList<>();
+        si = new ArrayList<>();
+        no = new ArrayList<>();
+        frecuencias = new ArrayList<>();
+        mejorar = new ArrayList<>();
+        habilitada = new ArrayList<>();
+
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
+        this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
         this.no = getIntent().getIntegerArrayListExtra("no");
-*/
+        this.frecuencias = getIntent().getStringArrayListExtra("frecuencias");
+        this.habilitada = getIntent().getIntegerArrayListExtra("habilitada");
+        this.mejorar = getIntent().getIntegerArrayListExtra("mejorar");
 
+        this.horasAlarma = new ArrayList<>();
+        horasAlarma.add("22:00");
+        horasAlarma.add("08:30");
+
+        this.horasPregunta = new ArrayList<>();
+        horasPregunta.add("22:10");
+        horasPregunta.add("08:40");
+        */
         // Esto lo hacemos así porque aún no cogemos de BBDD///////////////////////////////////////*
         this.textosAlarma = new ArrayList<>();
         textosAlarma.add("Lavarse los dientes");
@@ -78,13 +103,13 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         frecuencias.add("Mensual");
 
         this.habilitada = new ArrayList<>();
-        habilitada.add(true);
-        habilitada.add(false);
+        habilitada.add(1);
+        habilitada.add(0);
 
         this.mejorar = new ArrayList<>();
         mejorar.add(30);
         mejorar.add(15);
-        //*////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -135,6 +160,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].equals("Editar")) {
                         Intent intent = new Intent(getApplicationContext(), UsuarioTareaDetalleActivity.class);
+                        intent.putExtra("nueva", "no");
                         // Se introducen todos los valores que se mostraran
                         intent.putExtra("txtAlarma", textosAlarma.get(pos-1));
                         intent.putExtra("horaAlarma", horasAlarma.get(pos-1));
@@ -162,7 +188,8 @@ public class UsuarioTareasActivity extends AppCompatActivity {
 
     // Metodo on click del boton "+" material design
     public void nuevaTarea(View view){
-        Intent intent = new Intent(getApplicationContext(), UsuarioTareaDetalleActivity.class);
-        startActivity(intent);
+        Intent nuevaTarea = new Intent(this, UsuarioTareaDetalleActivity.class);
+        nuevaTarea.putExtra("nueva", "nueva");
+        startActivity(nuevaTarea);
     }
 }

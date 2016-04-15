@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.query.In;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -22,9 +23,9 @@ public class TransferTareaT {
 
 	private String textoAlarma;
 
-	private Date horaPregunta;
+	private Time horaPregunta;
 
-	private Date horaAlarma;
+	private Time horaAlarma;
 
 	private Integer contador;
 
@@ -43,8 +44,8 @@ public class TransferTareaT {
 	public TransferTareaT(){ }
 
     // Constructor sin id, adecuado para crear tareas
-    public TransferTareaT(String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
+    public TransferTareaT(String textoAlarma, Time horaAlarma,
+                          String textoPregunta, Time horaPregunta, Integer mejorar, Usuario usuario){
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
         this.textoPregunta = textoPregunta;
@@ -54,8 +55,10 @@ public class TransferTareaT {
     }
 
     // Constructor con id, adecuado para modificar tareas
-    public TransferTareaT(Integer id, String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
+    public TransferTareaT(Integer id, String textoAlarma, Time horaAlarma,
+                          String textoPregunta, Time horaPregunta, Integer mejorar, Usuario usuario,
+                          Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
+                          Boolean habilitada){
         this.id = id;
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
@@ -63,11 +66,11 @@ public class TransferTareaT {
         this.horaPregunta = horaPregunta;
         this.mejorar = mejorar;
         this.usuario = usuario;
-        contador = 0;
-        frecuenciaTarea = Frecuencia.DIARIA;
-        numSi = 0;
-        numNo = 0;
-        habilitada = true;
+        this.contador = contador;
+        this.frecuenciaTarea = frecuencia;
+        this.numSi = numSi;
+        this.numNo = numNo;
+        this.habilitada = habilitada;
     }
 
 	public Integer getId() {
@@ -94,19 +97,19 @@ public class TransferTareaT {
 		this.textoAlarma = textoAlarma;
 	}
 
-	public Date getHoraPregunta() {
+	public Time getHoraPregunta() {
 		return horaPregunta;
 	}
 
-	public void setHoraPregunta(Date horaPregunta) {
+	public void setHoraPregunta(Time horaPregunta) {
 		this.horaPregunta = horaPregunta;
 	}
 
-	public Date getHoraAlarma() {
+	public Time getHoraAlarma() {
 		return horaAlarma;
 	}
 
-	public void setHoraAlarma(Date horaAlarma) {
+	public void setHoraAlarma(Time horaAlarma) {
 		this.horaAlarma = horaAlarma;
 	}
 

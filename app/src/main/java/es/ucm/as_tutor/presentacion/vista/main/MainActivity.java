@@ -41,6 +41,8 @@ import java.util.Locale;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentDetalleAyuda;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentListadoAyuda;
 import es.ucm.as_tutor.presentacion.vista.evento.AdaptadorEventoUsuarios;
@@ -95,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
-        try {
+      /*  try {
             Dao<es.ucm.as_tutor.negocio.suceso.Tarea, Integer> a = getHelper().getTareaDao();
             a.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -579,8 +581,9 @@ public class MainActivity extends AppCompatActivity {
          }else {
             switch (item.getItemId()) {
                 case R.id.tareasUsuario:
-                    Intent intent = new Intent(this, UsuarioTareasActivity.class);
-                    startActivity(intent);
+                    //Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
+                    Intent iConsultarTareas = new Intent(this, UsuarioTareasActivity.class);
+                    startActivity(iConsultarTareas);
                     break;
                 case R.id.retoUsuario:
                     //Aqui iria un if/else

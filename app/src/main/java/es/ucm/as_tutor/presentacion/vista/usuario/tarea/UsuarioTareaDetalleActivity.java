@@ -1,8 +1,10 @@
 package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +15,23 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.sql.Time;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.utils.ParserTime;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 
 /**
  * Created by msalitu on 06/04/2016.
  */
 public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
+    private boolean nuevaTarea;
+    private Integer idUsuario;
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
@@ -54,34 +65,12 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.frecuenciaSpinner = (Spinner) findViewById(R.id.frecuencia);
         this.total = (TextView) findViewById(R.id.total);
 
-
-        // En caso de provenir de la seleccion de una tarea para editar se dan valores a los campos
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            textoAlarma.setText(bundle.getString("txtAlarma"));
-            textoPregunta.setText(bundle.getString("txtPregunta"));
-            si.setText(bundle.get("si").toString());
-            no.setText(bundle.get("no").toString());
-            mejorar.setText(bundle.get("mejorar").toString());
-            total.setText(bundle.get("total").toString());
-            // TimePicker hora alarma
-            String horaLargo = bundle.getString("horaAlarma");
-            String horas = horaLargo.substring(0, 2);
-            String mins = horaLargo.substring(3, 5);
-            Integer hora = Integer.parseInt(horas);
-            Integer min = Integer.parseInt(mins);
-            horaAlarma.setCurrentHour(hora);
-            horaAlarma.setCurrentMinute(min);
-            // TimePicker hora pregunta
-            horaLargo = bundle.getString("horaPregunta");
-            horas = horaLargo.substring(0, 2);
-            mins = horaLargo.substring(3, 5);
-            hora = Integer.parseInt(horas);
-            min = Integer.parseInt(mins);
-            horaPregunta.setCurrentHour(hora);
-            horaPregunta.setCurrentMinute(min);
-            // Frecuencia
-            cambiarOrdenFrecuencias(bundle.getString("frecuencia"));
+        if (!bundle.get("nueva").equals("nueva")) {   // Editar
+            nuevaTarea = false;
+            completarCampos(bundle);
+        } else{                 // Crear
+            nuevaTarea = true;
         }
 
         // Spinner de frecuencia
@@ -115,6 +104,27 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Este metodo carga los valores de la BBDD en los campos
+    private void completarCampos(Bundle bundle){
+        textoAlarma.setText(bundle.getString("txtAlarma"));
+        textoPregunta.setText(bundle.getString("txtPregunta"));
+        si.setText(bundle.get("si").toString());
+        no.setText(bundle.get("no").toString());
+        mejorar.setText(bundle.get("mejorar").toString());
+        total.setText(bundle.get("total").toString());
+        // TimePicker hora alarma
+        String horaLargo = bundle.getString("horaAlarma");
+        horaAlarma.setCurrentHour(ParserTime.hour(horaLargo));
+        horaAlarma.setCurrentMinute(ParserTime.min(horaLargo));
+        // TimePicker hora pregunta
+        horaLargo = bundle.getString("horaPregunta");
+        horaPregunta.setCurrentHour(ParserTime.hour(horaLargo));
+        horaPregunta.setCurrentMinute(ParserTime.min(horaLargo));
+        // Frecuencia
+        cambiarOrdenFrecuencias(bundle.getString("frecuencia"));
+    }
+
 
     // Este metodo es necesario para que se muestre como primera opcion del spinner la frecuencia
     // de la tarea seleccionada
@@ -151,5 +161,37 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void aceptar(View view){
+        String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
+        String pregunta_hour = horaPregunta.getCurrentHour() + ":" + horaPregunta.getCurrentMinute();
+        TransferTareaT transfer = new TransferTareaT();
+        transfer.setTextoAlarma(textoAlarma.getText().toString());
+        transfer.setTextoPregunta(textoPregunta.getText().toString());
+        transfer.setHoraAlarma(ParserTime.toTime(alarm_hour));
+        transfer.setHoraPregunta(ParserTime.toTime(pregunta_hour));
+
+        if (nuevaTarea){
+           // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Nueva tarea", Toast.LENGTH_SHORT);
+
+            toast1.show();
+        }else{
+           // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Editar", Toast.LENGTH_SHORT);
+
+            toast1.show();
+        }
+
+    }
+
+    public void cancelar(View view){
+        Intent cancelar = new Intent(this, UsuarioTareasActivity.class);
+        startActivity(cancelar);
     }
 }

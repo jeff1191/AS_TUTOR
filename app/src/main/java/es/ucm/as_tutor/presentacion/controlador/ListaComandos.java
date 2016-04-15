@@ -7,4 +7,6 @@ public class ListaComandos {
     public static final String CREAR_TAREA = "crearTarea";
     public static final String EDITAR_TAREA = "editarTarea";
     public static final String ELIMINAR_TAREA = "eliminarTarea";
+    public static final String DESHABILITAR_TAREA = "deshabilitarTarea";
+    public static final String CONSULTAR_TAREAS = "consultarTareas";
 }

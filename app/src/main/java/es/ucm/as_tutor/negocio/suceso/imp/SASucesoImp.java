@@ -5,11 +5,14 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -66,4 +69,39 @@ public class SASucesoImp implements SASuceso {
 			e.printStackTrace();
 		}
 	}
+
+    @Override
+    public void deshabilitarTarea(TransferTareaT datos) {
+        try {
+            Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
+        ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
+        try {
+            // Busca al usuario por su id
+            Dao<Usuario, Integer> daoUsuario = mDBHelper.getUsuarioDao();
+            Usuario usuario = daoUsuario.queryForId(idUsuario);
+            // Busca en la BBDD las tareas de ese usuario
+            Dao<Tarea, Integer> daoTarea = mDBHelper.getTareaDao();
+            List<Tarea> tareas = daoTarea.queryForEq("USUARIO", usuario);
+            // Las transformamos en transfers para devolverselas a la vista
+            for(Tarea tarea : tareas){
+                TransferTareaT transfer = new TransferTareaT(
+                        tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
+                        tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
+                        tarea.getUsuario(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
+                ret.add(transfer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
 }
