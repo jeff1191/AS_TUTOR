@@ -13,7 +13,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
     public Command getCommand(String comando) {
         Command ret = null;
         switch(comando){
-
+            case ListaComandos.CREAR_TAREA:
+                break;
+            case ListaComandos.EDITAR_TAREA:
+                break;
+            case ListaComandos.ELIMINAR_TAREA:
+                break;
         }
 
         return ret;
