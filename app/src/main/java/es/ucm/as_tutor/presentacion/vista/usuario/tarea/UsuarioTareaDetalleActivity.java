@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
@@ -29,7 +31,7 @@ import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private boolean nuevaTarea;
-    private Integer idUsuario;
+    private Usuario usuario;
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
@@ -187,6 +189,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setNumSi(Integer.parseInt(si.getText().toString()));
         transfer.setNumNo(Integer.parseInt(no.getText().toString()));
         transfer.setHabilitada(true);
+        transfer.setUsuario(usuario);
 
         if (nuevaTarea){
            // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);

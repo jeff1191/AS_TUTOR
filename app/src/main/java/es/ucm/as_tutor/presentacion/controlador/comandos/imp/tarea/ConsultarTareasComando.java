@@ -14,6 +14,7 @@ public class ConsultarTareasComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        return saSuceso.consultarTareas((Integer) datos);
+       // return saSuceso.consultarTareas((Integer) datos);
+        return saSuceso.consultarTareas(1);
     }
 }

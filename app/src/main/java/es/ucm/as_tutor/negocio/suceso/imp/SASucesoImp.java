@@ -1,8 +1,11 @@
 
 package es.ucm.as_tutor.negocio.suceso.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class SASucesoImp implements SASuceso {
             tarea.setHoraPregunta(transferTarea.getHoraPregunta());
             tarea.setHoraAlarma(transferTarea.getHoraAlarma());
             tarea.setMejorar(transferTarea.getMejorar());
+            tarea.setUsuario(transferTarea.getUsuario());
             if (transferTarea.getFrecuenciaTarea() != null)
                 tarea.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
             if (transferTarea.getHabilitada() != null)
@@ -83,12 +87,42 @@ public class SASucesoImp implements SASuceso {
     public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
         ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
         try {
-            // Busca al usuario por su id
+
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-            Usuario usuario = daoUsuario.queryForId(idUsuario);
-            // Busca en la BBDD las tareas de ese usuario
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
-            List<Tarea> tareas = daoTarea.queryForEq("USUARIO", usuario);
+
+
+
+            //*/////////////////////////////////////////////////////////////////////////////////////
+            Usuario u = new Usuario();
+            u.setNombre("Maria");
+            daoUsuario.create(u);
+
+            Tarea t1 = new Tarea();
+            t1.setTextoAlarma("Prueba 1");
+            t1.setUsuario(u);
+            daoTarea.create(t1);
+
+            Tarea t2 = new Tarea();
+            t2.setTextoAlarma("Prueba 2");
+            t2.setUsuario(u);
+            daoTarea.create(t2);
+
+            Tarea t3 = new Tarea();
+            t3.setTextoAlarma("Prueba 3");
+            t3.setUsuario(u);
+            daoTarea.create(t3);
+            ////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // Busca al usuario por su id
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(idUsuario);
+            Usuario usuario = uQb.queryForFirst();
+            // Busca las tareas de ese usuario
+            QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
+            tQb.where().eq("USUARIO" , usuario);
+            List<Tarea> tareas = tQb.query();
             // Las transformamos en transfers para devolverselas a la vista
             for(Tarea tarea : tareas){
                 TransferTareaT transfer = new TransferTareaT(

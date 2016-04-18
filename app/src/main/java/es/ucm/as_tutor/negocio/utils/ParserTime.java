@@ -16,12 +16,18 @@ public class ParserTime {
 
     // Devuelve la hora
     public static Integer hour(String time){
-        return Integer.parseInt(time.substring(0, 2));
+        if(time.length() == 5)
+            return Integer.parseInt(time.substring(0, 2));
+        else
+            return Integer.parseInt(time.substring(0, 1));
     }
 
     // Devuelve el minuto
     public static Integer min(String time){
-        return Integer.parseInt(time.substring(3, 5));
+        if(time.length() == 5)
+            return Integer.parseInt(time.substring(3, 5));
+        else
+            return Integer.parseInt(time.substring(2, 4));
     }
 
     // Time realmente es el numero de milisegundos

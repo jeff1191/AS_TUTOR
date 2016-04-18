@@ -48,16 +48,16 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         actionBar.setIcon(R.drawable.logo);
 
         /// Coge de la BBDD
-/*
-        textosAlarma = new ArrayList<>();
-        horasAlarma = new ArrayList<>();
-        textosPreguntas = new ArrayList<>();
-        horasPregunta = new ArrayList<>();
-        si = new ArrayList<>();
-        no = new ArrayList<>();
-        frecuencias = new ArrayList<>();
-        mejorar = new ArrayList<>();
-        habilitada = new ArrayList<>();
+
+        textosAlarma = new ArrayList<String>();
+        horasAlarma = new ArrayList<String>();
+        textosPreguntas = new ArrayList<String>();
+        horasPregunta = new ArrayList<String>();
+        si = new ArrayList<Integer>();
+        no = new ArrayList<Integer>();
+        frecuencias = new ArrayList<String>();
+        mejorar = new ArrayList<Integer>();
+        habilitada = new ArrayList<Integer>();
 
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
@@ -67,51 +67,14 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.habilitada = getIntent().getIntegerArrayListExtra("habilitada");
         this.mejorar = getIntent().getIntegerArrayListExtra("mejorar");
 
-        this.horasAlarma = new ArrayList<>();
+        // Las horas aun no las cogemos de la BBDD
+        this.horasAlarma = new ArrayList<String>();
         horasAlarma.add("22:00");
         horasAlarma.add("08:30");
 
-        this.horasPregunta = new ArrayList<>();
+        this.horasPregunta = new ArrayList<String>();
         horasPregunta.add("22:10");
         horasPregunta.add("08:40");
-        */
-        // Esto lo hacemos así porque aún no cogemos de BBDD///////////////////////////////////////*
-        this.textosAlarma = new ArrayList<>();
-        textosAlarma.add("Lavarse los dientes");
-        textosAlarma.add("Meter las cosas en la mochila");
-
-        this.horasAlarma = new ArrayList<>();
-        horasAlarma.add("22:00");
-        horasAlarma.add("08:30");
-
-        this.textosPreguntas = new ArrayList<>();
-        textosPreguntas.add("¿Te has lavado los dientes?");
-        textosPreguntas.add("¿Has metido las cosas en la mochila?");
-
-        this.horasPregunta = new ArrayList<>();
-        horasPregunta.add("22:10");
-        horasPregunta.add("08:40");
-
-        this.si = new ArrayList<>();
-        si.add(1);
-        si.add(0);
-
-        this.no = new ArrayList<>();
-        no.add(1);
-        no.add(0);
-
-        this.frecuencias = new ArrayList<>();
-        frecuencias.add("Diaria");
-        frecuencias.add("Mensual");
-
-        this.habilitada = new ArrayList<>();
-        habilitada.add(1);
-        habilitada.add(0);
-
-        this.mejorar = new ArrayList<>();
-        mejorar.add(30);
-        mejorar.add(15);
-        /////////////////////////////////////////////////////////////////////////////////////////
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -120,7 +83,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         View header = inflater.inflate(R.layout.tareas_header, lv, false);
         lv.addHeaderView(header, null, false);
         // Se rellenan las filas
-        if(textosAlarma.size()!= 0){
+        if(textosAlarma != null){
             AdaptadorTareas adapter = new AdaptadorTareas(textosAlarma, horasAlarma, textosPreguntas,
                     horasPregunta, si, no, frecuencias, habilitada, this.getApplicationContext());
             lv.setAdapter(adapter);

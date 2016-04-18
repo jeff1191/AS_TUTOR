@@ -2,6 +2,7 @@ package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class AdaptadorTareas extends BaseAdapter {
                            ArrayList<String> textosPreguntas, ArrayList<String> horasPregunta,
                            ArrayList<Integer> si,ArrayList<Integer> no, ArrayList<String> frecuencias,
                            ArrayList<Integer> habilitadas, Context context) {
+        Log.d("tareas", "adapter");
         this.context = context;
         this.textosAlarma = textosAlarma;
         this.horasAlarma = horasAlarma;
@@ -89,14 +91,14 @@ public class AdaptadorTareas extends BaseAdapter {
 
         // Dar valores a cada columna de la fila
         txtTitle.setText(textosAlarma.get(position));
-        horaAlarma.setText(horasAlarma.get(position));
-        txtPregunta.setText(textosPreguntas.get(position));
-        horaPregunta.setText(horasPregunta.get(position));
-        String ss = si.get(position).toString();
-        sit.setText(ss);
-        String sn = no.get(position).toString();
-        not.setText(sn);
-        Integer t = si.get(position)-no.get(position);
+       // horaAlarma.setText(horasAlarma.get(position));
+       // txtPregunta.setText(textosPreguntas.get(position));
+       // horaPregunta.setText(horasPregunta.get(position));
+       // String ss = si.get(position).toString();
+      //  sit.setText(ss);
+      //  String sn = no.get(position).toString();
+      //  not.setText(sn);
+      /*  Integer t = si.get(position)-no.get(position);
         if(t >= 0)
             total.setTextColor(Color.GREEN);
         else
@@ -107,7 +109,7 @@ public class AdaptadorTareas extends BaseAdapter {
             habilitada.setChecked(true);
         else
             habilitada.setChecked(false);
-
+*/
         // Poner el texto en color negro
         txtTitle.setTextColor(Color.BLACK);
         horaAlarma.setTextColor(Color.BLACK);

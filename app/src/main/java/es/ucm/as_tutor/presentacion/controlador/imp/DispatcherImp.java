@@ -1,6 +1,7 @@
 package es.ucm.as_tutor.presentacion.controlador.imp;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.j256.ormlite.stmt.query.In;
 
@@ -35,7 +36,7 @@ public class DispatcherImp extends Dispatcher {
                 break;
 
             case ListaComandos.CONSULTAR_TAREAS:
-
+                Log.d("tareas", "dispatcher");
                 ArrayList<String> textosAlarma = new ArrayList<String>();
                 ArrayList<String> horasAlarma = new ArrayList<String>();
                 ArrayList<String> textosPreguntas = new ArrayList<String>();
@@ -64,6 +65,8 @@ public class DispatcherImp extends Dispatcher {
                 }
 
                 Intent iConsultarTareas = new Intent( Manager.getInstance().getContext(), UsuarioTareasActivity.class);
+                //iConsultarTareas.putStringArrayListExtra("horasPregunta", textosPreguntas);
+                //iConsultarTareas.putStringArrayListExtra("horasAlarma", textosPreguntas);
                 iConsultarTareas.putStringArrayListExtra("textosPregunta", textosPreguntas);
                 iConsultarTareas.putStringArrayListExtra("textosAlarma", textosAlarma);
                 iConsultarTareas.putStringArrayListExtra("frecuencias", frecuencias);
@@ -71,6 +74,7 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.putIntegerArrayListExtra("no", no);
                 iConsultarTareas.putIntegerArrayListExtra("mejorar", mejorar);
                 iConsultarTareas.putIntegerArrayListExtra("habilitada", habilitada);
+                iConsultarTareas.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
                 break;
         }

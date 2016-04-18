@@ -1,8 +1,7 @@
 package es.ucm.as_tutor.presentacion.vista.main;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by msalitu on 15/04/2016.
@@ -10,7 +9,7 @@ import android.content.Context;
 
 public class Manager {
     private static Manager ourInstance = new Manager();
-    private Activity activity;
+    private AppCompatActivity activity;
 
     // Metodo que se utiliza desde los servicios de aplicacion
     public static Manager getInstance() {
@@ -21,7 +20,7 @@ public class Manager {
     private Manager() { }
 
     // Metodo que cambia la activity, se utiliza desde las propias activities
-    public void setActivity(Activity miActivity){
+    public void setActivity(AppCompatActivity miActivity){
         activity = miActivity;
     }
 
@@ -31,7 +30,7 @@ public class Manager {
     }
 
     // Metodo que devuelve el FragmentManager, se utiliza desde el dispatcher
-    public FragmentManager getFragmentManager(){
-        return activity.getFragmentManager();
+    public android.support.v4.app.FragmentManager getFragmentManager(){
+        return activity.getSupportFragmentManager();
     }
 }
