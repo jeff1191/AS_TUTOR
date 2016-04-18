@@ -39,6 +39,8 @@ public class TransferTareaT {
 
 	private Usuario usuario;
 
+	private Integer idUsuario;
+
 	public TransferTareaT(){ }
 
     // Constructor sin id, adecuado para crear tareas
@@ -165,5 +167,13 @@ public class TransferTareaT {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 }

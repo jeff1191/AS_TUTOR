@@ -32,7 +32,10 @@ public class SASucesoImp implements SASuceso {
     }
 
 	@Override
-	public void crearTarea(TransferTareaT transferTarea) {
+	public Integer crearTarea(TransferTareaT transferTarea) {
+
+        // Devuelve el id del usuario al cual se le crea la tarea
+        Integer idUsuario = transferTarea.getIdUsuario();
 
             // El constructor vacio de Tarea da valores por defecto a los campos no editables
             Tarea tarea = new Tarea();
@@ -41,19 +44,27 @@ public class SASucesoImp implements SASuceso {
             tarea.setHoraPregunta(transferTarea.getHoraPregunta());
             tarea.setHoraAlarma(transferTarea.getHoraAlarma());
             tarea.setMejorar(transferTarea.getMejorar());
-            tarea.setUsuario(transferTarea.getUsuario());
+
             if (transferTarea.getFrecuenciaTarea() != null)
                 tarea.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
             if (transferTarea.getHabilitada() != null)
                 tarea.setHabilitada(transferTarea.getHabilitada());
 
         try {
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(idUsuario);
+            Usuario usuario = uQb.queryForFirst();
+            tarea.setUsuario(usuario);
+
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             daoTarea.create(tarea);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+        return idUsuario;
 	}
 
 	@Override
@@ -93,7 +104,7 @@ public class SASucesoImp implements SASuceso {
 
 
 
-            //*/////////////////////////////////////////////////////////////////////////////////////
+            /*/////////////////////////////////////////////////////////////////////////////////////
             Usuario u = new Usuario();
             u.setNombre("Maria");
             daoUsuario.create(u);
@@ -112,7 +123,7 @@ public class SASucesoImp implements SASuceso {
             t3.setTextoAlarma("Prueba 3");
             t3.setUsuario(u);
             daoTarea.create(t3);
-            ////////////////////////////////////////////////////////////////////////////////////////
+            */////////////////////////////////////////////////////////////////////////////////////////
 
 
             // Busca al usuario por su id

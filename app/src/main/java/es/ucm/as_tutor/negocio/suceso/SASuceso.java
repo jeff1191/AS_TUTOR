@@ -12,7 +12,7 @@ import es.ucm.as_tutor.negocio.usuario.Usuario;
 
 public interface SASuceso {
 
-	public void crearTarea(TransferTareaT transferTarea);
+	public Integer crearTarea(TransferTareaT transferTarea);
 
 	public void editarTarea(TransferTareaT transferTarea);
 

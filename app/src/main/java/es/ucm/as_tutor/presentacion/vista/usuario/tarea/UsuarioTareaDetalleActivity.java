@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
@@ -31,7 +33,7 @@ import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private boolean nuevaTarea;
-    private Usuario usuario;
+    private Integer idUsuario;
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
@@ -66,6 +68,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.total = (TextView) findViewById(R.id.total);
 
         Bundle bundle = getIntent().getExtras();
+        idUsuario = bundle.getInt("usuario");
         if (!bundle.get("nueva").equals("nueva")) {   // Editar
             nuevaTarea = false;
             completarCampos(bundle);
@@ -189,15 +192,17 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setNumSi(Integer.parseInt(si.getText().toString()));
         transfer.setNumNo(Integer.parseInt(no.getText().toString()));
         transfer.setHabilitada(true);
-        transfer.setUsuario(usuario);
+        transfer.setIdUsuario(idUsuario);
 
         if (nuevaTarea){
-           // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
+
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
-                            "Nueva tarea", Toast.LENGTH_SHORT);
+                            "Nueva tarea" + transfer.getIdUsuario(), Toast.LENGTH_SHORT);
 
             toast1.show();
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
+
         }else{
            // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
             Toast toast1 =

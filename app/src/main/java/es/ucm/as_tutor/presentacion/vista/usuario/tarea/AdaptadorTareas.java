@@ -2,7 +2,6 @@ package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ public class AdaptadorTareas extends BaseAdapter {
                            ArrayList<String> textosPreguntas, ArrayList<String> horasPregunta,
                            ArrayList<Integer> si,ArrayList<Integer> no, ArrayList<String> frecuencias,
                            ArrayList<Integer> habilitadas, Context context) {
-        Log.d("tareas", "adapter");
         this.context = context;
         this.textosAlarma = textosAlarma;
         this.horasAlarma = horasAlarma;

@@ -13,7 +13,6 @@ public class CrearTareaComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        saSuceso.crearTarea((TransferTareaT) datos);
-        return null;
+        return saSuceso.crearTarea((TransferTareaT) datos);
     }
 }

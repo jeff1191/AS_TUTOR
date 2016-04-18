@@ -48,7 +48,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         actionBar.setIcon(R.drawable.logo);
 
         /// Coge de la BBDD
-
         textosAlarma = new ArrayList<String>();
         horasAlarma = new ArrayList<String>();
         textosPreguntas = new ArrayList<String>();
@@ -59,6 +58,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         mejorar = new ArrayList<Integer>();
         habilitada = new ArrayList<Integer>();
 
+        this.idUsuario = getIntent().getIntExtra("usuario", 0);
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
@@ -155,6 +155,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     public void nuevaTarea(View view){
         Intent nuevaTarea = new Intent(this, UsuarioTareaDetalleActivity.class);
         nuevaTarea.putExtra("nueva", "nueva");
+        nuevaTarea.putExtra("usuario", idUsuario);
         startActivity(nuevaTarea);
     }
 }
