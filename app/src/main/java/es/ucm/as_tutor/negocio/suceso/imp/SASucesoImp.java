@@ -32,11 +32,7 @@ public class SASucesoImp implements SASuceso {
     }
 
 	@Override
-	public Integer crearTarea(TransferTareaT transferTarea) {
-
-        // Devuelve el id del usuario al cual se le crea la tarea
-        Integer idUsuario = transferTarea.getIdUsuario();
-
+	public void crearTarea(TransferTareaT transferTarea) {
             // El constructor vacio de Tarea da valores por defecto a los campos no editables
             Tarea tarea = new Tarea();
             tarea.setTextoPregunta(transferTarea.getTextoPregunta());
@@ -53,7 +49,7 @@ public class SASucesoImp implements SASuceso {
         try {
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
-            uQb.where().idEq(idUsuario);
+            uQb.where().idEq(transferTarea.getIdUsuario());
             Usuario usuario = uQb.queryForFirst();
             tarea.setUsuario(usuario);
 
@@ -63,8 +59,6 @@ public class SASucesoImp implements SASuceso {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-        return idUsuario;
 	}
 
 	@Override
@@ -104,7 +98,7 @@ public class SASucesoImp implements SASuceso {
 
 
 
-            /*/////////////////////////////////////////////////////////////////////////////////////
+/*/////////////////////////////////////////////////////////////////////////////////////
             Usuario u = new Usuario();
             u.setNombre("Maria");
             daoUsuario.create(u);
@@ -124,7 +118,7 @@ public class SASucesoImp implements SASuceso {
             t3.setUsuario(u);
             daoTarea.create(t3);
             */////////////////////////////////////////////////////////////////////////////////////////
-
+            Log.e("tareas sasucesoimpl", idUsuario.toString());
 
             // Busca al usuario por su id
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
@@ -134,14 +128,24 @@ public class SASucesoImp implements SASuceso {
             QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
             tQb.where().eq("USUARIO" , usuario);
             List<Tarea> tareas = tQb.query();
+
             // Las transformamos en transfers para devolverselas a la vista
-            for(Tarea tarea : tareas){
+            for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
                 TransferTareaT transfer = new TransferTareaT(
                         tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
                         tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
-                        tarea.getUsuario(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
                         tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
-                ret.add(transfer);
+                ret.add(i, transfer);
+            }
+
+            // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
+            // para cuando no haya ninguna
+            if(tareas.size() == 0) {
+                TransferTareaT fantasma = new TransferTareaT();
+                fantasma.setIdUsuario(idUsuario);
+                ret.add(0, fantasma);
             }
 
         } catch (SQLException e) {

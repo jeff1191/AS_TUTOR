@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,7 +59,8 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         mejorar = new ArrayList<Integer>();
         habilitada = new ArrayList<Integer>();
 
-        this.idUsuario = getIntent().getIntExtra("usuario", 0);
+        this.idUsuario = getIntent().getExtras().getInt("usuario");
+        Log.e("tareas Activity", idUsuario.toString());
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
@@ -66,15 +68,8 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.frecuencias = getIntent().getStringArrayListExtra("frecuencias");
         this.habilitada = getIntent().getIntegerArrayListExtra("habilitada");
         this.mejorar = getIntent().getIntegerArrayListExtra("mejorar");
-
-        // Las horas aun no las cogemos de la BBDD
-        this.horasAlarma = new ArrayList<String>();
-        horasAlarma.add("22:00");
-        horasAlarma.add("08:30");
-
-        this.horasPregunta = new ArrayList<String>();
-        horasPregunta.add("22:10");
-        horasPregunta.add("08:40");
+        this.horasAlarma = getIntent().getStringArrayListExtra("horaAlarmas");
+        this.horasPregunta = getIntent().getStringArrayListExtra("horaPreguntas");
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -125,8 +120,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].equals("Editar")) {
                         Intent intent = new Intent(getApplicationContext(), UsuarioTareaDetalleActivity.class);
-                        intent.putExtra("nueva", "no");
-                        // Se introducen todos los valores que se mostraran
+                        intent.putExtra("nueva", "no"); // asi la UsuarioTareaDetalleActivity sabe que no es una tarea nueva
                         intent.putExtra("txtAlarma", textosAlarma.get(pos-1));
                         intent.putExtra("horaAlarma", horasAlarma.get(pos-1));
                         intent.putExtra("txtPregunta", textosPreguntas.get(pos-1));
@@ -135,7 +129,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                         intent.putExtra("si", si.get(pos-1));
                         intent.putExtra("no", no.get(pos - 1));
                         Integer total = si.get(pos-1) - no.get(pos-1);
-                        intent.putExtra("total", total);
                         intent.putExtra("mejorar", mejorar.get(pos-1));
                         intent.putExtra("habilitada", habilitada.get(pos-1));
                         startActivity(intent);

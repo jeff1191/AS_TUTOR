@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,6 +70,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         idUsuario = bundle.getInt("usuario");
+        Log.e("tareas", idUsuario.toString());
         if (!bundle.get("nueva").equals("nueva")) {   // Editar
             nuevaTarea = false;
             completarCampos(bundle);
@@ -195,14 +197,9 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setIdUsuario(idUsuario);
 
         if (nuevaTarea){
-
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Nueva tarea" + transfer.getIdUsuario(), Toast.LENGTH_SHORT);
-
-            toast1.show();
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
-
+            Log.e("tareas", idUsuario.toString());
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }else{
            // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
             Toast toast1 =

@@ -1,5 +1,7 @@
 package es.ucm.as_tutor.negocio.utils;
 
+import android.util.Log;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.Timer;
@@ -11,7 +13,7 @@ public class ParserTime {
 
     // Forma el string a partir de dos enteros: la hora y el minuto
     public static String toString(Integer hour, Integer min){
-        return hour + ":" + min;
+        return hour.toString() + ":" + min.toString();
     }
 
     // Devuelve la hora
@@ -37,6 +39,11 @@ public class ParserTime {
         long ret = hour*3600 + min*20;
         Date d = new Date(ret);
         return d;
+    }
+
+    public static String DateToString(Date date){
+        String ret = date.toString().substring(10, 16);
+        return ret;
     }
 
 }

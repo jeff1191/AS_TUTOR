@@ -37,26 +37,24 @@ public class TransferTareaT {
 
 	private Boolean habilitada;
 
-	private Usuario usuario;
-
 	private Integer idUsuario;
 
 	public TransferTareaT(){ }
 
     // Constructor sin id, adecuado para crear tareas
     public TransferTareaT(String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario){
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUuario){
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
         this.textoPregunta = textoPregunta;
         this.horaPregunta = horaPregunta;
         this.mejorar = mejorar;
-        this.usuario = usuario;
+		this.idUsuario = idUuario;
     }
 
     // Constructor con id, adecuado para modificar tareas
     public TransferTareaT(Integer id, String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Usuario usuario,
+                          String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUsuario,
                           Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
                           Boolean habilitada){
         this.id = id;
@@ -65,12 +63,12 @@ public class TransferTareaT {
         this.textoPregunta = textoPregunta;
         this.horaPregunta = horaPregunta;
         this.mejorar = mejorar;
-        this.usuario = usuario;
         this.contador = contador;
         this.frecuenciaTarea = frecuencia;
         this.numSi = numSi;
         this.numNo = numNo;
         this.habilitada = habilitada;
+		this.idUsuario = idUsuario;
     }
 
 	public Integer getId() {
@@ -159,14 +157,6 @@ public class TransferTareaT {
 
 	public void setHabilitada(Boolean habilitada) {
 		this.habilitada = habilitada;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public Integer getIdUsuario() {
