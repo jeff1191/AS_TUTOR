@@ -96,8 +96,6 @@ public class SASucesoImp implements SASuceso {
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 
-
-
 /*/////////////////////////////////////////////////////////////////////////////////////
             Usuario u = new Usuario();
             u.setNombre("Maria");
@@ -117,8 +115,7 @@ public class SASucesoImp implements SASuceso {
             t3.setTextoAlarma("Prueba 3");
             t3.setUsuario(u);
             daoTarea.create(t3);
-            */////////////////////////////////////////////////////////////////////////////////////////
-            Log.e("tareas sasucesoimpl", idUsuario.toString());
+            *//////////////////////////////////////////////////////////////////////////////////////
 
             // Busca al usuario por su id
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();

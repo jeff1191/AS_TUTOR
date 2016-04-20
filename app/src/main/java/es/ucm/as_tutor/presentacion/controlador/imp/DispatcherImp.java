@@ -52,7 +52,6 @@ public class DispatcherImp extends Dispatcher {
                 // Si ese usuario tiene tareas se cogen los campos que vamos a mostrar
                 if (tareas.size() >= 1 && tareas.get(0).getTextoAlarma()!= null) {
                     for (int i = 0; i < tareas.size(); i++) {
-                        Log.e("tareas", "entro en el for");
                         TransferTareaT transfer = tareas.get(i);
                         textosAlarma.add(i, transfer.getTextoAlarma());
                         textosPreguntas.add(i, transfer.getTextoPregunta());

@@ -198,7 +198,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
         if (nuevaTarea){
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
-            Log.e("tareas", idUsuario.toString());
             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }else{
            // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);

@@ -60,7 +60,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         habilitada = new ArrayList<Integer>();
 
         this.idUsuario = getIntent().getExtras().getInt("usuario");
-        Log.e("tareas Activity", idUsuario.toString());
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
