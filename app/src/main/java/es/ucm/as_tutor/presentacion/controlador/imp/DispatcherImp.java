@@ -45,6 +45,7 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<String> frecuencias = new ArrayList<String>();
                 ArrayList<Integer> mejorar = new ArrayList<Integer>();
                 ArrayList<Integer> habilitada = new ArrayList<Integer>();
+                ArrayList<Integer> id = new ArrayList<Integer>();
 
 
                 ArrayList<TransferTareaT> tareas = (ArrayList<TransferTareaT>) datos;
@@ -67,6 +68,7 @@ public class DispatcherImp extends Dispatcher {
                         horasPregunta.add(i, ParserTime.DateToString(pregunta));
                         Date alarma = transfer.getHoraAlarma();
                         horasAlarma.add(i, ParserTime.DateToString(alarma));
+                        id.add(i, transfer.getId());
                     }
                 }
 
@@ -80,7 +82,7 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.putIntegerArrayListExtra("no", no);
                 iConsultarTareas.putIntegerArrayListExtra("mejorar", mejorar);
                 iConsultarTareas.putIntegerArrayListExtra("habilitada", habilitada);
-
+                iConsultarTareas.putIntegerArrayListExtra("idsTareas", id);
                 iConsultarTareas.putExtra("usuario", tareas.get(0).getIdUsuario());
                 iConsultarTareas.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);

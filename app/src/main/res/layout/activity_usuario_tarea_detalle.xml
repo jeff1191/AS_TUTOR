@@ -121,7 +121,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:id="@+id/frecuencia"/>
+                android:id="@+id/frecuencia"
+                android:dropDownWidth="wrap_content"
+                style="@android:style/Widget.Material.Light.TextView.SpinnerItem" />
 
         </LinearLayout>
 
@@ -147,7 +149,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/mejora"
-                android:text="3"
+                android:text="30"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
@@ -176,7 +178,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/si"
-                android:text="3"
+                android:text="0"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
@@ -204,7 +206,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/no"
-                android:text="3"
+                android:text="0"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />

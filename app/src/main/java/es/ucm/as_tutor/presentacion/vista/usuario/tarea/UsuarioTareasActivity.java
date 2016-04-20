@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +35,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     private ArrayList<String> frecuencias;
     private ArrayList<Integer> mejorar;
     private ArrayList<Integer> habilitada;
+    private ArrayList<Integer> idsTareas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.mejorar = getIntent().getIntegerArrayListExtra("mejorar");
         this.horasAlarma = getIntent().getStringArrayListExtra("horaAlarmas");
         this.horasPregunta = getIntent().getStringArrayListExtra("horaPreguntas");
+        this.idsTareas = getIntent().getIntegerArrayListExtra("idsTareas");
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -131,12 +132,15 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                         intent.putExtra("total", total);
                         intent.putExtra("mejorar", mejorar.get(pos-1));
                         intent.putExtra("habilitada", habilitada.get(pos-1));
+                        intent.putExtra("usuario", idUsuario);
+                        intent.putExtra("idTarea", idsTareas.get(pos-1));
                         startActivity(intent);
                     } else if (items[item].equals("Habilitar/deshabilitar")) {
-                        // ejecuta comando deshabilitar tarea
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.DESHABILITAR_TAREA, idsTareas.get(pos-1));
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                     } else if(items[item].equals("Eliminar")) {
-                        // mensaje de confirmacion??
-                        // ejecuta el comando de eliminar tarea
+                        DialogEliminarTarea alertDialog = DialogEliminarTarea.newInstance(textosAlarma.get(pos-1),idsTareas.get(pos-1), idUsuario);
+                        alertDialog.show(getSupportFragmentManager(), "Eliminar tarea");
                     }
                 }
             });

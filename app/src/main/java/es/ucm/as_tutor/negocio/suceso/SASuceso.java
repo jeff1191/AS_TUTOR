@@ -16,9 +16,9 @@ public interface SASuceso {
 
 	public void editarTarea(TransferTareaT transferTarea);
 
-	public void eliminarTarea(TransferTareaT transferTarea);
+	public void eliminarTarea(Integer idTarea);
 
-	public void deshabilitarTarea(TransferTareaT datos);
+	public void deshabilitarTarea(Integer idTarea);
 
-	public ArrayList<TransferTareaT> consultarTareas(Integer usuario);
+	public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario);
 }

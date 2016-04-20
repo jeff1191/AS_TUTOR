@@ -2,8 +2,10 @@ package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private boolean nuevaTarea;
     private Integer idUsuario;
+    private Integer idTarea;
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
@@ -69,6 +72,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         idUsuario = bundle.getInt("usuario");
+        idTarea = bundle.getInt("idTarea");
         if (!bundle.get("nueva").equals("nueva")) {   // Editar
             nuevaTarea = false;
             completarCampos(bundle);
@@ -86,18 +90,12 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 frecuenciaSpinner.setSelection(position);
                 String frecuenciaSeleccionada = (String) frecuenciaSpinner.getSelectedItem();
-
                 switch (frecuenciaSeleccionada) {
                     case "Diaria":
-                        // set frecuencia
                         break;
-
                     case "Semanal":
-                        // set frecuencia
                         break;
-
                     case "Mensual":
-                        // set frecuencia
                         break;
                 }
             }
@@ -192,6 +190,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setNumSi(Integer.parseInt(si.getText().toString()));
         transfer.setNumNo(Integer.parseInt(no.getText().toString()));
         transfer.setHabilitada(true);
+        transfer.setId(idTarea);
         transfer.setIdUsuario(idUsuario);
 
         if (nuevaTarea){

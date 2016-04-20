@@ -13,7 +13,7 @@ public class EliminarTareaComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        saSuceso.eliminarTarea((TransferTareaT) datos);
+        saSuceso.eliminarTarea((Integer) datos);
         return null;
     }
 }

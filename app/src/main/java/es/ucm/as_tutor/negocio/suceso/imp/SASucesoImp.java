@@ -74,6 +74,7 @@ public class SASucesoImp implements SASuceso {
         tarea.setNumSi(transferTarea.getNumSi());
         tarea.setNumNo(transferTarea.getNumNo());
         tarea.setContador(transferTarea.getContador());
+        tarea.setId(transferTarea.getId());
         try {
             // Se busca al usuario por su id para asignarselo a la tarea
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
@@ -90,18 +91,23 @@ public class SASucesoImp implements SASuceso {
 	}
 
 	@Override
-	public void eliminarTarea(TransferTareaT transferTarea) {
+	public void eliminarTarea(Integer idTarea) {
 		try {
-			Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+            Tarea tarea = daoTarea.queryForId(idTarea);
+            daoTarea.delete(tarea);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
     @Override
-    public void deshabilitarTarea(TransferTareaT datos) {
+    public void deshabilitarTarea(Integer idTarea) {
         try {
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+            Tarea tarea = daoTarea.queryForId(idTarea);
+            tarea.setHabilitada(!tarea.getHabilitada());
+            daoTarea.update(tarea);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,6 +144,7 @@ public class SASucesoImp implements SASuceso {
                         tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
                         tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
                         tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
+                transfer.setId(tarea.getId());
                 ret.add(i, transfer);
             }
 
