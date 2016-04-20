@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,7 +69,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         idUsuario = bundle.getInt("usuario");
-        Log.e("tareas", idUsuario.toString());
         if (!bundle.get("nueva").equals("nueva")) {   // Editar
             nuevaTarea = false;
             completarCampos(bundle);
@@ -119,11 +117,11 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         mejorar.setText(bundle.get("mejorar").toString());
         total.setText(bundle.get("total").toString());
         // TimePicker hora alarma
-        String horaLargo = bundle.getString("horaAlarma");
+        String horaLargo = bundle.getString("horaAlarma").trim();
         horaAlarma.setCurrentHour(ParserTime.hour(horaLargo));
         horaAlarma.setCurrentMinute(ParserTime.min(horaLargo));
         // TimePicker hora pregunta
-        horaLargo = bundle.getString("horaPregunta");
+        horaLargo = bundle.getString("horaPregunta").trim();
         horaPregunta.setCurrentHour(ParserTime.hour(horaLargo));
         horaPregunta.setCurrentMinute(ParserTime.min(horaLargo));
         // Frecuencia
@@ -200,18 +198,12 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }else{
-           // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Editar", Toast.LENGTH_SHORT);
-
-            toast1.show();
+            Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }
-
     }
 
     public void cancelar(View view){
-        Intent cancelar = new Intent(this, UsuarioTareasActivity.class);
-        startActivity(cancelar);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
     }
 }

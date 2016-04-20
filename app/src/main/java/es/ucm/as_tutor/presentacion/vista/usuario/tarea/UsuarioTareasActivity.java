@@ -128,6 +128,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                         intent.putExtra("si", si.get(pos-1));
                         intent.putExtra("no", no.get(pos - 1));
                         Integer total = si.get(pos-1) - no.get(pos-1);
+                        intent.putExtra("total", total);
                         intent.putExtra("mejorar", mejorar.get(pos-1));
                         intent.putExtra("habilitada", habilitada.get(pos-1));
                         startActivity(intent);

@@ -63,8 +63,27 @@ public class SASucesoImp implements SASuceso {
 
 	@Override
 	public void editarTarea(TransferTareaT transferTarea) {
-		try {
-			Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+		Tarea tarea = new Tarea();
+        tarea.setTextoPregunta(transferTarea.getTextoPregunta());
+        tarea.setTextoAlarma(transferTarea.getTextoAlarma());
+        tarea.setHoraPregunta(transferTarea.getHoraPregunta());
+        tarea.setHoraAlarma(transferTarea.getHoraAlarma());
+        tarea.setMejorar(transferTarea.getMejorar());
+        tarea.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
+        tarea.setHabilitada(transferTarea.getHabilitada());
+        tarea.setNumSi(transferTarea.getNumSi());
+        tarea.setNumNo(transferTarea.getNumNo());
+        tarea.setContador(transferTarea.getContador());
+        try {
+            // Se busca al usuario por su id para asignarselo a la tarea
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(transferTarea.getIdUsuario());
+            Usuario usuario = uQb.queryForFirst();
+            tarea.setUsuario(usuario);
+            // Se actualiza la informacion de la tarea en la BBDD
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+            daoTarea.update(tarea);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -96,25 +115,10 @@ public class SASucesoImp implements SASuceso {
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 
-/*/////////////////////////////////////////////////////////////////////////////////////
+            /*/////////////////////////////////////////////////////////////////////////////////////
             Usuario u = new Usuario();
             u.setNombre("Maria");
             daoUsuario.create(u);
-
-            Tarea t1 = new Tarea();
-            t1.setTextoAlarma("Prueba 1");
-            t1.setUsuario(u);
-            daoTarea.create(t1);
-
-            Tarea t2 = new Tarea();
-            t2.setTextoAlarma("Prueba 2");
-            t2.setUsuario(u);
-            daoTarea.create(t2);
-
-            Tarea t3 = new Tarea();
-            t3.setTextoAlarma("Prueba 3");
-            t3.setUsuario(u);
-            daoTarea.create(t3);
             *//////////////////////////////////////////////////////////////////////////////////////
 
             // Busca al usuario por su id

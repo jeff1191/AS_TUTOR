@@ -18,21 +18,18 @@ public class ParserTime {
 
     // Devuelve la hora
     public static Integer hour(String time){
-        if(time.length() == 5)
-            return Integer.parseInt(time.substring(0, 2));
-        else
-            return Integer.parseInt(time.substring(0, 1));
+        String[] parts = time.split(":");
+        return Integer.parseInt(parts[0]);
     }
 
     // Devuelve el minuto
     public static Integer min(String time){
-        if(time.length() == 5)
-            return Integer.parseInt(time.substring(3, 5));
-        else
-            return Integer.parseInt(time.substring(3, 4));
+        String[] parts = time.split(":");
+        return Integer.parseInt(parts[1]);
     }
 
-    // Time realmente es el numero de milisegundos
+    // Se crea el objeto a partir del numero de milisegundos desde el 1/1/1970 pero a nosotros
+    // solo nos interesa la hora, no la fecha ya que ni la almacenamos en la BBDD
     public static Date toDate(String time){
         Integer hour = hour(time);
         Integer min = min(time);
