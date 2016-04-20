@@ -54,10 +54,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_usuario_tarea_detalle);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.logo);
 
         // Se buscan las views por su id
         this.textoAlarma = (EditText) findViewById(R.id.textoAlarma);
@@ -73,10 +69,10 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         idUsuario = bundle.getInt("usuario");
         idTarea = bundle.getInt("idTarea");
-        if (!bundle.get("nueva").equals("nueva")) {   // Editar
+        if (!bundle.get("nueva").equals("nueva")) { // Editar tarea
             nuevaTarea = false;
             completarCampos(bundle);
-        } else{                 // Crear
+        } else{                                     // Crear tarea
             nuevaTarea = true;
         }
 
@@ -167,15 +163,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void aceptar(View view){
         String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();

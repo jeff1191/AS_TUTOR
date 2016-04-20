@@ -123,7 +123,7 @@
                 android:textAlignment="center"
                 android:id="@+id/frecuencia"
                 android:dropDownWidth="wrap_content"
-                style="@android:style/Widget.Material.Light.TextView.SpinnerItem" />
+                style="@style/spinnerItemStyle"/>
 
         </LinearLayout>
 

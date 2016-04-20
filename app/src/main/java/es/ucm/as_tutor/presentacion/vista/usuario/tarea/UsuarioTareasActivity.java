@@ -172,6 +172,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                         intent.putExtra("habilitada", habilitada.get(pos-1));
                         intent.putExtra("usuario", idUsuario);
                         intent.putExtra("idTarea", idsTareas.get(pos-1));
+                        intent.setFlags(intent.getFlags() |Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                     } else if (items[item].equals("Habilitar/deshabilitar")) {
                         Controlador.getInstancia().ejecutaComando(ListaComandos.DESHABILITAR_TAREA, idsTareas.get(pos-1));
@@ -192,6 +193,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         Intent nuevaTarea = new Intent(this, UsuarioTareaDetalleActivity.class);
         nuevaTarea.putExtra("nueva", "nueva");
         nuevaTarea.putExtra("usuario", idUsuario);
+        nuevaTarea.setFlags(nuevaTarea.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(nuevaTarea);
     }
 }
