@@ -28,10 +28,13 @@ public class DispatcherImp extends Dispatcher {
         switch(accion){
             case ListaComandos.CREAR_TAREA:
                 break;
+
             case ListaComandos.EDITAR_TAREA:
                 break;
+
             case ListaComandos.ELIMINAR_TAREA:
                 break;
+
             case ListaComandos.DESHABILITAR_TAREA:
                 break;
 
@@ -87,6 +90,10 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
                 break;
+
+            case ListaComandos.CONSULTAR_USUARIO:
+                break;
+
         }
     }
 }

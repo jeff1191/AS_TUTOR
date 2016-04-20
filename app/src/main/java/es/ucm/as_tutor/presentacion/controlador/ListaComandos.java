@@ -9,4 +9,5 @@ public class ListaComandos {
     public static final String ELIMINAR_TAREA = "eliminarTarea";
     public static final String DESHABILITAR_TAREA = "deshabilitarTarea";
     public static final String CONSULTAR_TAREAS = "consultarTareas";
+    public static final String CONSULTAR_USUARIO = "consultarUsuario";
 }

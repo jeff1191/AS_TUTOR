@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="Tareas del Usuario X"
-        android:id="@+id/textViewNombreEventosUsuario"
+        android:id="@+id/titulo"
         android:textSize="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -71,8 +71,7 @@
                         android:orientation="vertical"
                         android:layout_height="match_parent"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:id="@+id/antes">
+                        android:layout_weight="1">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -80,8 +79,7 @@
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Antes"
-                            android:gravity="center"
-                            android:id="@+id/textView" />
+                            android:gravity="center" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -101,8 +99,7 @@
                         android:layout_height="match_parent"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:id="@+id/ahora">
+                        android:layout_gravity="center_horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -110,8 +107,7 @@
                             android:layout_weight="1"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Ahora"
-                            android:gravity="center"
-                            android:id="@+id/textView2" />
+                            android:gravity="center" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -130,7 +126,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/imageView2"
+                        android:id="@+id/flecha"
                         android:gravity="center_horizontal"
                         android:src="@drawable/flechaverde" />
 

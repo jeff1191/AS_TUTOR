@@ -6,18 +6,25 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
+import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
@@ -26,6 +33,9 @@ import es.ucm.as_tutor.presentacion.vista.main.Manager;
 public class UsuarioTareasActivity extends AppCompatActivity {
 
     private Integer idUsuario;
+    private Integer puntuacionActual;
+    private Integer puntuacionAntes;
+    private String nombreUsuario;
     private ArrayList<String> textosAlarma;
     private ArrayList<String> horasAlarma;
     private ArrayList<String> textosPreguntas;
@@ -48,7 +58,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
 
-        /// Coge de la BBDD
         textosAlarma = new ArrayList<String>();
         horasAlarma = new ArrayList<String>();
         textosPreguntas = new ArrayList<String>();
@@ -59,6 +68,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         mejorar = new ArrayList<Integer>();
         habilitada = new ArrayList<Integer>();
 
+        // Coge de la BBDD
         this.idUsuario = getIntent().getExtras().getInt("usuario");
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
@@ -70,6 +80,31 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.horasAlarma = getIntent().getStringArrayListExtra("horaAlarmas");
         this.horasPregunta = getIntent().getStringArrayListExtra("horaPreguntas");
         this.idsTareas = getIntent().getIntegerArrayListExtra("idsTareas");
+
+        // Para conseguir la informacion del usuario se ejecuta el comando de consulta
+        Command c = new ConsultarUsuarioComando();
+        try {
+            TransferUsuarioT usuario = (TransferUsuarioT) c.ejecutaComando(idUsuario);
+            nombreUsuario = usuario.getNombre();
+            puntuacionActual = usuario.getPuntuacion();
+            puntuacionAntes = usuario.getPuntuacionAnterior();
+        } catch (commandException e) {
+            Log.e("tareas", "excepcion usuario");
+        }
+        //Titulo
+        final TextView titulo = (TextView) findViewById(R.id.titulo);
+        titulo.setText("Tareas de "+ nombreUsuario);
+        // Puntuacion
+        final TextView antes = (TextView) findViewById(R.id.puntuacionAnterior);
+        final TextView actual = (TextView) findViewById(R.id.puntuacionAhora);
+        final ImageView flecha = (ImageView) findViewById(R.id.flecha);
+
+        antes.setText(puntuacionAntes.toString());
+        actual.setText(puntuacionActual.toString());
+        if(puntuacionActual - puntuacionAntes < 0)
+            flecha.setImageResource(R.drawable.flecharoja);
+        else
+            flecha.setImageResource(R.drawable.flechaverde);
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -92,10 +127,12 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         });
     }
 
+
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -106,6 +143,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     // Muestra el menú con las opciones para la tarea seleccionada
     public void mostrarMenuTarea(View v, int position) {
@@ -147,6 +185,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
             builder.show();
         }
     }
+
 
     // Metodo on click del boton "+" material design
     public void nuevaTarea(View view){

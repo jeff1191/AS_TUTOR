@@ -582,8 +582,6 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.tareasUsuario:
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
-                    //Intent iConsultarTareas = new Intent(this, UsuarioTareasActivity.class);
-                    //startActivity(iConsultarTareas);
                     break;
                 case R.id.retoUsuario:
                     //Aqui iria un if/else
