@@ -27,8 +27,9 @@
     <!-- FAQs-->
     <string-array name="faq">
         <item>¿Cómo añado un nuevo usuario?</item>
-        <item>¿Cómo invito un usuario a un evento?</item>
         <item>¿Cómo creo una tarea para un usuario?</item>
+        <item>¿Cómo edito/deshabilito/elimino una tarea?</item>
+        <item>¿Cómo invito un usuario a un evento?</item>
     </string-array>
 
     <!-- Respuestas FAQs-->
@@ -37,8 +38,20 @@
         inferior del listado. Entonces se abrirá una ventana donde rellenar todos los campos de tu nuevo
         usuario. Cuando termines, pulsa el botón ACEPTAR para guardar los cambios.
             ¡Ya tienes un nuevo usuario!</item>
-        <item>¿Cómo invitar un usuario a un evento?</item>
-        <item>¿Cómo crear una tarea para un usuario?</item>
+        <item>En la sección USUARIO debes seleccionar el usuario al que quieras añadir la tarea.
+        Aparecerá un icono de menú en la parte superior derecha de la pantalla. Selecciona y elige
+        la opción "TAREAS". En esta pantalla podrás ver todas las tareas de ese usuario. En la parte
+        inferior derecha haz click sobre el botón rosa "+" y rellena los detalles de tu tarea. ¡Conseguido!</item>
+        <item>En la sección USUARIO debes seleccionar el usuario del que quieres cambiar la tarea.
+            Aparecerá un icono de menú en la parte superior derecha de la pantalla. Selecciona y elige
+        la opción "TAREAS". En esta pantalla podrás ver todas las tareas de ese usuario. A continuación,
+        selecciona la tarea que te interese, aparecerá un cuadro de diálogo que te ofrecerá la opción
+        que te interese.</item>
+        <item>En la sección EVENTOS debes seleccionar el evento al cual quieres invitar al usuario.
+            A continuación podrás ver los detalles del mismo y en concreto una lista con todos los
+        usuarios de tu sistema. Si seleccionas la fila del usuario en cuestión se marcará la casilla
+        de la columna de la izquierda lo cual te indica que tu usuario está invitado.</item>
+
     </string-array>
 
 </resources>

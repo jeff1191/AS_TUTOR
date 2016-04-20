@@ -523,13 +523,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 4: // Ayuda
                 menuActionBar.clear();
-
-                FragmentDetalleAyuda fragmentDetalleAyuda = new FragmentDetalleAyuda();
-                //fragment.setArguments(arguments);
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleAyuda).commit();
+                BlankFragment fragmentoBlanco = new BlankFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentoBlanco).commit();
 
                 FragmentListadoAyuda fragmentListadoAyuda = new FragmentListadoAyuda();
-                //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoAyuda).commit();
 
                 NavList.setItemChecked(position, true);
