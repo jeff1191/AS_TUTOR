@@ -21,7 +21,6 @@ import es.ucm.as_tutor.presentacion.vista.main.MainActivity;
 public class RegistroTutor extends Activity {
 
     private EditText correoTutor;
-    private EditText codigoSincronizacion;
     private EditText constrasenha;
     private EditText nombreTutor;
     private ImageButton info;
@@ -37,16 +36,14 @@ public class RegistroTutor extends Activity {
         nombreTutor = (EditText) findViewById(R.id.nombreTutor);
         correoTutor = (EditText) findViewById(R.id.emailTutor);
         constrasenha = (EditText) findViewById(R.id.contrasenha);
-
     }
 
     public void realizarRegistro(View v) {
-
         //Leer los datos del "fomulario"
         String correo = String.valueOf(correoTutor.getText());
         String clave = String.valueOf(constrasenha.getText());
         String nombre = String.valueOf(nombreTutor.getText());
-        String codigoSync = nombre.substring(0, 2);
+        String codigoSync = nombre.substring(0, 3);
 
         if (datosValidos(codigoSync, correo, clave)) {
             TransferTutorT tutor = new TransferTutorT();
@@ -66,7 +63,6 @@ public class RegistroTutor extends Activity {
         if (!nombre.toString().matches("") &&
                 !correo.toString().matches("") &&
                 !clave.toString().matches("")) {
-
             if (correo.toString().matches(PATRON_EMAIL)) {
                 return true;
             } else

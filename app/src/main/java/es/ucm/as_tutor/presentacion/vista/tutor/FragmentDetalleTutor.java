@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,10 @@ public class FragmentDetalleTutor extends Fragment {
     private String respuestaSeguridad;
     private String contrasenha;
     private String codigo;
+    private EditText nombrev;
+    private EditText correov;
+    private EditText preguntav;
+    private EditText respuestav;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,19 +63,17 @@ public class FragmentDetalleTutor extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_detalle_tutor, container, false);
-        final EditText nombrev = (EditText)rootView.findViewById(R.id.nombreTutor);
-        final EditText correov = (EditText)rootView.findViewById(R.id.correoTutor);
-       // EditText contrasenhav = (EditText)rootView.findViewById(R.id.contrasenha);
-        final EditText preguntav = (EditText)rootView.findViewById(R.id.pregunta);
-        final EditText respuestav = (EditText)rootView.findViewById(R.id.respuesta);
+        nombrev = (EditText)rootView.findViewById(R.id.nombreTutor);
+        correov = (EditText)rootView.findViewById(R.id.correoTutor);
+        preguntav = (EditText)rootView.findViewById(R.id.pregunta);
+        respuestav = (EditText)rootView.findViewById(R.id.respuesta);
 
         nombrev.setText(nombre);
         correov.setText(email);
-        // contrasenhav.setText(contrasenha);
         preguntav.setText(preguntaSeguridad);
         respuestav.setText(respuestaSeguridad);
 
@@ -109,11 +112,12 @@ public class FragmentDetalleTutor extends Fragment {
             }
         });
 
-        Button contrasenha = (Button) rootView.findViewById(R.id.cambiarContrasenha);
-        cancelar.setOnClickListener(new View.OnClickListener() {
+        Button cambiarPassword = (Button) rootView.findViewById(R.id.password);
+        cambiarPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog a = DialogCambioContrasenha(inflater);
+                a.show();
             }
         });
 
@@ -127,17 +131,26 @@ public class FragmentDetalleTutor extends Fragment {
         inflater.inflate(R.menu.menu_usuario, menu);
     }
 
-    public AlertDialog DialogCambioContrasenha(LayoutInflater inflater, String password) {
+    public AlertDialog DialogCambioContrasenha(LayoutInflater inflater) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View v = inflater.inflate(R.layout.dialog_cambio_password, null);
 
-        EditText pwd1 = (EditText) v.findViewById(R.id.pwd1);
-        EditText pwd2 = (EditText) v.findViewById(R.id.pwd2);
+        final EditText pwd1 = (EditText) v.findViewById(R.id.pwd1);
+        final EditText pwd2 = (EditText) v.findViewById(R.id.pwd2);
         builder.setView(v);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(pwd1.getText().toString().equals(pwd2.getText().toString())) {
+                    contrasenha = pwd1.getText().toString();
+                    Log.e("contraseña cambiada", contrasenha);
+                }else{
+                    Toast toast = Toast.makeText(Manager.getInstance().getContext(),
+                            "Las contraseñas no coinciden", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
+                Log.e("contraseña", contrasenha);
             }
         });
         builder.setNegativeButton("Cancelar",
@@ -146,9 +159,9 @@ public class FragmentDetalleTutor extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-
         builder.setTitle("Cambiar contraseña");
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return builder.create();
+
     }
 }

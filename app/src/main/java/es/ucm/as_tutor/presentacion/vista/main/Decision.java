@@ -32,19 +32,13 @@ public class Decision extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Intent intent = new Intent().setClass(Decision.this, MainActivity.class);
+                Intent intent = new Intent().setClass(Decision.this, Acceso.class);
                 startActivity(intent);
             }
 
         } catch (commandException e) {
             e.printStackTrace();
         }
-        finish();
-
-            //Pantalla de pin
-            //Intent intent = new Intent().setClass(Decision.this, Acceso.class);
-            //startActivity(intent);*/
-
         finish();
     }
 }
