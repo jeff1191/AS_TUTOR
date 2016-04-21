@@ -96,8 +96,8 @@ public class FragmentDetalleUsuario extends Fragment {
         arguments.putString("telfPadre", usuario.getTelPadre());
         arguments.putString("telfMadre", usuario.getTelMadre());
         arguments.putString("colegio", usuario.getCentroAcademico());
-        if(usuario.getReto() != null)
-            arguments.putInt("reto", usuario.getReto().getId());
+        if(usuario.getIdReto() != null)
+            arguments.putInt("reto", usuario.getIdReto());
         arguments.putString("sincronizacion", usuario.getCodigoSincronizacion());
 
         frgUsuario.setArguments(arguments);

@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 /**
  * Created by Juan Lu on 07/04/2016.
@@ -28,10 +32,18 @@ public class FragmentDetalleNuevoReto extends Fragment {
         FragmentDetalleNuevoReto frgNuevoReto = new FragmentDetalleNuevoReto();
 
         Bundle arguments = new Bundle();
-        if(reto.getUsuario() != null) {
-            arguments.putInt("usuario", reto.getUsuario().getId());
-            arguments.putString("nombreUsuario", reto.getUsuario().getNombre());
-            arguments.putString("fotoUsuario", reto.getUsuario().getAvatar());
+        if(reto.getIdUsuario() != null) {
+            arguments.putInt("usuario", reto.getIdUsuario());
+            TransferUsuarioT aux = new TransferUsuarioT();
+            aux.setId(reto.getIdUsuario());
+            try {
+                TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
+                        .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(aux);
+                arguments.putString("nombreUsuario", ret.getNombre());
+                arguments.putString("fotoUsuario", ret.getAvatar());
+            } catch (commandException e) {
+                e.printStackTrace();
+            }
         }
 
         frgNuevoReto.setArguments(arguments);

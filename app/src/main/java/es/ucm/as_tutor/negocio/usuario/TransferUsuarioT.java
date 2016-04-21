@@ -3,8 +3,6 @@
  */
 package es.ucm.as_tutor.negocio.usuario;
 
-import es.ucm.as_tutor.negocio.suceso.Reto;
-
 public class TransferUsuarioT {
 
 	private Integer id;
@@ -45,7 +43,7 @@ public class TransferUsuarioT {
 
 	private String centroAcademico;
 
-	private Reto reto;
+	private Integer idReto;
 
 	private String codigoSincronizacion;
 
@@ -66,7 +64,7 @@ public class TransferUsuarioT {
 							Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
 							String direccion, String tipoPerfil, String notas, String nombrePadre,
 							String nombreMadre, String correoPadre, String correoMadre,
-							String telPadre, String telMadre, String centroAcademico, Reto reto,
+							String telPadre, String telMadre, String centroAcademico, Integer idRreto,
 							String codigoSincronizacion) {
 		this.id = id;
 		this.nombre = nombre;
@@ -87,7 +85,7 @@ public class TransferUsuarioT {
 		this.telMadre = telMadre;
 		this.telPadre = telPadre;
 		this.centroAcademico = centroAcademico;
-		this.reto = reto;
+		this.idReto = idReto;
 		this.codigoSincronizacion = codigoSincronizacion;
 	}
 
@@ -243,12 +241,12 @@ public class TransferUsuarioT {
 		this.centroAcademico = centroAcademico;
 	}
 
-	public Reto getReto() {
-		return reto;
+	public Integer getIdReto() {
+		return idReto;
 	}
 
-	public void setReto(Reto reto) {
-		this.reto = reto;
+	public void setIdReto(Integer idReto) {
+		this.idReto = idReto;
 	}
 
 	public String getCodigoSincronizacion() {

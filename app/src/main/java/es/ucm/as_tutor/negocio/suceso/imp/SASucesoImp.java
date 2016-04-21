@@ -139,7 +139,7 @@ public class SASucesoImp implements SASuceso {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
             Reto r = daoReto.queryForId(consulta.getId());
             if(r != null)
-                ret = new TransferRetoT(r.getId(), r.getUsuario(), r.getContador(),
+                ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
                         r.getTexto(), r.getSuperado());
             else
                 ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new

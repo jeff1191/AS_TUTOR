@@ -3,14 +3,11 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
-import es.ucm.as_tutor.negocio.usuario.Usuario;
-
-
 public class TransferRetoT {
 
 	private Integer id;
 
-	private Usuario usuario;
+	private Integer idUsuario;
 
 	private Integer contador;
 
@@ -21,9 +18,9 @@ public class TransferRetoT {
 	public TransferRetoT() {
 	}
 
-	public TransferRetoT(Integer id, Usuario usuario, Integer contador, String texto, Boolean superado) {
+	public TransferRetoT(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado) {
 		this.id = id;
-		this.usuario = usuario;
+		this.idUsuario = idUsuario;
 		this.contador = contador;
 		this.texto = texto;
 		this.superado = superado;
@@ -37,12 +34,12 @@ public class TransferRetoT {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public Integer getContador() {

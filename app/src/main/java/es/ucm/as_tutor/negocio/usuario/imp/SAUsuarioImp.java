@@ -34,40 +34,47 @@ public class SAUsuarioImp implements SAUsuario {
 
 	public void crearUsuario(TransferUsuarioT transferUsuario) {
 
-		Usuario usuario = new Usuario();
-		usuario.setNombre(transferUsuario.getNombre());
-		usuario.setCorreo(transferUsuario.getCorreo());
-		usuario.setAvatar(transferUsuario.getAvatar());
-		usuario.setTelefono(transferUsuario.getTelefono());
-		usuario.setPuntuacion(transferUsuario.getPuntuacion());
-		usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
-		usuario.setCurso(transferUsuario.getCurso());
-		usuario.setDni(transferUsuario.getDni());
-		usuario.setDireccion(transferUsuario.getDireccion());
-		switch (transferUsuario.getTipoPerfil()){
-			case "A":
-				usuario.setTipoPerfil(Perfil.A);
-				break;
-			case "B":
-				usuario.setTipoPerfil(Perfil.B);
-				break;
-			case "C":
-				usuario.setTipoPerfil(Perfil.C);
-				break;
-		}
-		usuario.setNotas(transferUsuario.getNotas());
-		usuario.setNombrePadre(transferUsuario.getNombrePadre());
-		usuario.setNombreMadre(transferUsuario.getNombreMadre());
-		usuario.setCorreoPadre(transferUsuario.getCorreoPadre());
-		usuario.setCorreoMadre(transferUsuario.getCorreoMadre());
-		usuario.setTelfPadre(transferUsuario.getTelPadre());
-		usuario.setTelfMadre(transferUsuario.getTelMadre());
-		usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
-		usuario.setReto(transferUsuario.getReto());
-		usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
-
 		try {
+			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Reto reto = null;
+
+			if(transferUsuario.getIdReto() != null)
+				reto = daoReto.queryForId(transferUsuario.getIdReto());
+
+			Usuario usuario = new Usuario();
+
+			usuario.setNombre(transferUsuario.getNombre());
+			usuario.setCorreo(transferUsuario.getCorreo());
+			usuario.setAvatar(transferUsuario.getAvatar());
+			usuario.setTelefono(transferUsuario.getTelefono());
+			usuario.setPuntuacion(transferUsuario.getPuntuacion());
+			usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+			usuario.setCurso(transferUsuario.getCurso());
+			usuario.setDni(transferUsuario.getDni());
+			usuario.setDireccion(transferUsuario.getDireccion());
+			switch (transferUsuario.getTipoPerfil()){
+				case "A":
+					usuario.setTipoPerfil(Perfil.A);
+					break;
+				case "B":
+					usuario.setTipoPerfil(Perfil.B);
+					break;
+				case "C":
+					usuario.setTipoPerfil(Perfil.C);
+					break;
+			}
+			usuario.setNotas(transferUsuario.getNotas());
+			usuario.setNombrePadre(transferUsuario.getNombrePadre());
+			usuario.setNombreMadre(transferUsuario.getNombreMadre());
+			usuario.setCorreoPadre(transferUsuario.getCorreoPadre());
+			usuario.setCorreoMadre(transferUsuario.getCorreoMadre());
+			usuario.setTelfPadre(transferUsuario.getTelPadre());
+			usuario.setTelfMadre(transferUsuario.getTelMadre());
+			usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
+			usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
+			usuario.setReto(reto);
+
 			daoUsuario.create(usuario);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,6 +85,7 @@ public class SAUsuarioImp implements SAUsuario {
 	public void editarUsuario(TransferUsuarioT usuarioMod) {
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
 			Usuario usuario = daoUsuario.queryForId(usuarioMod.getId());
 			//Aqui buscar los campos modificados y machacharlos
 			//¿Que tiene mas sentido... pasar todo o ver aqui que campos no son nulos?
@@ -108,10 +116,13 @@ public class SAUsuarioImp implements SAUsuario {
 					usuario.setTelfMadre(usuarioMod.getTelMadre());
 				}
 			} else {
-				//Sincronizacion
+				//Sincronizacion (Tal vez otro comando?)
 				usuario.setPuntuacion(usuarioMod.getPuntuacion());
 				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
-				usuario.setReto(usuarioMod.getReto());
+				//Esto seria mas complejo, ya que no solo es encontrarlo sino
+				//cambiar puntuacion y eso no lo tenenmos ahora
+				Reto reto = daoReto.queryForId(usuarioMod.getIdReto());
+				usuario.setReto(reto);
 			}
 			daoUsuario.update(usuario);
 			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
@@ -137,13 +148,18 @@ public class SAUsuarioImp implements SAUsuario {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Usuario user = daoUsuario.queryForId(consulta.getId());
 			//Faltarian de traer las tareas y ver si reto y perfil funcionan bien
+
+			Integer idReto;
+			if(user.getReto() == null) idReto = 0;
+			else idReto = user.getReto().getId();
+
 			ret = new TransferUsuarioT(user.getId(), user.getNombre(),
 					user.getCorreo(), user.getAvatar(), user.getTelefono(), user.getPuntuacion(),
 					user.getPuntuacionAnterior(), user.getCurso(), user.getDni(),
 					user.getDireccion(), user.getTipoPerfil().toString(), user.getNotas(),
 					user.getNombrePadre(), user.getNombreMadre(), user.getCorreoPadre(),
 					user.getCorreoMadre(), user.getTelfPadre(), user.getTelfMadre(),
-					user.getCentroAcademico(), user.getReto(), user.getCodigoSincronizacion());
+					user.getCentroAcademico(), idReto, user.getCodigoSincronizacion());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
