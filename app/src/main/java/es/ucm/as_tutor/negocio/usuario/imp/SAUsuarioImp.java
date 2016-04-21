@@ -3,8 +3,6 @@
  */
 package es.ucm.as_tutor.negocio.usuario.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -89,9 +87,9 @@ public class SAUsuarioImp implements SAUsuario {
 			Usuario usuario = daoUsuario.queryForId(usuarioMod.getId());
 			//Aqui buscar los campos modificados y machacharlos
 			//¿Que tiene mas sentido... pasar todo o ver aqui que campos no son nulos?
-			if(usuarioMod.getNombrePadre() == null){
+			if(usuarioMod.getNombreMadre() == null && usuarioMod.getNombrePadre() == null
+					&& usuarioMod.getNombre() != null){
 				//Implica que viene de detalleUsuario
-				Log.e("testJL", "Esto es lo q tiene la puntuacion del usuario en bbdd antes update" + usuario.getPuntuacion());
 				usuario.setNombre(usuarioMod.getNombre());
 				usuario.setCorreo(usuarioMod.getCorreo());
 				usuario.setAvatar(usuarioMod.getAvatar());
@@ -102,7 +100,8 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.setNotas(usuarioMod.getNotas());
 				usuario.setCentroAcademico(usuarioMod.getCentroAcademico());
 			}
-			else if(usuarioMod.getNombre() == null){
+			else if(usuarioMod.getNombre() == null && (usuarioMod.getNombreMadre() != null
+					|| usuarioMod.getNombrePadre() != null)){
 				//Implica que viene de infoPadres
 				if(usuarioMod.getNombreMadre() == null) {
 					//Implica que viene de infoPadre
@@ -126,7 +125,6 @@ public class SAUsuarioImp implements SAUsuario {
 			}
 			daoUsuario.update(usuario);
 			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
-			Log.e("testJL", "Esto es lo q tiene la puntuacion del usuario en bbdd despues update" + usuario.getPuntuacion());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -241,7 +239,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user3.setReto(reto.queryForId(2));
 				usuario.create(user3);
 				Usuario user4 = new Usuario();
-				user4.setNombre("El de prueba");
+				user4.setNombre("Clara Paules");
 				user4.setAvatar(""); // Aqui tendria que ir la direccion de la foto
 				user4.setDni("12345678Q");
 				user4.setDireccion("C/ Alacala 46, 6ºA");

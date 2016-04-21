@@ -214,8 +214,9 @@ public class FragmentDetalleUsuario extends Fragment {
     }
 
     public AlertDialog createInfoProgenitoresDialogo(final String progenitor, LayoutInflater inflater) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Manager.getInstance().getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View v = inflater.inflate(R.layout.dialog_info_padres, null);
+        builder.setView(v);
 
         final EditText name = (EditText) v.findViewById(R.id.name);
         final EditText phone = (EditText) v.findViewById(R.id.phone);
@@ -234,13 +235,14 @@ public class FragmentDetalleUsuario extends Fragment {
             mail.setText(correoMadre);
         }
 
-        builder.setView(v);
-
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cambiar info padre o madre
                 TransferUsuarioT editUser = new TransferUsuarioT();
+                TransferUsuarioT consultarU = new TransferUsuarioT();
+                editUser.setId(id);
+                consultarU.setId(id);
                 if(progenitor.equals("padre")){
                     editUser.setNombrePadre(name.getText().toString());
                     editUser.setTelPadre(phone.getText().toString());
@@ -251,12 +253,11 @@ public class FragmentDetalleUsuario extends Fragment {
                     editUser.setTelMadre(phone.getText().toString());
                     editUser.setCorreoMadre(mail.getText().toString());
                 }
-
-                editUser.setId(id);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultarU);
             }
         });
-        builder.setNegativeButton("Cancelar",
+        builder.setNegativeButton("Salir",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
