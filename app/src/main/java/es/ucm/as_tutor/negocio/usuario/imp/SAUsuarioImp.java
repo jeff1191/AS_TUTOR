@@ -3,6 +3,8 @@
  */
 package es.ucm.as_tutor.negocio.usuario.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -30,16 +32,102 @@ public class SAUsuarioImp implements SAUsuario {
 		return mDBHelper;
 	}
 
-	public void crearUsuario(TransferUsuarioT usuario) {
+	public void crearUsuario(TransferUsuarioT transferUsuario) {
+
+		Usuario usuario = new Usuario();
+		usuario.setNombre(transferUsuario.getNombre());
+		usuario.setCorreo(transferUsuario.getCorreo());
+		usuario.setAvatar(transferUsuario.getAvatar());
+		usuario.setTelefono(transferUsuario.getTelefono());
+		usuario.setPuntuacion(transferUsuario.getPuntuacion());
+		usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+		usuario.setCurso(transferUsuario.getCurso());
+		usuario.setDni(transferUsuario.getDni());
+		usuario.setDireccion(transferUsuario.getDireccion());
+		switch (transferUsuario.getTipoPerfil()){
+			case "A":
+				usuario.setTipoPerfil(Perfil.A);
+				break;
+			case "B":
+				usuario.setTipoPerfil(Perfil.B);
+				break;
+			case "C":
+				usuario.setTipoPerfil(Perfil.C);
+				break;
+		}
+		usuario.setNotas(transferUsuario.getNotas());
+		usuario.setNombrePadre(transferUsuario.getNombrePadre());
+		usuario.setNombreMadre(transferUsuario.getNombreMadre());
+		usuario.setCorreoPadre(transferUsuario.getCorreoPadre());
+		usuario.setCorreoMadre(transferUsuario.getCorreoMadre());
+		usuario.setTelfPadre(transferUsuario.getTelPadre());
+		usuario.setTelfMadre(transferUsuario.getTelMadre());
+		usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
+		usuario.setReto(transferUsuario.getReto());
+		usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
+
+		try {
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			daoUsuario.create(usuario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public void editarUsuario(TransferUsuarioT usuarioMod) {
-
+		try {
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Usuario usuario = daoUsuario.queryForId(usuarioMod.getId());
+			//Aqui buscar los campos modificados y machacharlos
+			//¿Que tiene mas sentido... pasar todo o ver aqui que campos no son nulos?
+			if(usuarioMod.getNombrePadre() == null){
+				//Implica que viene de detalleUsuario
+				Log.e("testJL", "Esto es lo q tiene la puntuacion del usuario en bbdd antes update" + usuario.getPuntuacion());
+				usuario.setNombre(usuarioMod.getNombre());
+				usuario.setCorreo(usuarioMod.getCorreo());
+				usuario.setAvatar(usuarioMod.getAvatar());
+				usuario.setTelefono(usuarioMod.getTelefono());
+				usuario.setCurso(usuarioMod.getCurso());
+				usuario.setDni(usuarioMod.getDni());
+				usuario.setDireccion(usuarioMod.getDireccion());
+				usuario.setNotas(usuarioMod.getNotas());
+				usuario.setCentroAcademico(usuarioMod.getCentroAcademico());
+			}
+			else if(usuarioMod.getNombre() == null){
+				//Implica que viene de infoPadres
+				if(usuarioMod.getNombreMadre() == null) {
+					//Implica que viene de infoPadre
+					usuario.setNombrePadre(usuarioMod.getNombrePadre());
+					usuario.setCorreoPadre(usuarioMod.getCorreoPadre());
+					usuario.setTelfPadre(usuarioMod.getTelPadre());
+				}
+				else{
+					usuario.setNombreMadre(usuarioMod.getNombreMadre());
+					usuario.setCorreoMadre(usuarioMod.getCorreoMadre());
+					usuario.setTelfMadre(usuarioMod.getTelMadre());
+				}
+			} else {
+				//Sincronizacion
+				usuario.setPuntuacion(usuarioMod.getPuntuacion());
+				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
+				usuario.setReto(usuarioMod.getReto());
+			}
+			daoUsuario.update(usuario);
+			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
+			Log.e("testJL", "Esto es lo q tiene la puntuacion del usuario en bbdd despues update" + usuario.getPuntuacion());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void eliminarUsuario(Integer idUsuario) {
-
+	public void eliminarUsuario(TransferUsuarioT consulta) {
+		try {
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			daoUsuario.deleteById(consulta.getId()); // Ver si eso una manera mejor de borrar
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta) {
@@ -181,12 +269,6 @@ public class SAUsuarioImp implements SAUsuario {
 	}
 
 	public void consultarInforme(Integer idUsuario) {
-
-	}
-
-	public Reto consultarRetoUsuario(Integer idUsuario) {
-
-		return null;
 
 	}
 

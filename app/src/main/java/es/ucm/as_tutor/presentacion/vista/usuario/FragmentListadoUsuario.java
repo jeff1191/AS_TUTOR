@@ -1,6 +1,7 @@
 package es.ucm.as_tutor.presentacion.vista.usuario;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,12 +17,14 @@ import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
 public class FragmentListadoUsuario extends Fragment {
 
 	private ListView listadoUsuarios;
 	private AdaptadorUsuarios adaptadorUsuarios;
+	private FloatingActionButton nuevoUser;
 
 	private ArrayList<Integer> ids;
 	private ArrayList<String> nombres;
@@ -78,26 +81,23 @@ public class FragmentListadoUsuario extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_listado_usuario, container, false);
 		listadoUsuarios = (ListView)rootView.findViewById(R.id.listadoUsuarios);
 		listadoUsuarios.setAdapter(adaptadorUsuarios);
+		nuevoUser = (FloatingActionButton)rootView.findViewById(R.id.botonNuevoUsuario);
+
+		nuevoUser.setOnClickListener(new AdapterView.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentDetalleNuevoUsuario fragmentNuevoUsuario = new FragmentDetalleNuevoUsuario();
+				Manager.getInstance().getFragmentManager().beginTransaction()
+						.replace(R.id.FrgDetalle, fragmentNuevoUsuario).commit();
+			}
+		});
 
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-
-				//AQUI ES DONDE DEBE IR EL COMANDO DE VER DETALLE DE USUARIO
-
 				TransferUsuarioT consultar = new TransferUsuarioT();
 				consultar.setId(ids.get(pos));
 				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultar);
-
-				/*
-				Bundle bundle = new Bundle();
-				bundle.putString("nombre", nombres.get(pos));
-				bundle.putInt("id", ids.get(pos));
-				bundle.putString("avatar", avatares.get(pos));
-				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
-				frgUsuario.setArguments(bundle);
-				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgUsuario).commit();
-				*/
 			}
 		});
 

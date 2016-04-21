@@ -2,26 +2,20 @@ package es.ucm.as_tutor.presentacion.vista.main;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +25,6 @@ import com.imanoweb.calendarview.CustomCalendarView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,8 +34,6 @@ import java.util.Locale;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentDetalleAyuda;
@@ -51,15 +42,9 @@ import es.ucm.as_tutor.presentacion.vista.evento.AdaptadorEventoUsuarios;
 import es.ucm.as_tutor.presentacion.vista.evento.FragmentListadoEvento;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentListadoTutor;
-import es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleNuevoUsuario;
-import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
-import es.ucm.as_tutor.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_IMAGE_CAPTURE = 3;
-    private static final int SELECCIONAR_GALERIA = 2;
-    private static final int CAMARA = 1;
 
     private String[] titulos;
     private DrawerLayout NavDrawerLayout;
@@ -181,15 +166,6 @@ public class MainActivity extends AppCompatActivity {
         //getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListado).commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuActionBar = menu;
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
-        return true;
-    }
-
-
     private void MostrarFragment(int position) {
         Fragment fragment = null;
         switch (position) {
@@ -268,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 3: // Mi perfil
-                menuActionBar.clear();
+               // menuActionBar.clear();
 
                 FragmentDetalleTutor fragmentDetalleTutor = new FragmentDetalleTutor();
                 //fragment.setArguments(arguments);
@@ -286,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 4: // Ayuda
-                menuActionBar.clear();
+              //  menuActionBar.clear();
 
                 FragmentDetalleAyuda fragmentDetalleAyuda = new FragmentDetalleAyuda();
                 //fragment.setArguments(arguments);
@@ -340,90 +316,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuActionBar = menu;
+        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-         }else {
-            switch (item.getItemId()) {
-                case R.id.tareasUsuario:
-                    //Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
-                    Intent iConsultarTareas = new Intent(this, UsuarioTareasActivity.class);
-                    startActivity(iConsultarTareas);
-                    break;
-                case R.id.retoUsuario:
-                    TransferRetoT consultar = new TransferRetoT();
-                    Usuario u = new Usuario();
-                    u.setNombre("Princesas cerveceras");
-                    u.setId(567);
-                    u.setAvatar("");
-                    consultar.setTexto(""); // Para que salga la ventana de uno nuevo
-                    consultar.setId(23); //ID reto
-                    consultar.setUsuario(u); // Usuario jefe
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, consultar);
-                    break;
-                case R.id.eventosUsuario:
-                    FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
-                    break;
-                case R.id.enviarCorreo:
-                    // aquí habrá que ejecutar el comando de enviar correo
-
-                    // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
-                    //Instanciamos un Intent del tipo ACTION_SEND
-                    Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    //Definimos la tipologia de datos del contenido dle Email en este caso text/html
-                    emailIntent.setType("application/pdf");
-                    // Indicamos con un Array de tipo String las direcciones de correo a las cuales
-                    //queremos enviar el texto
-                    //emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-                    // Definimos un titulo para el Email
-                    emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
-                    // Definimos un Asunto para el Email
-                    emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
-                    // Obtenemos la referencia al texto y lo pasamos al Email Intent
-                    emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
-                            "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-                            + "\n¡Ánimo!" + "\n\nEnviado desde AS");
-
-                    Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
-                    emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-                    getApplicationContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
-                    ///////////////////////////////////////////////////////////////////////////////////////////
-
-                    break;
-                case R.id.eliminarUsuario:
-                    //aqui habrá que ejecutar el comando de eliminar usuario
-
-               /* case R.id.editarListaUsuariosEventos:
-
-                    AdaptadorEventoUsuarios adapter = new AdaptadorEventoUsuarios(5,this);
-                    adapter.addItem(new ItemUsuarioEvento(1,"Pepe", "Tipo A" ));
-                    adapter.addItem(new ItemUsuarioEvento(2,"Juan", "Tipo A" ));
-                    adapter.addItem(new ItemUsuarioEvento(3,"Pedro", "Tipo B" ));
-                    adapter.addItem(new ItemUsuarioEvento(4,"Pepa", "Tipo C" ));
-                    adapter.addItem(new ItemUsuarioEvento(5,"Alfredo", "Tipo D" ));
-                    //String names[] ={"Alberto","Berta","Carlos","Daniel","Julian","Alfredo"};
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View convertView = (View) inflater.inflate(R.layout.evento_listado_usuarios, null);
-                    alertDialog.setView(convertView);
-                    alertDialog.setTitle("Usuarios");
-                    ListView lv = (ListView) convertView.findViewById(R.id.listView1);
-                    //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
-                    lv.setAdapter(adapter);
-                    alertDialog.show();
-
-                break;*/
-
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
+        mDrawerToggle.onOptionsItemSelected(item);
         return true;
+
     }
     public void nuevoEvento(View view){
         menuActionBar.clear();
@@ -534,78 +440,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void enviarUsuarios(View view){
-        Log.e("USR", "asda");
-    }
-
-    public void nuevoUsuario(View view){
-        FragmentDetalleNuevoUsuario fragmentNuevoUsuario = new FragmentDetalleNuevoUsuario();
-        getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoUsuario).commit();
-    }
-
-    public void infoPadre(View view){
-        AlertDialog a = createInfoProgenitoresDialogo("padre");
-        a.show();
-    }
-
-    public void infoMadre(View view){
-        AlertDialog a = createInfoProgenitoresDialogo("madre");
-        a.show();
-    }
-
-    public AlertDialog createInfoProgenitoresDialogo(String who) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_info_padres, null);
-
-        EditText name = (EditText) v.findViewById(R.id.name);
-        EditText phone = (EditText) v.findViewById(R.id.phone);
-        EditText mail = (EditText) v.findViewById(R.id.mail);
-        builder.setView(v);
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Acciones
-            }
-        });
-        builder.setNegativeButton("Cancelar",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-
-        if (who.equals("padre"))
-            builder.setTitle("Información del padre");
-        else
-            builder.setTitle("Información de la madre");
-        return builder.create();
-    }
-
-    public void cambiarImagenPerfil(View v) {
-        final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Hacer foto")) {
-                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, CAMARA);
-                } else if (items[item].equals("Elegir de la galeria")) {
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Select File"),
-                            SELECCIONAR_GALERIA);
-                } else if (items[item].equals("Imagen por defecto")) {
-                    ImageView iv = (ImageView) findViewById(R.id.avatar);
-                    iv.setImageResource(R.drawable.avatar);
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
 }
