@@ -135,9 +135,6 @@ public class MainActivity extends AppCompatActivity {
         //Establecemos que el ActionBar muestre el Boton Home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);*/
-
         //Establecemos la accion al clickear sobre cualquier item del menu.
         //De la misma forma que hariamos en una app comun con un listview.
         NavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -152,18 +149,10 @@ public class MainActivity extends AppCompatActivity {
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
-        Log.e("test", "Llega hasta crear usuarios");
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIOS, null); // Este hay q eliminarlo mas adelante
-        Log.e("test", "Llega hasta crear retos");
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETOS, null); // Este hay q eliminarlo mas adelante
-        Log.e("test", "Llega hasta listado usuarios");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIOS, null); // Este hay q eliminarlo mas adelante
         Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
-        Log.e("test", "Acaba onCreate");
 
-        //Esto tiene que ir en el comando de arriba + dispacher ;)
-       // FragmentListadoUsuario frgListado = new FragmentListadoUsuario();
-       // frgListado.setArguments(arguments);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListado).commit();
     }
 
     private void MostrarFragment(int position) {
@@ -175,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
                 //Listado
                 Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
-
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
                 //Cambiamos el titulo en donde decia "
@@ -184,9 +172,6 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-               /* menuActionBar.clear(); //poner otro menu
-                getMenuInflater().inflate(R.menu.menu_main_eventos, menuActionBar);*/
-
                 //Fragmento en blanco
                 BlankFragment fragmentDetalleTarea = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
@@ -318,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        Log.e("testJL", "se mete aqui main");
         menuActionBar = menu;
         getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
@@ -334,6 +318,9 @@ public class MainActivity extends AppCompatActivity {
         *
         * thank you stack overflow (L)(L)
         */
+
+        Log.e("testJL", "Se mete en el del main");
+
         if(mDrawerToggle.onOptionsItemSelected(item)) return true;
         else return false;
 

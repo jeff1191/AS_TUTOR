@@ -87,7 +87,7 @@ public class DispatcherImp extends Dispatcher {
             case ListaComandos.CONSULTAR_USUARIO:
 
                 TransferUsuarioT usuario = (TransferUsuarioT) datos;
-                FragmentDetalleUsuario frgDetalleU = FragmentDetalleUsuario.newInstance(usuario); //AQUI tiene que haber chica ;)
+                FragmentDetalleUsuario frgDetalleU = FragmentDetalleUsuario.newInstance(usuario);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
 
                 break;
@@ -95,7 +95,7 @@ public class DispatcherImp extends Dispatcher {
             case ListaComandos.CONSULTAR_RETO:
 
                 TransferRetoT reto = (TransferRetoT) datos;
-                if(reto.getTexto().equals("")){ //Si no hay reto al menos pasas los datos del usuario
+                if(reto.getId() == null){ //Si no hay reto al menos pasas los datos del usuario
                     FragmentDetalleNuevoReto fragmentNuevoReto = FragmentDetalleNuevoReto.newInstance(reto);
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();
                 }

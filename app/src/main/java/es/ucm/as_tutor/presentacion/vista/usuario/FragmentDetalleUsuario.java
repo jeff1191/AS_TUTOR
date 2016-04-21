@@ -1,8 +1,6 @@
 package es.ucm.as_tutor.presentacion.vista.usuario;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,15 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
-import es.ucm.as_tutor.presentacion.vista.main.Manager;
-import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
 
 public class FragmentDetalleUsuario extends Fragment {
 
@@ -111,7 +105,9 @@ public class FragmentDetalleUsuario extends Fragment {
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
+            Log.e("testJL", "El valor del id de usuario es " + bundle.getInt("id"));
             id = bundle.getInt("id");
+            Log.e("testJL", "El valor del id una vez guardado es " + id);
             nombre = bundle.getString("nombre");
             correo = bundle.getString("correo");
             avatar = bundle.getString("avatar");
@@ -272,20 +268,18 @@ public class FragmentDetalleUsuario extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        Log.e("testJL", "se mete en fragmentDetalle");
         inflater.inflate(R.menu.menu_main_usuarios, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("testJL", "se mete en fragmentDetalle2");
-        Log.e("testJL", "entra pls");
+        Log.e("testJL", "Se mete en el del fragment");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
-                Log.e("testJL", "entra en tareas usuario");
+                /*Log.e("testJL", "entra en tareas usuario");
                 TransferUsuarioT userT = new TransferUsuarioT();
                 userT.setId(id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, userT);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, userT);*/
                 break;
             case R.id.retoUsuario:
                 TransferRetoT consultarR = new TransferRetoT();
@@ -294,12 +288,13 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, consultarR);
                 break;
             case R.id.eventosUsuario:
-                FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
+                /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
+                */
                 break;
             case R.id.enviarCorreo:
                 // aquí habrá que ejecutar el comando de enviar correo
-
+                /*
                 // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
                 //Instanciamos un Intent del tipo ACTION_SEND
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -313,7 +308,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 // Definimos un Asunto para el Email
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
                 // Obtenemos la referencia al texto y lo pasamos al Email Intent
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + "!\n " +
                         "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
                         + "\n¡Ánimo!" + "\n\nEnviado desde AS");
 
@@ -323,21 +318,30 @@ public class FragmentDetalleUsuario extends Fragment {
                 //getApplicationContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 ///////////////////////////////////////////////////////////////////////////////////////////
-
+                */
                 break;
             case R.id.eliminarUsuario:
+                Log.e("testJL", "va a la fun externa " + id + nombre + correo + centroEstudios);
+                eliminaUsuario();
+                /*
                 Log.e("testJL", "entra en eliminar usuario con el id " + id);
                 TransferUsuarioT consultarU = new TransferUsuarioT();
                 consultarU.setId(id);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);*/
                 break;
         }
 
         return true;
     }
 
-
+    private void eliminaUsuario(){
+        Log.e("testJL", "entra en eliminar usuario con el id " + id + nombre + correo + centroEstudios);
+        TransferUsuarioT consultarU = new TransferUsuarioT();
+        consultarU.setId(id);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+    }
 
 
 }

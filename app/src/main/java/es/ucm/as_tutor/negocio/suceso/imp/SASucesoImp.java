@@ -109,24 +109,44 @@ public class SASucesoImp implements SASuceso {
 
     public void crearRetos(){
         Dao<Reto, Integer> reto;
-        Dao<Usuario, Integer> usuario;
         try {
             reto = getHelper().getRetoDao();
-            usuario = getHelper().getUsuarioDao();
+            Usuario u = new Usuario();
             if(!reto.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
                 Reto reto1 = new Reto();
                 reto1.setContador(3);
                 reto1.setTexto("Dar un beso de buenas noches a mama");
                 reto1.setSuperado(false);
-                reto1.setUsuario(usuario.queryForId(1));
+                u.setId(1);
+                reto1.setUsuario(u);
+                reto1.setPremio("Si lo completas, ganaras un kitkat");
                 reto.create(reto1);
                 Reto reto2 = new Reto();
                 reto2.setContador(5);
                 reto2.setTexto("Lavarse las manos antes de comer");
                 reto2.setSuperado(false);
-                reto2.setUsuario(usuario.queryForId(3));
+                u.setId(3);
+                reto2.setUsuario(u);
+                reto2.setPremio("");
                 reto.create(reto2);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void crearReto(TransferRetoT transferReto) {
+        try{
+            Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            Reto reto = new Reto();
+            reto.setTexto(transferReto.getTexto());
+            reto.setPremio(transferReto.getPremio());
+            reto.setSuperado(transferReto.getSuperado());
+            reto.setContador(transferReto.getContador());
+            reto.setUsuario(daoUsuario.queryForId(transferReto.getIdUsuario()));
+            daoReto.create(reto);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -138,12 +158,14 @@ public class SASucesoImp implements SASuceso {
 
         try {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
-            Reto r = daoReto.queryForId(consulta.getId());
-            if(r != null)
-                ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
-                        r.getTexto(), r.getSuperado());
-            else
-                ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new
+            if(consulta.getId() != null) {
+                Reto r = daoReto.queryForId(consulta.getId());
+                if (r != null)
+                    ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
+                            r.getTexto(), r.getSuperado(), r.getPremio());
+                else
+                    ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

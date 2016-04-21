@@ -15,15 +15,18 @@ public class TransferRetoT {
 
 	private Boolean superado;
 
+	private String premio;
+
 	public TransferRetoT() {
 	}
 
-	public TransferRetoT(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado) {
+	public TransferRetoT(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado, String premio) {
 		this.id = id;
 		this.idUsuario = idUsuario;
 		this.contador = contador;
 		this.texto = texto;
 		this.superado = superado;
+		this.premio = premio;
 	}
 
 	public Integer getId() {
@@ -64,5 +67,13 @@ public class TransferRetoT {
 
 	public void setSuperado(Boolean superado) {
 		this.superado = superado;
+	}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	public void setPremio(String premio) {
+		this.premio = premio;
 	}
 }

@@ -31,6 +31,7 @@ public class FragmentDetalleReto extends Fragment {
     private Integer usuario;
     private String nombreUsuario;
     private String fotoUsuario;
+    private String premio;
 
     public FragmentDetalleReto() {
     }
@@ -56,6 +57,7 @@ public class FragmentDetalleReto extends Fragment {
         arguments.putString("texto", reto.getTexto());
         arguments.putInt("contador", reto.getContador());
         arguments.putBoolean("superado", reto.getSuperado());
+        arguments.putString("premio", reto.getPremio());
 
         frgReto.setArguments(arguments);
 
@@ -75,6 +77,7 @@ public class FragmentDetalleReto extends Fragment {
             usuario = bundle.getInt("usuario");
             nombreUsuario = bundle.getString("nombreUsuario");
             fotoUsuario = bundle.getString("fotoUsuario");
+            premio = bundle.getString("premio");
         }
     }
 
@@ -88,6 +91,11 @@ public class FragmentDetalleReto extends Fragment {
         //((ImageView)rootView.findViewById(R.id.avatarR)).setImageBitmap(BitmapFactory.decodeFile(fotoUsuario));
         ((ImageView)rootView.findViewById(R.id.avatarR)).setImageResource(R.drawable.avatar);
         ((TextView) rootView.findViewById(R.id.textoReto)).setText(texto);
+
+        if(!premio.equals(""))
+            ((TextView) rootView.findViewById(R.id.textoPremio)).setText(premio);
+        else
+            ((TextView) rootView.findViewById(R.id.textoPremio)).setText("No tiene ningun premio asignado");
 
         //Si esta superado el texto debe ser diferente
         if (superado)

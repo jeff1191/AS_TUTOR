@@ -3,6 +3,8 @@
  */
 package es.ucm.as_tutor.negocio.usuario.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -132,6 +134,7 @@ public class SAUsuarioImp implements SAUsuario {
 
 	public void eliminarUsuario(TransferUsuarioT consulta) {
 		try {
+			Log.e("testJL", "El valor del id que llega a bbdd es " + consulta.getId());
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			daoUsuario.deleteById(consulta.getId()); // Ver si eso una manera mejor de borrar
 		} catch (SQLException e) {
@@ -215,6 +218,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user2.setCodigoSincronizacion("VIC001");
 				user2.setPuntuacion(9);
 				user2.setPuntuacionAnterior(10);
+				user2.setReto(null);
 				usuario.create(user2);
 				Usuario user3 = new Usuario();
 				user3.setNombre("Jefferson Almache");
@@ -258,6 +262,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user4.setCodigoSincronizacion("VIC001");
 				user4.setPuntuacion(9);
 				user4.setPuntuacionAnterior(10);
+				user4.setReto(null);
 				usuario.create(user4);
 			}
 		} catch (SQLException e) {

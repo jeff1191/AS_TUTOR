@@ -112,16 +112,16 @@
             android:layout_weight="1"
             android:text="Aceptar"
             android:layout_gravity="center"
-            android:id="@+id/botonAceptarReto"
-            android:onClick="crearNuevoReto" />
+            android:clickable="true"
+            android:id="@+id/botonAceptarReto" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Cancelar"
-            android:id="@+id/botonCancelarReto"
-            android:onClick="cancelarNuevoReto"/>
+            android:clickable="true"
+            android:id="@+id/botonCancelarReto"/>
 
         <LinearLayout
             android:orientation="horizontal"

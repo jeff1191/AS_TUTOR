@@ -21,5 +21,7 @@ public interface SASuceso {
 
 	public void crearRetos();
 
+	public void crearReto(TransferRetoT transferReto);
+
 	public TransferRetoT consultarReto(TransferRetoT consulta);
 }

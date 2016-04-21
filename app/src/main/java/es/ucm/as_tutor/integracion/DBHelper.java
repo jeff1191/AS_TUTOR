@@ -2,7 +2,6 @@ package es.ucm.as_tutor.integracion;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -37,14 +36,12 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
-        Log.e("gegegege", "se metio antes");
         try {
             TableUtils.createTable(connectionSource, Evento.class);
             TableUtils.createTable(connectionSource, Reto.class);
             TableUtils.createTable(connectionSource, Tarea.class);
             TableUtils.createTable(connectionSource, Usuario.class);
             TableUtils.createTable(connectionSource, UsuarioEvento.class);
-            Log.e("gegegege", "se metio");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

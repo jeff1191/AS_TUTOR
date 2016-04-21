@@ -4,6 +4,7 @@ package es.ucm.as_tutor.presentacion.controlador.comandos.factoria.imp;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.ConsultarRetoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.CrearUsuarioComando;
@@ -61,6 +62,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.EDITAR_USUARIO:
                 ret = new EditarUsuarioComando();
+                break;
+            case ListaComandos.CREAR_RETO:
+                ret = new CrearRetoComando();
                 break;
             case ListaComandos.CONSULTAR_RETO:
                 ret = new ConsultarRetoComando();
