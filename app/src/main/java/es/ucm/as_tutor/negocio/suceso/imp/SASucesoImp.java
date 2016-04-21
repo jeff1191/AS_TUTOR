@@ -14,6 +14,7 @@ import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -81,12 +82,12 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
+    public ArrayList<TransferTareaT> consultarTareas(TransferUsuarioT idUsuario) {
         ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
         try {
             // Busca al usuario por su id
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-            Usuario usuario = daoUsuario.queryForId(idUsuario);
+            Usuario usuario = daoUsuario.queryForId(idUsuario.getId());
             // Busca en la BBDD las tareas de ese usuario
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             List<Tarea> tareas = daoTarea.queryForEq("USUARIO", usuario);

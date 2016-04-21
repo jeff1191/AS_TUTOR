@@ -328,9 +328,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
-        Log.e("testJL", "se mete aqui main 2");
-        mDrawerToggle.onOptionsItemSelected(item);
-        return true;
+        /*
+        * If your Activity's onOptionsItemSelected method returs true,
+        * the call is consumed in activity and Fragment's onOptionsItemSelected is not called
+        *
+        * thank you stack overflow (L)(L)
+        */
+        if(mDrawerToggle.onOptionsItemSelected(item)) return true;
+        else return false;
 
     }
     public void nuevoEvento(View view){

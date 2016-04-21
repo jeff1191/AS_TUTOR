@@ -278,11 +278,14 @@ public class FragmentDetalleUsuario extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.e("testJL", "se mete en fragmentDetalle2");
         Log.e("testJL", "entra pls");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
                 Log.e("testJL", "entra en tareas usuario");
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
+                TransferUsuarioT userT = new TransferUsuarioT();
+                userT.setId(id);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, userT);
                 break;
             case R.id.retoUsuario:
                 TransferRetoT consultarR = new TransferRetoT();
