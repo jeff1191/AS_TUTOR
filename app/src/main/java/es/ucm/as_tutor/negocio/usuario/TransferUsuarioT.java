@@ -3,457 +3,259 @@
  */
 package es.ucm.as_tutor.negocio.usuario;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+import es.ucm.as_tutor.negocio.suceso.Reto;
+
 public class TransferUsuarioT {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Integer id;
+
 	private String nombre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String correo;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private String foto;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private String avatar;
+
+	private String telefono;
+
+	private Integer puntuacion;
+
+	private Integer puntuacionAnterior;
+
 	private String curso;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String dni;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private TipoPerfil tipoPerfil;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private String direccion;
+
+	private String tipoPerfil;
+
+	private String notas;
+
 	private String nombrePadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String nombreMadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String correoPadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String correoMadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private String telMadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String telPadre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private String telMadre;
+
 	private String centroAcademico;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Integer ID;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param nombre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNombre(String nombre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	private Reto reto;
 
-		// end-user-code
+	private String codigoSincronizacion;
+
+	//Informacion para el listado
+
+
+	public TransferUsuarioT(Integer id, String nombre, String avatar) {
+		this.id = id;
+		this.nombre = nombre;
+		this.avatar = avatar;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	//Vacio
+	public TransferUsuarioT (){	}
+
+	//Toda la informacion para el fragment detalle
+	public TransferUsuarioT(Integer id, String nombre, String correo, String avatar, String telefono,
+							Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
+							String direccion, String tipoPerfil, String notas, String nombrePadre,
+							String nombreMadre, String correoPadre, String correoMadre,
+							String telPadre, String telMadre, String centroAcademico, Reto reto,
+							String codigoSincronizacion) {
+		this.id = id;
+		this.nombre = nombre;
+		this.correo = correo;
+		this.avatar = avatar;
+		this.telefono = telefono;
+		this.puntuacion = puntuacion;
+		this.puntuacionAnterior = puntuacionAnterior;
+		this.curso = curso;
+		this.dni = dni;
+		this.direccion = direccion;
+		this.tipoPerfil = tipoPerfil;
+		this.notas = notas;
+		this.nombrePadre = nombrePadre;
+		this.nombreMadre = nombreMadre;
+		this.correoPadre = correoPadre;
+		this.correoMadre = correoMadre;
+		this.telMadre = telMadre;
+		this.telPadre = telPadre;
+		this.centroAcademico = centroAcademico;
+		this.reto = reto;
+		this.codigoSincronizacion = codigoSincronizacion;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return nombre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param correo
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCorreo(String correo) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getCorreo() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return correo;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param foto
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFoto(String foto) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String getFoto() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	public String getAvatar() {
+		return avatar;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param curso
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCurso(String curso) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public Integer getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(Integer puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
+	public Integer getPuntuacionAnterior() {
+		return puntuacionAnterior;
+	}
+
+	public void setPuntuacionAnterior(Integer puntuacionAnterior) {
+		this.puntuacionAnterior = puntuacionAnterior;
+	}
+
 	public String getCurso() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return curso;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param dni
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setDni(String dni) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getDni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return dni;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTipoPerfil() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getTipoPerfil() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public String getDireccion() {
+		return direccion;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param nombrePadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNombrePadre(String nombrePadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	public String getTipoPerfil() {
+		return tipoPerfil;
+	}
+
+	public void setTipoPerfil(String tipoPerfil) {
+		this.tipoPerfil = tipoPerfil;
+	}
+
+	public String getNotas() {
+		return notas;
+	}
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+
 	public String getNombrePadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return nombrePadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param nombreMadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNombreMadre(String nombreMadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setNombrePadre(String nombrePadre) {
+		this.nombrePadre = nombrePadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getNombreMadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return nombreMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param correoPadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCorreoPadre(String correoPadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setNombreMadre(String nombreMadre) {
+		this.nombreMadre = nombreMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getCorreoPadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return correoPadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param correoMadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCorreoMadre(String correoMadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setCorreoPadre(String correoPadre) {
+		this.correoPadre = correoPadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getCorreoMadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return correoMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param telPadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTelPadre(String telPadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setCorreoMadre(String correoMadre) {
+		this.correoMadre = correoMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public String getTelPadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param telMadre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setTelMadre(String telMadre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getTelMadre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return telMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param centroAcademico
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCentroAcademico(String centroAcademico) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setTelMadre(String telMadre) {
+		this.telMadre = telMadre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	public String getTelPadre() {
+		return telPadre;
+	}
+
+	public void setTelPadre(String telPadre) {
+		this.telPadre = telPadre;
+	}
+
 	public String getCentroAcademico() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return centroAcademico;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param id
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setID(Integer id) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setCentroAcademico(String centroAcademico) {
+		this.centroAcademico = centroAcademico;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Integer getID() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	public Reto getReto() {
+		return reto;
+	}
+
+	public void setReto(Reto reto) {
+		this.reto = reto;
+	}
+
+	public String getCodigoSincronizacion() {
+		return codigoSincronizacion;
+	}
+
+	public void setCodigoSincronizacion(String codigoSincronizacion) {
+		this.codigoSincronizacion = codigoSincronizacion;
 	}
 }

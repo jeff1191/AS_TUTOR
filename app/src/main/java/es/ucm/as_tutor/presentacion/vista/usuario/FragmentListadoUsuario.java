@@ -13,6 +13,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 
 
 public class FragmentListadoUsuario extends Fragment {
@@ -20,30 +23,38 @@ public class FragmentListadoUsuario extends Fragment {
 	private ListView listadoUsuarios;
 	private AdaptadorUsuarios adaptadorUsuarios;
 
+	private ArrayList<Integer> ids;
 	private ArrayList<String> nombres;
-	private ArrayList<Integer> imagenes;
-	private ArrayList<String> dnis;
-	private ArrayList<String> direcciones;
-	private ArrayList<String> telefonos;
-	private ArrayList<String> correos;
-	private ArrayList<String> colegios;
-	private ArrayList<String> estudios;
-	private ArrayList<String> cursos;
-	private ArrayList<String> notas;
-	private ArrayList<String> nombrePadres;
-	private ArrayList<String> nombreMadres;
-	private ArrayList<String> telfPadres;
-	private ArrayList<String> telfMadres;
-	private ArrayList<String> correoPadres;
-	private ArrayList<String> correoMadres;
-	ArrayList<String> perfiles;
-	ArrayList<String> sincronizaciones;
-	private ArrayList<String> puntuaciones;
+	private ArrayList<String> avatares;
+
 	private Menu menuActionBar;
 
 
 	public FragmentListadoUsuario() {
 		// Required empty public constructor
+	}
+
+	public static FragmentListadoUsuario newInstance(ArrayList<TransferUsuarioT> usuarios) {
+		FragmentListadoUsuario frgUsuarioLista = new FragmentListadoUsuario();
+
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ArrayList<String> nombres = new ArrayList<String>();
+		ArrayList<String> avatares = new ArrayList<String>();
+
+		for(TransferUsuarioT transfer : usuarios){
+			ids.add(transfer.getId());
+			nombres.add(transfer.getNombre());
+			avatares.add(transfer.getAvatar());
+		}
+
+		Bundle arguments = new Bundle();
+		arguments.putIntegerArrayList("ids", ids);
+		arguments.putStringArrayList("nombres", nombres);
+		arguments.putStringArrayList("avatares", avatares);
+
+		frgUsuarioLista.setArguments(arguments);
+
+		return frgUsuarioLista;
 	}
 
 	@Override
@@ -52,29 +63,12 @@ public class FragmentListadoUsuario extends Fragment {
 
 		Bundle bundle = getArguments();
 		if (bundle != null) {
+			ids = bundle.getIntegerArrayList("ids");
 			nombres = bundle.getStringArrayList("nombres");
-			imagenes = bundle.getIntegerArrayList("imagenes");
-			dnis = bundle.getStringArrayList("dnis");
-			direcciones = bundle.getStringArrayList("direcciones");
-			telefonos = bundle.getStringArrayList("telefonos");
-			correos = bundle.getStringArrayList("correos");
-			colegios = bundle.getStringArrayList("colegios");
-			estudios = bundle.getStringArrayList("estudios");
-			cursos = bundle.getStringArrayList("cursos");
-			notas = bundle.getStringArrayList("notas");
-			nombrePadres = bundle.getStringArrayList("nombrePadres");
-			nombreMadres = bundle.getStringArrayList("nombreMadres");
-			telfPadres = bundle.getStringArrayList("telfPadres");
-			telfMadres = bundle.getStringArrayList("telfMadres");
-			correoPadres = bundle.getStringArrayList("correoPadres");
-			correoMadres = bundle.getStringArrayList("correoMadres");
-			perfiles = bundle.getStringArrayList("perfiles");
-			sincronizaciones = bundle.getStringArrayList("sincronizaciones");
-			puntuaciones = bundle.getStringArrayList("puntuaciones");
-
+			avatares = bundle.getStringArrayList("avatares");
 			adaptadorUsuarios = new AdaptadorUsuarios(getActivity());
 			adaptadorUsuarios.setNombres(nombres);
-			adaptadorUsuarios.setImagenes(imagenes);
+			adaptadorUsuarios.setAvatares(avatares);
 		}
 	}
 
@@ -88,31 +82,22 @@ public class FragmentListadoUsuario extends Fragment {
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
+
+				//AQUI ES DONDE DEBE IR EL COMANDO DE VER DETALLE DE USUARIO
+
+				TransferUsuarioT consultar = new TransferUsuarioT();
+				consultar.setId(ids.get(pos));
+				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultar);
+
+				/*
 				Bundle bundle = new Bundle();
-
 				bundle.putString("nombre", nombres.get(pos));
-				bundle.putInt("avatar", imagenes.get(pos));
-				bundle.putString("dnis", dnis.get(pos));
-				bundle.putString("direcciones", direcciones.get(pos));
-				bundle.putString("telefonos", telefonos.get(pos));
-				bundle.putString("correos", correos.get(pos));
-				bundle.putString("colegios", colegios.get(pos));
-				bundle.putString("estudios", estudios.get(pos));
-				bundle.putString("cursos", cursos.get(pos));
-				bundle.putString("notas", notas.get(pos));
-				bundle.putString("nombrePadres", nombrePadres.get(pos));
-				bundle.putString("nombreMadres", nombreMadres.get(pos));
-				bundle.putString("telfPadres", telfPadres.get(pos));
-				bundle.putString("telfMadres", telfMadres.get(pos));
-				bundle.putString("correoPadres", correoPadres.get(pos));
-				bundle.putString("correoMadres", correoMadres.get(pos));
-				bundle.putString("perfiles", perfiles.get(pos));
-				bundle.putString("sincronizaciones", sincronizaciones.get(pos));
-				bundle.putString("puntuaciones", puntuaciones.get(pos));
-
+				bundle.putInt("id", ids.get(pos));
+				bundle.putString("avatar", avatares.get(pos));
 				FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
 				frgUsuario.setArguments(bundle);
 				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgUsuario).commit();
+				*/
 			}
 		});
 

@@ -3,6 +3,11 @@ package es.ucm.as_tutor.presentacion.controlador.comandos.factoria.imp;
 
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
+import es.ucm.as_tutor.presentacion.controlador.comandos.ConsultarRetoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.ConsultarUsuarioComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.CrearRetosComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.ListadoUsuariosComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.CrearUsuariosComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.ConsultarTareasComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.CrearTareaComando;
@@ -32,6 +37,22 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_TAREAS:
                 ret = new ConsultarTareasComando();
+                break;
+            case ListaComandos.CREAR_USUARIOS:
+                ret = new CrearUsuariosComando();
+                break;
+            case ListaComandos.CREAR_RETOS:
+                ret = new CrearRetosComando();
+                break;
+            case ListaComandos.LISTADO_USUARIOS:
+                ret = new ListadoUsuariosComando();
+                break;
+            case ListaComandos.CONSULTAR_USUARIO:
+                ret = new ConsultarUsuarioComando();
+                break;
+            case ListaComandos.CONSULTAR_RETO:
+                ret = new ConsultarRetoComando();
+                break;
         }
         return ret;
     }

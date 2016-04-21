@@ -2,6 +2,7 @@ package es.ucm.as_tutor.presentacion.vista.usuario;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ class AdaptadorUsuarios extends BaseAdapter {
 
         private LayoutInflater inflater;
         private ArrayList<String> nombres = new ArrayList<String>();
-        private ArrayList<Integer> imagenes = new ArrayList<Integer>();
+        private ArrayList<String> avatares = new ArrayList<String>();
 
     public AdaptadorUsuarios(Activity context) {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,7 +49,10 @@ class AdaptadorUsuarios extends BaseAdapter {
         TextView nombreUser= (TextView)item.findViewById(R.id.nombreUsuario);
         nombreUser.setText(nombres.get(position));
         ImageView img = (ImageView)item.findViewById(R.id.avatar);
-        img.setImageResource(imagenes.get(position));
+        if(!avatares.get(position).equals(""))
+            img.setImageBitmap(BitmapFactory.decodeFile(avatares.get(position)));
+        else
+            img.setImageResource(R.drawable.avatar);
 
         return(item);
     }
@@ -58,8 +62,8 @@ class AdaptadorUsuarios extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setImagenes(ArrayList<Integer> imagenes) {
-        this.imagenes = imagenes;
+    public void setAvatares(ArrayList<String> imagenes) {
+        this.avatares = imagenes;
         notifyDataSetChanged();
     }
 }

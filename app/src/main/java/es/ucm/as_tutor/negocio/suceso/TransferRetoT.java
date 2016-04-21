@@ -3,104 +3,69 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
-import java.util.Collection;
-import java.sql.Timestamp;
+import es.ucm.as_tutor.negocio.usuario.Usuario;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+
 public class TransferRetoT {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Collection usuarios;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private String nombre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Timestamp fechaIni;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getUsuarios() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	private Integer id;
 
-		// end-user-code
+	private Usuario usuario;
+
+	private Integer contador;
+
+	private String texto;
+
+	private Boolean superado;
+
+	public TransferRetoT() {
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getNombre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public TransferRetoT(Integer id, Usuario usuario, Integer contador, String texto, Boolean superado) {
+		this.id = id;
+		this.usuario = usuario;
+		this.contador = contador;
+		this.texto = texto;
+		this.superado = superado;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void getFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Integer getId() {
+		return id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setUsuarios() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNombre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setFechaIni() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
-		// end-user-code
+	public Integer getContador() {
+		return contador;
+	}
+
+	public void setContador(Integer contador) {
+		this.contador = contador;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public Boolean getSuperado() {
+		return superado;
+	}
+
+	public void setSuperado(Boolean superado) {
+		this.superado = superado;
 	}
 }

@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
-import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
@@ -102,6 +103,50 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return ret;
+    }
+
+    public void crearRetos(){
+        Dao<Reto, Integer> reto;
+        Dao<Usuario, Integer> usuario;
+        try {
+            reto = getHelper().getRetoDao();
+            usuario = getHelper().getUsuarioDao();
+            if(!reto.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
+                Reto reto1 = new Reto();
+                reto1.setContador(3);
+                reto1.setTexto("Dar un beso de buenas noches a mama");
+                reto1.setSuperado(false);
+                reto1.setUsuario(usuario.queryForId(1));
+                reto.create(reto1);
+                Reto reto2 = new Reto();
+                reto2.setContador(5);
+                reto2.setTexto("Lavarse las manos antes de comer");
+                reto2.setSuperado(false);
+                reto2.setUsuario(usuario.queryForId(3));
+                reto.create(reto2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public TransferRetoT consultarReto(TransferRetoT consulta) {
+        TransferRetoT ret = null;
+
+        try {
+            Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+            Reto r = daoReto.queryForId(consulta.getId());
+            if(r != null)
+                ret = new TransferRetoT(r.getId(), r.getUsuario(), r.getContador(),
+                        r.getTexto(), r.getSuperado());
+            else
+                ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return ret;
     }
 }

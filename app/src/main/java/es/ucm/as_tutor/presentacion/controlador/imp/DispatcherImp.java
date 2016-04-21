@@ -2,17 +2,19 @@ package es.ucm.as_tutor.presentacion.controlador.imp;
 
 import android.content.Intent;
 
-import com.j256.ormlite.stmt.query.In;
-
 import java.util.ArrayList;
-import java.util.List;
 
+import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Dispatcher;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
-import es.ucm.as_tutor.presentacion.vista.main.MainActivity;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
-import es.ucm.as_tutor.presentacion.vista.usuario.tarea.UsuarioTareaDetalleActivity;
+import es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleUsuario;
+import es.ucm.as_tutor.presentacion.vista.usuario.FragmentListadoUsuario;
+import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
+import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleReto;
 import es.ucm.as_tutor.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
 
 /**
@@ -72,6 +74,36 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.putIntegerArrayListExtra("mejorar", mejorar);
                 iConsultarTareas.putIntegerArrayListExtra("habilitada", habilitada);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
+                break;
+
+            case ListaComandos.LISTADO_USUARIOS:
+
+                ArrayList<TransferUsuarioT> usuarios = (ArrayList<TransferUsuarioT>) datos;
+                FragmentListadoUsuario frgListadoU = FragmentListadoUsuario.newInstance(usuarios);
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListadoU).commit();
+
+                break;
+
+            case ListaComandos.CONSULTAR_USUARIO:
+
+                TransferUsuarioT usuario = (TransferUsuarioT) datos;
+                FragmentDetalleUsuario frgDetalleU = FragmentDetalleUsuario.newInstance(usuario); //AQUI tiene que haber chica ;)
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
+
+                break;
+
+            case ListaComandos.CONSULTAR_RETO:
+
+                TransferRetoT reto = (TransferRetoT) datos;
+                if(reto.getTexto().equals("")){ //Si no hay reto al menos pasas los datos del usuario
+                    FragmentDetalleNuevoReto fragmentNuevoReto = FragmentDetalleNuevoReto.newInstance(reto);
+                    Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();
+                }
+                else{
+                    FragmentDetalleReto fragmentReto = FragmentDetalleReto.newInstance(reto);
+                    Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
+                }
+
                 break;
         }
     }
