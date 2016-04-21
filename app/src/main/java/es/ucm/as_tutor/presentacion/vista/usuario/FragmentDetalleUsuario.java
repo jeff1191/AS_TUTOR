@@ -193,7 +193,7 @@ public class FragmentDetalleUsuario extends Fragment {
             });
 
             nombreV.setText(nombre);
-            sincronizacionV.setText("Sincronización: " + sincronizacion);
+            sincronizacionV.setText(sincronizacion);
             perfilV.setText("Perfil " + perfil);
             dniV.setText(dni);
             direccionV.setText(direccion);
@@ -203,12 +203,12 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV.setText(estudios);
             notasV.setText(notas);
             puntuacionV.setText(puntuacion + "/10");
+
+            //Esto cambiarlo para que se pueda editar la imagen
            /* if(!avatar.equals(""))
                 avatarV.setImageBitmap(BitmapFactory.decodeFile(avatar));
             else */
                 avatarV.setImageResource(R.drawable.avatar);
-
-
 
             return rootView;
     }
@@ -272,6 +272,7 @@ public class FragmentDetalleUsuario extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
+        Log.e("testJL", "se mete en fragmentDetalle");
         inflater.inflate(R.menu.menu_main_usuarios, menu);
     }
 

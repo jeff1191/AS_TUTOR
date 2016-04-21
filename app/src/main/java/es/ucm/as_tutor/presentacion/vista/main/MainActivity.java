@@ -318,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        Log.e("testJL", "se mete aqui main");
         menuActionBar = menu;
         getMenuInflater().inflate(R.menu.menu_usuario, menu);
         return true;
@@ -327,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
+        Log.e("testJL", "se mete aqui main 2");
         mDrawerToggle.onOptionsItemSelected(item);
         return true;
 
