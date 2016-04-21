@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.utils.Perfil;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
@@ -125,7 +126,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                     usuario.setCurso(estudiosV.getText().toString());
                     usuario.setDni(dniV.getText().toString());
                     usuario.setDireccion(direccionV.getText().toString());
-                    usuario.setTipoPerfil(perfilV.toString());
+                    usuario.setTipoPerfil(Perfil.A.toString());
                     usuario.setNotas(notasV.getText().toString());
                     usuario.setNombrePadre(nombrePadreV.getText().toString());
                     usuario.setNombreMadre(nombreMadreV.getText().toString());
@@ -139,6 +140,9 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
 
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, usuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+                    BlankFragment fragmentBlank = new BlankFragment();
+                    Manager.getInstance().getFragmentManager().beginTransaction()
+                            .replace(R.id.FrgDetalle, fragmentBlank).commit();
                 }
             });
 
