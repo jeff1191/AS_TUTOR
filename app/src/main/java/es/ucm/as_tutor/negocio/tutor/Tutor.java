@@ -20,6 +20,12 @@ public class Tutor {
     @DatabaseField(columnName = "CONTRASENHA")
     private String contrasenha;
 
+    @DatabaseField(columnName = "PREGUNTA")
+    private String respuesta;
+
+    @DatabaseField(columnName = "RESPUESTA")
+    private String pregunta;
+
     public Integer getId() {
         return id;
     }
@@ -58,5 +64,21 @@ public class Tutor {
 
     public void setContrasenha(String contrasenha) {
         this.contrasenha = contrasenha;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
     }
 }

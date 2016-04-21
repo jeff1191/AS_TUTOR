@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_marginTop="24dp"
         android:orientation="horizontal">
         <TextView
@@ -21,25 +21,19 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Perfil"
             android:gravity="center"
-            android:layout_weight="1.5" />
+            android:layout_weight="2" />
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/logo"
-                android:gravity="center"/>
-
+        <!-- Lateral izquierdo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.8"
+            android:gravity="center"/>
     </LinearLayout>
 
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
@@ -96,7 +90,7 @@
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
-                <!-- Contrasenha -->
+                <!-- Pregunta seguridad -->
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -112,11 +106,52 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/contrasenha"
-                            android:hint="Contraseña"/>
+                            android:id="@+id/pregunta"
+                            android:hint="Pregunta de seguridad para recuperar la contraseña"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
+                <!-- Respuesta seguridad -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:id="@+id/respuesta"
+                            android:hint="Respuesta a la pregunta de seguridad"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!-- cambiar contrasenha-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cambiar contraseña"
+                        android:id="@+id/cambiarContrasenha"
+                        android:gravity="center"
+                        android:background="@color/colorAccent"
+                        android:textColor="#FFFFFF"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="24dp"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp" />
+                    </LinearLayout>
 
             </LinearLayout><!-- fin info -->
 
@@ -125,8 +160,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="0.8">
-            </LinearLayout>
+                android:layout_weight="0.8"
+                android:gravity="center"/>
+
+
 
         </LinearLayout>
 
@@ -134,7 +171,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.75"
         android:id="@+id/botones"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp">

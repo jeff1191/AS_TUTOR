@@ -1,5 +1,7 @@
 package es.ucm.as_tutor.negocio.tutor.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
@@ -34,6 +36,8 @@ public class SATutorImp implements SATutor {
                 ret.setCorreo(tutor.getCorreo());
                 ret.setCodigoSincronizacion(tutor.getCodigoSincronizacion());
                 ret.setContrasenha(tutor.getContrasenha());
+                ret.setPregunta(tutor.getPregunta());
+                ret.setRespuesta(tutor.getRespuesta());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,11 +50,13 @@ public class SATutorImp implements SATutor {
         try {
             Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
             Tutor tutor = daoTutor.queryForId(1);
-            tutor.setId(transferTutor.getId());
+            tutor.setId(1);
             tutor.setNombre(transferTutor.getNombre());
             tutor.setCorreo(transferTutor.getCorreo());
             tutor.setCodigoSincronizacion(transferTutor.getCodigoSincronizacion());
             tutor.setContrasenha(transferTutor.getContrasenha());
+            tutor.setPregunta(transferTutor.getPregunta());
+            tutor.setRespuesta(transferTutor.getRespuesta());
             daoTutor.update(tutor);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,6 +73,8 @@ public class SATutorImp implements SATutor {
             tutor.setCorreo(transferTutor.getCorreo());
             tutor.setCodigoSincronizacion(transferTutor.getCodigoSincronizacion());
             tutor.setContrasenha(transferTutor.getContrasenha());
+            tutor.setPregunta(transferTutor.getPregunta());
+            tutor.setRespuesta(transferTutor.getRespuesta());
             daoTutor.create(tutor);
         } catch (SQLException e) {
             e.printStackTrace();

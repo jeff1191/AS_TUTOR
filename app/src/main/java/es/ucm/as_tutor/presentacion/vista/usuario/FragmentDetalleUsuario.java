@@ -125,8 +125,4 @@ public class FragmentDetalleUsuario extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }
