@@ -71,41 +71,18 @@ public class MainActivity extends AppCompatActivity {
     private Menu menuActionBar;
     private DBHelper mDBHelper = null;
 
-    private DBHelper getHelper() {
-        if (mDBHelper == null) {
-            mDBHelper = OpenHelperManager.getHelper(this, DBHelper.class);
-        }
-        return mDBHelper;
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mDBHelper != null) {
-            OpenHelperManager.releaseHelper();
-            mDBHelper = null;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         Manager.getInstance().setActivity(this);
-
-        mDBHelper = getHelper();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
-        try {
-            Dao<es.ucm.as_tutor.negocio.suceso.Tarea, Integer> a = getHelper().getTareaDao();
-            a.queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -507,18 +484,14 @@ public class MainActivity extends AppCompatActivity {
                 menuActionBar.clear();
 
                 FragmentDetalleTutor fragmentDetalleTutor = new FragmentDetalleTutor();
-                //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTutor).commit();
 
                 FragmentListadoTutor fragmentListadoTutor = new FragmentListadoTutor();
-                //fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoTutor).commit();
 
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
-                //Cambiamos el titulo en donde decia "
                 setTitle(titulos[position - 1]);
-                //Cerramos el menu deslizable
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 4: // Ayuda
@@ -759,10 +732,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void enviarUsuarios(View view){
-        Log.e("USR", "asda");
     }
 
     public void nuevoUsuario(View view){

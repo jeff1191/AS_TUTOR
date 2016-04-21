@@ -1,9 +1,4 @@
 <resources>
-    <!-- Spinner -->
-    <style name="spinnerItemStyle" parent="@android:style/Widget.Holo.Light.Spinner">
-        <item name="android:dropDownSpinnerStyle">@android:style/Widget.Spinner.DropDown</item>
-        <item name="android:spinnerItemStyle">@android:style/Widget.TextView.SpinnerItem</item>
-    </style>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

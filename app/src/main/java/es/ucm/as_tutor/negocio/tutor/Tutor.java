@@ -15,7 +15,10 @@ public class Tutor {
 	private String correo;
 
     @DatabaseField(columnName = "CODIGO")
-	private String codigo;
+	private String codigoSincronizacion;
+
+    @DatabaseField(columnName = "CONTRASENHA")
+    private String contrasenha;
 
     public Integer getId() {
         return id;
@@ -41,11 +44,19 @@ public class Tutor {
         this.correo = correo;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoSincronizacion() {
+        return codigoSincronizacion;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoSincronizacion(String codigoSincronizacion) {
+        this.codigoSincronizacion = codigoSincronizacion;
+    }
+
+    public String getContrasenha() {
+        return contrasenha;
+    }
+
+    public void setContrasenha(String contrasenha) {
+        this.contrasenha = contrasenha;
     }
 }

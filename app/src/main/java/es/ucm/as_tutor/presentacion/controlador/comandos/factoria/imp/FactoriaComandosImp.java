@@ -9,6 +9,9 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.CrearTareaCom
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.DeshabilitarTareaComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.EditarTareaComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.EliminarTareaComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.ConsultarTutorComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.CrearTutorComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.EditarTutorComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 
 /**
@@ -36,6 +39,15 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
+                break;
+            case ListaComandos.CONSULTAR_TUTOR:
+                ret = new ConsultarTutorComando();
+                break;
+            case ListaComandos.CREAR_TUTOR:
+                ret = new CrearTutorComando();
+                break;
+            case ListaComandos.EDITAR_TUTOR:
+                ret = new EditarTutorComando();
                 break;
         }
         return ret;

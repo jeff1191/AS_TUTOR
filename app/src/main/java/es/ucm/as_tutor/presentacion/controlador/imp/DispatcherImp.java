@@ -95,6 +95,15 @@ public class DispatcherImp extends Dispatcher {
             case ListaComandos.CONSULTAR_USUARIO:
                 break;
 
+            case ListaComandos.CONSULTAR_TUTOR:
+                break;
+
+            case ListaComandos.EDITAR_TUTOR:
+                break;
+
+            case ListaComandos.CREAR_TUTOR:
+                break;
+
         }
     }
 }

@@ -10,4 +10,7 @@ public class ListaComandos {
     public static final String DESHABILITAR_TAREA = "deshabilitarTarea";
     public static final String CONSULTAR_TAREAS = "consultarTareas";
     public static final String CONSULTAR_USUARIO = "consultarUsuario";
+    public static final String CONSULTAR_TUTOR = "consultarTutor";
+    public static final String CREAR_TUTOR = "crearTutor";
+    public static final String EDITAR_TUTOR = "editarTutor";
 }
