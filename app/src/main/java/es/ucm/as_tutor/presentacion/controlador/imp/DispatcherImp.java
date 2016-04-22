@@ -29,17 +29,6 @@ public class DispatcherImp extends Dispatcher {
     public void dispatch(String accion, Object datos) {
 
         switch(accion){
-            case ListaComandos.CREAR_TAREA:
-                break;
-
-            case ListaComandos.EDITAR_TAREA:
-                break;
-
-            case ListaComandos.ELIMINAR_TAREA:
-                break;
-
-            case ListaComandos.DESHABILITAR_TAREA:
-                break;
 
             case ListaComandos.CONSULTAR_TAREAS:
                 ArrayList<String> textosAlarma = new ArrayList<String>();
@@ -96,23 +85,18 @@ public class DispatcherImp extends Dispatcher {
                 break;
 
             case ListaComandos.LISTADO_USUARIOS:
-
                 ArrayList<TransferUsuarioT> usuarios = (ArrayList<TransferUsuarioT>) datos;
                 FragmentListadoUsuario frgListadoU = FragmentListadoUsuario.newInstance(usuarios);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListadoU).commit();
-
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:
-
                 TransferUsuarioT usuario = (TransferUsuarioT) datos;
                 FragmentDetalleUsuario frgDetalleU = FragmentDetalleUsuario.newInstance(usuario);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
-
                 break;
 
             case ListaComandos.CONSULTAR_RETO:
-
                 TransferRetoT reto = (TransferRetoT) datos;
                 if(reto.getId() == null){ //Si no hay reto al menos pasas los datos del usuario
                     FragmentDetalleNuevoReto fragmentNuevoReto = FragmentDetalleNuevoReto.newInstance(reto);
@@ -122,18 +106,7 @@ public class DispatcherImp extends Dispatcher {
                     FragmentDetalleReto fragmentReto = FragmentDetalleReto.newInstance(reto);
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
                 }
-
                 break;
-
-            case ListaComandos.CONSULTAR_TUTOR:
-                break;
-
-            case ListaComandos.EDITAR_TUTOR:
-                break;
-
-            case ListaComandos.CREAR_TUTOR:
-                break;
-
         }
     }
 }
