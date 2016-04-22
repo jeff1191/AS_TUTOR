@@ -2,11 +2,9 @@ package es.ucm.as_tutor.presentacion.vista.main;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,37 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imanoweb.calendarview.CalendarListener;
-import com.imanoweb.calendarview.CustomCalendarView;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-
-import java.io.File;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
-import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentDetalleAyuda;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentListadoAyuda;
-import es.ucm.as_tutor.presentacion.vista.evento.AdaptadorEventoUsuarios;
-import es.ucm.as_tutor.presentacion.vista.evento.FragmentListadoEvento;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentListadoTutor;
-import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
-import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -233,8 +212,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mDrawerToggle.onOptionsItemSelected(item)) return true;
-        else return false;
+        if (mDrawerToggle.onOptionsItemSelected(item)) return true;
+        else {
+            switch (item.getItemId()) {
+                case R.id.retoUsuario:
+                    Log.e("testJL", "El id del retos es " + 1);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, 1);
+                    break;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+        return true;
+        //else return false;
     }
 
     public void nuevoEvento(View view){    }

@@ -72,9 +72,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private String estudios;
     private String notas;
     private Integer puntuacion;
-    private Integer puntuacionAnterior;
     private String avatar;
-    private Integer reto;
     private String nombrePadre;
     private String nombreMadre;
     private String telefonoPadre;
@@ -95,7 +93,6 @@ public class FragmentDetalleUsuario extends Fragment {
         arguments.putString("avatar", usuario.getAvatar());
         arguments.putString("telefono", usuario.getTelefono());
         arguments.putInt("puntuacion", usuario.getPuntuacion());
-        arguments.putInt("puntuacionAnterior", usuario.getPuntuacionAnterior());
         arguments.putString("estudios", usuario.getCurso());
         arguments.putString("dni", usuario.getDni());
         arguments.putString("direccion", usuario.getDireccion());
@@ -108,8 +105,6 @@ public class FragmentDetalleUsuario extends Fragment {
         arguments.putString("telfPadre", usuario.getTelPadre());
         arguments.putString("telfMadre", usuario.getTelMadre());
         arguments.putString("colegio", usuario.getCentroAcademico());
-        if(usuario.getIdReto() != null)
-            arguments.putInt("reto", usuario.getIdReto());
         arguments.putString("sincronizacion", usuario.getCodigoSincronizacion());
 
         frgUsuario.setArguments(arguments);
@@ -131,7 +126,6 @@ public class FragmentDetalleUsuario extends Fragment {
             avatar = bundle.getString("avatar");
             telefono = bundle.getString("telefono");
             puntuacion = bundle.getInt("puntuacion");
-            puntuacionAnterior = bundle.getInt("puntuacionAnterior");
             estudios = bundle.getString("estudios");
             dni = bundle.getString("dni");
             direccion = bundle.getString("direccion");
@@ -144,7 +138,6 @@ public class FragmentDetalleUsuario extends Fragment {
             correoPadre = bundle.getString("correoPadre");
             correoMadre = bundle.getString("correoMadre");
             centroEstudios = bundle.getString("colegio");
-            reto = bundle.getInt("reto");
             sincronizacion = bundle.getString("sincronizacion");
         }
     }
@@ -335,9 +328,7 @@ public class FragmentDetalleUsuario extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 // Cambiar info padre o madre
                 TransferUsuarioT editUser = new TransferUsuarioT();
-                TransferUsuarioT consultarU = new TransferUsuarioT();
                 editUser.setId(id);
-                consultarU.setId(id);
                 if(progenitor.equals("padre")){
                     editUser.setNombrePadre(name.getText().toString());
                     editUser.setTelPadre(phone.getText().toString());
@@ -349,7 +340,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     editUser.setCorreoMadre(mail.getText().toString());
                 }
                 Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultarU);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, id);
             }
         });
         builder.setNegativeButton("Cancelar",
@@ -378,8 +369,8 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, id);
                 break;
             case R.id.retoUsuario:
-                Log.e("testJL", "El id del retos es " + reto);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, reto);
+                Log.e("testJL", "El id del usuario dueño del reto es " + id);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, id);
                 break;
             case R.id.eventosUsuario:
                 /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();

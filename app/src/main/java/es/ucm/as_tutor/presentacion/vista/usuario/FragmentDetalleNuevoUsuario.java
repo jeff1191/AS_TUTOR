@@ -151,7 +151,6 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                     usuario.setTelPadre(telPadreV.getText().toString());
                     usuario.setTelMadre(telMadreV.getText().toString());
                     usuario.setCentroAcademico(centroEstudiosV.getText().toString());
-                    usuario.setIdReto(null);
                     usuario.setCodigoSincronizacion("111"); // Esto hay que mejorarlo
 
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, usuario);

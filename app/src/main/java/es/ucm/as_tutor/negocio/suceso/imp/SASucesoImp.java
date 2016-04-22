@@ -173,7 +173,7 @@ public class SASucesoImp implements SASuceso {
                 reto1.setSuperado(false);
                 u.setId(1);
                 reto1.setUsuario(u);
-                reto1.setPremio("Si lo completas, ganaras un kitkat");
+                reto1.setPremio("Si lo completa, ganara un kitkat");
                 reto.create(reto1);
                 Reto reto2 = new Reto();
                 reto2.setContador(5);
@@ -203,22 +203,29 @@ public class SASucesoImp implements SASuceso {
             reto.setContador(transferReto.getContador());
             reto.setUsuario(usuario);
             daoReto.create(reto);
-            //Buscar ese reto y meterselo a usuario, como esta no nos vale xq no tiene ID :(
-            //daoUsuario.update(usuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public TransferRetoT consultarReto(Integer idReto) {
+    public TransferRetoT consultarReto(Integer idUsuario) {
         TransferRetoT ret = null;
 
         try {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
-            Reto r = daoReto.queryForId(idReto);
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(idUsuario);
+            Usuario usuario = uQb.queryForFirst();
+            // Busca el reto de ese usuario
+            QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
+            rQb.where().eq("USUARIO" , usuario);
+            Reto r = rQb.queryForFirst();
+
             ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
                     r.getTexto(), r.getSuperado(), r.getPremio());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

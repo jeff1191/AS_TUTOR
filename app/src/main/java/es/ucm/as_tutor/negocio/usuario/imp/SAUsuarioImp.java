@@ -35,15 +35,8 @@ public class SAUsuarioImp implements SAUsuario {
 	public void crearUsuario(TransferUsuarioT transferUsuario) {
 
 		try {
-			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			Reto reto = null;
-
-			if(transferUsuario.getIdReto() != null)
-				reto = daoReto.queryForId(transferUsuario.getIdReto());
-
 			Usuario usuario = new Usuario();
-
 			usuario.setNombre(transferUsuario.getNombre());
 			usuario.setCorreo(transferUsuario.getCorreo());
 			usuario.setAvatar(transferUsuario.getAvatar());
@@ -73,7 +66,6 @@ public class SAUsuarioImp implements SAUsuario {
 			usuario.setTelfMadre(transferUsuario.getTelMadre());
 			usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
 			usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
-			usuario.setReto(reto);
 
 			daoUsuario.create(usuario);
 		} catch (SQLException e) {
@@ -120,10 +112,6 @@ public class SAUsuarioImp implements SAUsuario {
 				//Sincronizacion (Tal vez otro comando?)
 				usuario.setPuntuacion(usuarioMod.getPuntuacion());
 				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
-				//Esto seria mas complejo, ya que no solo es encontrarlo sino
-				//cambiar puntuacion y eso no lo tenenmos ahora
-				Reto reto = daoReto.queryForId(usuarioMod.getIdReto());
-				usuario.setReto(reto);
 			}
 			daoUsuario.update(usuario);
 			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
@@ -148,10 +136,6 @@ public class SAUsuarioImp implements SAUsuario {
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Usuario user = daoUsuario.queryForId(idUsuario);
-			//Faltarian de traer las tareas y ver si reto y perfil funcionan bien
-			Integer idReto;
-			if(user.getReto() == null) idReto = 0;
-			else idReto = user.getReto().getId();
 
 			ret = new TransferUsuarioT(user.getId(), user.getNombre(),
 					user.getCorreo(), user.getAvatar(), user.getTelefono(), user.getPuntuacion(),
@@ -159,7 +143,7 @@ public class SAUsuarioImp implements SAUsuario {
 					user.getDireccion(), user.getTipoPerfil().toString(), user.getNotas(),
 					user.getNombrePadre(), user.getNombreMadre(), user.getCorreoPadre(),
 					user.getCorreoMadre(), user.getTelfPadre(), user.getTelfMadre(),
-					user.getCentroAcademico(), idReto, user.getCodigoSincronizacion());
+					user.getCentroAcademico(), user.getCodigoSincronizacion());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -195,7 +179,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user1.setCodigoSincronizacion("VIC001");
 				user1.setPuntuacion(9);
 				user1.setPuntuacionAnterior(10);
-				user1.setReto(reto.queryForId(1));
 				usuario.create(user1);
 				Usuario user2 = new Usuario();
 				user2.setNombre("Juanlu Armas");
@@ -217,7 +200,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user2.setCodigoSincronizacion("VIC001");
 				user2.setPuntuacion(9);
 				user2.setPuntuacionAnterior(10);
-				user2.setReto(null);
 				usuario.create(user2);
 				Usuario user3 = new Usuario();
 				user3.setNombre("Jefferson Almache");
@@ -239,7 +221,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user3.setCodigoSincronizacion("VIC001");
 				user3.setPuntuacion(9);
 				user3.setPuntuacionAnterior(10);
-				user3.setReto(reto.queryForId(2));
 				usuario.create(user3);
 				Usuario user4 = new Usuario();
 				user4.setNombre("Clara Paules");
@@ -261,7 +242,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user4.setCodigoSincronizacion("VIC001");
 				user4.setPuntuacion(9);
 				user4.setPuntuacionAnterior(10);
-				user4.setReto(null);
 				usuario.create(user4);
 			}
 		} catch (SQLException e) {

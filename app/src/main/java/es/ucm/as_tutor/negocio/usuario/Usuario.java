@@ -1,13 +1,9 @@
 
 package es.ucm.as_tutor.negocio.usuario;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 
-import es.ucm.as_tutor.negocio.suceso.Reto;
-import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.utils.Perfil;
 
 
@@ -70,12 +66,6 @@ public class Usuario {
 
     @DatabaseField(columnName = "CENTRO_ACADEMICO")
 	private String centroAcademico;
-
-    @DatabaseField(foreign = true, columnName = "RETO")
-	private Reto reto;
-
-    @ForeignCollectionField(eager = true, columnName = "TAREAS")
-    private ForeignCollection<Tarea> tareas;
 
     @DatabaseField(columnName = "CODIGO_SINCRONIZACION")
     private String codigoSincronizacion;
@@ -222,22 +212,6 @@ public class Usuario {
 
     public void setCentroAcademico(String centroAcademico) {
         this.centroAcademico = centroAcademico;
-    }
-
-    public Reto getReto() {
-        return reto;
-    }
-
-    public void setReto(Reto reto) {
-        this.reto = reto;
-    }
-
-    public ForeignCollection<Tarea> getTareas() {
-        return tareas;
-    }
-
-    public void setTareas(ForeignCollection<Tarea> tareas) {
-        this.tareas = tareas;
     }
 
     public String getDireccion() {
