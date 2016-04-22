@@ -60,7 +60,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private TextView infoMadreV;
     private FloatingActionButton editarDatos;
 
-    private Integer id;
+    private static Integer idUsuario;
     private String nombre;
     private String sincronizacion;
     private String perfil;
@@ -85,9 +85,9 @@ public class FragmentDetalleUsuario extends Fragment {
 
     public static FragmentDetalleUsuario newInstance(TransferUsuarioT usuario) {
         FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
-
+        idUsuario = usuario.getId();
+        Log.e("testing", "usuario fragment detalle" + idUsuario);
         Bundle arguments = new Bundle();
-        arguments.putInt("id", usuario.getId());
         arguments.putString("nombre", usuario.getNombre());
         arguments.putString("correo", usuario.getCorreo());
         arguments.putString("avatar", usuario.getAvatar());
@@ -115,12 +115,8 @@ public class FragmentDetalleUsuario extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
-            Log.e("testJL", "El valor del id de usuario es " + bundle.getInt("id"));
-            id = bundle.getInt("id");
-            Log.e("testJL", "El valor del id una vez guardado es " + id);
             nombre = bundle.getString("nombre");
             correo = bundle.getString("correo");
             avatar = bundle.getString("avatar");
@@ -140,6 +136,7 @@ public class FragmentDetalleUsuario extends Fragment {
             centroEstudios = bundle.getString("colegio");
             sincronizacion = bundle.getString("sincronizacion");
         }
+        setHasOptionsMenu(true);
     }
 
 
@@ -208,7 +205,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     usuario.setDireccion(direccionV.getText().toString());
                     usuario.setNotas(notasV.getText().toString());
                     usuario.setCentroAcademico(centroEstudiosV.getText().toString());
-                    usuario.setId(id);
+                    usuario.setId(idUsuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, usuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 }
@@ -328,7 +325,7 @@ public class FragmentDetalleUsuario extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 // Cambiar info padre o madre
                 TransferUsuarioT editUser = new TransferUsuarioT();
-                editUser.setId(id);
+                editUser.setId(idUsuario);
                 if(progenitor.equals("padre")){
                     editUser.setNombrePadre(name.getText().toString());
                     editUser.setTelPadre(phone.getText().toString());
@@ -340,7 +337,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     editUser.setCorreoMadre(mail.getText().toString());
                 }
                 Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, id);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
             }
         });
         builder.setNegativeButton("Cancelar",
@@ -363,14 +360,12 @@ public class FragmentDetalleUsuario extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("testJL", "Se mete en el del fragment");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, id);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                 break;
             case R.id.retoUsuario:
-                Log.e("testJL", "El id del usuario dueño del reto es " + id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, id);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
                 break;
             case R.id.eventosUsuario:
                 /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
@@ -406,14 +401,9 @@ public class FragmentDetalleUsuario extends Fragment {
                 break;
 
             case R.id.eliminarUsuario:
-                Log.e("testJL", "va a la fun externa " + id + nombre + correo + centroEstudios);
-                eliminaUsuario();
-                /*
-                Log.e("testJL", "entra en eliminar usuario con el id " + id);
-                TransferUsuarioT consultarU = new TransferUsuarioT();
-                consultarU.setId(id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);*/
+                Log.e("testJL", "va a la fun externa " + idUsuario + nombre + correo + centroEstudios);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -421,14 +411,4 @@ public class FragmentDetalleUsuario extends Fragment {
 
         return true;
     }
-
-    private void eliminaUsuario(){
-        Log.e("testJL", "entra en eliminar usuario con el id " + id + nombre + correo + centroEstudios);
-        TransferUsuarioT consultarU = new TransferUsuarioT();
-        consultarU.setId(id);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
-    }
-
-
 }

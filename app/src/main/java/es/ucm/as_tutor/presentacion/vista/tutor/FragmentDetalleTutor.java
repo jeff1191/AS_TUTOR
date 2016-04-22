@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
@@ -129,7 +128,7 @@ public class FragmentDetalleTutor extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_usuario, menu);
+        inflater.inflate(R.menu.menu_vacio, menu);
     }
 
     public AlertDialog DialogCambioContrasenha(LayoutInflater inflater) {

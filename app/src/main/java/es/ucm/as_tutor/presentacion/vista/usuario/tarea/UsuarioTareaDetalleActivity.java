@@ -1,31 +1,19 @@
 package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
-import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
@@ -148,7 +136,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
 
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_vacio, menu);
         return true;
     }
 

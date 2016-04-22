@@ -2,7 +2,6 @@ package es.ucm.as_tutor.presentacion.vista.ayuda;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,6 +70,6 @@ public class FragmentDetalleAyuda extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.menu_usuario, menu);
+        inflater.inflate(R.menu.menu_vacio, menu);
     }
 }

@@ -120,12 +120,6 @@ public class SASucesoImp implements SASuceso {
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 
-            /*/////////////////////////////////////////////////////////////////////////////////////
-            Usuario u = new Usuario();
-            u.setNombre("Maria");
-            daoUsuario.create(u);
-            *//////////////////////////////////////////////////////////////////////////////////////
-
             // Busca al usuario por su id
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
             uQb.where().idEq(idUsuario);

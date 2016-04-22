@@ -129,7 +129,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
 
 
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_vacio, menu);
         return true;
     }
 

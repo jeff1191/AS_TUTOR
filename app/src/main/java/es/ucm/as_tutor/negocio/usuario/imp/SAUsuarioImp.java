@@ -120,11 +120,10 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 	}
 
-	public void eliminarUsuario(TransferUsuarioT consulta) {
+	public void eliminarUsuario(Integer idUsuario) {
 		try {
-			Log.e("testJL", "El valor del id que llega a bbdd es " + consulta.getId());
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			daoUsuario.deleteById(consulta.getId()); // Ver si eso una manera mejor de borrar
+			daoUsuario.deleteById(idUsuario); // Ver si eso una manera mejor de borrar
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

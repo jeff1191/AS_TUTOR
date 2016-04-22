@@ -192,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
 
@@ -204,27 +203,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuActionBar = menu;
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_vacio, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) return true;
-        else {
-            switch (item.getItemId()) {
-                case R.id.retoUsuario:
-                    Log.e("testJL", "El id del retos es " + 1);
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, 1);
-                    break;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
-        return true;
-        //else return false;
+        else return false;
     }
 
     public void nuevoEvento(View view){    }

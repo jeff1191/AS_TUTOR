@@ -14,6 +14,7 @@ import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.presentacion.controlador.Dispatcher;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 import es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleUsuario;
 import es.ucm.as_tutor.presentacion.vista.usuario.FragmentListadoUsuario;
@@ -107,6 +108,12 @@ public class DispatcherImp extends Dispatcher {
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
                 }
                 break;
+
+            case ListaComandos.ELIMINAR_USUARIO:
+                BlankFragment fragmentoBlanco = new BlankFragment();
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentoBlanco).commit();
+                break;
+
         }
     }
 }
