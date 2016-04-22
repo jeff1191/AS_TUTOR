@@ -40,16 +40,18 @@ public class DispatcherImp extends Dispatcher {
     public void dispatch(String accion, Object datos) {
 
         switch(accion){
+            // Eventos
             case ListaComandos.CREAR_EVENTO:
               //Una vez que creas el evento pones el blankFragment
                 BlankFragment bk1 = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, bk1).commit();
+                break;
 
-            break;
             case ListaComandos.ELIMINAR_EVENTO:
                 BlankFragment del = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, del).commit();
-            break;
+                break;
+
             case ListaComandos.CONSULTAR_EVENTO:
                 //REllenar las lista con los usuarios.
 
@@ -61,7 +63,7 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<Integer> idsUsuarios = new ArrayList<Integer>();
 
                 for(int i=0; i < info.size(); i++){
-                    idsUsuarios.add(info.get(i).getUsuario().getID());
+                    idsUsuarios.add(info.get(i).getUsuario().getId());
                     nombresUsuarios.add(info.get(i).getUsuario().getNombre());
                     asistenciaUsuarios.add(info.get(i).getAsistencia());
                     usuariosActivos.add(info.get(i).getActivo());
@@ -72,21 +74,20 @@ public class DispatcherImp extends Dispatcher {
 
                 FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance(consulta,nombresUsuarios, idsUsuarios, asistenciaUsuarios,usuariosActivos,"guardar");
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
-            break;
+                break;
+
             case ListaComandos.GUARDAR_EVENTO:
                 //Una vez que creas el evento pones el blankFragment
                 BlankFragment bk2 = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, bk2).commit();
-            break;
-            case ListaComandos.LISTADO_EVENTOS:
+                break;
 
+            case ListaComandos.LISTADO_EVENTOS:
                 ArrayList<TransferEvento> eventos = (ArrayList<TransferEvento>) datos;
                 FragmentListadoEvento fragmentListadoEvento = FragmentListadoEvento.newInstance(eventos);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoEvento).commit();
             break;
-            case ListaComandos.CONSUTAR_USUARIOS_EVENTO:
 
-            break;
             case ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS:
                 TransferEvento crear = null;
                 ArrayList<String> nombresUsuariosCrear = new ArrayList<String>();
@@ -94,18 +95,14 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<Integer> indicesUsuarios = new ArrayList<>();
                 for(int i =0; i < ((ArrayList<TransferUsuarioT>) datos).size(); i++) {
                     nombresUsuariosCrear.add(((ArrayList<TransferUsuarioT>) datos).get(i).getNombre());
-                    indicesUsuarios.add(((ArrayList<TransferUsuarioT>) datos).get(i).getID());
+                    indicesUsuarios.add(((ArrayList<TransferUsuarioT>) datos).get(i).getId());
                     usuariosActivosCrear.add(1); // Todos activos
                 }
                 FragmentDetalleEvento frgDetalleCrear = FragmentDetalleEvento.newInstance(crear,nombresUsuariosCrear,indicesUsuarios,null,usuariosActivosCrear,"crear");
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleCrear).commit();
-            break;
-
-
-            case ListaComandos.ANYADIR_USUARIOS_EVENTO:
-
                 break;
 
+            // Tareas
             case ListaComandos.CONSULTAR_TAREAS:
                 ArrayList<String> textosAlarma = new ArrayList<String>();
                 ArrayList<String> horasAlarma = new ArrayList<String>();
@@ -117,8 +114,6 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<Integer> mejorar = new ArrayList<Integer>();
                 ArrayList<Integer> habilitada = new ArrayList<Integer>();
                 ArrayList<Integer> id = new ArrayList<Integer>();
-
-
                 ArrayList<TransferTareaT> tareas = (ArrayList<TransferTareaT>) datos;
 
                 // Si ese usuario tiene tareas se cogen los campos que vamos a mostrar
@@ -160,6 +155,7 @@ public class DispatcherImp extends Dispatcher {
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
                 break;
 
+            // Usuarios
             case ListaComandos.LISTADO_USUARIOS:
                 ArrayList<TransferUsuarioT> usuarios = (ArrayList<TransferUsuarioT>) datos;
                 FragmentListadoUsuario frgListadoU = FragmentListadoUsuario.newInstance(usuarios);
@@ -172,6 +168,12 @@ public class DispatcherImp extends Dispatcher {
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
                 break;
 
+            case ListaComandos.ELIMINAR_USUARIO:
+                BlankFragment fragmentoBlanco = new BlankFragment();
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentoBlanco).commit();
+                break;
+
+            // Reto
             case ListaComandos.CONSULTAR_RETO:
                 TransferRetoT reto = (TransferRetoT) datos;
                 if(reto.getId() == null){ //Si no hay reto al menos pasas los datos del usuario
@@ -183,12 +185,6 @@ public class DispatcherImp extends Dispatcher {
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
                 }
                 break;
-
-            case ListaComandos.ELIMINAR_USUARIO:
-                BlankFragment fragmentoBlanco = new BlankFragment();
-                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentoBlanco).commit();
-                break;
-
         }
     }
 }

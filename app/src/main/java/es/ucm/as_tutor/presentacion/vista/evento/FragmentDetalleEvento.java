@@ -225,7 +225,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
 
                                     if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
                                         TransferUsuarioT add = new TransferUsuarioT();
-                                        add.setID(adapterListadoUsuarios.getDatosIds().get(i));
+                                        add.setId(adapterListadoUsuarios.getDatosIds().get(i));
 
                                         TransferUsuarioEvento eventoUsuario = new TransferUsuarioEvento(nuevoEvento,add);
                                         eventoUsuario.setActivo(1);
@@ -298,8 +298,8 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
 
                                 if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
                                     TransferUsuarioT add = new TransferUsuarioT();
-                                    add.setID(adapterListadoUsuarios.getDatosIds().get(i));
-                                    Log.e("ASIGNANDO: ", add.getID() + "");
+                                    add.setId(adapterListadoUsuarios.getDatosIds().get(i));
+                                    Log.e("ASIGNANDO: ", add.getId() + "");
 
                                     TransferUsuarioEvento eventoUsuario = new TransferUsuarioEvento(nuevoEvento,add);
                                     eventoUsuario.setActivo(1);

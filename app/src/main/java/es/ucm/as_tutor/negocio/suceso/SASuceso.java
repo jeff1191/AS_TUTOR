@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public interface SASuceso {
 
+	// Tarea
+
 	public void crearTarea(TransferTareaT transferTarea);
 
 	public void editarTarea(TransferTareaT transferTarea);
@@ -23,18 +25,28 @@ public interface SASuceso {
 
 	public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario);
 
+	// Reto
+
 	public void crearRetos();
 
 	public void crearReto(TransferRetoT transferReto);
 
 	public TransferRetoT consultarReto(Integer idUsuario);
 
+	// Evento
+
 	public boolean crearEvento(TransferEvento nuevoEvento);
+
 	public boolean eliminarEvento(TransferEvento eliminaEvento);
+
 	public TransferEvento consultaEvento(TransferEvento consulta);
+
 	public boolean guardarEvento(TransferEvento guardaEvento);
+
 	public ArrayList<TransferEvento> listadoEventos();
+
 	public ArrayList<TransferUsuarioEvento> consultarUsuariosEvento(TransferEvento consultaEvento);
+
 	public void crearUsuariosEvento(ArrayList<TransferUsuarioEvento> eventosUsuarios);
 
 }

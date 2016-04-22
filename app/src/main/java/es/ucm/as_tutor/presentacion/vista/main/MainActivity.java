@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void nuevoEvento(View view){
         menuActionBar.clear();
-        getMenuInflater().inflate(R.menu.menu_usuario, menuActionBar);
+        getMenuInflater().inflate(R.menu.menu_vacio, menuActionBar);
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS,null);
     }
 

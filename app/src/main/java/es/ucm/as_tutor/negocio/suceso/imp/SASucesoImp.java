@@ -1,8 +1,6 @@
 
 package es.ucm.as_tutor.negocio.suceso.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -39,6 +37,7 @@ public class SASucesoImp implements SASuceso {
     }
 
 
+	// Tarea
 	@Override
 	public void crearTarea(TransferTareaT transferTarea) {
             // El constructor vacio de Tarea da valores por defecto a los campos no editables
@@ -69,26 +68,9 @@ public class SASucesoImp implements SASuceso {
 		}
 	}
 
-	@Override
-	public boolean crearEvento(TransferEvento nuevoEvento) {
-
-		try {
-			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
-			Evento createE = new Evento();
-			createE.setNombreEvento(nuevoEvento.getNombre());
-			createE.setHoraAlarma(nuevoEvento.getHoraAlarma());
-			createE.setHoraEvento(nuevoEvento.getHoraEvento());
-			createE.setFecha(nuevoEvento.getFecha());
-			daoEvento.create(createE);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	@Override
-	public void editarTarea(TransferTareaT transferTarea) {
-		Tarea tarea = new Tarea();
+    @Override
+    public void editarTarea(TransferTareaT transferTarea) {
+        Tarea tarea = new Tarea();
         tarea.setTextoPregunta(transferTarea.getTextoPregunta());
         tarea.setTextoAlarma(transferTarea.getTextoAlarma());
         tarea.setHoraPregunta(transferTarea.getHoraPregunta());
@@ -110,20 +92,94 @@ public class SASucesoImp implements SASuceso {
             // Se actualiza la informacion de la tarea en la BBDD
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             daoTarea.update(tarea);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public void eliminarTarea(Integer idTarea) {
-		try {
+    @Override
+    public void eliminarTarea(Integer idTarea) {
+        try {
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
             Tarea tarea = daoTarea.queryForId(idTarea);
             daoTarea.delete(tarea);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deshabilitarTarea(Integer idTarea) {
+        try {
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+            Tarea tarea = daoTarea.queryForId(idTarea);
+            tarea.setHabilitada(!tarea.getHabilitada());
+            daoTarea.update(tarea);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
+        ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
+        try {
+
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+
+            // Busca al usuario por su id
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(idUsuario);
+            Usuario usuario = uQb.queryForFirst();
+            // Busca las tareas de ese usuario
+            QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
+            tQb.where().eq("USUARIO" , usuario);
+            List<Tarea> tareas = tQb.query();
+
+            // Las transformamos en transfers para devolverselas a la vista
+            for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+                TransferTareaT transfer = new TransferTareaT(
+                        tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
+                        tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
+                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
+                transfer.setId(tarea.getId());
+                ret.add(i, transfer);
+            }
+
+            // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
+            // para cuando no haya ninguna
+            if(tareas.size() == 0) {
+                TransferTareaT fantasma = new TransferTareaT();
+                fantasma.setIdUsuario(idUsuario);
+                ret.add(0, fantasma);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    // Evento
+	@Override
+	public boolean crearEvento(TransferEvento nuevoEvento) {
+
+		try {
+			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
+			Evento createE = new Evento();
+			createE.setNombreEvento(nuevoEvento.getNombre());
+			createE.setHoraAlarma(nuevoEvento.getHoraAlarma());
+			createE.setHoraEvento(nuevoEvento.getHoraEvento());
+			createE.setFecha(nuevoEvento.getFecha());
+			daoEvento.create(createE);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	@Override
@@ -212,7 +268,7 @@ public class SASucesoImp implements SASuceso {
 			List<Usuario> usuariosEventos = getHelper().lookupUsuariosForEvento(eventoBDD);
 			for(int i = 0; i < usuariosEventos.size(); i++) {
 				TransferUsuarioT tUsuario= new TransferUsuarioT();
-				tUsuario.setID(usuariosEventos.get(i).getId());
+				tUsuario.setId(usuariosEventos.get(i).getId());
 				tUsuario.setNombre(usuariosEventos.get(i).getNombre());
 				TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
 				tRet.setActivo(eventoUsuarios.get(i).getActivo());
@@ -231,7 +287,7 @@ public class SASucesoImp implements SASuceso {
 				}
 				if(anyadir){//puedo añadir el objeto i - ESTOS NO ESTAN ACTIVOS
 					TransferUsuarioT tUsuario= new TransferUsuarioT();
-					tUsuario.setID(usuariosBDD.get(i).getId());
+					tUsuario.setId(usuariosBDD.get(i).getId());
 					tUsuario.setNombre(usuariosBDD.get(i).getNombre());
 					TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
 					tRet.setActivo(0);
@@ -261,7 +317,7 @@ public class SASucesoImp implements SASuceso {
 				Evento eventoBDD = tQb.queryForFirst();
 
 				for(int i=0; i < eventosUsuarios.size(); i++){
-					UsuarioEvento relacion = new UsuarioEvento(eventoBDD, daoUsuario.queryForId(eventosUsuarios.get(i).getUsuario().getID()));
+					UsuarioEvento relacion = new UsuarioEvento(eventoBDD, daoUsuario.queryForId(eventosUsuarios.get(i).getUsuario().getId()));
 					relacion.setAsistencia("NO");
 					relacion.setActivo(1);
 					daoUsuarioEvento.create(relacion);
@@ -276,60 +332,7 @@ public class SASucesoImp implements SASuceso {
 		}
 	}
 
-    @Override
-    public void deshabilitarTarea(Integer idTarea) {
-        try {
-            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
-            Tarea tarea = daoTarea.queryForId(idTarea);
-            tarea.setHabilitada(!tarea.getHabilitada());
-            daoTarea.update(tarea);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
-        ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
-        try {
-
-            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
-
-            // Busca al usuario por su id
-            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
-            uQb.where().idEq(idUsuario);
-            Usuario usuario = uQb.queryForFirst();
-            // Busca las tareas de ese usuario
-            QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
-            tQb.where().eq("USUARIO" , usuario);
-            List<Tarea> tareas = tQb.query();
-
-            // Las transformamos en transfers para devolverselas a la vista
-            for(int i = 0; i < tareas.size(); i++){
-                Tarea tarea = tareas.get(i);
-                TransferTareaT transfer = new TransferTareaT(
-                        tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
-                        tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
-                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
-                        tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
-                transfer.setId(tarea.getId());
-                ret.add(i, transfer);
-            }
-
-            // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
-            // para cuando no haya ninguna
-            if(tareas.size() == 0) {
-                TransferTareaT fantasma = new TransferTareaT();
-                fantasma.setIdUsuario(idUsuario);
-                ret.add(0, fantasma);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
+    // Reto
 
     public void crearRetos(){
         Dao<Reto, Integer> reto;

@@ -68,7 +68,7 @@ public class FragmentListadoEvento extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getActivity().getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_vacio, menu);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
