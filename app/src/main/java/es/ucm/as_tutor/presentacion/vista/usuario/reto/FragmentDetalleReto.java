@@ -106,7 +106,7 @@ public class FragmentDetalleReto extends Fragment {
         else
             ((TextView) rootView.findViewById(R.id.cont)).setText("Ha respondido afirmativante "
                     + contador + " veces");
-
+        ((TextView) rootView.findViewById(R.id.contador)).setText(contador + "/30");
         ((ProgressBar) rootView.findViewById(R.id.progressBar)).setProgress(contador);
 
 
