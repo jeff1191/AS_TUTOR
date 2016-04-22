@@ -37,7 +37,7 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".presentacion.vista.main.Decision" />
         <activity
-            android:name=".presentacion.vista.main.Registro"
+            android:name=".presentacion.vista.tutor.RegistroTutor"
             android:label="@string/title_activity_registro"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>

@@ -13,7 +13,7 @@ public class DeshabilitarTareaComando implements Command{
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        saSuceso.deshabilitarTarea((TransferTareaT) datos);
+        saSuceso.deshabilitarTarea((Integer)datos);
         return null;
     }
 }

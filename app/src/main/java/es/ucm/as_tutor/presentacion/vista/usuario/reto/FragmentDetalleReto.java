@@ -44,11 +44,9 @@ public class FragmentDetalleReto extends Fragment {
         arguments.putInt("id", reto.getId());
         if(reto.getIdUsuario() != null) {
             arguments.putInt("usuario", reto.getIdUsuario());
-            TransferUsuarioT aux = new TransferUsuarioT();
-            aux.setId(reto.getIdUsuario());
             try {
                 TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
-                        .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(aux);
+                        .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
                 arguments.putString("nombreUsuario", ret.getNombre());
                 arguments.putString("fotoUsuario", ret.getAvatar());
             } catch (commandException e) {
@@ -108,7 +106,7 @@ public class FragmentDetalleReto extends Fragment {
         else
             ((TextView) rootView.findViewById(R.id.cont)).setText("Ha respondido afirmativante "
                     + contador + " veces");
-
+        ((TextView) rootView.findViewById(R.id.contador)).setText(contador + "/30");
         ((ProgressBar) rootView.findViewById(R.id.progressBar)).setProgress(contador);
 
 

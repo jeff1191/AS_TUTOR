@@ -1,20 +1,16 @@
 package es.ucm.as_tutor.presentacion.vista.usuario.tarea;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
@@ -30,6 +26,8 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private boolean nuevaTarea;
     private Integer idUsuario;
+    private Integer idTarea;
+    private Frecuencia frecuencia;
     private EditText textoAlarma;
     private EditText textoPregunta;
     private EditText mejorar;
@@ -37,9 +35,8 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     private TextView no;
     private TimePicker horaAlarma;
     private TimePicker horaPregunta;
-    private Spinner frecuenciaSpinner;
+    private RadioGroup frecuenciasRadio;
     private TextView total;
-    private String[] frecuencias = {"Diaria", "Semanal", "Mensual"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +44,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_usuario_tarea_detalle);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.logo);
 
         // Se buscan las views por su id
         this.textoAlarma = (EditText) findViewById(R.id.textoAlarma);
@@ -60,47 +53,38 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         this.mejorar = (EditText) findViewById(R.id.mejora);
         this.horaAlarma = (TimePicker) findViewById(R.id.horaAlarma);
         this.horaPregunta = (TimePicker) findViewById(R.id.horaPregunta);
-        this.frecuenciaSpinner = (Spinner) findViewById(R.id.frecuencia);
+        this.frecuenciasRadio = (RadioGroup) findViewById(R.id.radioFrecuencias);
         this.total = (TextView) findViewById(R.id.total);
 
-        Bundle bundle = getIntent().getExtras();
-        if (!bundle.get("nueva").equals("nueva")) {   // Editar
-            nuevaTarea = false;
-            completarCampos(bundle);
-        } else{                 // Crear
-            nuevaTarea = true;
-        }
-
-        // Spinner de frecuencia
-        ArrayAdapter<String> adapter_frecuencia = new ArrayAdapter(this.getApplicationContext(),
-                android.R.layout.simple_spinner_item, frecuencias);
-        adapter_frecuencia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        frecuenciaSpinner.setAdapter(adapter_frecuencia);
-        frecuenciaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        frecuenciasRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                frecuenciaSpinner.setSelection(position);
-                String frecuenciaSeleccionada = (String) frecuenciaSpinner.getSelectedItem();
-
-                switch (frecuenciaSeleccionada) {
-                    case "Diaria":
-                        // set frecuencia
-                        break;
-
-                    case "Semanal":
-                        // set frecuencia
-                        break;
-
-                    case "Mensual":
-                        // set frecuencia
-                        break;
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // TODO Auto-generated method stub
+                if (checkedId == R.id.diaria){
+                    frecuencia = Frecuencia.DIARIA;
+                    frecuenciasRadio.check(R.id.diaria);
+                }else if (checkedId == R.id.semanal){
+                    frecuencia = Frecuencia.SEMANAL;
+                    frecuenciasRadio.check(R.id.semanal);
+                }else if (checkedId == R.id.mensual){
+                    frecuencia = Frecuencia.MENSUAL;
+                    frecuenciasRadio.check(R.id.mensual);
                 }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        idUsuario = bundle.getInt("usuario");
+        idTarea = bundle.getInt("idTarea");
+        if (!bundle.get("nueva").equals("nueva")) { // Editar tarea
+            nuevaTarea = false;
+            completarCampos(bundle);
+        } else{                                     // Crear tarea
+            nuevaTarea = true;
+            seleccionaRadioButton("diaria");
+        }
+
+
     }
 
     // Este metodo carga los valores de la BBDD en los campos
@@ -112,67 +96,50 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         mejorar.setText(bundle.get("mejorar").toString());
         total.setText(bundle.get("total").toString());
         // TimePicker hora alarma
-        String horaLargo = bundle.getString("horaAlarma");
+        String horaLargo = bundle.getString("horaAlarma").trim();
         horaAlarma.setCurrentHour(ParserTime.hour(horaLargo));
         horaAlarma.setCurrentMinute(ParserTime.min(horaLargo));
         // TimePicker hora pregunta
-        horaLargo = bundle.getString("horaPregunta");
+        horaLargo = bundle.getString("horaPregunta").trim();
         horaPregunta.setCurrentHour(ParserTime.hour(horaLargo));
         horaPregunta.setCurrentMinute(ParserTime.min(horaLargo));
         // Frecuencia
-        cambiarOrdenFrecuencias(bundle.getString("frecuencia"));
+        seleccionaRadioButton(bundle.getString("frecuencia"));
     }
 
-
-    // Este metodo es necesario para que se muestre como primera opcion del spinner la frecuencia
-    // de la tarea seleccionada
-    private void cambiarOrdenFrecuencias(String frecuencia) {
-        switch (frecuencia){
+    private Frecuencia seleccionaRadioButton(String string){
+        switch (string){
             case "Diaria":
-                this.frecuencias[0] = "Diaria";
-                this.frecuencias[1] = "Semanal";
-                this.frecuencias[2] = "Mensual";
+                frecuenciasRadio.clearCheck();
+                frecuencia = Frecuencia.DIARIA;
+                RadioButton diaria = (RadioButton) findViewById(R.id.diaria);
+                diaria.setChecked(true);
+                frecuenciasRadio.check(R.id.diaria);
                 break;
             case "Semanal":
-                this.frecuencias[0] = "Semanal";
-                this.frecuencias[1] = "Mensual";
-                this.frecuencias[2] = "Diaria";
+                frecuenciasRadio.clearCheck();
+                frecuencia = Frecuencia.SEMANAL;
+                RadioButton semanal = (RadioButton) findViewById(R.id.semanal);
+                semanal.setChecked(true);
+                frecuenciasRadio.check(R.id.semanal);
                 break;
             case "Mensual":
-                this.frecuencias[0] = "Mensual";
-                this.frecuencias[1] = "Diaria";
-                this.frecuencias[2] = "Semanal";
+                frecuenciasRadio.clearCheck();
+                frecuencia = Frecuencia.MENSUAL;
+                RadioButton mensual = (RadioButton) findViewById(R.id.mensual);
+                mensual.setChecked(true);
+                frecuenciasRadio.check(R.id.mensual);
                 break;
         }
+        return frecuencia;
     }
 
-    private Frecuencia frecuenciaSeleccionada(){
-        Frecuencia ret = Frecuencia.DIARIA;
-        switch (frecuenciaSpinner.getSelectedItem().toString()){
-            case "Diaria":
-                ret = Frecuencia.DIARIA;
-            case "Semanal":
-                ret = Frecuencia.SEMANAL;
-            case "Mensual":
-                ret = Frecuencia.MENSUAL;
-        }
-        return ret;
-    }
 
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_vacio, menu);
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void aceptar(View view){
         String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
@@ -182,32 +149,24 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setTextoPregunta(textoPregunta.getText().toString());
         transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));
         transfer.setHoraPregunta(ParserTime.toDate(pregunta_hour));
-        transfer.setFrecuenciaTarea(frecuenciaSeleccionada());
+        transfer.setFrecuenciaTarea(frecuencia);
         transfer.setMejorar(Integer.parseInt(mejorar.getText().toString()));
         transfer.setNumSi(Integer.parseInt(si.getText().toString()));
         transfer.setNumNo(Integer.parseInt(no.getText().toString()));
         transfer.setHabilitada(true);
+        transfer.setId(idTarea);
+        transfer.setIdUsuario(idUsuario);
 
         if (nuevaTarea){
-           // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Nueva tarea", Toast.LENGTH_SHORT);
-
-            toast1.show();
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }else{
-           // Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Editar", Toast.LENGTH_SHORT);
-
-            toast1.show();
+            Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
         }
-
     }
 
     public void cancelar(View view){
-        Intent cancelar = new Intent(this, UsuarioTareasActivity.class);
-        startActivity(cancelar);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
     }
 }

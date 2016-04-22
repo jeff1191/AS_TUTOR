@@ -26,6 +26,7 @@ public class AdaptadorTareas extends BaseAdapter {
     ArrayList<String> horasPregunta;
     ArrayList<Integer> si;
     ArrayList<Integer> no;
+    ArrayList<Integer> total;
     ArrayList<String> frecuencias;
     ArrayList<Integer> habilitadas;
     LayoutInflater inflater;
@@ -43,6 +44,7 @@ public class AdaptadorTareas extends BaseAdapter {
         this.no = no;
         this.frecuencias = frecuencias;
         this.habilitadas = habilitadas;
+        this.total = new ArrayList<Integer>();
     }
 
     @Override

@@ -12,14 +12,17 @@ public class Evento {
     @DatabaseField(generatedId = true, columnName = "ID")
     private Integer id;
 
-    @DatabaseField(columnName = "TEXTO_ALARMA")
-    private String textoAlarma;
+    @DatabaseField(columnName = "NOMBRE")
+    private String nombreEvento;
 
-    @DatabaseField(columnName = "TEXTO_FECHA")
-    private String textoFecha;
+    @DatabaseField(columnName = "FECHA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+    private Date fecha;
 
     @DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
     private Date horaAlarma;
+
+    @DatabaseField(columnName = "HORA_EVENTO", dataType = DataType.DATE_STRING, format = "dd-MM-yyyy HH:mm:ss")
+    private Date horaEvento;
 
     public Integer getId() {
         return id;
@@ -29,20 +32,20 @@ public class Evento {
         this.id = id;
     }
 
-    public String getTextoAlarma() {
-        return textoAlarma;
+    public String getNombreEvento() {
+        return nombreEvento;
     }
 
-    public void setTextoAlarma(String textoAlarma) {
-        this.textoAlarma = textoAlarma;
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
     }
 
-    public String getTextoFecha() {
-        return textoFecha;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setTextoFecha(String textoFecha) {
-        this.textoFecha = textoFecha;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public Date getHoraAlarma() {
@@ -53,4 +56,11 @@ public class Evento {
         this.horaAlarma = horaAlarma;
     }
 
+    public Date getHoraEvento() {
+        return horaEvento;
+    }
+
+    public void setHoraEvento(Date horaEvento) {
+        this.horaEvento = horaEvento;
+    }
 }

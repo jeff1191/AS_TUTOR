@@ -14,6 +14,8 @@ import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.tutor.Tutor;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
@@ -35,15 +37,8 @@ public class SAUsuarioImp implements SAUsuario {
 	public void crearUsuario(TransferUsuarioT transferUsuario) {
 
 		try {
-			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			Reto reto = null;
-
-			if(transferUsuario.getIdReto() != null)
-				reto = daoReto.queryForId(transferUsuario.getIdReto());
-
 			Usuario usuario = new Usuario();
-
 			usuario.setNombre(transferUsuario.getNombre());
 			usuario.setCorreo(transferUsuario.getCorreo());
 			usuario.setAvatar(transferUsuario.getAvatar());
@@ -73,9 +68,17 @@ public class SAUsuarioImp implements SAUsuario {
 			usuario.setTelfMadre(transferUsuario.getTelMadre());
 			usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
 			usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
-			usuario.setReto(reto);
 
-			daoUsuario.create(usuario);
+            Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
+            Tutor tutor = daoTutor.queryForId(1);
+            daoUsuario.create(usuario);
+
+            List<Usuario> aux = daoUsuario.queryForEq("NOMBRE", usuario.getNombre());
+            Usuario usuario1 = aux.get(0);
+
+            String codigoSincronizacion = tutor.getCodigoSincronizacion()+usuario1.getId();
+            usuario1.setCodigoSincronizacion(codigoSincronizacion);
+			daoUsuario.update(usuario1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -120,10 +123,6 @@ public class SAUsuarioImp implements SAUsuario {
 				//Sincronizacion (Tal vez otro comando?)
 				usuario.setPuntuacion(usuarioMod.getPuntuacion());
 				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
-				//Esto seria mas complejo, ya que no solo es encontrarlo sino
-				//cambiar puntuacion y eso no lo tenenmos ahora
-				Reto reto = daoReto.queryForId(usuarioMod.getIdReto());
-				usuario.setReto(reto);
 			}
 			daoUsuario.update(usuario);
 			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
@@ -132,27 +131,21 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 	}
 
-	public void eliminarUsuario(TransferUsuarioT consulta) {
+	public void eliminarUsuario(Integer idUsuario) {
 		try {
-			Log.e("testJL", "El valor del id que llega a bbdd es " + consulta.getId());
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			daoUsuario.deleteById(consulta.getId()); // Ver si eso una manera mejor de borrar
+			daoUsuario.deleteById(idUsuario); // Ver si eso una manera mejor de borrar
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta) {
+	public TransferUsuarioT consultarUsuario(Integer idUsuario) {
 		TransferUsuarioT ret = null;
 
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			Usuario user = daoUsuario.queryForId(consulta.getId());
-			//Faltarian de traer las tareas y ver si reto y perfil funcionan bien
-
-			Integer idReto;
-			if(user.getReto() == null) idReto = 0;
-			else idReto = user.getReto().getId();
+			Usuario user = daoUsuario.queryForId(idUsuario);
 
 			ret = new TransferUsuarioT(user.getId(), user.getNombre(),
 					user.getCorreo(), user.getAvatar(), user.getTelefono(), user.getPuntuacion(),
@@ -160,7 +153,7 @@ public class SAUsuarioImp implements SAUsuario {
 					user.getDireccion(), user.getTipoPerfil().toString(), user.getNotas(),
 					user.getNombrePadre(), user.getNombreMadre(), user.getCorreoPadre(),
 					user.getCorreoMadre(), user.getTelfPadre(), user.getTelfMadre(),
-					user.getCentroAcademico(), idReto, user.getCodigoSincronizacion());
+					user.getCentroAcademico(), user.getCodigoSincronizacion());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -196,7 +189,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user1.setCodigoSincronizacion("VIC001");
 				user1.setPuntuacion(9);
 				user1.setPuntuacionAnterior(10);
-				user1.setReto(reto.queryForId(1));
 				usuario.create(user1);
 				Usuario user2 = new Usuario();
 				user2.setNombre("Juanlu Armas");
@@ -218,7 +210,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user2.setCodigoSincronizacion("VIC001");
 				user2.setPuntuacion(9);
 				user2.setPuntuacionAnterior(10);
-				user2.setReto(null);
 				usuario.create(user2);
 				Usuario user3 = new Usuario();
 				user3.setNombre("Jefferson Almache");
@@ -240,7 +231,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user3.setCodigoSincronizacion("VIC001");
 				user3.setPuntuacion(9);
 				user3.setPuntuacionAnterior(10);
-				user3.setReto(reto.queryForId(2));
 				usuario.create(user3);
 				Usuario user4 = new Usuario();
 				user4.setNombre("Clara Paules");
@@ -262,7 +252,6 @@ public class SAUsuarioImp implements SAUsuario {
 				user4.setCodigoSincronizacion("VIC001");
 				user4.setPuntuacion(9);
 				user4.setPuntuacionAnterior(10);
-				user4.setReto(null);
 				usuario.create(user4);
 			}
 		} catch (SQLException e) {

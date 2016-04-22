@@ -11,9 +11,9 @@ public interface SAUsuario {
 
 	public void editarUsuario(TransferUsuarioT usuarioMod);
 
-	public void eliminarUsuario(TransferUsuarioT consulta);
+	public void eliminarUsuario(Integer idUsuario);
 
-	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta);
+	public TransferUsuarioT consultarUsuario(Integer idUsuario);
 
 	public void crearUsuarios();
 

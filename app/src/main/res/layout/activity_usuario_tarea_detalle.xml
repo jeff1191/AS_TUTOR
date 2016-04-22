@@ -105,7 +105,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <TextView
@@ -115,13 +115,32 @@
                 android:layout_weight="1"
                 android:gravity="center|bottom" />
 
-            <Spinner
+            <RadioGroup
+                android:id="@+id/radioFrecuencias"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:id="@+id/frecuencia"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="24dp">
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Diaria"
+                    android:id="@+id/diaria" />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Semanal"
+                    android:id="@+id/semanal" />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Mensual"
+                    android:id="@+id/mensual" />
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -147,7 +166,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/mejora"
-                android:text="3"
+                android:text="30"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
@@ -176,7 +195,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/si"
-                android:text="3"
+                android:text="0"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
@@ -204,7 +223,7 @@
                 android:layout_height="0dp"
                 android:inputType="number"
                 android:id="@+id/no"
-                android:text="3"
+                android:text="0"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
@@ -253,6 +272,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
+
         </LinearLayout>
 
         <!-- Boton cancelar-->

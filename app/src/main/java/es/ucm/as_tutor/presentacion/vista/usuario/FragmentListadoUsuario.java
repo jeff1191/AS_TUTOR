@@ -3,6 +3,7 @@ package es.ucm.as_tutor.presentacion.vista.usuario;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -95,9 +96,8 @@ public class FragmentListadoUsuario extends Fragment {
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-				TransferUsuarioT consultar = new TransferUsuarioT();
-				consultar.setId(ids.get(pos));
-				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultar);
+				Log.e("testing", "ID en listao" + ids.get(pos));
+				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, ids.get(pos));
 			}
 		});
 
@@ -108,7 +108,7 @@ public class FragmentListadoUsuario extends Fragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		menuActionBar = menu;
-		getActivity().getMenuInflater().inflate(R.menu.menu_usuario, menu);
+		getActivity().getMenuInflater().inflate(R.menu.menu_vacio, menu);
 	}
 }
 

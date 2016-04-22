@@ -1,109 +1,75 @@
-/**
- * 
- */
+
 package es.ucm.as_tutor.negocio.tutor;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author Jeffer
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class TransferTutorT {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Integer ID;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
+	private Integer id;
+
 	private String nombre;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private String correo;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param id
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setID(Integer id) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+	private String codigoSincronizacion;
 
-		// end-user-code
+	private String contrasenha;
+
+	private String respuesta;
+
+	private String pregunta;
+
+	public Integer getId() {
+		return id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Integer getID() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param nombre
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNombre(String nombre) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getNombre() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return nombre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param correo
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setCorreo(String correo) {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-
-		// end-user-code
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public String getCorreo() {
-		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
-		return null;
-		// end-user-code
+		return correo;
 	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getCodigoSincronizacion() {
+		return codigoSincronizacion;
+	}
+
+	public void setCodigoSincronizacion(String codigoSincronizacion) {
+		this.codigoSincronizacion = codigoSincronizacion;
+	}
+
+	public String getContrasenha() {
+		return contrasenha;
+	}
+
+	public void setContrasenha(String contrasenha) {
+		this.contrasenha = contrasenha;
+	}
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
 }

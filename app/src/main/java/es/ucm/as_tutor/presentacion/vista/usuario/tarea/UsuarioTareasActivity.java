@@ -6,18 +6,25 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
+import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
@@ -26,6 +33,9 @@ import es.ucm.as_tutor.presentacion.vista.main.Manager;
 public class UsuarioTareasActivity extends AppCompatActivity {
 
     private Integer idUsuario;
+    private Integer puntuacionActual;
+    private Integer puntuacionAntes;
+    private String nombreUsuario;
     private ArrayList<String> textosAlarma;
     private ArrayList<String> horasAlarma;
     private ArrayList<String> textosPreguntas;
@@ -35,6 +45,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     private ArrayList<String> frecuencias;
     private ArrayList<Integer> mejorar;
     private ArrayList<Integer> habilitada;
+    private ArrayList<Integer> idsTareas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +58,18 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.logo);
 
-        /// Coge de la BBDD
-/*
-        textosAlarma = new ArrayList<>();
-        horasAlarma = new ArrayList<>();
-        textosPreguntas = new ArrayList<>();
-        horasPregunta = new ArrayList<>();
-        si = new ArrayList<>();
-        no = new ArrayList<>();
-        frecuencias = new ArrayList<>();
-        mejorar = new ArrayList<>();
-        habilitada = new ArrayList<>();
+        textosAlarma = new ArrayList<String>();
+        horasAlarma = new ArrayList<String>();
+        textosPreguntas = new ArrayList<String>();
+        horasPregunta = new ArrayList<String>();
+        si = new ArrayList<Integer>();
+        no = new ArrayList<Integer>();
+        frecuencias = new ArrayList<String>();
+        mejorar = new ArrayList<Integer>();
+        habilitada = new ArrayList<Integer>();
 
+        // Coge de la BBDD
+        this.idUsuario = getIntent().getExtras().getInt("usuario");
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
@@ -66,52 +77,34 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.frecuencias = getIntent().getStringArrayListExtra("frecuencias");
         this.habilitada = getIntent().getIntegerArrayListExtra("habilitada");
         this.mejorar = getIntent().getIntegerArrayListExtra("mejorar");
+        this.horasAlarma = getIntent().getStringArrayListExtra("horaAlarmas");
+        this.horasPregunta = getIntent().getStringArrayListExtra("horaPreguntas");
+        this.idsTareas = getIntent().getIntegerArrayListExtra("idsTareas");
 
-        this.horasAlarma = new ArrayList<>();
-        horasAlarma.add("22:00");
-        horasAlarma.add("08:30");
+        // Para conseguir la informacion del usuario se ejecuta el comando de consulta
+        Command c = new ConsultarUsuarioComando();
+        try {
+            TransferUsuarioT usuario = (TransferUsuarioT) c.ejecutaComando(idUsuario);
+            nombreUsuario = usuario.getNombre();
+            puntuacionActual = usuario.getPuntuacion();
+            puntuacionAntes = usuario.getPuntuacionAnterior();
+        } catch (commandException e) {
+            Log.e("tareas", "excepcion usuario");
+        }
+        //Titulo
+        final TextView titulo = (TextView) findViewById(R.id.titulo);
+        titulo.setText("Tareas de "+ nombreUsuario);
+        // Puntuacion
+        final TextView antes = (TextView) findViewById(R.id.puntuacionAnterior);
+        final TextView actual = (TextView) findViewById(R.id.puntuacionAhora);
+        final ImageView flecha = (ImageView) findViewById(R.id.flecha);
 
-        this.horasPregunta = new ArrayList<>();
-        horasPregunta.add("22:10");
-        horasPregunta.add("08:40");
-        */
-        // Esto lo hacemos así porque aún no cogemos de BBDD///////////////////////////////////////*
-        this.textosAlarma = new ArrayList<>();
-        textosAlarma.add("Lavarse los dientes");
-        textosAlarma.add("Meter las cosas en la mochila");
-
-        this.horasAlarma = new ArrayList<>();
-        horasAlarma.add("22:00");
-        horasAlarma.add("08:30");
-
-        this.textosPreguntas = new ArrayList<>();
-        textosPreguntas.add("¿Te has lavado los dientes?");
-        textosPreguntas.add("¿Has metido las cosas en la mochila?");
-
-        this.horasPregunta = new ArrayList<>();
-        horasPregunta.add("22:10");
-        horasPregunta.add("08:40");
-
-        this.si = new ArrayList<>();
-        si.add(1);
-        si.add(0);
-
-        this.no = new ArrayList<>();
-        no.add(1);
-        no.add(0);
-
-        this.frecuencias = new ArrayList<>();
-        frecuencias.add("Diaria");
-        frecuencias.add("Mensual");
-
-        this.habilitada = new ArrayList<>();
-        habilitada.add(1);
-        habilitada.add(0);
-
-        this.mejorar = new ArrayList<>();
-        mejorar.add(30);
-        mejorar.add(15);
-        /////////////////////////////////////////////////////////////////////////////////////////
+        antes.setText(puntuacionAntes.toString());
+        actual.setText(puntuacionActual.toString());
+        if(puntuacionActual - puntuacionAntes < 0)
+            flecha.setImageResource(R.drawable.flecharoja);
+        else
+            flecha.setImageResource(R.drawable.flechaverde);
 
         // Creacion de la lista de tareas
         final ListView lv = (ListView) findViewById(R.id.listView);
@@ -120,7 +113,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         View header = inflater.inflate(R.layout.tareas_header, lv, false);
         lv.addHeaderView(header, null, false);
         // Se rellenan las filas
-        if(textosAlarma.size()!= 0){
+        if(textosAlarma != null){
             AdaptadorTareas adapter = new AdaptadorTareas(textosAlarma, horasAlarma, textosPreguntas,
                     horasPregunta, si, no, frecuencias, habilitada, this.getApplicationContext());
             lv.setAdapter(adapter);
@@ -134,10 +127,12 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         });
     }
 
+
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_vacio, menu);
         return true;
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -148,6 +143,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     // Muestra el menú con las opciones para la tarea seleccionada
     public void mostrarMenuTarea(View v, int position) {
@@ -162,8 +158,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].equals("Editar")) {
                         Intent intent = new Intent(getApplicationContext(), UsuarioTareaDetalleActivity.class);
-                        intent.putExtra("nueva", "no");
-                        // Se introducen todos los valores que se mostraran
+                        intent.putExtra("nueva", "no"); // asi la UsuarioTareaDetalleActivity sabe que no es una tarea nueva
                         intent.putExtra("txtAlarma", textosAlarma.get(pos-1));
                         intent.putExtra("horaAlarma", horasAlarma.get(pos-1));
                         intent.putExtra("txtPregunta", textosPreguntas.get(pos-1));
@@ -175,12 +170,16 @@ public class UsuarioTareasActivity extends AppCompatActivity {
                         intent.putExtra("total", total);
                         intent.putExtra("mejorar", mejorar.get(pos-1));
                         intent.putExtra("habilitada", habilitada.get(pos-1));
+                        intent.putExtra("usuario", idUsuario);
+                        intent.putExtra("idTarea", idsTareas.get(pos-1));
+                        intent.setFlags(intent.getFlags() |Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                     } else if (items[item].equals("Habilitar/deshabilitar")) {
-                        // ejecuta comando deshabilitar tarea
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.DESHABILITAR_TAREA, idsTareas.get(pos-1));
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                     } else if(items[item].equals("Eliminar")) {
-                        // mensaje de confirmacion??
-                        // ejecuta el comando de eliminar tarea
+                        DialogEliminarTarea alertDialog = DialogEliminarTarea.newInstance(textosAlarma.get(pos-1),idsTareas.get(pos-1), idUsuario);
+                        alertDialog.show(getSupportFragmentManager(), "Eliminar tarea");
                     }
                 }
             });
@@ -188,10 +187,13 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         }
     }
 
+
     // Metodo on click del boton "+" material design
     public void nuevaTarea(View view){
         Intent nuevaTarea = new Intent(this, UsuarioTareaDetalleActivity.class);
         nuevaTarea.putExtra("nueva", "nueva");
+        nuevaTarea.putExtra("usuario", idUsuario);
+        nuevaTarea.setFlags(nuevaTarea.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(nuevaTarea);
     }
 }

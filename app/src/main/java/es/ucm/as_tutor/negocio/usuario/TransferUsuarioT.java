@@ -43,8 +43,6 @@ public class TransferUsuarioT {
 
 	private String centroAcademico;
 
-	private Integer idReto;
-
 	private String codigoSincronizacion;
 
 	//Informacion para el listado
@@ -64,7 +62,7 @@ public class TransferUsuarioT {
 							Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
 							String direccion, String tipoPerfil, String notas, String nombrePadre,
 							String nombreMadre, String correoPadre, String correoMadre,
-							String telPadre, String telMadre, String centroAcademico, Integer idRreto,
+							String telPadre, String telMadre, String centroAcademico,
 							String codigoSincronizacion) {
 		this.id = id;
 		this.nombre = nombre;
@@ -85,7 +83,6 @@ public class TransferUsuarioT {
 		this.telMadre = telMadre;
 		this.telPadre = telPadre;
 		this.centroAcademico = centroAcademico;
-		this.idReto = idReto;
 		this.codigoSincronizacion = codigoSincronizacion;
 	}
 
@@ -239,14 +236,6 @@ public class TransferUsuarioT {
 
 	public void setCentroAcademico(String centroAcademico) {
 		this.centroAcademico = centroAcademico;
-	}
-
-	public Integer getIdReto() {
-		return idReto;
-	}
-
-	public void setIdReto(Integer idReto) {
-		this.idReto = idReto;
 	}
 
 	public String getCodigoSincronizacion() {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentacion.vista.ayuda.FragmentListadoAyuda"
-    android:background="@color/botonActivo">
+    android:background="@color/listado">
 
     <ListView
         android:layout_width="match_parent"

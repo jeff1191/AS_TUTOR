@@ -17,13 +17,13 @@ import es.ucm.as_tutor.R;
 public class AdaptadorEventoUsuarios  extends BaseAdapter {
 
     private ArrayList<String> nombresUsuarios = new ArrayList<String>();
+    private ArrayList<Integer> idsUsuarios = new ArrayList<Integer>();
     private ArrayList<String> usuariosAsistencia;
     private ArrayList<Boolean> usuariosActivos = new ArrayList<Boolean>();
     private LayoutInflater inflater;
 
     public AdaptadorEventoUsuarios(Activity context) {
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     public void addItem(final String item, boolean activado, int i) {
@@ -67,9 +67,9 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         nombreUsuario.setText(getItem(position));
         if(usuariosAsistencia != null)
             usuarioAsistencia.setText(usuariosAsistencia.get(position));
-        else{//Significa que estamos creando un nuevo evento
+        else//Significa que estamos creando un nuevo evento
             usuarioAsistencia.setText("-");
-        }
+
         return convertView;
     }
 
@@ -98,7 +98,20 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         usuariosAsistencia=asistencia;
         notifyDataSetChanged();
     }
+    public ArrayList<String> getAsistencia(){
+        return usuariosAsistencia;
+    }
 
+    public void setDatosIds(ArrayList<Integer> idsUsers) {
+        idsUsuarios = idsUsers;
+    }
+    public ArrayList<Integer> getDatosIds(){
+        return idsUsuarios;
+    }
+
+    public ArrayList<Boolean> getDatosCheck() {
+        return usuariosActivos;
+    }
 
     public static class ViewHolder {
             public CheckBox chkItem;

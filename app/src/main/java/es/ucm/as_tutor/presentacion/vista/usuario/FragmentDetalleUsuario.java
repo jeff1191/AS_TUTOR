@@ -33,7 +33,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
@@ -61,7 +60,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private TextView infoMadreV;
     private FloatingActionButton editarDatos;
 
-    private Integer id;
+    private static Integer idUsuario;
     private String nombre;
     private String sincronizacion;
     private String perfil;
@@ -73,9 +72,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private String estudios;
     private String notas;
     private Integer puntuacion;
-    private Integer puntuacionAnterior;
     private String avatar;
-    private Integer reto;
     private String nombrePadre;
     private String nombreMadre;
     private String telefonoPadre;
@@ -88,15 +85,14 @@ public class FragmentDetalleUsuario extends Fragment {
 
     public static FragmentDetalleUsuario newInstance(TransferUsuarioT usuario) {
         FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
-
+        idUsuario = usuario.getId();
+        Log.e("testing", "usuario fragment detalle" + idUsuario);
         Bundle arguments = new Bundle();
-        arguments.putInt("id", usuario.getId());
         arguments.putString("nombre", usuario.getNombre());
         arguments.putString("correo", usuario.getCorreo());
         arguments.putString("avatar", usuario.getAvatar());
         arguments.putString("telefono", usuario.getTelefono());
         arguments.putInt("puntuacion", usuario.getPuntuacion());
-        arguments.putInt("puntuacionAnterior", usuario.getPuntuacionAnterior());
         arguments.putString("estudios", usuario.getCurso());
         arguments.putString("dni", usuario.getDni());
         arguments.putString("direccion", usuario.getDireccion());
@@ -109,8 +105,6 @@ public class FragmentDetalleUsuario extends Fragment {
         arguments.putString("telfPadre", usuario.getTelPadre());
         arguments.putString("telfMadre", usuario.getTelMadre());
         arguments.putString("colegio", usuario.getCentroAcademico());
-        if(usuario.getIdReto() != null)
-            arguments.putInt("reto", usuario.getIdReto());
         arguments.putString("sincronizacion", usuario.getCodigoSincronizacion());
 
         frgUsuario.setArguments(arguments);
@@ -121,18 +115,13 @@ public class FragmentDetalleUsuario extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
-            Log.e("testJL", "El valor del id de usuario es " + bundle.getInt("id"));
-            id = bundle.getInt("id");
-            Log.e("testJL", "El valor del id una vez guardado es " + id);
             nombre = bundle.getString("nombre");
             correo = bundle.getString("correo");
             avatar = bundle.getString("avatar");
             telefono = bundle.getString("telefono");
             puntuacion = bundle.getInt("puntuacion");
-            puntuacionAnterior = bundle.getInt("puntuacionAnterior");
             estudios = bundle.getString("estudios");
             dni = bundle.getString("dni");
             direccion = bundle.getString("direccion");
@@ -145,9 +134,9 @@ public class FragmentDetalleUsuario extends Fragment {
             correoPadre = bundle.getString("correoPadre");
             correoMadre = bundle.getString("correoMadre");
             centroEstudios = bundle.getString("colegio");
-            reto = bundle.getInt("reto");
             sincronizacion = bundle.getString("sincronizacion");
         }
+        setHasOptionsMenu(true);
     }
 
 
@@ -216,7 +205,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     usuario.setDireccion(direccionV.getText().toString());
                     usuario.setNotas(notasV.getText().toString());
                     usuario.setCentroAcademico(centroEstudiosV.getText().toString());
-                    usuario.setId(id);
+                    usuario.setId(idUsuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, usuario);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 }
@@ -331,14 +320,12 @@ public class FragmentDetalleUsuario extends Fragment {
             mail.setText(correoMadre);
         }
 
-        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cambiar info padre o madre
                 TransferUsuarioT editUser = new TransferUsuarioT();
-                TransferUsuarioT consultarU = new TransferUsuarioT();
-                editUser.setId(id);
-                consultarU.setId(id);
+                editUser.setId(idUsuario);
                 if(progenitor.equals("padre")){
                     editUser.setNombrePadre(name.getText().toString());
                     editUser.setTelPadre(phone.getText().toString());
@@ -350,10 +337,10 @@ public class FragmentDetalleUsuario extends Fragment {
                     editUser.setCorreoMadre(mail.getText().toString());
                 }
                 Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultarU);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
             }
         });
-        builder.setNegativeButton("Salir",
+        builder.setNegativeButton("Cancelar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -373,19 +360,12 @@ public class FragmentDetalleUsuario extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("testJL", "Se mete en el del fragment");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
-                /*Log.e("testJL", "entra en tareas usuario");
-                TransferUsuarioT userT = new TransferUsuarioT();
-                userT.setId(id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, userT);*/
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                 break;
             case R.id.retoUsuario:
-                TransferRetoT consultarR = new TransferRetoT();
-                Log.e("testJL", "El id del retos es " + reto);
-                consultarR.setId(reto);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, consultarR);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
                 break;
             case R.id.eventosUsuario:
                 /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
@@ -394,7 +374,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 break;
             case R.id.enviarCorreo:
                 // aquí habrá que ejecutar el comando de enviar correo
-                /*
+
                 // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
                 //Instanciamos un Intent del tipo ACTION_SEND
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -408,40 +388,27 @@ public class FragmentDetalleUsuario extends Fragment {
                 // Definimos un Asunto para el Email
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
                 // Obtenemos la referencia al texto y lo pasamos al Email Intent
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + "!\n " +
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
                         "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
                         + "\n¡Ánimo!" + "\n\nEnviado desde AS");
 
                 Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
                 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
-                //getApplicationContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                Manager.getInstance().getContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 ///////////////////////////////////////////////////////////////////////////////////////////
-                */
                 break;
+
             case R.id.eliminarUsuario:
-                Log.e("testJL", "va a la fun externa " + id + nombre + correo + centroEstudios);
-                eliminaUsuario();
-                /*
-                Log.e("testJL", "entra en eliminar usuario con el id " + id);
-                TransferUsuarioT consultarU = new TransferUsuarioT();
-                consultarU.setId(id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);*/
+                Log.e("testJL", "va a la fun externa " + idUsuario + nombre + correo + centroEstudios);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
         return true;
     }
-
-    private void eliminaUsuario(){
-        Log.e("testJL", "entra en eliminar usuario con el id " + id + nombre + correo + centroEstudios);
-        TransferUsuarioT consultarU = new TransferUsuarioT();
-        consultarU.setId(id);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
-    }
-
-
 }

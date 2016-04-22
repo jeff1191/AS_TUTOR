@@ -13,7 +13,7 @@ public class EliminarUsuarioComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        saUsuario.eliminarUsuario((TransferUsuarioT) datos);
+        saUsuario.eliminarUsuario((Integer) datos);
         return null;
     }
 }
