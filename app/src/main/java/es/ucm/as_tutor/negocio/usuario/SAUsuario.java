@@ -13,7 +13,7 @@ public interface SAUsuario {
 
 	public void eliminarUsuario(TransferUsuarioT consulta);
 
-	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta);
+	public TransferUsuarioT consultarUsuario(Integer idUsuario);
 
 	public void crearUsuarios();
 

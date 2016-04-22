@@ -95,9 +95,7 @@ public class FragmentListadoUsuario extends Fragment {
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-				TransferUsuarioT consultar = new TransferUsuarioT();
-				consultar.setId(ids.get(pos));
-				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultar);
+				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, ids.get(pos));
 			}
 		});
 

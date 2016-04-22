@@ -142,14 +142,13 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 	}
 
-	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta) {
+	public TransferUsuarioT consultarUsuario(Integer idUsuario) {
 		TransferUsuarioT ret = null;
 
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			Usuario user = daoUsuario.queryForId(consulta.getId());
+			Usuario user = daoUsuario.queryForId(idUsuario);
 			//Faltarian de traer las tareas y ver si reto y perfil funcionan bien
-
 			Integer idReto;
 			if(user.getReto() == null) idReto = 0;
 			else idReto = user.getReto().getId();

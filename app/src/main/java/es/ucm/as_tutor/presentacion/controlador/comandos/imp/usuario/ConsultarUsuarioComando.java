@@ -13,6 +13,6 @@ public class ConsultarUsuarioComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
-        return saUsuario.consultarUsuario((TransferUsuarioT) datos);
+        return saUsuario.consultarUsuario((Integer) datos);
     }
 }
