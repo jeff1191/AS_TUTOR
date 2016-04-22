@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private AdaptadorNavegacion NavAdapter;
     private Menu menuActionBar;
-    private DBHelper mDBHelper = null;
 
 
 
@@ -135,6 +134,22 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
+
+
+                //Fragmento en blanco
+                BlankFragment fragmentDetalleTarea = new BlankFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
+
+                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS,null);
+
+
+
+                NavList.setItemChecked(position, true);
+                NavList.setSelection(position);
+                //Cambiamos el titulo en donde decia "
+                setTitle(titulos[position - 1]);
+                //Cerramos el menu deslizable
+                NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 3: // Mi perfil
                 menuActionBar.clear();
@@ -214,6 +229,10 @@ public class MainActivity extends AppCompatActivity {
         else return false;
     }
 
-    public void nuevoEvento(View view){    }
+    public void nuevoEvento(View view){
+        menuActionBar.clear();
+        getMenuInflater().inflate(R.menu.menu_usuario, menuActionBar);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS,null);
+    }
 
 }

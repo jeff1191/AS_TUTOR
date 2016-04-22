@@ -16,6 +16,17 @@ public class UsuarioEvento {
     private Usuario usuario;
     @DatabaseField(foreign = true, columnName = "EVENTO")
     private Evento evento;
+    @DatabaseField(columnName = "ACTIVO")
+    private Integer activo;
+    @DatabaseField(columnName = "ASISTENCIA")
+    private String asistencia;
+
+
+    public UsuarioEvento(Evento evento, Usuario usuario) {
+        this.usuario = usuario;
+        this.evento = evento;
+    }
+    public UsuarioEvento(){} // ORMLITE
 
     public Integer getId() {
         return id;
@@ -39,5 +50,21 @@ public class UsuarioEvento {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public Integer getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Integer activo) {
+        this.activo = activo;
+    }
+
+    public String getAsistencia() {
+        return asistencia;
+    }
+
+    public void setAsistencia(String asistencia) {
+        this.asistencia = asistencia;
     }
 }
