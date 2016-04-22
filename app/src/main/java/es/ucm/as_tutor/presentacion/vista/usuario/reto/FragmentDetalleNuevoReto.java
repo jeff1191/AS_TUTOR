@@ -38,19 +38,16 @@ public class FragmentDetalleNuevoReto extends Fragment {
         FragmentDetalleNuevoReto frgNuevoReto = new FragmentDetalleNuevoReto();
 
         Bundle arguments = new Bundle();
-        if(reto.getIdUsuario() != null) {
-            arguments.putInt("usuario", reto.getIdUsuario());
-            TransferUsuarioT aux = new TransferUsuarioT();
-            aux.setId(reto.getIdUsuario());
-            try {
-                TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
-                        .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(aux);
-                arguments.putString("nombreUsuario", ret.getNombre());
-                arguments.putString("fotoUsuario", ret.getAvatar());
-            } catch (commandException e) {
-                e.printStackTrace();
-            }
+        arguments.putInt("usuario", reto.getIdUsuario());
+        try {
+            TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
+                    .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
+            arguments.putString("nombreUsuario", ret.getNombre());
+            arguments.putString("fotoUsuario", ret.getAvatar());
+        } catch (commandException e) {
+            e.printStackTrace();
         }
+
 
         frgNuevoReto.setArguments(arguments);
 
@@ -97,23 +94,14 @@ public class FragmentDetalleNuevoReto extends Fragment {
                 reto.setPremio(premio.getText().toString());
                 reto.setSuperado(false);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETO, reto);
-                TransferUsuarioT u = new TransferUsuarioT();
-                u.setId(idUsuario);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, u);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
             }
         });
 
         cancelarNuevoReto.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //O se pone en blanco
-               /* BlankFragment fragmentBlank = new BlankFragment();
-                Manager.getInstance().getFragmentManager().beginTransaction()
-                        .replace(R.id.FrgDetalle, fragmentBlank).commit();*/
-                //O se va otra vez al usuario
-                TransferUsuarioT u = new TransferUsuarioT();
-                u.setId(idUsuario);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, u);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
             }
         });
 

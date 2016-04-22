@@ -212,13 +212,16 @@ public class SASucesoImp implements SASuceso {
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
             uQb.where().idEq(idUsuario);
             Usuario usuario = uQb.queryForFirst();
-            // Busca el reto de ese usuario
+            //Guarda el usuario en el transfer
+            ret = new TransferRetoT();
+            ret.setIdUsuario(usuario.getId());
+            //Busca el reto de ese usuario
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
-            rQb.where().eq("USUARIO" , usuario);
+            rQb.where().eq("USUARIO", usuario);
             Reto r = rQb.queryForFirst();
-
-            ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
-                    r.getTexto(), r.getSuperado(), r.getPremio());
+            if (r != null)
+                ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
+                        r.getTexto(), r.getSuperado(), r.getPremio());
 
         } catch (SQLException e) {
             e.printStackTrace();
