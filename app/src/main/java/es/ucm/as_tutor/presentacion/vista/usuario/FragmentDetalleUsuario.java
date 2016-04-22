@@ -376,10 +376,7 @@ public class FragmentDetalleUsuario extends Fragment {
         Log.e("testJL", "Se mete en el del fragment");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
-                /*Log.e("testJL", "entra en tareas usuario");
-                TransferUsuarioT userT = new TransferUsuarioT();
-                userT.setId(id);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, userT);*/
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
                 break;
             case R.id.retoUsuario:
                 TransferRetoT consultarR = new TransferRetoT();
@@ -394,7 +391,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 break;
             case R.id.enviarCorreo:
                 // aquí habrá que ejecutar el comando de enviar correo
-                /*
+
                 // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
                 //Instanciamos un Intent del tipo ACTION_SEND
                 Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -408,18 +405,18 @@ public class FragmentDetalleUsuario extends Fragment {
                 // Definimos un Asunto para el Email
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
                 // Obtenemos la referencia al texto y lo pasamos al Email Intent
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + "!\n " +
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
                         "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
                         + "\n¡Ánimo!" + "\n\nEnviado desde AS");
 
                 Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
                 emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
-                //getApplicationContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                Manager.getInstance().getContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 ///////////////////////////////////////////////////////////////////////////////////////////
-                */
                 break;
+
             case R.id.eliminarUsuario:
                 Log.e("testJL", "va a la fun externa " + id + nombre + correo + centroEstudios);
                 eliminaUsuario();
@@ -430,6 +427,8 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, consultarU);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);*/
                 break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
         return true;
