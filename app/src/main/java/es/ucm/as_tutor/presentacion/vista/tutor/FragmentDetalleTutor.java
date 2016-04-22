@@ -117,6 +117,7 @@ public class FragmentDetalleTutor extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog a = DialogCambioContrasenha(inflater);
+                a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 a.show();
             }
         });

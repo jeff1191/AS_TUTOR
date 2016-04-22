@@ -489,6 +489,7 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTutor).commit();
 
                 FragmentListadoTutor fragmentListadoTutor = new FragmentListadoTutor();
+                //fragmentListadoTutor.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoTutor).commit();
 
                 NavList.setItemChecked(position, true);

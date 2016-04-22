@@ -47,6 +47,7 @@ public class Acceso extends Activity {
         }
 
         AlertDialog a = dialogVerificarAcceso(getLayoutInflater());
+        a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         a.show();
     }
 
@@ -60,6 +61,7 @@ public class Acceso extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog a = dialogRecuperarPassword(inflater);
+                a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 a.show();
             }
         });
@@ -80,7 +82,7 @@ public class Acceso extends Activity {
                 }
             }
         });
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         builder.setTitle("Clave de acceso");
         builder.setIcon(R.drawable.logo);
         return builder.create();
