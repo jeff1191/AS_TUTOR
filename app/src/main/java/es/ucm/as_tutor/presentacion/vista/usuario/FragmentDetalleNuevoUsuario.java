@@ -99,6 +99,8 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
             aceptar = (Button) rootView.findViewById(R.id.botonAceptarNuevoU);
             cancelar = (Button) rootView.findViewById(R.id.botonCancelarNuevoU);
 
+            avatar = "";
+
             avatarV.setOnClickListener(new AdapterView.OnClickListener() {
                 @Override
                 public void onClick(View v) {

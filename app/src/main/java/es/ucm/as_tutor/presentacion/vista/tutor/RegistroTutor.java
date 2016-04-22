@@ -43,7 +43,11 @@ public class RegistroTutor extends Activity {
         String correo = String.valueOf(correoTutor.getText());
         String clave = String.valueOf(constrasenha.getText());
         String nombre = String.valueOf(nombreTutor.getText());
-        String codigoSync = nombre.substring(0, 3);
+        String codigoSync;
+        if(nombre.length() >= 3)
+            codigoSync = nombre.substring(0, 3);
+        else
+            codigoSync = nombre.substring(0, 0);
 
         if (datosValidos(codigoSync, correo, clave)) {
             TransferTutorT tutor = new TransferTutorT();

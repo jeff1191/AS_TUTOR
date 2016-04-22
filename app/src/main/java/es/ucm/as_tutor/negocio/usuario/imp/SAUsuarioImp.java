@@ -14,6 +14,8 @@ import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.tutor.Tutor;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
@@ -67,7 +69,16 @@ public class SAUsuarioImp implements SAUsuario {
 			usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
 			usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
 
-			daoUsuario.create(usuario);
+            Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
+            Tutor tutor = daoTutor.queryForId(1);
+            daoUsuario.create(usuario);
+
+            List<Usuario> aux = daoUsuario.queryForEq("NOMBRE", usuario.getNombre());
+            Usuario usuario1 = aux.get(0);
+
+            String codigoSincronizacion = tutor.getCodigoSincronizacion()+usuario1.getId();
+            usuario1.setCodigoSincronizacion(codigoSincronizacion);
+			daoUsuario.update(usuario1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
