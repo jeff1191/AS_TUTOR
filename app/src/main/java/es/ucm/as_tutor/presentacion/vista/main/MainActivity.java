@@ -2,6 +2,7 @@ package es.ucm.as_tutor.presentacion.vista.main;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -27,6 +28,7 @@ import com.imanoweb.calendarview.CustomCalendarView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ import es.ucm.as_tutor.presentacion.vista.evento.AdaptadorEventoUsuarios;
 import es.ucm.as_tutor.presentacion.vista.evento.FragmentListadoEvento;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as_tutor.presentacion.vista.tutor.FragmentListadoTutor;
+import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
+import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 
 
 public class MainActivity extends AppCompatActivity {

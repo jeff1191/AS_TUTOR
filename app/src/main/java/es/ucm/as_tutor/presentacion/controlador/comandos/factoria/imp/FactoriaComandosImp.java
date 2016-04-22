@@ -73,7 +73,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.CONSULTAR_RETO:
                 ret = new ConsultarRetoComando();
                 break;
-                break;
             case ListaComandos.CONSULTAR_TUTOR:
                 ret = new ConsultarTutorComando();
                 break;
