@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e("testJL", "Se mete en el del main");
 
         if(mDrawerToggle.onOptionsItemSelected(item)) return true;
-        else return false;
+        else return super.onOptionsItemSelected(item);
 
     }
     public void nuevoEvento(View view){
