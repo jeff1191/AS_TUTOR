@@ -1,9 +1,17 @@
 package es.ucm.as_tutor.presentacion.vista.usuario;
 
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
@@ -48,6 +62,8 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
     private TextView correoMadreV;
     private Button aceptar;
     private Button cancelar;
+
+    private String avatar;
 
     public FragmentDetalleNuevoUsuario(){}
 
@@ -87,8 +103,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                 @Override
                 public void onClick(View v) {
                     final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog
-                            .Builder(Manager.getInstance().getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int item) {
@@ -105,11 +120,12 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                                         SELECCIONAR_GALERIA);
                             } else if (items[item].equals("Imagen por defecto")) {
                                 avatarV.setImageResource(R.drawable.avatar);
+                                avatar="";
                                 dialog.dismiss();
                             }
                         }
                     });
-                    builder.show();
+                    builder.create().show();
                 }
             });
 
@@ -119,7 +135,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                     TransferUsuarioT usuario = new TransferUsuarioT();
                     usuario.setNombre(nombreV.getText().toString());
                     usuario.setCorreo(correoV.getText().toString());
-                    usuario.setAvatar(avatarV.toString());
+                    usuario.setAvatar(avatar);
                     usuario.setTelefono(telefonoV.getText().toString());
                     usuario.setPuntuacion(10);
                     usuario.setPuntuacionAnterior(10);
@@ -156,6 +172,56 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
             });
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == CAMARA) {
+                Bitmap imagen = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                avatarV.setImageBitmap(imagen);
+                avatar = destination.getPath();
+            } else if (requestCode == SELECCIONAR_GALERIA) {
+                Uri selectedImageUri = data.getData();
+                String[] projection = {MediaStore.MediaColumns.DATA};
+                CursorLoader cursorLoader = new CursorLoader(Manager.getInstance().getContext(),
+                        selectedImageUri, projection, null, null, null);
+                Cursor cursor = cursorLoader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                String selectedImagePath = cursor.getString(column_index);
+                Bitmap bm;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImagePath, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                avatarV.setImageBitmap(bm);
+                avatar=selectedImagePath;
+            }
+        }
     }
 
 

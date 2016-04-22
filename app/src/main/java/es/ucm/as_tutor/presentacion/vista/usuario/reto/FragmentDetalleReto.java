@@ -1,6 +1,7 @@
 package es.ucm.as_tutor.presentacion.vista.usuario.reto;
 
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -88,11 +89,15 @@ public class FragmentDetalleReto extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_detalle_reto, container, false);
 
         ((TextView) rootView.findViewById(R.id.reto)).setText("Reto de " + nombreUsuario);
-        //((ImageView)rootView.findViewById(R.id.avatarR)).setImageBitmap(BitmapFactory.decodeFile(fotoUsuario));
-        ((ImageView)rootView.findViewById(R.id.avatarR)).setImageResource(R.drawable.avatar);
+
+        if(fotoUsuario != null && !fotoUsuario.equals(""))
+            ((ImageView)rootView.findViewById(R.id.avatarR)).setImageBitmap(BitmapFactory.decodeFile(fotoUsuario));
+        else
+            ((ImageView)rootView.findViewById(R.id.avatarR)).setImageResource(R.drawable.avatar);
+
         ((TextView) rootView.findViewById(R.id.textoReto)).setText(texto);
 
-        if(!premio.equals(""))
+        if(premio != null && !premio.equals(""))
             ((TextView) rootView.findViewById(R.id.textoPremio)).setText(premio);
         else
             ((TextView) rootView.findViewById(R.id.textoPremio)).setText("No tiene ningun premio asignado");

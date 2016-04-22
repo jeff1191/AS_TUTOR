@@ -138,15 +138,19 @@ public class SASucesoImp implements SASuceso {
     @Override
     public void crearReto(TransferRetoT transferReto) {
         try{
+            //Hay que asignarselo a ambos
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Reto reto = new Reto();
+            Usuario usuario = daoUsuario.queryForId(transferReto.getIdUsuario());
             reto.setTexto(transferReto.getTexto());
             reto.setPremio(transferReto.getPremio());
             reto.setSuperado(transferReto.getSuperado());
             reto.setContador(transferReto.getContador());
-            reto.setUsuario(daoUsuario.queryForId(transferReto.getIdUsuario()));
+            reto.setUsuario(usuario);
             daoReto.create(reto);
+            //Buscar ese reto y meterselo a usuario, como esta no nos vale xq no tiene ID :(
+            //daoUsuario.update(usuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }

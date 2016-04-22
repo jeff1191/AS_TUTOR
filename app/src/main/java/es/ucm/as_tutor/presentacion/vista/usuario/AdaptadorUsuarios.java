@@ -2,6 +2,7 @@ package es.ucm.as_tutor.presentacion.vista.usuario;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +49,10 @@ class AdaptadorUsuarios extends BaseAdapter {
         TextView nombreUser= (TextView)item.findViewById(R.id.nombreUsuarioLista);
         nombreUser.setText(nombres.get(position));
         ImageView img = (ImageView)item.findViewById(R.id.avatarUsuarioLista);
-       /* if(!avatares.get(position).equals(""))
+        if(!avatares.get(position).equals(""))
             img.setImageBitmap(BitmapFactory.decodeFile(avatares.get(position)));
-        else*/
-        img.setImageResource(R.drawable.avatar);
+        else
+            img.setImageResource(R.drawable.avatar);
 
         return(item);
     }

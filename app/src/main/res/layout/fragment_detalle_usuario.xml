@@ -72,8 +72,7 @@
                             android:paddingTop="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:clickable="true"
-                            android:onClick="cambiarImagenPerfil" />
+                            android:clickable="true" />
 
                         <!-- Puntuacion -->
                         <LinearLayout

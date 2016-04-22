@@ -1,7 +1,15 @@
 package es.ucm.as_tutor.presentacion.vista.usuario;
 
+import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -12,19 +20,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 public class FragmentDetalleUsuario extends Fragment {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 3;
+    private static final int SELECCIONAR_GALERIA = 2;
+    private static final int CAMARA = 1;
 
     private TextView nombreV;
     private TextView sincronizacionV;
@@ -154,13 +173,43 @@ public class FragmentDetalleUsuario extends Fragment {
             infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
             editarDatos = (FloatingActionButton) rootView.findViewById(R.id.guardarCambios);
 
+            avatarV.setOnClickListener(new AdapterView.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            if (items[item].equals("Hacer foto")) {
+                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, CAMARA);
+                            } else if (items[item].equals("Elegir de la galeria")) {
+                                Intent intent = new Intent(
+                                        Intent.ACTION_PICK,
+                                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                intent.setType("image/*");
+                                startActivityForResult(
+                                        Intent.createChooser(intent, "Select File"),
+                                        SELECCIONAR_GALERIA);
+                            } else if (items[item].equals("Imagen por defecto")) {
+                                avatarV.setImageResource(R.drawable.avatar);
+                                avatar="";
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    builder.create().show();
+                }
+            });
+
             editarDatos.setOnClickListener(new AdapterView.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     TransferUsuarioT usuario = new TransferUsuarioT();
                     usuario.setNombre(nombreV.getText().toString());
                     usuario.setCorreo(correoV.getText().toString());
-                    usuario.setAvatar(avatarV.toString());
+                    usuario.setAvatar(avatar);
                     usuario.setTelefono(telefonoV.getText().toString());
                     usuario.setCurso(estudiosV.getText().toString());
                     usuario.setDni(dniV.getText().toString());
@@ -169,6 +218,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     usuario.setCentroAcademico(centroEstudiosV.getText().toString());
                     usuario.setId(id);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, usuario);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 }
             });
 
@@ -176,6 +226,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 @Override
                 public void onClick(View v) {
                     AlertDialog a = createInfoProgenitoresDialogo("padre", inflater);
+                    a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     a.show();
                 }
             });
@@ -184,6 +235,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 @Override
                 public void onClick(View v) {
                     AlertDialog a = createInfoProgenitoresDialogo("madre", inflater);
+                    a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     a.show();
                 }
             });
@@ -199,14 +251,62 @@ public class FragmentDetalleUsuario extends Fragment {
             estudiosV.setText(estudios);
             notasV.setText(notas);
             puntuacionV.setText(puntuacion + "/10");
-
-            //Esto cambiarlo para que se pueda editar la imagen
-           /* if(!avatar.equals(""))
+            if(avatar != null && !avatar.equals(""))
                 avatarV.setImageBitmap(BitmapFactory.decodeFile(avatar));
-            else */
+            else
                 avatarV.setImageResource(R.drawable.avatar);
 
             return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == CAMARA) {
+                Bitmap imagen = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                avatarV.setImageBitmap(imagen);
+                avatar = destination.getPath();
+            } else if (requestCode == SELECCIONAR_GALERIA) {
+                Uri selectedImageUri = data.getData();
+                String[] projection = {MediaStore.MediaColumns.DATA};
+                CursorLoader cursorLoader = new CursorLoader(Manager.getInstance().getContext(),
+                        selectedImageUri, projection, null, null, null);
+                Cursor cursor = cursorLoader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                String selectedImagePath = cursor.getString(column_index);
+                Bitmap bm;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImagePath, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                avatarV.setImageBitmap(bm);
+                avatar=selectedImagePath;
+            }
+        }
     }
 
     public AlertDialog createInfoProgenitoresDialogo(final String progenitor, LayoutInflater inflater) {

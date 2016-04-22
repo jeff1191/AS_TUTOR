@@ -178,7 +178,7 @@ public class SAUsuarioImp implements SAUsuario {
 			if(!usuario.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
 				Usuario user1 = new Usuario();
 				user1.setNombre("María Salgado");
-				user1.setAvatar(""); // Aqui tendria que ir la direccion de la foto
+				user1.setAvatar("");
 				user1.setDni("12345678Q");
 				user1.setDireccion("C/ Alacala 46, 6ºA");
 				user1.setTelefono("678678678");
@@ -200,7 +200,7 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.create(user1);
 				Usuario user2 = new Usuario();
 				user2.setNombre("Juanlu Armas");
-				user2.setAvatar(""); // Aqui tendria que ir la direccion de la foto
+				user2.setAvatar("");
 				user2.setDni("12345678Q");
 				user2.setDireccion("C/ Alacala 46, 6ºA");
 				user2.setTelefono("678678678");
@@ -222,7 +222,7 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.create(user2);
 				Usuario user3 = new Usuario();
 				user3.setNombre("Jefferson Almache");
-				user3.setAvatar(""); // Aqui tendria que ir la direccion de la foto
+				user3.setAvatar("");
 				user3.setDni("12345678Q");
 				user3.setDireccion("C/ Alacala 46, 6ºA");
 				user3.setTelefono("678678678");
@@ -244,7 +244,7 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.create(user3);
 				Usuario user4 = new Usuario();
 				user4.setNombre("Clara Paules");
-				user4.setAvatar(""); // Aqui tendria que ir la direccion de la foto
+				user4.setAvatar("");
 				user4.setDni("12345678Q");
 				user4.setDireccion("C/ Alacala 46, 6ºA");
 				user4.setTelefono("678678678");
