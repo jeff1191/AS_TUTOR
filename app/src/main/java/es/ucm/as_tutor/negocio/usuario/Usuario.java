@@ -26,6 +26,9 @@ public class Usuario {
     @DatabaseField(columnName = "AVATAR")
     private String avatar;
 
+    @DatabaseField(columnName = "TELEFONO")
+    private String telefono;
+
     @DatabaseField(columnName = "PUNTUACION")
     private Integer puntuacion;
 
@@ -74,6 +77,9 @@ public class Usuario {
     @ForeignCollectionField(eager = true, columnName = "TAREAS")
     private ForeignCollection<Tarea> tareas;
 
+    @DatabaseField(columnName = "CODIGO_SINCRONIZACION")
+    private String codigoSincronizacion;
+
     public Integer getId() {
         return id;
     }
@@ -96,6 +102,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getAvatar() {
@@ -232,5 +246,13 @@ public class Usuario {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getCodigoSincronizacion() {
+        return codigoSincronizacion;
+    }
+
+    public void setCodigoSincronizacion(String codigoSincronizacion) {
+        this.codigoSincronizacion = codigoSincronizacion;
     }
 }

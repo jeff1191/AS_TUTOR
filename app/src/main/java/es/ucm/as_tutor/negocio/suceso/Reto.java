@@ -25,6 +25,9 @@ public class Reto {
 	@DatabaseField(columnName = "SUPERADO")
 	private Boolean superado;
 
+	@DatabaseField(columnName = "PREMIO")
+	private String premio;
+
 	public Integer getId() {
 		return id;
 	}
@@ -63,5 +66,13 @@ public class Reto {
 
 	public void setSuperado(Boolean superado) {
 		this.superado = superado;
+	}
+
+	public String getPremio() {
+		return premio;
+	}
+
+	public void setPremio(String premio) {
+		this.premio = premio;
 	}
 }

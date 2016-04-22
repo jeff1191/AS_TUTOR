@@ -18,7 +18,6 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/nombre"
-                android:text="Carlos Perez"
                 android:gravity="center"
                 android:layout_weight="4" />
 
@@ -34,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sincronización: VIC001"
                 android:gravity="center|right"
                 android:layout_weight="1"
                 android:id="@+id/sincronizacion" />
@@ -43,7 +41,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Perfil A"
                 android:gravity="center|right"
                 android:layout_weight="1"
                 android:id="@+id/perfil" />
@@ -75,8 +72,7 @@
                             android:paddingTop="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:clickable="true"
-                            android:onClick="cambiarImagenPerfil" />
+                            android:clickable="true" />
 
                         <!-- Puntuacion -->
                         <LinearLayout
@@ -100,7 +96,6 @@
                                 android:layout_height="match_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:id="@+id/puntuacionUsuario"
-                                android:text="8/10"
                                 android:gravity="left|center"
                                 android:layout_weight="1" />
 
@@ -124,8 +119,7 @@
                             android:gravity="center"
                             android:id="@+id/infoPadre"
                             android:layout_weight="1"
-                        android:clickable="true"
-                        android:onClick="infoPadre" />
+                            android:clickable="true"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -136,7 +130,6 @@
                             android:id="@+id/infoMadre"
                             android:gravity="center"
                             android:layout_weight="1"
-                            android:onClick="infoMadre"
                             android:clickable="true" />
 
                     <LinearLayout
@@ -313,24 +306,13 @@
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!-- Curso -->
+                    <!-- Hueco -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
 
-                            <EditText
-                                android:id="@+id/curso"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:hint="Curso" />
-                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                 </LinearLayout> <!-- Fin fila centro de estudios -->
@@ -353,6 +335,17 @@
                         android:inputType="text|textMultiLine"
                         android:hint="Notas" />
                 </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="134dp"
+                    android:src="@drawable/ic_save_white_48dp"
+                    android:layout_marginTop="50dp"
+                    android:clickable="true"
+                    android:id="@+id/guardarCambios"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="right|bottom" />
+
             </LinearLayout>
 
 

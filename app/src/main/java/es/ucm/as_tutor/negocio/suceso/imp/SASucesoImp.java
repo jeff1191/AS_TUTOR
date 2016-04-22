@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
-import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
@@ -159,6 +161,76 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return ret;
+    }
+
+    public void crearRetos(){
+        Dao<Reto, Integer> reto;
+        try {
+            reto = getHelper().getRetoDao();
+            Usuario u = new Usuario();
+            if(!reto.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
+                Reto reto1 = new Reto();
+                reto1.setContador(3);
+                reto1.setTexto("Dar un beso de buenas noches a mama");
+                reto1.setSuperado(false);
+                u.setId(1);
+                reto1.setUsuario(u);
+                reto1.setPremio("Si lo completas, ganaras un kitkat");
+                reto.create(reto1);
+                Reto reto2 = new Reto();
+                reto2.setContador(5);
+                reto2.setTexto("Lavarse las manos antes de comer");
+                reto2.setSuperado(false);
+                u.setId(3);
+                reto2.setUsuario(u);
+                reto2.setPremio("");
+                reto.create(reto2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void crearReto(TransferRetoT transferReto) {
+        try{
+            //Hay que asignarselo a ambos
+            Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            Reto reto = new Reto();
+            Usuario usuario = daoUsuario.queryForId(transferReto.getIdUsuario());
+            reto.setTexto(transferReto.getTexto());
+            reto.setPremio(transferReto.getPremio());
+            reto.setSuperado(transferReto.getSuperado());
+            reto.setContador(transferReto.getContador());
+            reto.setUsuario(usuario);
+            daoReto.create(reto);
+            //Buscar ese reto y meterselo a usuario, como esta no nos vale xq no tiene ID :(
+            //daoUsuario.update(usuario);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public TransferRetoT consultarReto(TransferRetoT consulta) {
+        TransferRetoT ret = null;
+
+        try {
+            Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+            if(consulta.getId() != null) {
+                Reto r = daoReto.queryForId(consulta.getId());
+                if (r != null)
+                    ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
+                            r.getTexto(), r.getSuperado(), r.getPremio());
+                else
+                    ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return ret;
     }
 }

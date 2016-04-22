@@ -10,13 +10,14 @@ import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
+import es.ucm.as_tutor.negocio.utils.Perfil;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
@@ -30,19 +31,264 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 		return mDBHelper;
 	}
-	@Override
-	public TransferUsuarioT consultarUsuario(Integer idUsuario) {
-        TransferUsuarioT ret = new TransferUsuarioT();
-        try {
-            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-            Usuario usuario = daoUsuario.queryForId(idUsuario);
-            ret.setId(idUsuario);
-            ret.setNombre(usuario.getNombre());
-            ret.setPuntuacion(usuario.getPuntuacion());
-            ret.setPuntuacionAnterior(usuario.getPuntuacionAnterior());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
+
+	public void crearUsuario(TransferUsuarioT transferUsuario) {
+
+		try {
+			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Reto reto = null;
+
+			if(transferUsuario.getIdReto() != null)
+				reto = daoReto.queryForId(transferUsuario.getIdReto());
+
+			Usuario usuario = new Usuario();
+
+			usuario.setNombre(transferUsuario.getNombre());
+			usuario.setCorreo(transferUsuario.getCorreo());
+			usuario.setAvatar(transferUsuario.getAvatar());
+			usuario.setTelefono(transferUsuario.getTelefono());
+			usuario.setPuntuacion(transferUsuario.getPuntuacion());
+			usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
+			usuario.setCurso(transferUsuario.getCurso());
+			usuario.setDni(transferUsuario.getDni());
+			usuario.setDireccion(transferUsuario.getDireccion());
+			switch (transferUsuario.getTipoPerfil()){
+				case "A":
+					usuario.setTipoPerfil(Perfil.A);
+					break;
+				case "B":
+					usuario.setTipoPerfil(Perfil.B);
+					break;
+				case "C":
+					usuario.setTipoPerfil(Perfil.C);
+					break;
+			}
+			usuario.setNotas(transferUsuario.getNotas());
+			usuario.setNombrePadre(transferUsuario.getNombrePadre());
+			usuario.setNombreMadre(transferUsuario.getNombreMadre());
+			usuario.setCorreoPadre(transferUsuario.getCorreoPadre());
+			usuario.setCorreoMadre(transferUsuario.getCorreoMadre());
+			usuario.setTelfPadre(transferUsuario.getTelPadre());
+			usuario.setTelfMadre(transferUsuario.getTelMadre());
+			usuario.setCentroAcademico(transferUsuario.getCentroAcademico());
+			usuario.setCodigoSincronizacion(transferUsuario.getCodigoSincronizacion());
+			usuario.setReto(reto);
+
+			daoUsuario.create(usuario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void editarUsuario(TransferUsuarioT usuarioMod) {
+		try {
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+			Usuario usuario = daoUsuario.queryForId(usuarioMod.getId());
+			//Aqui buscar los campos modificados y machacharlos
+			//¿Que tiene mas sentido... pasar todo o ver aqui que campos no son nulos?
+			if(usuarioMod.getNombreMadre() == null && usuarioMod.getNombrePadre() == null
+					&& usuarioMod.getNombre() != null){
+				//Implica que viene de detalleUsuario
+				usuario.setNombre(usuarioMod.getNombre());
+				usuario.setCorreo(usuarioMod.getCorreo());
+				usuario.setAvatar(usuarioMod.getAvatar());
+				usuario.setTelefono(usuarioMod.getTelefono());
+				usuario.setCurso(usuarioMod.getCurso());
+				usuario.setDni(usuarioMod.getDni());
+				usuario.setDireccion(usuarioMod.getDireccion());
+				usuario.setNotas(usuarioMod.getNotas());
+				usuario.setCentroAcademico(usuarioMod.getCentroAcademico());
+			}
+			else if(usuarioMod.getNombre() == null && (usuarioMod.getNombreMadre() != null
+					|| usuarioMod.getNombrePadre() != null)){
+				//Implica que viene de infoPadres
+				if(usuarioMod.getNombreMadre() == null) {
+					//Implica que viene de infoPadre
+					usuario.setNombrePadre(usuarioMod.getNombrePadre());
+					usuario.setCorreoPadre(usuarioMod.getCorreoPadre());
+					usuario.setTelfPadre(usuarioMod.getTelPadre());
+				}
+				else{
+					usuario.setNombreMadre(usuarioMod.getNombreMadre());
+					usuario.setCorreoMadre(usuarioMod.getCorreoMadre());
+					usuario.setTelfMadre(usuarioMod.getTelMadre());
+				}
+			} else {
+				//Sincronizacion (Tal vez otro comando?)
+				usuario.setPuntuacion(usuarioMod.getPuntuacion());
+				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
+				//Esto seria mas complejo, ya que no solo es encontrarlo sino
+				//cambiar puntuacion y eso no lo tenenmos ahora
+				Reto reto = daoReto.queryForId(usuarioMod.getIdReto());
+				usuario.setReto(reto);
+			}
+			daoUsuario.update(usuario);
+			Usuario aux = daoUsuario.queryForId(usuarioMod.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void eliminarUsuario(TransferUsuarioT consulta) {
+		try {
+			Log.e("testJL", "El valor del id que llega a bbdd es " + consulta.getId());
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			daoUsuario.deleteById(consulta.getId()); // Ver si eso una manera mejor de borrar
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public TransferUsuarioT consultarUsuario(TransferUsuarioT consulta) {
+		TransferUsuarioT ret = null;
+
+		try {
+			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			Usuario user = daoUsuario.queryForId(consulta.getId());
+			//Faltarian de traer las tareas y ver si reto y perfil funcionan bien
+
+			Integer idReto;
+			if(user.getReto() == null) idReto = 0;
+			else idReto = user.getReto().getId();
+
+			ret = new TransferUsuarioT(user.getId(), user.getNombre(),
+					user.getCorreo(), user.getAvatar(), user.getTelefono(), user.getPuntuacion(),
+					user.getPuntuacionAnterior(), user.getCurso(), user.getDni(),
+					user.getDireccion(), user.getTipoPerfil().toString(), user.getNotas(),
+					user.getNombrePadre(), user.getNombreMadre(), user.getCorreoPadre(),
+					user.getCorreoMadre(), user.getTelfPadre(), user.getTelfMadre(),
+					user.getCentroAcademico(), idReto, user.getCodigoSincronizacion());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
+
+	}
+
+	public void crearUsuarios(){
+		Dao<Usuario, Integer> usuario;
+		Dao<Reto, Integer> reto;
+		try {
+			usuario = getHelper().getUsuarioDao();
+			reto = getHelper().getRetoDao();
+			if(!usuario.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
+				Usuario user1 = new Usuario();
+				user1.setNombre("María Salgado");
+				user1.setAvatar("");
+				user1.setDni("12345678Q");
+				user1.setDireccion("C/ Alacala 46, 6ºA");
+				user1.setTelefono("678678678");
+				user1.setCorreo("correo@gmail.com");
+				user1.setCentroAcademico("Colegio del Pilar");
+				user1.setCurso("4º ESO");
+				user1.setNotas("Le gusta el chocolate");
+				user1.setNombrePadre("Manuel");
+				user1.setNombreMadre("Carmen");
+				user1.setTelfPadre("666666666");
+				user1.setTelfMadre("666666666");
+				user1.setCorreoPadre("correo@gmail.com");
+				user1.setCorreoMadre("correo@gmail.com");
+				user1.setTipoPerfil(Perfil.A);
+				user1.setCodigoSincronizacion("VIC001");
+				user1.setPuntuacion(9);
+				user1.setPuntuacionAnterior(10);
+				user1.setReto(reto.queryForId(1));
+				usuario.create(user1);
+				Usuario user2 = new Usuario();
+				user2.setNombre("Juanlu Armas");
+				user2.setAvatar("");
+				user2.setDni("12345678Q");
+				user2.setDireccion("C/ Alacala 46, 6ºA");
+				user2.setTelefono("678678678");
+				user2.setCorreo("correo@gmail.com");
+				user2.setCentroAcademico("Colegio del Pilar");
+				user2.setCurso("4º ESO");
+				user2.setNotas("Le gusta el chocolate");
+				user2.setNombrePadre("Manuel");
+				user2.setNombreMadre("Carmen");
+				user2.setTelfPadre("666666666");
+				user2.setTelfMadre("888888888");
+				user2.setCorreoPadre("correo@gmail.com");
+				user2.setCorreoMadre("correo@gmail.com");
+				user2.setTipoPerfil(Perfil.B);
+				user2.setCodigoSincronizacion("VIC001");
+				user2.setPuntuacion(9);
+				user2.setPuntuacionAnterior(10);
+				user2.setReto(null);
+				usuario.create(user2);
+				Usuario user3 = new Usuario();
+				user3.setNombre("Jefferson Almache");
+				user3.setAvatar("");
+				user3.setDni("12345678Q");
+				user3.setDireccion("C/ Alacala 46, 6ºA");
+				user3.setTelefono("678678678");
+				user3.setCorreo("correo@gmail.com");
+				user3.setCentroAcademico("Colegio del Pilar");
+				user3.setCurso("4º ESO");
+				user3.setNotas("Le gusta el chocolate");
+				user3.setNombrePadre("Manuel");
+				user3.setNombreMadre("Carmen");
+				user3.setTelfPadre("666666666");
+				user3.setTelfMadre("666666666");
+				user3.setCorreoPadre("correo@gmail.com");
+				user3.setCorreoMadre("correo@gmail.com");
+				user3.setTipoPerfil(Perfil.C);
+				user3.setCodigoSincronizacion("VIC001");
+				user3.setPuntuacion(9);
+				user3.setPuntuacionAnterior(10);
+				user3.setReto(reto.queryForId(2));
+				usuario.create(user3);
+				Usuario user4 = new Usuario();
+				user4.setNombre("Clara Paules");
+				user4.setAvatar("");
+				user4.setDni("12345678Q");
+				user4.setDireccion("C/ Alacala 46, 6ºA");
+				user4.setTelefono("678678678");
+				user4.setCorreo("correo@gmail.com");
+				user4.setCentroAcademico("Colegio del Pilar");
+				user4.setCurso("4º ESO");
+				user4.setNotas("Le gusta el chocolate");
+				user4.setNombrePadre("Manuel");
+				user4.setNombreMadre("Carmen");
+				user4.setTelfPadre("666666666");
+				user4.setTelfMadre("666666666");
+				user4.setCorreoPadre("correo@gmail.com");
+				user4.setCorreoMadre("correo@gmail.com");
+				user4.setTipoPerfil(Perfil.C);
+				user4.setCodigoSincronizacion("VIC001");
+				user4.setPuntuacion(9);
+				user4.setPuntuacionAnterior(10);
+				user4.setReto(null);
+				usuario.create(user4);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public ArrayList<TransferUsuarioT> consultarUsuarios() {
+		ArrayList<TransferUsuarioT> ret = new ArrayList<TransferUsuarioT>();
+		Dao<Usuario, Integer> usuarios;
+		try {
+			usuarios = getHelper().getUsuarioDao();
+			List<Usuario> listaUsuarios = usuarios.queryForAll();
+			for(Usuario user : listaUsuarios){
+				TransferUsuarioT transfer = new TransferUsuarioT(user.getId(), user.getNombre(),
+						user.getAvatar());
+				ret.add(transfer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
+	public void consultarInforme(Integer idUsuario) {
+
+	}
+
 }

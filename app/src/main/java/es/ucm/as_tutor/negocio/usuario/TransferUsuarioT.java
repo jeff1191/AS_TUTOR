@@ -1,15 +1,7 @@
-
+/**
+ * 
+ */
 package es.ucm.as_tutor.negocio.usuario;
-
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-
-import es.ucm.as_tutor.negocio.suceso.Reto;
-import es.ucm.as_tutor.negocio.suceso.Tarea;
-import es.ucm.as_tutor.negocio.utils.Perfil;
-
 
 public class TransferUsuarioT {
 
@@ -21,6 +13,8 @@ public class TransferUsuarioT {
 
 	private String avatar;
 
+	private String telefono;
+
 	private Integer puntuacion;
 
 	private Integer puntuacionAnterior;
@@ -31,7 +25,7 @@ public class TransferUsuarioT {
 
 	private String direccion;
 
-	private Perfil tipoPerfil;
+	private String tipoPerfil;
 
 	private String notas;
 
@@ -43,19 +37,56 @@ public class TransferUsuarioT {
 
 	private String correoMadre;
 
-	private String telfPadre;
+	private String telPadre;
 
-	private String telfMadre;
+	private String telMadre;
 
 	private String centroAcademico;
 
-	private Reto reto;
+	private Integer idReto;
 
-	private ForeignCollection<Tarea> tareas;
+	private String codigoSincronizacion;
 
-	public TransferUsuarioT(){
-		puntuacion = 0;
-		puntuacionAnterior = 0;
+	//Informacion para el listado
+
+
+	public TransferUsuarioT(Integer id, String nombre, String avatar) {
+		this.id = id;
+		this.nombre = nombre;
+		this.avatar = avatar;
+	}
+
+	//Vacio
+	public TransferUsuarioT (){	}
+
+	//Toda la informacion para el fragment detalle
+	public TransferUsuarioT(Integer id, String nombre, String correo, String avatar, String telefono,
+							Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
+							String direccion, String tipoPerfil, String notas, String nombrePadre,
+							String nombreMadre, String correoPadre, String correoMadre,
+							String telPadre, String telMadre, String centroAcademico, Integer idRreto,
+							String codigoSincronizacion) {
+		this.id = id;
+		this.nombre = nombre;
+		this.correo = correo;
+		this.avatar = avatar;
+		this.telefono = telefono;
+		this.puntuacion = puntuacion;
+		this.puntuacionAnterior = puntuacionAnterior;
+		this.curso = curso;
+		this.dni = dni;
+		this.direccion = direccion;
+		this.tipoPerfil = tipoPerfil;
+		this.notas = notas;
+		this.nombrePadre = nombrePadre;
+		this.nombreMadre = nombreMadre;
+		this.correoPadre = correoPadre;
+		this.correoMadre = correoMadre;
+		this.telMadre = telMadre;
+		this.telPadre = telPadre;
+		this.centroAcademico = centroAcademico;
+		this.idReto = idReto;
+		this.codigoSincronizacion = codigoSincronizacion;
 	}
 
 	public Integer getId() {
@@ -90,6 +121,14 @@ public class TransferUsuarioT {
 		this.avatar = avatar;
 	}
 
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public Integer getPuntuacion() {
 		return puntuacion;
 	}
@@ -122,11 +161,19 @@ public class TransferUsuarioT {
 		this.dni = dni;
 	}
 
-	public Perfil getTipoPerfil() {
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getTipoPerfil() {
 		return tipoPerfil;
 	}
 
-	public void setTipoPerfil(Perfil tipoPerfil) {
+	public void setTipoPerfil(String tipoPerfil) {
 		this.tipoPerfil = tipoPerfil;
 	}
 
@@ -170,20 +217,20 @@ public class TransferUsuarioT {
 		this.correoMadre = correoMadre;
 	}
 
-	public String getTelfPadre() {
-		return telfPadre;
+	public String getTelMadre() {
+		return telMadre;
 	}
 
-	public void setTelfPadre(String telfPadre) {
-		this.telfPadre = telfPadre;
+	public void setTelMadre(String telMadre) {
+		this.telMadre = telMadre;
 	}
 
-	public String getTelfMadre() {
-		return telfMadre;
+	public String getTelPadre() {
+		return telPadre;
 	}
 
-	public void setTelfMadre(String telfMadre) {
-		this.telfMadre = telfMadre;
+	public void setTelPadre(String telPadre) {
+		this.telPadre = telPadre;
 	}
 
 	public String getCentroAcademico() {
@@ -194,27 +241,19 @@ public class TransferUsuarioT {
 		this.centroAcademico = centroAcademico;
 	}
 
-	public Reto getReto() {
-		return reto;
+	public Integer getIdReto() {
+		return idReto;
 	}
 
-	public void setReto(Reto reto) {
-		this.reto = reto;
+	public void setIdReto(Integer idReto) {
+		this.idReto = idReto;
 	}
 
-	public ForeignCollection<Tarea> getTareas() {
-		return tareas;
+	public String getCodigoSincronizacion() {
+		return codigoSincronizacion;
 	}
 
-	public void setTareas(ForeignCollection<Tarea> tareas) {
-		this.tareas = tareas;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setCodigoSincronizacion(String codigoSincronizacion) {
+		this.codigoSincronizacion = codigoSincronizacion;
 	}
 }
