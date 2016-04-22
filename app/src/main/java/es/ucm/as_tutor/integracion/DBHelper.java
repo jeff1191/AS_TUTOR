@@ -6,10 +6,14 @@ import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import es.ucm.as_tutor.negocio.UsuarioEvento;
 import es.ucm.as_tutor.negocio.suceso.Evento;
@@ -37,14 +41,12 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
-        Log.e("gegegege", "se metio antes");
         try {
             TableUtils.createTable(connectionSource, Evento.class);
             TableUtils.createTable(connectionSource, Reto.class);
             TableUtils.createTable(connectionSource, Tarea.class);
             TableUtils.createTable(connectionSource, Usuario.class);
             TableUtils.createTable(connectionSource, UsuarioEvento.class);
-            Log.e("gegegege", "se metio");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -95,5 +97,64 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         tareaDao = null;
         usuarioDao = null;
         usuarioEventoDao = null;
+    }
+
+	/*
+	 * Convenience methods to build and run our prepared queries.
+	 */
+
+    private PreparedQuery<Evento> EventosForUsuarioQuery = null;
+    private PreparedQuery<Usuario> UsuariosForEventoQuery = null;
+
+    public List<Evento> lookupEventosForUsuario(Usuario Usuario) throws SQLException {
+        if (EventosForUsuarioQuery == null) {
+            EventosForUsuarioQuery = makeEventosForUsuarioQuery();
+        }
+        EventosForUsuarioQuery.setArgumentHolderValue(0, Usuario);
+        return getEventoDao().query(EventosForUsuarioQuery);
+    }
+
+    public List<Usuario> lookupUsuariosForEvento(Evento Evento) throws SQLException {
+        if (UsuariosForEventoQuery == null) {
+            UsuariosForEventoQuery = makeUsuariosForEventoQuery();
+        }
+        UsuariosForEventoQuery.setArgumentHolderValue(0, Evento);
+        return getUsuarioDao().query(UsuariosForEventoQuery);
+    }
+
+    /**
+     * Build our query for Evento objects that match a Usuario.
+     */
+    private PreparedQuery<Evento> makeEventosForUsuarioQuery() throws SQLException {
+        // build our inner query for UsuarioEvento objects
+        QueryBuilder<UsuarioEvento, Integer> UsuarioEventoQb = getUsuarioEventoDao().queryBuilder();
+        // just select the Evento-id field
+        UsuarioEventoQb.selectColumns("EVENTO");
+        SelectArg UsuarioSelectArg = new SelectArg();
+        // you could also just pass in Usuario1 here
+        UsuarioEventoQb.where().eq("USUARIO", UsuarioSelectArg);
+
+        // build our outer query for Evento objects
+        QueryBuilder<Evento, Integer> EventoQb = getEventoDao().queryBuilder();
+        // where the id matches in the Evento-id from the inner query
+        EventoQb.where().in("ID", UsuarioEventoQb);
+        return EventoQb.prepare();
+    }
+
+    /**
+     * Build our query for Usuario objects that match a Evento
+     */
+    private PreparedQuery<Usuario> makeUsuariosForEventoQuery() throws SQLException {
+        QueryBuilder<UsuarioEvento, Integer> UsuarioEventoQb = getUsuarioEventoDao().queryBuilder();
+        // this time selecting for the Usuario-id field
+        UsuarioEventoQb.selectColumns("USUARIO");
+        SelectArg EventoSelectArg = new SelectArg();
+        UsuarioEventoQb.where().eq("EVENTO", EventoSelectArg);
+
+        // build our outer query
+        QueryBuilder<Usuario, Integer> UsuarioQb = getUsuarioDao().queryBuilder();
+        // where the Usuario-id matches the inner query's Usuario-id field
+        UsuarioQb.where().in("ID", UsuarioEventoQb);
+        return UsuarioQb.prepare();
     }
 }

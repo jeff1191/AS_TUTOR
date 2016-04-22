@@ -26,10 +26,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imanoweb.calendarview.CalendarListener;
-import com.imanoweb.calendarview.CustomCalendarView;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private AdaptadorNavegacion NavAdapter;
     private Menu menuActionBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -570,114 +572,7 @@ public class MainActivity extends AppCompatActivity {
     public void nuevoEvento(View view){
         menuActionBar.clear();
         getMenuInflater().inflate(R.menu.menu_usuario, menuActionBar);
-
-
-        TextView nuevoEv = (TextView) findViewById(R.id.DetalleNombreEvento);
-        nuevoEv.setText("Nuevo evento");
-
-        EditText nuevoNombre = (EditText) findViewById(R.id.editTextNombreEvento);
-        EditText nuevaHoraEvento = (EditText) findViewById(R.id.editTextHoraEvento);
-        EditText nuevaHoraAlarma = (EditText) findViewById(R.id.editTextHoraAlarma);
-        ListView listaEventoUsuarios = (ListView) findViewById(R.id.listViewUsuariosEvento);
-        Button boton_nuevo= (Button) findViewById(R.id.botonEvento);
-
-        nuevoNombre.setText("");
-        nuevaHoraEvento.setText("");
-        nuevaHoraAlarma.setText("");
-
-        AdaptadorEventoUsuarios adapterListadoUsuarios = new AdaptadorEventoUsuarios(this);
-        ArrayList<String> nombresUsuarios = new ArrayList<String>();
-        ArrayList<String> usuariosAsistencia = new ArrayList<String>();
-        ArrayList<Boolean> usuariosActivos  = new ArrayList<Boolean>();
-
-
-        nombresUsuarios.add("Juan Perez");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Maria Salgado");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Julian Iturrino");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Juan Luis Armas");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("David Guess");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Alfredo Almache");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Jeff Gordon");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-        nombresUsuarios.add("Andres Hamilton");
-        usuariosActivos.add(false);
-        usuariosAsistencia.add("NO");
-
-
-
-        adapterListadoUsuarios.setDatos(nombresUsuarios);
-        adapterListadoUsuarios.setDatosCheck(usuariosActivos);
-       // adapterListadoUsuarios.setDatosAsistencia(usuariosAsistencia);
-
-        listaEventoUsuarios.setAdapter(adapterListadoUsuarios);
-        boton_nuevo.setText("Crear");
-        //Calendar
-        //Initialize CustomCalendarView from layout
-        final CustomCalendarView calendarView = (CustomCalendarView) findViewById(R.id.calendar_view);
-        final Calendar calendarioVista =calendarView.getCurrentCalendar();
-        calendarioVista.set(Calendar.DAY_OF_MONTH, 15);
-        calendarioVista.set(Calendar.MONTH, 2 - 1);
-        calendarioVista.set(Calendar.YEAR, 2016);
-
-        //Initialize calendar with date
-        Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
-
-
-        //Show Monday as first date of week
-        calendarView.setFirstDayOfWeek(Calendar.MONDAY);
-
-        //Show/hide overflow days of a month
-        calendarView.setShowOverflowDate(false);
-
-        //call refreshCalendar to update calendar the view
-        calendarView.refreshCalendar(calendarioVista);
-
-        //Handling custom calendar events
-        calendarView.setCalendarListener(new CalendarListener() {
-            @Override
-            public void onDateSelected(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                Toast.makeText(MainActivity.this, "NUEVO: " + df.format(date), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onMonthChanged(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
-                Toast.makeText(MainActivity.this,"NUEVO: " + df.format(date), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        boton_nuevo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-    }
-
-    public void enviarUsuarios(View view){
-        Log.e("USR", "asda");
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS,null);
     }
 
     public void nuevoUsuario(View view){

@@ -1,6 +1,9 @@
 package es.ucm.as_tutor.negocio.suceso;
 
 import java.util.Date;
+import java.util.List;
+
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 
 /**
  * Created by Jeffer on 15/04/2016.
@@ -14,6 +17,8 @@ public class TransferEvento {
 
     public TransferEvento(){}
 
+
+
     public TransferEvento(Integer id, String nombre, Date fecha, Date horaAlarma, Date horaEvento) {
         this.id = id;
         this.nombre = nombre;
@@ -21,7 +26,6 @@ public class TransferEvento {
         this.horaAlarma = horaAlarma;
         this.horaEvento = horaEvento;
     }
-
 
     public Integer getId() {
         return id;

@@ -1,5 +1,8 @@
 package es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento;
 
+import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
+import es.ucm.as_tutor.negocio.suceso.SASuceso;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
 
@@ -9,6 +12,7 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandExcep
 public class EliminarEventoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        return null;
+        SASuceso sa = FactoriaSA.getInstancia().nuevoSASuceso();
+        return sa.eliminarEvento((TransferEvento) datos);
     }
 }

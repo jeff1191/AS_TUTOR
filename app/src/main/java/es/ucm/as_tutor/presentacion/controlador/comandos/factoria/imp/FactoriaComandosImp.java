@@ -4,9 +4,11 @@ package es.ucm.as_tutor.presentacion.controlador.comandos.factoria.imp;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.AnyadirUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.CrearEventoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.CrearEventoConsultarUsuarios;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.EliminarEventoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.GuardarEventoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ListadoEventoComando;
@@ -43,6 +45,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSUTAR_USUARIOS_EVENTO:
                 ret= new ConsultarUsuariosEvento();
+                break;
+            case ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS:
+                ret= new CrearEventoConsultarUsuarios();
+                break;
+            case ListaComandos.ANYADIR_USUARIOS_EVENTO:
+                ret= new AnyadirUsuariosEvento();
                 break;
             //Fin evento
         }

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
@@ -33,10 +34,11 @@ public class FragmentListadoEvento extends Fragment {
         ArrayList<String> nombresEventos = new ArrayList<String>();
         ArrayList<String> fechaEventos= new ArrayList<String>();
         ArrayList<Integer> idsEventos= new ArrayList<Integer>();
-
+        SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
         for(int i=0; i < eventos.size(); i++){
             nombresEventos.add(eventos.get(i).getNombre());
-            fechaEventos.add(eventos.get(i).getHoraAlarma().toString());
+            fechaEventos.add(formatFecha.format(eventos.get(i).getFecha())+ " a las "+ formatHora.format(eventos.get(i).getHoraEvento()) );
             idsEventos.add(eventos.get(i).getId());
         }
 
@@ -102,180 +104,6 @@ public class FragmentListadoEvento extends Fragment {
         });
 
         return rootView;
-    }
-
-//ESTE METODO SIMULA LA CARGA DE LOS DATOS DE BDD (PROVISIONAL)
-    public void cargarDatos(int pos,ArrayList<String> nombresUsuarios,
-                            ArrayList<Integer> usuariosActivos,
-                            ArrayList<String> usuariosAsistencia){
-
-        switch (pos){
-            case 0:
-                nombresUsuarios.add("Juan Perez");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("SI");
-
-                nombresUsuarios.add("Maria Salgado");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("SI");
-
-                nombresUsuarios.add("Julian Iturrino");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Juan Luis Armas");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("David Guess");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Alfredo Almache");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Jeff Gordon");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Andres Hamilton");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-                break;
-            case 1:
-                nombresUsuarios.add("Juan Perez");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Maria Salgado");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Julian Iturrino");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Juan Luis Armas");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("David Guess");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Alfredo Almache");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Jeff Gordon");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Andres Hamilton");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-                break;
-            case 2:
-                nombresUsuarios.add("Juan Perez");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Maria Salgado");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Julian Iturrino");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Juan Luis Armas");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("David Guess");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Alfredo Almache");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Jeff Gordon");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Andres Hamilton");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-                break;
-            case 3:
-                nombresUsuarios.add("Juan Perez");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Maria Salgado");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Julian Iturrino");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Juan Luis Armas");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("David Guess");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Alfredo Almache");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Jeff Gordon");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Andres Hamilton");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-                break;
-            case 4:
-                nombresUsuarios.add("Juan Perez");
-                usuariosActivos.add(1);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Maria Salgado");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Julian Iturrino");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Juan Luis Armas");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("David Guess");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Alfredo Almache");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Jeff Gordon");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-
-                nombresUsuarios.add("Andres Hamilton");
-                usuariosActivos.add(0);
-                usuariosAsistencia.add("NO");
-                break;
-        }
     }
 
 

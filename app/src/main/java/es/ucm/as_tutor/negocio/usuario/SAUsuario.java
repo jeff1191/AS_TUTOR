@@ -3,9 +3,12 @@
  */
 package es.ucm.as_tutor.negocio.usuario;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -112,4 +115,6 @@ public interface SAUsuario {
 	public void generarAPK(Integer idUsuario, String nombreTutor,
 			String correoTutor, String nombreUsuario, String correoUsuario,
 			Collection tareas);
+
+	public ArrayList<TransferUsuarioT> listadoUsuarios();
 }

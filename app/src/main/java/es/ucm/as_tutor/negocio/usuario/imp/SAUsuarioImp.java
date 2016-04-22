@@ -3,12 +3,24 @@
  */
 package es.ucm.as_tutor.negocio.usuario.imp;
 
-import java.util.Collection;
+import android.util.Log;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.suceso.Evento;
 import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
 /** 
@@ -18,18 +30,14 @@ import es.ucm.as_tutor.negocio.usuario.Usuario;
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class SAUsuarioImp implements SAUsuario {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private Object entityManager;
+	private DBHelper mDBHelper = null;
 
-	/** 
-	 * (sin Javadoc)
-	 * @see SAUsuario#crearUsuario(TransferUsuarioT usuario)
-	 * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	private DBHelper getHelper() {
+		if (mDBHelper == null) {
+			mDBHelper = OpenHelperManager.getHelper(Manager.getInstance().getContext(), DBHelper.class);
+		}
+		return mDBHelper;
+	}
 	public void crearUsuario(TransferUsuarioT usuario) {
 		// begin-user-code
 		// TODO Ap�ndice de m�todo generado autom�ticamente
@@ -157,5 +165,45 @@ public class SAUsuarioImp implements SAUsuario {
 		// TODO Ap�ndice de m�todo generado autom�ticamente
 
 		// end-user-code
+	}
+
+	@Override
+	public ArrayList<TransferUsuarioT> listadoUsuarios() {
+		ArrayList<TransferUsuarioT> ret = new ArrayList<TransferUsuarioT>();
+
+		try {
+			Dao<Usuario, Integer> daoUsuario =  getHelper().getUsuarioDao();
+
+			/*////////////////////////////////Borrar /////////////////////////////////
+			Usuario a = new Usuario();
+			a.setNombre("Pepe Pánfilo");
+		Usuario a1 = new Usuario();
+			a1.setNombre("Julio Andres");
+		Usuario a2= new Usuario();
+			a2.setNombre("Gandalf Granados");
+		Usuario a3 = new Usuario();
+			a3.setNombre("Pablo Pedro");
+		Usuario a4 = new Usuario();
+			a4.setNombre("Simeone Godin");
+			Usuario a5 = new Usuario();
+			a5.setNombre("Maria Camila");
+			Usuario a6 = new Usuario();
+			a6.setNombre("Julian Juan");
+
+
+			daoUsuario.create(a);daoUsuario.create(a1);daoUsuario.create(a2);daoUsuario.create(a3);daoUsuario.create(a4);
+			daoUsuario.create(a5);daoUsuario.create(a6);
+			/*************************************************/
+			List<Usuario> usuariosBDD = daoUsuario.queryForAll();
+			for(int i=0; i < usuariosBDD.size(); i++) {
+				TransferUsuarioT e = new TransferUsuarioT();
+				e.setNombre(usuariosBDD.get(i).getNombre());
+				e.setID(usuariosBDD.get(i).getId());
+				ret.add(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 }

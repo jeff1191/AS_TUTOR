@@ -23,5 +23,6 @@ public interface SASuceso {
 	public TransferEvento consultaEvento(TransferEvento consulta);
 	public boolean guardarEvento(TransferEvento guardaEvento);
 	public ArrayList<TransferEvento> listadoEventos();
-	public ArrayList<TransferUsuarioT> consultarUsuariosEvento(TransferEvento guardaEvento);
+	public ArrayList<TransferUsuarioEvento> consultarUsuariosEvento(TransferEvento consultaEvento);
+	public void crearUsuariosEvento(ArrayList<TransferUsuarioEvento> eventosUsuarios);
 }

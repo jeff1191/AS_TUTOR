@@ -138,27 +138,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.175"
                 android:orientation="vertical">
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mcv_arrowColor="@color/colorPrimary"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:mcv_showOtherDates="all"
+                    app:mcv_selectionColor="@color/colorAccent"
+                    app:mcv_tileSize="60dp"
+                    />
             </LinearLayout>
-
-            <com.imanoweb.calendarview.CustomCalendarView
-                android:id="@+id/calendar_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@android:color/white"
-                app:calendarBackgroundColor="@android:color/white"
-                app:calendarTitleTextColor="@color/black"
-                app:currentDayOfMonthColor="@color/black"
-                android:layout_weight="0.9"
-                app:dayOfMonthTextColor="@color/textoNormal"
-                app:dayOfWeekTextColor="@color/textoNormal"
-                app:disabledDayBackgroundColor="@color/botonActivo"
-                app:disabledDayTextColor="@color/textoNormal"
-                app:selectedDayBackgroundColor="@color/colorAccent"
-                app:titleLayoutBackgroundColor="@android:color/white"
-                app:weekLayoutBackgroundColor="@android:color/white">
-            </com.imanoweb.calendarview.CustomCalendarView>
-
-
 
         </LinearLayout>
 
@@ -168,33 +158,46 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+        </LinearLayout>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:id="@+id/botonCancelarEvento"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+               />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+        </LinearLayout>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:id="@+id/botonAccionEvento"
+                android:layout_weight="1"
+                android:layout_marginTop="20dp"
+                />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
             android:orientation="vertical">
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Guardar"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:id="@+id/botonEvento"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="vertical">
-        </LinearLayout>
     </LinearLayout>
-
-
 
 </LinearLayout>
