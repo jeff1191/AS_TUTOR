@@ -33,7 +33,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
@@ -331,7 +330,7 @@ public class FragmentDetalleUsuario extends Fragment {
             mail.setText(correoMadre);
         }
 
-        builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Cambiar info padre o madre
@@ -353,7 +352,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, consultarU);
             }
         });
-        builder.setNegativeButton("Salir",
+        builder.setNegativeButton("Cancelar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -376,13 +375,11 @@ public class FragmentDetalleUsuario extends Fragment {
         Log.e("testJL", "Se mete en el del fragment");
         switch (item.getItemId()) {
             case R.id.tareasUsuario:
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, 1);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, id);
                 break;
             case R.id.retoUsuario:
-                TransferRetoT consultarR = new TransferRetoT();
                 Log.e("testJL", "El id del retos es " + reto);
-                consultarR.setId(reto);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, consultarR);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, reto);
                 break;
             case R.id.eventosUsuario:
                 /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();

@@ -13,6 +13,6 @@ public class ConsultarRetoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        return saSuceso.consultarReto((TransferRetoT) datos);
+        return saSuceso.consultarReto((Integer) datos);
     }
 }

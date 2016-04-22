@@ -5,8 +5,6 @@ package es.ucm.as_tutor.negocio.suceso;
 
 import java.util.ArrayList;
 
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
-
 public interface SASuceso {
 
 	public void crearTarea(TransferTareaT transferTarea);
@@ -23,5 +21,5 @@ public interface SASuceso {
 
 	public void crearReto(TransferRetoT transferReto);
 
-	public TransferRetoT consultarReto(TransferRetoT consulta);
+	public TransferRetoT consultarReto(Integer idReto);
 }

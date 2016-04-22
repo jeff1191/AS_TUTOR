@@ -1,8 +1,6 @@
 
 package es.ucm.as_tutor.negocio.suceso.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -17,7 +15,6 @@ import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -214,19 +211,14 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public TransferRetoT consultarReto(TransferRetoT consulta) {
+    public TransferRetoT consultarReto(Integer idReto) {
         TransferRetoT ret = null;
 
         try {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
-            if(consulta.getId() != null) {
-                Reto r = daoReto.queryForId(consulta.getId());
-                if (r != null)
-                    ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
-                            r.getTexto(), r.getSuperado(), r.getPremio());
-                else
-                    ret = consulta; // Esto depende como quede lo de mas arriba, poner tambien un new
-            }
+            Reto r = daoReto.queryForId(idReto);
+            ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
+                    r.getTexto(), r.getSuperado(), r.getPremio());
         } catch (SQLException e) {
             e.printStackTrace();
         }
