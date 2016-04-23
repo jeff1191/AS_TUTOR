@@ -28,11 +28,13 @@ public class Decision extends AppCompatActivity {
             tutor = (TransferTutorT) c.ejecutaComando(null);
 
             if (tutor.getNombre() == null){
-                Intent intent = new Intent().setClass(Decision.this, RegistroTutor.class);
+                Intent intent = new Intent(getApplicationContext(), RegistroTutor.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
             else{
-                Intent intent = new Intent().setClass(Decision.this, Acceso.class);
+                Intent intent = new Intent(getApplicationContext(), Acceso.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
 

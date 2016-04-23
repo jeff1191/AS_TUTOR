@@ -3,23 +3,34 @@
  */
 package es.ucm.as_tutor.negocio.usuario.imp;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.Reto;
+import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
+import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
 import es.ucm.as_tutor.negocio.tutor.Tutor;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
+import es.ucm.as_tutor.negocio.utils.PDFManager;
 import es.ucm.as_tutor.negocio.utils.Perfil;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.GenerarPDFComando;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 
@@ -133,8 +144,17 @@ public class SAUsuarioImp implements SAUsuario {
 
 	public void eliminarUsuario(Integer idUsuario) {
 		try {
-			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-			daoUsuario.deleteById(idUsuario); // Ver si eso una manera mejor de borrar
+
+            // Eliminamos todas las tareas de el usuario
+            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+            ArrayList<TransferTareaT> tareas = saSuceso.consultarTareas(idUsuario);
+            for (int i = 0; i < tareas.size(); i++)
+                saSuceso.eliminarTarea(tareas.get(i).getId());
+
+            // Eliminamos al usuario
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+			daoUsuario.deleteById(idUsuario);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -276,8 +296,60 @@ public class SAUsuarioImp implements SAUsuario {
 		return ret;
 	}
 
-	public void consultarInforme(Integer idUsuario) {
+    @Override
+    public void generarPDF(Integer idUsuario) {
 
+        SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+        ArrayList<TransferTareaT> tareas = saSuceso.consultarTareas(idUsuario);
+        TransferRetoT reto = saSuceso.consultarReto(idUsuario);
+        TransferUsuarioT usuario = consultarUsuario(idUsuario);
+
+        PDFManager.generarPDF(usuario, reto, tareas);
+    }
+
+
+	@Override
+	public void enviarCorreo(Integer idUsuario) {
+
+        Dao<Usuario, Integer> usuarioDao;
+        Dao<Tutor, Integer> tutorDao;
+
+        try {
+            // Se busca en la BBDD los datos necesarios para el correo
+            usuarioDao = getHelper().getUsuarioDao();
+            tutorDao = getHelper().getTutorDao();
+            Usuario usuario = usuarioDao.queryForId(idUsuario);
+            String nombreUsuario = usuario.getNombre();
+            Tutor tutor = tutorDao.queryForId(1);
+            String nombreTutor = tutor.getNombre();
+            String correoTutor = tutor.getCorreo();
+
+            //Se abre la aplicación de correo que haya instalada en la tablet con la sesion
+            // que los usuarios tengan iniciada
+            //Instanciamos un Intent del tipo ACTION_SEND
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            //Definimos la tipologia de datos del contenido dle Email en este caso pdf
+            emailIntent.setType("application/pdf");
+            // Indicamos con un Array de tipo String las direcciones de correo a las cuales
+            //queremos enviar el texto
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{correoTutor});
+            // Definimos un titulo para el Email
+            emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
+            // Definimos un asunto para el Email
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
+            // Obtenemos la referencia al texto y lo pasamos al Email Intent
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + nombreTutor + "!\n " +
+                    "Este es el progreso de "+ nombreUsuario +" hasta el momento.\n\nEnviado desde AS");
+
+            Uri uri = Uri.parse( new File("file://" + "/storage/sdcard/Download/AS/Informe.pdf").toString());
+
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            Manager.getInstance().getContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
+
 
 }

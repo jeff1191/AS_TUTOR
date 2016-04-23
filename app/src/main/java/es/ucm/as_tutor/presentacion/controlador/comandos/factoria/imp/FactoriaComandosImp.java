@@ -10,6 +10,8 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetosComa
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.CrearUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.EditarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.EliminarUsuarioComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.EnviarCorreoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.GenerarPDFComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ListadoUsuariosComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.CrearUsuariosComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComandos;
@@ -39,26 +41,21 @@ public class FactoriaComandosImp extends FactoriaComandos {
     public Command getCommand(String comando) {
         Command ret = null;
         switch(comando){
-            case ListaComandos.CREAR_TAREA:
-                ret = new CrearTareaComando();
+
+            // Tutor
+            case ListaComandos.CONSULTAR_TUTOR:
+                ret = new ConsultarTutorComando();
                 break;
-            case ListaComandos.EDITAR_TAREA:
-                ret = new EditarTareaComando();
+            case ListaComandos.CREAR_TUTOR:
+                ret = new CrearTutorComando();
                 break;
-            case ListaComandos.ELIMINAR_TAREA:
-                ret = new EliminarTareaComando();
+            case ListaComandos.EDITAR_TUTOR:
+                ret = new EditarTutorComando();
                 break;
-            case ListaComandos.DESHABILITAR_TAREA:
-                ret = new DeshabilitarTareaComando();
-                break;
-            case ListaComandos.CONSULTAR_TAREAS:
-                ret = new ConsultarTareasComando();
-                break;
+
+            //Usuario
             case ListaComandos.CREAR_USUARIOS:
                 ret = new CrearUsuariosComando();
-                break;
-            case ListaComandos.CREAR_RETOS:
-                ret = new CrearRetosComando();
                 break;
             case ListaComandos.CREAR_USUARIO:
                 ret = new CrearUsuarioComando();
@@ -75,21 +72,41 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.EDITAR_USUARIO:
                 ret = new EditarUsuarioComando();
                 break;
+            case ListaComandos.ENVIAR_CORREO:
+                ret = new EnviarCorreoComando();
+                break;
+            case ListaComandos.GENERAR_PDF:
+                ret = new GenerarPDFComando();
+                break;
+
+            // Tarea
+            case ListaComandos.CREAR_TAREA:
+                ret = new CrearTareaComando();
+                break;
+            case ListaComandos.EDITAR_TAREA:
+                ret = new EditarTareaComando();
+                break;
+            case ListaComandos.ELIMINAR_TAREA:
+                ret = new EliminarTareaComando();
+                break;
+            case ListaComandos.DESHABILITAR_TAREA:
+                ret = new DeshabilitarTareaComando();
+                break;
+            case ListaComandos.CONSULTAR_TAREAS:
+                ret = new ConsultarTareasComando();
+                break;
+
+            // Reto
+            case ListaComandos.CREAR_RETOS:
+                ret = new CrearRetosComando();
+                break;
             case ListaComandos.CREAR_RETO:
                 ret = new CrearRetoComando();
                 break;
             case ListaComandos.CONSULTAR_RETO:
                 ret = new ConsultarRetoComando();
                 break;
-            case ListaComandos.CONSULTAR_TUTOR:
-                ret = new ConsultarTutorComando();
-                break;
-            case ListaComandos.CREAR_TUTOR:
-                ret = new CrearTutorComando();
-                break;
-            case ListaComandos.EDITAR_TUTOR:
-                ret = new EditarTutorComando();
-                break;
+
             //Evento
             case ListaComandos.CREAR_EVENTO:
                 ret = new CrearEventoComando();
@@ -115,7 +132,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.ANYADIR_USUARIOS_EVENTO:
                 ret= new AnyadirUsuariosEvento();
                 break;
-            //Fin evento
         }
 
         return ret;

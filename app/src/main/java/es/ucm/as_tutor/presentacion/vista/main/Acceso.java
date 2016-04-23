@@ -71,14 +71,18 @@ public class Acceso extends Activity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(pwd1.getText().toString().equals(password.toString()))
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                else{
+                if(pwd1.getText().toString().equals(password.toString())) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                }else{
                     Toast errorNombre =
                             Toast.makeText(getApplicationContext(),
                                     "Clave incorrecta", Toast.LENGTH_SHORT);
                     errorNombre.show();
-                    startActivity(new Intent(getApplicationContext(), Acceso.class));
+                    Intent intent = new Intent(getApplicationContext(), Acceso.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
                 }
             }
         });

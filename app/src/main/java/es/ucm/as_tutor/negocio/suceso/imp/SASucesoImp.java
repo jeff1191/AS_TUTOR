@@ -101,8 +101,7 @@ public class SASucesoImp implements SASuceso {
     public void eliminarTarea(Integer idTarea) {
         try {
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
-            Tarea tarea = daoTarea.queryForId(idTarea);
-            daoTarea.delete(tarea);
+            daoTarea.deleteById(idTarea);
         } catch (SQLException e) {
             e.printStackTrace();
         }

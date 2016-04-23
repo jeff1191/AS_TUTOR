@@ -144,7 +144,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         }
     }
 
-
     // Muestra el menú con las opciones para la tarea seleccionada
     public void mostrarMenuTarea(View v, int position) {
         final int pos = position;

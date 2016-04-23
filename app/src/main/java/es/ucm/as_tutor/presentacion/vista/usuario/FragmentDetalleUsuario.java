@@ -373,35 +373,11 @@ public class FragmentDetalleUsuario extends Fragment {
                 */
                 break;
             case R.id.enviarCorreo:
-                // aquí habrá que ejecutar el comando de enviar correo
-
-                // Enviar correo abriendo aplicación/////////////////////////////////////////////////////
-                //Instanciamos un Intent del tipo ACTION_SEND
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                //Definimos la tipologia de datos del contenido dle Email en este caso text/html
-                emailIntent.setType("application/pdf");
-                // Indicamos con un Array de tipo String las direcciones de correo a las cuales
-                //queremos enviar el texto
-                //emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-                // Definimos un titulo para el Email
-                emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "Informe AS");
-                // Definimos un Asunto para el Email
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Informe AS");
-                // Obtenemos la referencia al texto y lo pasamos al Email Intent
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + /*name + */"!\n " +
-                        "Este es tu progreso hasta el momento. Sigue esforzándote para continuar mejorando."
-                        + "\n¡Ánimo!" + "\n\nEnviado desde AS");
-
-                Uri uri = Uri.parse( new File("file://" + "/sdcard/Download/AS/Informe.pdf").toString());
-                emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
-
-                Manager.getInstance().getContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
-                ///////////////////////////////////////////////////////////////////////////////////////////
+                Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
                 break;
 
             case R.id.eliminarUsuario:
-                Log.e("testJL", "va a la fun externa " + idUsuario + nombre + correo + centroEstudios);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, idUsuario);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
                 break;

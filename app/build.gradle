@@ -28,4 +28,5 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
+    compile 'com.itextpdf:itextg:5.5.9'
 }
