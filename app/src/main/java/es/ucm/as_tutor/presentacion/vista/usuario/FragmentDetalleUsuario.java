@@ -37,6 +37,7 @@ import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
+import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
 
 public class FragmentDetalleUsuario extends Fragment {
 
@@ -368,9 +369,7 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
                 break;
             case R.id.eventosUsuario:
-                /*FragmentDetalleUsuarioEvento fragmentEventoUsuario = new FragmentDetalleUsuarioEvento();
-                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
-                */
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTOS_USUARIO,idUsuario);
                 break;
             case R.id.enviarCorreo:
                 // aquí habrá que ejecutar el comando de enviar correo

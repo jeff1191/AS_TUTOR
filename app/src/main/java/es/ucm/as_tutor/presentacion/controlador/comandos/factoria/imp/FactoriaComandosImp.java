@@ -3,8 +3,10 @@ package es.ucm.as_tutor.presentacion.controlador.comandos.factoria.imp;
 
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.GuardarUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.ConsultarRetoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarEventosUsuario;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.CrearUsuarioComando;
@@ -21,7 +23,6 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.EliminarTarea
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.ConsultarTutorComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.CrearTutorComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.EditarTutorComando;
-import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.AnyadirUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarUsuariosEvento;
@@ -75,6 +76,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.EDITAR_USUARIO:
                 ret = new EditarUsuarioComando();
                 break;
+            case ListaComandos.CONSULTAR_EVENTOS_USUARIO:
+                ret= new ConsultarEventosUsuario();
+                break;
             case ListaComandos.CREAR_RETO:
                 ret = new CrearRetoComando();
                 break;
@@ -114,6 +118,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.ANYADIR_USUARIOS_EVENTO:
                 ret= new AnyadirUsuariosEvento();
+                break;
+            case ListaComandos.GUARDAR_USUARIOS_EVENTO:
+                ret= new GuardarUsuariosEvento();
                 break;
             //Fin evento
         }

@@ -47,6 +47,8 @@ public interface SASuceso {
 
 	public ArrayList<TransferUsuarioEvento> consultarUsuariosEvento(TransferEvento consultaEvento);
 
+	public void guardarUsuariosEvento(ArrayList<TransferUsuarioEvento> eventosUsuarios);
+
 	public void crearUsuariosEvento(ArrayList<TransferUsuarioEvento> eventosUsuarios);
 
 }

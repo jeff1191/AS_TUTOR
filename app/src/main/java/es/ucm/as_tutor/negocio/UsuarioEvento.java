@@ -12,12 +12,10 @@ public class UsuarioEvento {
 
     @DatabaseField(generatedId = true, columnName = "ID")
     private Integer id;
-    @DatabaseField(foreign = true, columnName = "USUARIO")
+    @DatabaseField(foreign = true,foreignAutoRefresh = true, columnName = "USUARIO")
     private Usuario usuario;
-    @DatabaseField(foreign = true, columnName = "EVENTO")
+    @DatabaseField(foreign = true, foreignAutoRefresh = true,columnName = "EVENTO")
     private Evento evento;
-    @DatabaseField(columnName = "ACTIVO")
-    private Integer activo;
     @DatabaseField(columnName = "ASISTENCIA")
     private String asistencia;
 
@@ -50,14 +48,6 @@ public class UsuarioEvento {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
-    }
-
-    public Integer getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Integer activo) {
-        this.activo = activo;
     }
 
     public String getAsistencia() {
