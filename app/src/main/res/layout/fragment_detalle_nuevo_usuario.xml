@@ -20,13 +20,38 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                        <!-- Imagen usuario -->
+
+                <!-- Espacio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"/>
+
+                <!-- Titulo pantalla -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Nuevo usuario"
+                    android:id="@+id/tituloNuevoUsuario"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+
+                <!-- Espacio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"/>
+
+                <!-- Imagen usuario -->
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/nuevaImagenUsuario"
                     android:src="@drawable/avatar"
-                    android:layout_weight="5"
+                    android:layout_weight="4"
                     android:gravity="center"
                     android:paddingTop="10dp"
                     android:clickable="true"
@@ -36,7 +61,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:orientation="horizontal"/>
 
                 <!-- Notas extras usuario-->
@@ -45,7 +70,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="3"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -56,6 +83,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
+                            android:inputType="textMultiLine"
                             android:hint="Notas" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -91,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:hint="Nombre nuevo usuario"
+                        android:hint="Nombre (*)"
                         android:textAppearance="?android:attr/textAppearanceMedium"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -145,6 +173,7 @@
                                         android:id="@+id/nuevoTelefono"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:inputType="number"
                                         android:singleLine="true"
                                         android:hint="Teléfono" />
                                 </android.support.design.widget.TextInputLayout>
@@ -162,7 +191,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:textAppearance="?android:attr/textAppearanceMedium"
-                                    android:text="Perfil"
+                                    android:text="Perfil (*)"
                                     android:gravity="center"
                                     android:layout_weight="1" />
 
@@ -352,7 +381,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:hint="Teléfono del padre" />
+                            android:hint="Teléfono del padre"
+                            android:inputType="number" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -441,7 +471,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:singleLine="true"
-                                    android:hint="Teléfono de la madre" />
+                                    android:hint="Teléfono de la madre"
+                                    android:inputType="number" />
                             </android.support.design.widget.TextInputLayout>
                         </LinearLayout>
 
@@ -478,7 +509,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
 
                 <!-- Espacio izquierdo -->
                 <LinearLayout
@@ -495,8 +527,17 @@
                     android:layout_weight="1"
                     android:id="@+id/botonCancelarNuevoU"
                     android:clickable="true"
-                    android:text="Cancelar"
-                    android:layout_marginRight="10dp" />
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:text="Cancelar" />
+
+                <!-- Espacio central -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+                </LinearLayout>
 
                 <!-- Boton guardar-->
                 <Button
@@ -505,8 +546,9 @@
                     android:layout_weight="1"
                     android:id="@+id/botonAceptarNuevoU"
                     android:clickable="true"
-                    android:text="ACEPTAR"
-                    android:layout_marginLeft="10dp" />
+                    android:background="@color/colorPrimary"
+                    android:textColor="@android:color/white"
+                    android:text="Crear" />
 
                 <!-- Espacio derecho -->
                 <LinearLayout

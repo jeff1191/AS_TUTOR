@@ -14,13 +14,12 @@ import es.ucm.as_tutor.negocio.UsuarioEvento;
 import es.ucm.as_tutor.negocio.suceso.Evento;
 import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
-import es.ucm.as_tutor.negocio.suceso.TransferEvento;
-import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
-import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -346,7 +345,7 @@ public class SASucesoImp implements SASuceso {
                 reto1.setSuperado(false);
                 u.setId(1);
                 reto1.setUsuario(u);
-                reto1.setPremio("Si lo completa, ganara un kitkat");
+                reto1.setPremio("Kitkat");
                 reto.create(reto1);
                 Reto reto2 = new Reto();
                 reto2.setContador(5);
