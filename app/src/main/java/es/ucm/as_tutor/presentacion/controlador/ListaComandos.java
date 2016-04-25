@@ -27,9 +27,12 @@ public class ListaComandos {
     public static final String CREAR_RETOS = "crearRetos";
     public static final String CREAR_RETO = "crearReto";
     public static final String CONSULTAR_RETO = "consultarReto";
+    public static final String CONSULTAR_EVENTOS_USUARIO= "consultarEventosUsuario";
+
     //Eventos
     public static final String CREAR_EVENTO = "crearEvento";
     public static final String ANYADIR_USUARIOS_EVENTO = "anyadirUsuariosEvento";
+    public static final String GUARDAR_USUARIOS_EVENTO = "guardarUsuariosEvento";
     public static final String ELIMINAR_EVENTO = "eliminarEvento";
     public static final String CONSULTAR_EVENTO = "consultarEvento";
     public static final String GUARDAR_EVENTO = "guardarEvento";

@@ -221,11 +221,14 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
                                 Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_EVENTO, nuevoEvento);
 //Añadir usuarios al evento
                                 List<TransferUsuarioEvento> listaUsuarios = new ArrayList<TransferUsuarioEvento>();
+                                TransferUsuarioEvento evento = new TransferUsuarioEvento(nuevoEvento, null);
+                                listaUsuarios.add(evento);
                                 for(int i=0; i < adapterListadoUsuarios.getDatosCheck().size(); i++){
 
                                     if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
                                         TransferUsuarioT add = new TransferUsuarioT();
                                         add.setId(adapterListadoUsuarios.getDatosIds().get(i));
+                                        add.setNombre(adapterListadoUsuarios.getItem(i));
 
                                         TransferUsuarioEvento eventoUsuario = new TransferUsuarioEvento(nuevoEvento,add);
                                         eventoUsuario.setActivo(1);
@@ -234,8 +237,11 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
                                     }
 
                                 }
+                                if(listaUsuarios.size()==0) { // Si ha desmarcado todos los usuarios, necesitamos el evento para quitar todos sus elems
 
-                                Controlador.getInstancia().ejecutaComando(ListaComandos.ANYADIR_USUARIOS_EVENTO, listaUsuarios);
+                                }
+
+                                Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_USUARIOS_EVENTO, listaUsuarios);
                                 Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS, null);
                             }
                             else{
@@ -299,7 +305,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
                                 if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
                                     TransferUsuarioT add = new TransferUsuarioT();
                                     add.setId(adapterListadoUsuarios.getDatosIds().get(i));
-                                    Log.e("ASIGNANDO: ", add.getId() + "");
+                                    add.setNombre(adapterListadoUsuarios.getItem(i));
 
                                     TransferUsuarioEvento eventoUsuario = new TransferUsuarioEvento(nuevoEvento,add);
                                     eventoUsuario.setActivo(1);

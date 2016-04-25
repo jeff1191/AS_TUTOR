@@ -3,6 +3,7 @@ package es.ucm.as_tutor.presentacion.controlador.imp;
 import android.content.Intent;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 import es.ucm.as_tutor.presentacion.vista.usuario.FragmentDetalleUsuario;
 import es.ucm.as_tutor.presentacion.vista.usuario.FragmentListadoUsuario;
+import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
 import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleReto;
 import es.ucm.as_tutor.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
@@ -62,7 +64,7 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<Integer> usuariosActivos = new ArrayList<Integer>();
                 ArrayList<Integer> idsUsuarios = new ArrayList<Integer>();
 
-                for(int i=0; i < info.size(); i++){
+                for(int i=1; i < info.size(); i++){ // pos 0 para el evento
                     idsUsuarios.add(info.get(i).getUsuario().getId());
                     nombresUsuarios.add(info.get(i).getUsuario().getNombre());
                     asistenciaUsuarios.add(info.get(i).getAsistencia());
@@ -184,6 +186,22 @@ public class DispatcherImp extends Dispatcher {
                     FragmentDetalleReto fragmentReto = FragmentDetalleReto.newInstance(reto);
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentReto).commit();
                 }
+                break;
+            case ListaComandos.CONSULTAR_EVENTOS_USUARIO:
+
+                ArrayList<TransferUsuarioEvento> infoEventosUsuario = (ArrayList<TransferUsuarioEvento>) datos;
+                ArrayList<String> nombresEventos = new ArrayList<String>();
+                ArrayList<String> asistenciaEventos = new ArrayList<String>();
+                SimpleDateFormat formatFecha = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
+                for(int i=1; i < infoEventosUsuario.size(); i++){ // Posicion 0 ocupada por el usuario
+                    nombresEventos.add(infoEventosUsuario.get(i).getEvento().getNombre()+" a las " +formatHora.format(infoEventosUsuario.get(i).getEvento().getHoraEvento())+ " el "+formatFecha.format(infoEventosUsuario.get(i).getEvento().getFecha()));
+                    asistenciaEventos.add(infoEventosUsuario.get(i).getAsistencia());
+                }
+                TransferUsuarioT usuario_actual = infoEventosUsuario.get(0).getUsuario();//Sabemos que estamaos consultando algo que existe
+
+                FragmentDetalleUsuarioEvento fragmentEventoUsuario = FragmentDetalleUsuarioEvento.newInstance(usuario_actual,nombresEventos,asistenciaEventos);
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
                 break;
         }
     }

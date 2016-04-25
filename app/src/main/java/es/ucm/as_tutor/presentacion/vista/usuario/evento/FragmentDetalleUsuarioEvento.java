@@ -9,10 +9,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,14 +24,44 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
 
 
     private ListView listViewEventos;
+    private String nombreUsuario;
+    private AdaptadorUsuarioEventos adapter;
+
     public FragmentDetalleUsuarioEvento() {
         // Required empty public constructor
     }
+    public static FragmentDetalleUsuarioEvento newInstance(TransferUsuarioT usuario,
+                                                    ArrayList<String> nombresEventos,
+                                                    ArrayList<String> asistenciaEventos) {
+        FragmentDetalleUsuarioEvento frgDetalleEvento = new FragmentDetalleUsuarioEvento();
+        Bundle bundle = new Bundle();
+        if(nombresEventos.size() != 0)
+            bundle.putString("nombreUsuario","Eventos de " + usuario.getNombre());
+        else
+            bundle.putString("nombreUsuario","El usuario " + usuario.getNombre()+ " no tiene eventos");
 
+        bundle.putStringArrayList("listaEventos", nombresEventos);
+        bundle.putStringArrayList("listaEventosAsistencia", asistenciaEventos);
+
+        frgDetalleEvento.setArguments(bundle);
+        return frgDetalleEvento;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+
+            ArrayList<String> listaEventos = bundle.getStringArrayList("listaEventos");
+            ArrayList<String> listaUsuariosAsistencia = bundle.getStringArrayList("listaEventosAsistencia");
+            nombreUsuario = bundle.getString("nombreUsuario");
+            adapter = new AdaptadorUsuarioEventos(getActivity());
+            adapter.setEventos(listaEventos);
+            adapter.setAsistencia(listaUsuariosAsistencia);
+
+
+        }
     }
 
     @Override
@@ -36,38 +69,13 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_detalle_usuario_evento, container, false);
-
         listViewEventos = (ListView) rootView.findViewById(R.id.listViewEventos);
-
+        TextView titulo = (TextView) rootView.findViewById(R.id.textViewNombreEventosUsuario);
+        titulo.setText(nombreUsuario);
         View header = inflater.inflate(R.layout.header_usuario_eventos, listViewEventos, false);
         listViewEventos.addHeaderView(header, null, false);
-
-        ArrayList<String> items = new ArrayList<>();
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-        items.add("Ir al Barcas a las 12:00 - 14 feb 2016");
-
-        ArrayList<String> asistencia = new ArrayList<>();
-        asistencia.add("Si");
-        asistencia.add("Si");
-        asistencia.add("Si");
-        asistencia.add("No");
-        asistencia.add("No");
-        asistencia.add("No");
-
-        AdaptadorUsuarioEventos adapter = new AdaptadorUsuarioEventos(getActivity());
-        adapter.setEventos(items);
-        adapter.setAsistencia(asistencia);
-
         listViewEventos.setAdapter(adapter);
-
         return rootView;
-
-
-
     }
 
     @Override

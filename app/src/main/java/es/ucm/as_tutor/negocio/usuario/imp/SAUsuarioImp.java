@@ -18,10 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as_tutor.integracion.DBHelper;
+import es.ucm.as_tutor.negocio.UsuarioEvento;
+import es.ucm.as_tutor.negocio.suceso.Evento;
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
+import es.ucm.as_tutor.negocio.suceso.TransferEvento;
+import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
 import es.ucm.as_tutor.negocio.tutor.Tutor;
@@ -351,5 +355,43 @@ public class SAUsuarioImp implements SAUsuario {
         }
 	}
 
+	@Override
+	public ArrayList<TransferUsuarioEvento> consultarEventosUsuario(Integer idUsuario) {
+		ArrayList<TransferUsuarioEvento> ret = new ArrayList<TransferUsuarioEvento>();
+
+		try {
+			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
+			Dao<Usuario, Integer> daoUsuario =  getHelper().getUsuarioDao();
+			Dao<UsuarioEvento, Integer> daoUsuarioEvento =  getHelper().getUsuarioEventoDao();
+			//Consultar usuario
+			Usuario usuarioBDD = daoUsuario.queryForId(idUsuario);
+
+			TransferUsuarioT tUsuario = new TransferUsuarioT();
+			tUsuario.setId(usuarioBDD.getId());
+			tUsuario.setNombre(usuarioBDD.getNombre());
+
+			QueryBuilder<UsuarioEvento, Integer> tQb = daoUsuarioEvento.queryBuilder();
+
+			List<UsuarioEvento> eventosUsuarioTabla = tQb.where().eq("USUARIO", usuarioBDD).query(); //tendremos todos los eventos con ID_EVENTO
+
+			List<Evento> usuarioEventos = getHelper().lookupEventosForUsuario(usuarioBDD); //tenemos los usuarios de ese evento
+			ret.add(new TransferUsuarioEvento(null,tUsuario));
+			for(int i = 0; i < usuarioEventos.size(); i++) {
+				TransferEvento tEvento= new TransferEvento();
+				tEvento.setId(usuarioEventos.get(i).getId());
+				tEvento.setNombre(usuarioEventos.get(i).getNombreEvento());
+				tEvento.setFecha(usuarioEventos.get(i).getFecha());
+				tEvento.setHoraEvento(usuarioEventos.get(i).getHoraEvento());
+				tEvento.setHoraAlarma(usuarioEventos.get(i).getHoraAlarma());
+				TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
+				tRet.setAsistencia(eventosUsuarioTabla.get(i).getAsistencia());
+				ret.add(tRet);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
 
 }

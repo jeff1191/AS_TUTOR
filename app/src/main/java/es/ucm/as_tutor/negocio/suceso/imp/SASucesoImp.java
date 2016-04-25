@@ -265,12 +265,14 @@ public class SASucesoImp implements SASuceso {
 			List<UsuarioEvento> eventoUsuarios = tQb.where().eq("EVENTO", eventoBDD).query(); //tendremos todos los eventos con ID_EVENTO
 
 			List<Usuario> usuariosEventos = getHelper().lookupUsuariosForEvento(eventoBDD);
+            ret.add(new TransferUsuarioEvento(tEvento,null));//posicion 0 para el evento ( tiene que mostrarse en la vista)
 			for(int i = 0; i < usuariosEventos.size(); i++) {
 				TransferUsuarioT tUsuario= new TransferUsuarioT();
 				tUsuario.setId(usuariosEventos.get(i).getId());
 				tUsuario.setNombre(usuariosEventos.get(i).getNombre());
 				TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
-				tRet.setActivo(eventoUsuarios.get(i).getActivo());
+                tRet.setId(eventoUsuarios.get(i).getId());
+				tRet.setActivo(1);
 				tRet.setAsistencia(eventoUsuarios.get(i).getAsistencia());
 				ret.add(tRet);
 			}
@@ -318,7 +320,6 @@ public class SASucesoImp implements SASuceso {
 				for(int i=0; i < eventosUsuarios.size(); i++){
 					UsuarioEvento relacion = new UsuarioEvento(eventoBDD, daoUsuario.queryForId(eventosUsuarios.get(i).getUsuario().getId()));
 					relacion.setAsistencia("NO");
-					relacion.setActivo(1);
 					daoUsuarioEvento.create(relacion);
 				}
 
@@ -331,6 +332,36 @@ public class SASucesoImp implements SASuceso {
 		}
 	}
 
+
+    @Override
+    public void guardarUsuariosEvento(ArrayList<TransferUsuarioEvento> eventosUsuarios) {
+        if(eventosUsuarios.size() > 0) {
+            try {
+                Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
+                Dao<UsuarioEvento, Integer> daoUsuarioEvento = getHelper().getUsuarioEventoDao();
+                Dao<Usuario, Integer> daoUsuario =  getHelper().getUsuarioDao();
+
+                QueryBuilder<Evento, Integer> tQb = daoEvento.queryBuilder();
+                tQb.where().eq("NOMBRE", eventosUsuarios.get(0).getEvento().getNombre());
+                Evento eventoBDD = tQb.queryForFirst(); // Obtenemos el evento
+
+
+                QueryBuilder<UsuarioEvento, Integer> tQbUsuario_e = daoUsuarioEvento.queryBuilder();
+
+                List<UsuarioEvento> eventoUsuarios = tQbUsuario_e.where().eq("EVENTO", eventoBDD).query(); //tendremos todos los eventos con ID_EVENTO
+                daoUsuarioEvento.delete(eventoUsuarios); //Quitamos todos sus usuarios para volverlos añadir
+
+                for(int i=1; i < eventosUsuarios.size(); i++){
+                    UsuarioEvento relacion = new UsuarioEvento(eventoBDD, daoUsuario.queryForId(eventosUsuarios.get(i).getUsuario().getId()));
+                    relacion.setAsistencia("NO");
+                    daoUsuarioEvento.create(relacion);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     // Reto
 
     public void crearRetos(){
