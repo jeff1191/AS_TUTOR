@@ -165,7 +165,7 @@ public class PDFManager {
 
             if(tareas.size() >= 1 && tareas.get(0).getTextoAlarma()!=null)
                 for (Integer i = 0; i < tareas.size(); i++) {
-                    TransferTareaT tarea = tareas.get(i - 1);
+                    TransferTareaT tarea = tareas.get(i);
                     tabla.addCell(i.toString());
                     tabla.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
                     tabla.addCell(tarea.getTextoAlarma());

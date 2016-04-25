@@ -153,7 +153,6 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.putIntegerArrayListExtra("idsTareas", id);
                 iConsultarTareas.putExtra("usuario", tareas.get(0).getIdUsuario());
                 iConsultarTareas.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                iConsultarTareas.setFlags(iConsultarTareas.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
                 break;
 

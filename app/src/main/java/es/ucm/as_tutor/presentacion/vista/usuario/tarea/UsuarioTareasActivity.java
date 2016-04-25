@@ -25,6 +25,7 @@ import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
+import es.ucm.as_tutor.presentacion.vista.main.MainActivity;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
@@ -137,7 +138,8 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case android.R.id.home:
-                finish();
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
