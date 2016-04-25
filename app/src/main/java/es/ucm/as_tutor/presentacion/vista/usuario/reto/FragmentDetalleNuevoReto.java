@@ -4,6 +4,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
@@ -57,6 +61,7 @@ public class FragmentDetalleNuevoReto extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
             idUsuario = bundle.getInt("usuario");
@@ -87,14 +92,21 @@ public class FragmentDetalleNuevoReto extends Fragment {
             @Override
             public void onClick(View v) {
                 //Comando guarda reto al usuario
-                TransferRetoT reto = new TransferRetoT();
-                reto.setTexto(textoReto.getText().toString());
-                reto.setContador(0);
-                reto.setIdUsuario(idUsuario);
-                reto.setPremio(premio.getText().toString());
-                reto.setSuperado(false);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETO, reto);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
+                if(!textoReto.getText().toString().matches("")){
+                    TransferRetoT reto = new TransferRetoT();
+                    reto.setTexto(textoReto.getText().toString());
+                    reto.setContador(0);
+                    reto.setIdUsuario(idUsuario);
+                    reto.setPremio(premio.getText().toString());
+                    reto.setSuperado(false);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETO, reto);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
+                    Toast.makeText(getActivity(), "El reto " + textoReto.getText().toString()
+                            + " ha sido creado con éxito", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getActivity(), "Es necesario introducir un texto para el reto",
+                            Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -106,6 +118,34 @@ public class FragmentDetalleNuevoReto extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear(); //poner otro menu
+        inflater.inflate(R.menu.menu_reto_usuario, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.usuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
+                break;
+            case R.id.tareasUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+                break;
+            case R.id.eventosUsuario:
+
+                break;
+            case R.id.enviarCorreo:
+
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
 }

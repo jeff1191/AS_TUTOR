@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -62,7 +63,7 @@ public class FragmentDetalleUsuario extends Fragment {
     private FloatingActionButton editarDatos;
 
     private static Integer idUsuario;
-    private String nombre;
+    private static String nombre;
     private String sincronizacion;
     private String perfil;
     private String dni;
@@ -81,6 +82,12 @@ public class FragmentDetalleUsuario extends Fragment {
     private String correoPadre;
     private String correoMadre;
 
+    private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final String PATRON_DNI = "^[0-9]{8}[A-Z]$";
+
+    private static final String PATRON_TELEFONO = "^[0-9]{9}$";
 
     public FragmentDetalleUsuario(){}
 
@@ -116,6 +123,7 @@ public class FragmentDetalleUsuario extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Bundle bundle = getArguments();
         if(bundle != null) {
             nombre = bundle.getString("nombre");
@@ -143,7 +151,7 @@ public class FragmentDetalleUsuario extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater,
-                             ViewGroup container,
+                             final ViewGroup container,
                              Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detalle_usuario, container, false);
 
@@ -162,6 +170,22 @@ public class FragmentDetalleUsuario extends Fragment {
             infoPadreV = (TextView) rootView.findViewById(R.id.infoPadre);
             infoMadreV = (TextView) rootView.findViewById(R.id.infoMadre);
             editarDatos = (FloatingActionButton) rootView.findViewById(R.id.guardarCambios);
+
+            nombreV.setText(nombre);
+            sincronizacionV.setText(sincronizacion);
+            perfilV.setText("Perfil " + perfil);
+            dniV.setText(dni);
+            direccionV.setText(direccion);
+            telefonoV.setText(telefono);
+            correoV.setText(correo);
+            centroEstudiosV.setText(centroEstudios);
+            estudiosV.setText(estudios);
+            notasV.setText(notas);
+            puntuacionV.setText(puntuacion + "/10");
+            if(avatar != null && !avatar.equals(""))
+                avatarV.setImageBitmap(BitmapFactory.decodeFile(avatar));
+            else
+                avatarV.setImageResource(R.drawable.avatar);
 
             avatarV.setOnClickListener(new AdapterView.OnClickListener() {
                 @Override
@@ -196,19 +220,31 @@ public class FragmentDetalleUsuario extends Fragment {
             editarDatos.setOnClickListener(new AdapterView.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TransferUsuarioT usuario = new TransferUsuarioT();
-                    usuario.setNombre(nombreV.getText().toString());
-                    usuario.setCorreo(correoV.getText().toString());
-                    usuario.setAvatar(avatar);
-                    usuario.setTelefono(telefonoV.getText().toString());
-                    usuario.setCurso(estudiosV.getText().toString());
-                    usuario.setDni(dniV.getText().toString());
-                    usuario.setDireccion(direccionV.getText().toString());
-                    usuario.setNotas(notasV.getText().toString());
-                    usuario.setCentroAcademico(centroEstudiosV.getText().toString());
-                    usuario.setId(idUsuario);
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, usuario);
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+                    nombre = nombreV.getText().toString();
+                    correo = correoV.getText().toString();
+                    telefono = telefonoV.getText().toString();
+                    estudios = estudiosV.getText().toString();
+                    dni = dniV.getText().toString();
+                    direccion = direccionV.getText().toString();
+                    notas = notasV.getText().toString();
+                    centroEstudios = centroEstudiosV.getText().toString();
+                    if(validarDatosUsuario()) {
+                        TransferUsuarioT usuario = new TransferUsuarioT();
+                        usuario.setNombre(nombre);
+                        usuario.setCorreo(correo);
+                        usuario.setAvatar(avatar);
+                        usuario.setTelefono(telefono);
+                        usuario.setCurso(estudios);
+                        usuario.setDni(dni);
+                        usuario.setDireccion(direccion);
+                        usuario.setNotas(notas);
+                        usuario.setCentroAcademico(centroEstudios);
+                        usuario.setId(idUsuario);
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, usuario);
+                        Toast.makeText(getActivity(), "La informacion del usuario ha sido " +
+                                "actualizada con éxito", Toast.LENGTH_SHORT).show();
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+                    }
                 }
             });
 
@@ -230,23 +266,65 @@ public class FragmentDetalleUsuario extends Fragment {
                 }
             });
 
-            nombreV.setText(nombre);
-            sincronizacionV.setText(sincronizacion);
-            perfilV.setText("Perfil " + perfil);
-            dniV.setText(dni);
-            direccionV.setText(direccion);
-            telefonoV.setText(telefono);
-            correoV.setText(correo);
-            centroEstudiosV.setText(centroEstudios);
-            estudiosV.setText(estudios);
-            notasV.setText(notas);
-            puntuacionV.setText(puntuacion + "/10");
-            if(avatar != null && !avatar.equals(""))
-                avatarV.setImageBitmap(BitmapFactory.decodeFile(avatar));
-            else
-                avatarV.setImageResource(R.drawable.avatar);
-
             return rootView;
+    }
+
+    private void mostrarMensajeError(String msg) {
+        Toast errorNombre =
+                Toast.makeText(Manager.getInstance().getContext().getApplicationContext(),
+                        msg, Toast.LENGTH_SHORT);
+        errorNombre.show();
+    }
+
+    private boolean datosObligatoriosValidos(){
+        if (!nombre.matches(""))
+            return true;
+        else
+            mostrarMensajeError("El campo nombre no puede servacío");
+
+        return false;
+    }
+
+    private boolean algunCampoRelleno(){
+        return !correo.matches("") || !telefono.matches("") || !estudios.matches("") || !dni.matches("")
+                || !direccion.matches("") || !notas.matches("") || !nombrePadre.matches("")
+                || !nombreMadre.matches("") || !correoPadre.matches("") || !correoMadre.matches("")
+                || !telefonoPadre.matches("") || !telefonoMadre.matches("") || !centroEstudios.matches("");
+    }
+
+    private boolean validarDatosUsuario(){
+        boolean buenos = datosObligatoriosValidos();
+
+        if(buenos && algunCampoRelleno()){
+            return datosValidos();
+        }
+        else
+            return buenos;
+    }
+
+    private boolean datosValidos() {
+
+        Boolean dniValido = true;
+        Boolean correoValido = true;
+        Boolean telefonoValido = true;
+
+        if(!dni.matches("") && !dni.matches(PATRON_DNI)){
+            dniValido = false;
+            mostrarMensajeError("Campo dni inválido");
+        }
+
+        if(!correo.matches("") && !correo.matches(PATRON_EMAIL)){
+            correoValido = false;
+            mostrarMensajeError("Campo correo inválido");
+        }
+
+        if(!telefono.matches("") && !telefono.matches(PATRON_TELEFONO)){
+            correoValido = false;
+            mostrarMensajeError("Campo telefono inválido");
+        }
+
+
+        return dniValido && correoValido && telefonoValido;
     }
 
     @Override
@@ -324,21 +402,24 @@ public class FragmentDetalleUsuario extends Fragment {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Cambiar info padre o madre
-                TransferUsuarioT editUser = new TransferUsuarioT();
-                editUser.setId(idUsuario);
-                if(progenitor.equals("padre")){
-                    editUser.setNombrePadre(name.getText().toString());
-                    editUser.setTelPadre(phone.getText().toString());
-                    editUser.setCorreoPadre(mail.getText().toString());
+                if (validarDatosPadres(mail.getText().toString(), phone.getText().toString())) {
+                    TransferUsuarioT editUser = new TransferUsuarioT();
+                    editUser.setId(idUsuario);
+                    if (progenitor.equals("padre")) {
+                        editUser.setNombrePadre(name.getText().toString());
+                        editUser.setTelPadre(phone.getText().toString());
+                        editUser.setCorreoPadre(mail.getText().toString());
+                    }
+                    else {
+                        editUser.setNombreMadre(name.getText().toString());
+                        editUser.setTelMadre(phone.getText().toString());
+                        editUser.setCorreoMadre(mail.getText().toString());
+                    }
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
+                    Toast.makeText(getActivity(), "La informacion de los padres ha sido" +
+                            " actualizada con éxito", Toast.LENGTH_SHORT).show();
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
                 }
-                else{
-                    editUser.setNombreMadre(name.getText().toString());
-                    editUser.setTelMadre(phone.getText().toString());
-                    editUser.setCorreoMadre(mail.getText().toString());
-                }
-                Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editUser);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
             }
         });
         builder.setNegativeButton("Cancelar",
@@ -350,6 +431,24 @@ public class FragmentDetalleUsuario extends Fragment {
                 });
 
         return builder.create();
+    }
+
+    private boolean validarDatosPadres(String correoProgenitor, String telefonoProgenitor){
+
+        Boolean correoProgenitorValido = true;
+        Boolean telefonoProgenitorValido = true;
+
+        if(!correoProgenitor.matches("") && !correoProgenitor.matches(PATRON_EMAIL)){
+            correoProgenitorValido = false;
+            mostrarMensajeError("Campo correo inválido");
+        }
+
+        if(!telefonoProgenitor.matches("") && !telefonoProgenitor.matches(PATRON_TELEFONO)){
+            telefonoProgenitorValido = false;
+            mostrarMensajeError("Campo telefono inválido");
+        }
+
+        return correoProgenitorValido && telefonoProgenitorValido;
     }
 
     @Override
@@ -375,10 +474,9 @@ public class FragmentDetalleUsuario extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, idUsuario);
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
                 break;
-
             case R.id.eliminarUsuario:
-                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_USUARIO, idUsuario);
-                Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
+                DialogEliminarUsuario alertDialog = DialogEliminarUsuario.newInstance(idUsuario,nombre);
+                alertDialog.show(getActivity().getFragmentManager(), "Eliminar usuario");
                 break;
             default:
                 return super.onOptionsItemSelected(item);

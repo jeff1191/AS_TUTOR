@@ -10,49 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="7"
         android:orientation="horizontal">
-            <!-- Nombre usuario -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/nombre"
-                android:gravity="center"
-                android:layout_weight="4" />
-
-        <!-- Perfil y sincronizacion-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingRight="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center|right"
-                android:layout_weight="1"
-                android:id="@+id/sincronizacion" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center|right"
-                android:layout_weight="1"
-                android:id="@+id/perfil" />
-
-        </LinearLayout>
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_weight="7">
 
             <!-- Imagen,  puntuacion e info padres-->
             <LinearLayout
@@ -62,7 +21,13 @@
                 android:orientation="vertical">
 
                 <!-- Imagen usuario -->
-                        <ImageView
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"></LinearLayout>
+
+                <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:id="@+id/avatar"
@@ -151,7 +116,74 @@
             android:paddingRight="20dp">
 
                 <!-- Fila dni, y correo -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Nombre -->
                 <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingRight="20dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/nombre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="Nombre" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"></LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.75"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center|right"
+                        android:layout_weight="1"
+                        android:id="@+id/sincronizacion" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center|right"
+                        android:layout_weight="1"
+                        android:id="@+id/perfil" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -228,7 +260,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:hint="Teléfono" />
+                                android:hint="Teléfono"
+                                android:inputType="number" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
@@ -319,22 +352,32 @@
 
             <!-- Notas extras usuario-->
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:orientation="vertical"
-                android:paddingRight="20dp">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <EditText
-                        android:id="@+id/notas"
+                android:layout_weight="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical"
+                    android:paddingRight="20dp">
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text|textMultiLine"
-                        android:hint="Notas" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+                        <EditText
+                            android:id="@+id/notas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:inputType="textMultiLine"
+                            android:hint="Notas" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
                 <android.support.design.widget.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:layout_height="134dp"
@@ -345,7 +388,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_gravity="right|bottom" />
-
             </LinearLayout>
 
 

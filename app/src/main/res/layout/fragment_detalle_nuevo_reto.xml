@@ -85,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:hint="Motívale con un premio" />
+                        android:hint="Premio del reto (Opcional)" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
@@ -110,18 +110,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Aceptar"
+            android:text="Cancelar"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
             android:layout_gravity="center"
             android:clickable="true"
-            android:id="@+id/botonAceptarReto" />
+            android:id="@+id/botonCancelarReto" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"></LinearLayout>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancelar"
+            android:text="Crear"
             android:clickable="true"
-            android:id="@+id/botonCancelarReto"/>
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:id="@+id/botonAceptarReto"/>
 
         <LinearLayout
             android:orientation="horizontal"

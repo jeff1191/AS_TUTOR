@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComandos;
@@ -29,7 +31,7 @@ public class FragmentDetalleReto extends Fragment {
     private String texto;
     private Integer contador;
     private Boolean superado;
-    private Integer usuario;
+    private static Integer idUsuario;
     private String nombreUsuario;
     private String fotoUsuario;
     private String premio;
@@ -73,7 +75,7 @@ public class FragmentDetalleReto extends Fragment {
             texto = bundle.getString("texto");
             contador = bundle.getInt("contador");
             superado = bundle.getBoolean("superado");
-            usuario = bundle.getInt("usuario");
+            idUsuario = bundle.getInt("usuario");
             nombreUsuario = bundle.getString("nombreUsuario");
             fotoUsuario = bundle.getString("fotoUsuario");
             premio = bundle.getString("premio");
@@ -96,7 +98,7 @@ public class FragmentDetalleReto extends Fragment {
         ((TextView) rootView.findViewById(R.id.textoReto)).setText(texto);
 
         if(premio != null && !premio.equals(""))
-            ((TextView) rootView.findViewById(R.id.textoPremio)).setText(premio);
+            ((TextView) rootView.findViewById(R.id.textoPremio)).setText("Premio: " + premio);
         else
             ((TextView) rootView.findViewById(R.id.textoPremio)).setText("No tiene ningun premio asignado");
 
@@ -114,10 +116,30 @@ public class FragmentDetalleReto extends Fragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
         inflater.inflate(R.menu.menu_reto_usuario, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.usuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
+                break;
+            case R.id.tareasUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+                break;
+            case R.id.eventosUsuario:
+
+                break;
+            case R.id.enviarCorreo:
+
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 
 }
