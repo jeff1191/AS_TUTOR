@@ -30,8 +30,6 @@ public class RegistroTutor extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_registro);
         nombreTutor = (EditText) findViewById(R.id.nombreTutor);
         correoTutor = (EditText) findViewById(R.id.emailTutor);
@@ -67,12 +65,14 @@ public class RegistroTutor extends Activity {
         if (!nombre.toString().matches("") &&
                 !correo.toString().matches("") &&
                 !clave.toString().matches("")) {
-            if (correo.toString().matches(PATRON_EMAIL)) {
+            if(nombre.toString().length()<3)
+                mostrarMensajeError("El nombre debe tener al menos 3 letras");
+            else if (correo.toString().matches(PATRON_EMAIL)) {
                 return true;
             } else
                 mostrarMensajeError("Campo email inválido");
         } else
-            mostrarMensajeError("Algún campo es vacío");
+            mostrarMensajeError("Algún campo está vacío");
 
         return false;
     }

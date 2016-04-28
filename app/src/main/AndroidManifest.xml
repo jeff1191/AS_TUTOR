@@ -20,7 +20,8 @@
         <activity
             android:name=".presentacion.vista.main.Bienvenido"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,19 +31,28 @@
             android:name=".presentacion.vista.main.DetalleActivity"
             android:label="@string/title_activity_detalle_activity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".presentacion.vista.main.MainActivity"
+        <activity
+            android:name=".presentacion.vista.main.MainActivity"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".presentacion.vista.usuario.tarea.UsuarioTareasActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentacion.vista.usuario.tarea.UsuarioTareasActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"/>
         <activity android:name=".presentacion.vista.main.Decision" />
         <activity
             android:name=".presentacion.vista.tutor.RegistroTutor"
             android:label="@string/title_activity_registro"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".presentacion.vista.usuario.tarea.UsuarioTareaDetalleActivity"/>
-        <activity android:name=".presentacion.vista.main.Acceso"/>
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".presentacion.vista.usuario.tarea.UsuarioTareaDetalleActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".presentacion.vista.main.Acceso"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

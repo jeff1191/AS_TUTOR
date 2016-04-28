@@ -127,7 +127,7 @@ public class FragmentDetalleEvento extends Fragment{
         // Inflate the layout for this fragment
 
         rootView = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
-       listaEventoUsuarios = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
+        listaEventoUsuarios = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
         View header = inflater.inflate(R.layout.row_evento_listado_header, listaEventoUsuarios, false);
         aceptar= (Button) rootView.findViewById(R.id.botonAccionEvento);
         Button cancelar = (Button) rootView.findViewById(R.id.botonCancelarEvento);
@@ -138,7 +138,7 @@ public class FragmentDetalleEvento extends Fragment{
         customCalendar = (MaterialCalendarView) rootView.findViewById(R.id.calendar_view);
         //CALENDARIO
         //Initialize CustomCalendarView from layout
-//        calendarView = (CalendarView) rootView.findViewById(R.id.calendar_view);
+        // calendarView = (CalendarView) rootView.findViewById(R.id.calendar_view);
         String dia;
         String mes;
         String anyo;
@@ -146,7 +146,7 @@ public class FragmentDetalleEvento extends Fragment{
 
         if(nombreEvento.equals(""))
             textViewNombreEvento.setText("Nuevo evento");
-        else { //Listado del evento seleccinado (Necesitamos la fecha)
+        else { //Listado del evento seleccionado (Necesitamos la fecha)
             dia = fechaEvento.substring(0,2);
             mes = fechaEvento.substring(3,5);
             anyo = fechaEvento.substring(6);

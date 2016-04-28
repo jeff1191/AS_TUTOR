@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,7 +24,7 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.factoria.FactoriaComand
 /**
  * Created by Juan Lu on 14/04/2016.
  */
-public class Acceso extends Activity {
+public class Acceso extends AppCompatActivity {
 
     private String password;
     private String preguntaSeguridad;
@@ -32,8 +33,6 @@ public class Acceso extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_acceso);
 
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_TUTOR);

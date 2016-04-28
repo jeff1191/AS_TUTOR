@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import java.util.TimerTask;
 import es.ucm.as_tutor.R;
 
 
-public class Bienvenido extends Activity {
+public class Bienvenido extends AppCompatActivity {
     private static final long DELAY = 2000;
     public boolean sincronizacion = false;
 
@@ -22,11 +23,7 @@ public class Bienvenido extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(R.layout.activity_bienvenido);
-
 
         Toast toast1 =
                 Toast.makeText(getApplicationContext(),
