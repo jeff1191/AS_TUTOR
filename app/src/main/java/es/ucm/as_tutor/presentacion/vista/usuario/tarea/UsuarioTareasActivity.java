@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
@@ -85,7 +85,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         // Para conseguir la informacion del usuario se ejecuta el comando de consulta
         Command c = new ConsultarUsuarioComando();
         try {
-            TransferUsuarioT usuario = (TransferUsuarioT) c.ejecutaComando(idUsuario);
+            TransferUsuario usuario = (TransferUsuario) c.ejecutaComando(idUsuario);
             nombreUsuario = usuario.getNombre();
             puntuacionActual = usuario.getPuntuacion();
             puntuacionAntes = usuario.getPuntuacionAnterior();

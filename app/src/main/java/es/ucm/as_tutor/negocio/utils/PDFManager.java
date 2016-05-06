@@ -29,9 +29,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.suceso.TransferTarea;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
@@ -74,8 +74,8 @@ public class PDFManager {
     }
 
 
-    public static String generarPDF(TransferUsuarioT usuario, TransferRetoT reto,
-                                    ArrayList<TransferTareaT> tareas){
+    public static String generarPDF(TransferUsuario usuario, TransferReto reto,
+                                    ArrayList<TransferTarea> tareas){
         Document document = new Document();
         File f = crearFichero(NOMBRE_DOCUMENTO);
         try {
@@ -162,7 +162,7 @@ public class PDFManager {
 
             if(tareas.size() >= 1 && tareas.get(0).getTextoAlarma()!=null)
                 for (Integer i = 0; i < tareas.size(); i++) {
-                    TransferTareaT tarea = tareas.get(i);
+                    TransferTarea tarea = tareas.get(i);
                     tabla.addCell(i.toString());
                     tabla.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
                     tabla.addCell(tarea.getTextoAlarma());

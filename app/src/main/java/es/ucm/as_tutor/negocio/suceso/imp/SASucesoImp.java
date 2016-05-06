@@ -16,10 +16,10 @@ import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.suceso.TransferTarea;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -38,7 +38,7 @@ public class SASucesoImp implements SASuceso {
 
 	// Tarea
 	@Override
-	public void crearTarea(TransferTareaT transferTarea) {
+	public void crearTarea(TransferTarea transferTarea) {
             // El constructor vacio de Tarea da valores por defecto a los campos no editables
             Tarea tarea = new Tarea();
             tarea.setTextoPregunta(transferTarea.getTextoPregunta());
@@ -68,7 +68,7 @@ public class SASucesoImp implements SASuceso {
 	}
 
     @Override
-    public void editarTarea(TransferTareaT transferTarea) {
+    public void editarTarea(TransferTarea transferTarea) {
         Tarea tarea = new Tarea();
         tarea.setTextoPregunta(transferTarea.getTextoPregunta());
         tarea.setTextoAlarma(transferTarea.getTextoAlarma());
@@ -119,8 +119,8 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario) {
-        ArrayList<TransferTareaT> ret = new ArrayList<TransferTareaT>();
+    public ArrayList<TransferTarea> consultarTareas(Integer idUsuario) {
+        ArrayList<TransferTarea> ret = new ArrayList<TransferTarea>();
         try {
 
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
@@ -138,7 +138,7 @@ public class SASucesoImp implements SASuceso {
             // Las transformamos en transfers para devolverselas a la vista
             for(int i = 0; i < tareas.size(); i++){
                 Tarea tarea = tareas.get(i);
-                TransferTareaT transfer = new TransferTareaT(
+                TransferTarea transfer = new TransferTarea(
                         tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
                         tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
                         tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
@@ -150,7 +150,7 @@ public class SASucesoImp implements SASuceso {
             // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
             // para cuando no haya ninguna
             if(tareas.size() == 0) {
-                TransferTareaT fantasma = new TransferTareaT();
+                TransferTarea fantasma = new TransferTarea();
                 fantasma.setIdUsuario(idUsuario);
                 ret.add(0, fantasma);
             }
@@ -266,7 +266,7 @@ public class SASucesoImp implements SASuceso {
 			List<Usuario> usuariosEventos = getHelper().lookupUsuariosForEvento(eventoBDD);
             ret.add(new TransferUsuarioEvento(tEvento,null));//posicion 0 para el evento ( tiene que mostrarse en la vista)
 			for(int i = 0; i < usuariosEventos.size(); i++) {
-				TransferUsuarioT tUsuario= new TransferUsuarioT();
+				TransferUsuario tUsuario= new TransferUsuario();
 				tUsuario.setId(usuariosEventos.get(i).getId());
 				tUsuario.setNombre(usuariosEventos.get(i).getNombre());
 				TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
@@ -286,7 +286,7 @@ public class SASucesoImp implements SASuceso {
 						anyadir=false;// Si en algun momento se encuentra en la lista del Evento no lo añado
 				}
 				if(anyadir){//puedo añadir el objeto i - ESTOS NO ESTAN ACTIVOS
-					TransferUsuarioT tUsuario= new TransferUsuarioT();
+					TransferUsuario tUsuario= new TransferUsuario();
 					tUsuario.setId(usuariosBDD.get(i).getId());
 					tUsuario.setNombre(usuariosBDD.get(i).getNombre());
 					TransferUsuarioEvento tRet = new TransferUsuarioEvento(tEvento,tUsuario);
@@ -392,7 +392,7 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public void crearReto(TransferRetoT transferReto) {
+    public void crearReto(TransferReto transferReto) {
         try{
             //Hay que asignarselo a ambos
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
@@ -411,8 +411,8 @@ public class SASucesoImp implements SASuceso {
     }
 
     @Override
-    public TransferRetoT consultarReto(Integer idUsuario) {
-        TransferRetoT ret = null;
+    public TransferReto consultarReto(Integer idUsuario) {
+        TransferReto ret = null;
 
         try {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
@@ -421,14 +421,14 @@ public class SASucesoImp implements SASuceso {
             uQb.where().idEq(idUsuario);
             Usuario usuario = uQb.queryForFirst();
             //Guarda el usuario en el transfer
-            ret = new TransferRetoT();
+            ret = new TransferReto();
             ret.setIdUsuario(usuario.getId());
             //Busca el reto de ese usuario
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
             rQb.where().eq("USUARIO", usuario);
             Reto r = rQb.queryForFirst();
             if (r != null)
-                ret = new TransferRetoT(r.getId(), r.getUsuario().getId(), r.getContador(),
+                ret = new TransferReto(r.getId(), r.getUsuario().getId(), r.getContador(),
                         r.getTexto(), r.getSuperado(), r.getPremio());
 
         } catch (SQLException e) {

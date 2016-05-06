@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.tutor.TransferTutorT;
+import es.ucm.as_tutor.negocio.tutor.TransferTutor;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.MainActivity;
@@ -44,7 +44,7 @@ public class RegistroTutor extends Activity {
             codigoSync = nombre.substring(0, 0);
 
         if (datosValidos(codigoSync, correo, clave)) {
-            TransferTutorT tutor = new TransferTutorT();
+            TransferTutor tutor = new TransferTutor();
             tutor.setNombre(nombre);
             tutor.setCorreo(correo);
             tutor.setContrasenha(clave);

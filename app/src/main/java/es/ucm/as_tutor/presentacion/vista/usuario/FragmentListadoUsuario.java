@@ -15,7 +15,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
@@ -38,14 +38,14 @@ public class FragmentListadoUsuario extends Fragment {
 		// Required empty public constructor
 	}
 
-	public static FragmentListadoUsuario newInstance(ArrayList<TransferUsuarioT> usuarios) {
+	public static FragmentListadoUsuario newInstance(ArrayList<TransferUsuario> usuarios) {
 		FragmentListadoUsuario frgUsuarioLista = new FragmentListadoUsuario();
 
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		ArrayList<String> nombres = new ArrayList<String>();
 		ArrayList<String> avatares = new ArrayList<String>();
 
-		for(TransferUsuarioT transfer : usuarios){
+		for(TransferUsuario transfer : usuarios){
 			ids.add(transfer.getId());
 			nombres.add(transfer.getNombre());
 			avatares.add(transfer.getAvatar());

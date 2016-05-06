@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.negocio.tutor.SATutor;
-import es.ucm.as_tutor.negocio.tutor.TransferTutorT;
+import es.ucm.as_tutor.negocio.tutor.TransferTutor;
 import es.ucm.as_tutor.negocio.tutor.Tutor;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
@@ -23,8 +23,8 @@ public class SATutorImp implements SATutor {
 	}
 
 	@Override
-	public TransferTutorT consultarTutor() {
-        TransferTutorT ret = new TransferTutorT();
+	public TransferTutor consultarTutor() {
+        TransferTutor ret = new TransferTutor();
         try {
             Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
             if (daoTutor.idExists(1)) {
@@ -44,7 +44,7 @@ public class SATutorImp implements SATutor {
     }
 
 	@Override
-	public void editarTutor(TransferTutorT transferTutor) {
+	public void editarTutor(TransferTutor transferTutor) {
         try {
             Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
             Tutor tutor = daoTutor.queryForId(1);
@@ -62,7 +62,7 @@ public class SATutorImp implements SATutor {
 	}
 
     @Override
-    public void crearTutor(TransferTutorT transferTutor) {
+    public void crearTutor(TransferTutor transferTutor) {
         try {
             Dao<Tutor, Integer> daoTutor = getHelper().getTutorDao();
             Tutor tutor = new Tutor();

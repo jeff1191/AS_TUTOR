@@ -15,8 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
@@ -39,7 +39,7 @@ public class FragmentDetalleReto extends Fragment {
     public FragmentDetalleReto() {
     }
 
-    public static FragmentDetalleReto newInstance(TransferRetoT reto) {
+    public static FragmentDetalleReto newInstance(TransferReto reto) {
         FragmentDetalleReto frgReto = new FragmentDetalleReto();
 
         Bundle arguments = new Bundle();
@@ -47,7 +47,7 @@ public class FragmentDetalleReto extends Fragment {
         if(reto.getIdUsuario() != null) {
             arguments.putInt("usuario", reto.getIdUsuario());
             try {
-                TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
+                TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
                         .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
                 arguments.putString("nombreUsuario", ret.getNombre());
                 arguments.putString("fotoUsuario", ret.getAvatar());

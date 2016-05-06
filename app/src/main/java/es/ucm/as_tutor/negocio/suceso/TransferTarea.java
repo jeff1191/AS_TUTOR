@@ -3,11 +3,14 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 
-public class TransferTareaT {
+public class TransferTarea implements Serializable {
+
+	static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -33,11 +36,11 @@ public class TransferTareaT {
 
 	private Integer idUsuario;
 
-	public TransferTareaT(){ }
+	public TransferTarea(){ }
 
     // Constructor sin id, adecuado para crear tareas
-    public TransferTareaT(String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUuario){
+    public TransferTarea(String textoAlarma, Date horaAlarma,
+						 String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUuario){
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
         this.textoPregunta = textoPregunta;
@@ -47,10 +50,10 @@ public class TransferTareaT {
     }
 
     // Constructor con id, adecuado para modificar tareas
-    public TransferTareaT(Integer id, String textoAlarma, Date horaAlarma,
-                          String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUsuario,
-                          Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
-                          Boolean habilitada){
+    public TransferTarea(Integer id, String textoAlarma, Date horaAlarma,
+						 String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUsuario,
+						 Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
+						 Boolean habilitada){
         this.id = id;
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;

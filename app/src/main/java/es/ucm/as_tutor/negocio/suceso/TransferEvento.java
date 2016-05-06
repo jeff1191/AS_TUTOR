@@ -1,11 +1,14 @@
 package es.ucm.as_tutor.negocio.suceso;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Jeffer on 15/04/2016.
  */
-public class TransferEvento {
+public class TransferEvento implements Serializable {
+
+    static final long serialVersionUID = 1L;
     private Integer id;
     private String nombre; // Esto es lo que considero como el TextoAlarma osea el evento
     private Date fecha; //Esto es lo que considero como el Texto en que se da la alarma real

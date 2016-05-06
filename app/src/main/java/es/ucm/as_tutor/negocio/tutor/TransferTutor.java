@@ -1,7 +1,7 @@
 
 package es.ucm.as_tutor.negocio.tutor;
 
-public class TransferTutorT {
+public class TransferTutor {
 
 	private Integer id;
 

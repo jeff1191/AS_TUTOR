@@ -9,17 +9,17 @@ import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
 
 public interface SAUsuario {
 
-	public void crearUsuario(TransferUsuarioT transferUsuario);
+	public void crearUsuario(TransferUsuario transferUsuario);
 
-	public void editarUsuario(TransferUsuarioT usuarioMod);
+	public void editarUsuario(TransferUsuario usuarioMod);
 
 	public void eliminarUsuario(Integer idUsuario);
 
-	public TransferUsuarioT consultarUsuario(Integer idUsuario);
+	public TransferUsuario consultarUsuario(Integer idUsuario);
 
 	public void crearUsuarios();
 
-	public ArrayList<TransferUsuarioT> consultarUsuarios();
+	public ArrayList<TransferUsuario> consultarUsuarios();
 
 	public ArrayList<TransferUsuarioEvento> consultarEventosUsuario(Integer idUsuario);
 

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.suceso.TransferTarea;
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
@@ -144,7 +144,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     public void aceptar(View view){
         String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
         String pregunta_hour = horaPregunta.getCurrentHour() + ":" + horaPregunta.getCurrentMinute();
-        TransferTareaT transfer = new TransferTareaT();
+        TransferTarea transfer = new TransferTarea();
         transfer.setTextoAlarma(textoAlarma.getText().toString());
         transfer.setTextoPregunta(textoPregunta.getText().toString());
         transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));

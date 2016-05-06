@@ -31,7 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.negocio.utils.Perfil;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
@@ -193,7 +193,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                     centroEstudios = centroEstudiosV.getText().toString();
 
                     if (validar()) {
-                        TransferUsuarioT usuario = new TransferUsuarioT();
+                        TransferUsuario usuario = new TransferUsuario();
                         usuario.setNombre(nombre);
                         usuario.setCorreo(correo);
                         usuario.setAvatar(avatar);

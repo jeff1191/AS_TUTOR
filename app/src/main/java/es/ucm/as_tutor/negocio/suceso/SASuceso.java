@@ -9,23 +9,23 @@ public interface SASuceso {
 
 	// Tarea
 
-	public void crearTarea(TransferTareaT transferTarea);
+	public void crearTarea(TransferTarea transferTarea);
 
-	public void editarTarea(TransferTareaT transferTarea);
+	public void editarTarea(TransferTarea transferTarea);
 
 	public void eliminarTarea(Integer idTarea);
 
 	public void deshabilitarTarea(Integer idTarea);
 
-	public ArrayList<TransferTareaT> consultarTareas(Integer idUsuario);
+	public ArrayList<TransferTarea> consultarTareas(Integer idUsuario);
 
 	// Reto
 
 	public void crearRetos();
 
-	public void crearReto(TransferRetoT transferReto);
+	public void crearReto(TransferReto transferReto);
 
-	public TransferRetoT consultarReto(Integer idUsuario);
+	public TransferReto consultarReto(Integer idUsuario);
 
 	// Evento
 

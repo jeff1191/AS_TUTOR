@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
@@ -38,13 +38,13 @@ public class FragmentDetalleNuevoReto extends Fragment {
     private String nombreUsuario;
     private String fotoUsuario;
 
-    public static FragmentDetalleNuevoReto newInstance(TransferRetoT reto) {
+    public static FragmentDetalleNuevoReto newInstance(TransferReto reto) {
         FragmentDetalleNuevoReto frgNuevoReto = new FragmentDetalleNuevoReto();
 
         Bundle arguments = new Bundle();
         arguments.putInt("usuario", reto.getIdUsuario());
         try {
-            TransferUsuarioT ret = (TransferUsuarioT) FactoriaComandos.getInstancia()
+            TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
                     .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
             arguments.putString("nombreUsuario", ret.getNombre());
             arguments.putString("fotoUsuario", ret.getAvatar());
@@ -93,7 +93,7 @@ public class FragmentDetalleNuevoReto extends Fragment {
             public void onClick(View v) {
                 //Comando guarda reto al usuario
                 if(!textoReto.getText().toString().matches("")){
-                    TransferRetoT reto = new TransferRetoT();
+                    TransferReto reto = new TransferReto();
                     reto.setTexto(textoReto.getText().toString());
                     reto.setContador(0);
                     reto.setIdUsuario(idUsuario);

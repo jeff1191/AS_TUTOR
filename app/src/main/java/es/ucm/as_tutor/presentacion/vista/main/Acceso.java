@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.tutor.TransferTutorT;
+import es.ucm.as_tutor.negocio.tutor.TransferTutor;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
@@ -35,7 +35,7 @@ public class Acceso extends AppCompatActivity {
 
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_TUTOR);
         try {
-            TransferTutorT tutor = (TransferTutorT) c.ejecutaComando(null);
+            TransferTutor tutor = (TransferTutor) c.ejecutaComando(null);
             password = tutor.getContrasenha();
             preguntaSeguridad = tutor.getPregunta();
             respuestaSeguridad = tutor.getRespuesta();

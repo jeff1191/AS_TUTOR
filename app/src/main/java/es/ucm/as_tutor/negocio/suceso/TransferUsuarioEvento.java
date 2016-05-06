@@ -1,18 +1,22 @@
 package es.ucm.as_tutor.negocio.suceso;
 
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import java.io.Serializable;
+
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 
 /**
  * Created by Jeffer on 21/04/2016.
  */
-public class TransferUsuarioEvento {
+public class TransferUsuarioEvento implements Serializable {
+
+    static final long serialVersionUID = 1L;
     private Integer id;
     private TransferEvento evento;
-    private TransferUsuarioT usuario;
+    private TransferUsuario usuario;
     private Integer activo;
     private String asistencia;
 
-    public TransferUsuarioEvento(TransferEvento evento, TransferUsuarioT usuario) {
+    public TransferUsuarioEvento(TransferEvento evento, TransferUsuario usuario) {
         this.evento = evento;
         this.usuario = usuario;
     }
@@ -28,11 +32,11 @@ public class TransferUsuarioEvento {
         this.evento = evento;
     }
 
-    public TransferUsuarioT getUsuario() {
+    public TransferUsuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(TransferUsuarioT usuario) {
+    public void setUsuario(TransferUsuario usuario) {
         this.usuario = usuario;
     }
 

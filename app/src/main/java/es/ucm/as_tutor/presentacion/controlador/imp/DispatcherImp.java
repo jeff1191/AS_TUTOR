@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.suceso.TransferTarea;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
@@ -87,9 +87,9 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<String> nombresUsuariosCrear = new ArrayList<String>();
                 ArrayList<Integer> usuariosActivosCrear = new ArrayList<Integer>();
                 ArrayList<Integer> indicesUsuarios = new ArrayList<>();
-                for(int i =0; i < ((ArrayList<TransferUsuarioT>) datos).size(); i++) {
-                    nombresUsuariosCrear.add(((ArrayList<TransferUsuarioT>) datos).get(i).getNombre());
-                    indicesUsuarios.add(((ArrayList<TransferUsuarioT>) datos).get(i).getId());
+                for(int i =0; i < ((ArrayList<TransferUsuario>) datos).size(); i++) {
+                    nombresUsuariosCrear.add(((ArrayList<TransferUsuario>) datos).get(i).getNombre());
+                    indicesUsuarios.add(((ArrayList<TransferUsuario>) datos).get(i).getId());
                     usuariosActivosCrear.add(1); // Todos activos
                 }
                 FragmentDetalleEvento frgDetalleCrear = FragmentDetalleEvento.newInstance(crear,nombresUsuariosCrear,indicesUsuarios,null,usuariosActivosCrear,"crear");
@@ -108,12 +108,12 @@ public class DispatcherImp extends Dispatcher {
                 ArrayList<Integer> mejorar = new ArrayList<Integer>();
                 ArrayList<Integer> habilitada = new ArrayList<Integer>();
                 ArrayList<Integer> id = new ArrayList<Integer>();
-                ArrayList<TransferTareaT> tareas = (ArrayList<TransferTareaT>) datos;
+                ArrayList<TransferTarea> tareas = (ArrayList<TransferTarea>) datos;
 
                 // Si ese usuario tiene tareas se cogen los campos que vamos a mostrar
                 if (tareas.size() >= 1 && tareas.get(0).getTextoAlarma()!= null) {
                     for (int i = 0; i < tareas.size(); i++) {
-                        TransferTareaT transfer = tareas.get(i);
+                        TransferTarea transfer = tareas.get(i);
                         textosAlarma.add(i, transfer.getTextoAlarma());
                         textosPreguntas.add(i, transfer.getTextoPregunta());
                         si.add(transfer.getNumSi());
@@ -150,13 +150,13 @@ public class DispatcherImp extends Dispatcher {
 
             // Usuarios
             case ListaComandos.LISTADO_USUARIOS:
-                ArrayList<TransferUsuarioT> usuarios = (ArrayList<TransferUsuarioT>) datos;
+                ArrayList<TransferUsuario> usuarios = (ArrayList<TransferUsuario>) datos;
                 FragmentListadoUsuario frgListadoU = FragmentListadoUsuario.newInstance(usuarios);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListadoU).commit();
                 break;
 
             case ListaComandos.CONSULTAR_USUARIO:
-                TransferUsuarioT usuario = (TransferUsuarioT) datos;
+                TransferUsuario usuario = (TransferUsuario) datos;
                 FragmentDetalleUsuario frgDetalleU = FragmentDetalleUsuario.newInstance(usuario);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
                 break;
@@ -168,7 +168,7 @@ public class DispatcherImp extends Dispatcher {
 
             // Reto
             case ListaComandos.CONSULTAR_RETO:
-                TransferRetoT reto = (TransferRetoT) datos;
+                TransferReto reto = (TransferReto) datos;
                 if(reto.getId() == null){ //Si no hay reto al menos pasas los datos del usuario
                     FragmentDetalleNuevoReto fragmentNuevoReto = FragmentDetalleNuevoReto.newInstance(reto);
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();
@@ -189,7 +189,7 @@ public class DispatcherImp extends Dispatcher {
                     nombresEventos.add(infoEventosUsuario.get(i).getEvento().getNombre()+" a las " +formatHora.format(infoEventosUsuario.get(i).getEvento().getHoraEvento())+ " el "+formatFecha.format(infoEventosUsuario.get(i).getEvento().getFecha()));
                     asistenciaEventos.add(infoEventosUsuario.get(i).getAsistencia());
                 }
-                TransferUsuarioT usuario_actual = infoEventosUsuario.get(0).getUsuario();//Sabemos que estamaos consultando algo que existe
+                TransferUsuario usuario_actual = infoEventosUsuario.get(0).getUsuario();//Sabemos que estamaos consultando algo que existe
 
                 FragmentDetalleUsuarioEvento fragmentEventoUsuario = FragmentDetalleUsuarioEvento.newInstance(usuario_actual,nombresEventos,asistenciaEventos);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();

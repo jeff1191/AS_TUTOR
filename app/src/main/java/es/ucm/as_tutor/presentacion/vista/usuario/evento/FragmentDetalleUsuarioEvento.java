@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +29,7 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
     public FragmentDetalleUsuarioEvento() {
         // Required empty public constructor
     }
-    public static FragmentDetalleUsuarioEvento newInstance(TransferUsuarioT usuario,
+    public static FragmentDetalleUsuarioEvento newInstance(TransferUsuario usuario,
                                                     ArrayList<String> nombresEventos,
                                                     ArrayList<String> asistenciaEventos) {
         FragmentDetalleUsuarioEvento frgDetalleEvento = new FragmentDetalleUsuarioEvento();

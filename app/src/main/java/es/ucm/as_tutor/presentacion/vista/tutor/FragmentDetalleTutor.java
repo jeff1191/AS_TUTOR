@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.tutor.TransferTutorT;
+import es.ucm.as_tutor.negocio.tutor.TransferTutor;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
@@ -48,7 +48,7 @@ public class FragmentDetalleTutor extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Command c = new ConsultarTutorComando();
         try {
-            TransferTutorT tutor = (TransferTutorT) c.ejecutaComando(null);
+            TransferTutor tutor = (TransferTutor) c.ejecutaComando(null);
             codigoSincronizacion = tutor.getCodigoSincronizacion();
             nombre = tutor.getNombre();
             email = tutor.getCorreo();
@@ -80,7 +80,7 @@ public class FragmentDetalleTutor extends Fragment {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TransferTutorT transfer = new TransferTutorT();
+                TransferTutor transfer = new TransferTutor();
                 nombre = nombrev.getText().toString();
                 email = correov.getText().toString();
                 preguntaSeguridad = preguntav.getText().toString();

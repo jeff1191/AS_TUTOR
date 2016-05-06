@@ -3,7 +3,11 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
-public class TransferRetoT {
+import java.io.Serializable;
+
+public class TransferReto implements Serializable {
+
+	static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -13,14 +17,14 @@ public class TransferRetoT {
 
 	private String texto;
 
-	private Boolean superado;
+	private boolean superado;
 
 	private String premio;
 
-	public TransferRetoT() {
+	public TransferReto() {
 	}
 
-	public TransferRetoT(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado, String premio) {
+	public TransferReto(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado, String premio) {
 		this.id = id;
 		this.idUsuario = idUsuario;
 		this.contador = contador;

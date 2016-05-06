@@ -6,7 +6,7 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.GuardarUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.ConsultarRetoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetoComando;
-import es.ucm.as_tutor.presentacion.controlador.comandos.imp.sincronizacion.Sincronizar;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.sincronizacion.SincronizarComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarEventosUsuario;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
@@ -142,7 +142,7 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
 
             case ListaComandos.SINCRONIZAR:
-                ret = new Sincronizar();
+                ret = new SincronizarComando();
                 break;
 
         }

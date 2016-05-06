@@ -31,7 +31,7 @@ import java.util.Locale;
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
@@ -225,7 +225,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
                                 for(int i=0; i < adapterListadoUsuarios.getDatosCheck().size(); i++){
 
                                     if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
-                                        TransferUsuarioT add = new TransferUsuarioT();
+                                        TransferUsuario add = new TransferUsuario();
                                         add.setId(adapterListadoUsuarios.getDatosIds().get(i));
                                         add.setNombre(adapterListadoUsuarios.getItem(i));
 
@@ -302,7 +302,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
                             for(int i=0; i < adapterListadoUsuarios.getDatosCheck().size(); i++){
 
                                 if(adapterListadoUsuarios.getDatosCheck().get(i) == true){ // Si está marcado
-                                    TransferUsuarioT add = new TransferUsuarioT();
+                                    TransferUsuario add = new TransferUsuario();
                                     add.setId(adapterListadoUsuarios.getDatosIds().get(i));
                                     add.setNombre(adapterListadoUsuarios.getItem(i));
 

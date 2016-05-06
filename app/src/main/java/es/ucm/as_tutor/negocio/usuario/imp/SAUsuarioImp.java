@@ -23,11 +23,11 @@ import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
-import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.suceso.TransferTarea;
 import es.ucm.as_tutor.negocio.tutor.Tutor;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.PDFManager;
 import es.ucm.as_tutor.negocio.utils.Perfil;
@@ -45,7 +45,7 @@ public class SAUsuarioImp implements SAUsuario {
 		return mDBHelper;
 	}
 
-	public void crearUsuario(TransferUsuarioT transferUsuario) {
+	public void crearUsuario(TransferUsuario transferUsuario) {
 
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
@@ -96,7 +96,7 @@ public class SAUsuarioImp implements SAUsuario {
 
 	}
 
-	public void editarUsuario(TransferUsuarioT usuarioMod) {
+	public void editarUsuario(TransferUsuario usuarioMod) {
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
@@ -147,7 +147,7 @@ public class SAUsuarioImp implements SAUsuario {
 
             // Eliminamos todas las tareas de el usuario
             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-            ArrayList<TransferTareaT> tareas = saSuceso.consultarTareas(idUsuario);
+            ArrayList<TransferTarea> tareas = saSuceso.consultarTareas(idUsuario);
             for (int i = 0; i < tareas.size(); i++)
                 saSuceso.eliminarTarea(tareas.get(i).getId());
 
@@ -160,14 +160,14 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 	}
 
-	public TransferUsuarioT consultarUsuario(Integer idUsuario) {
-		TransferUsuarioT ret = null;
+	public TransferUsuario consultarUsuario(Integer idUsuario) {
+		TransferUsuario ret = null;
 
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Usuario user = daoUsuario.queryForId(idUsuario);
 
-			ret = new TransferUsuarioT(user.getId(), user.getNombre(),
+			ret = new TransferUsuario(user.getId(), user.getNombre(),
 					user.getCorreo(), user.getAvatar(), user.getTelefono(), user.getPuntuacion(),
 					user.getPuntuacionAnterior(), user.getCurso(), user.getDni(),
 					user.getDireccion(), user.getTipoPerfil().toString(), user.getNotas(),
@@ -279,14 +279,14 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 
 	}
-	public ArrayList<TransferUsuarioT> consultarUsuarios() {
-		ArrayList<TransferUsuarioT> ret = new ArrayList<TransferUsuarioT>();
+	public ArrayList<TransferUsuario> consultarUsuarios() {
+		ArrayList<TransferUsuario> ret = new ArrayList<TransferUsuario>();
 		Dao<Usuario, Integer> usuarios;
 		try {
 			usuarios = getHelper().getUsuarioDao();
 			List<Usuario> listaUsuarios = usuarios.queryForAll();
 			for(Usuario user : listaUsuarios){
-				TransferUsuarioT transfer = new TransferUsuarioT(user.getId(), user.getNombre(),
+				TransferUsuario transfer = new TransferUsuario(user.getId(), user.getNombre(),
 						user.getAvatar());
 				ret.add(transfer);
 			}
@@ -300,9 +300,9 @@ public class SAUsuarioImp implements SAUsuario {
     public void generarPDF(Integer idUsuario) {
 
         SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
-        ArrayList<TransferTareaT> tareas = saSuceso.consultarTareas(idUsuario);
-        TransferRetoT reto = saSuceso.consultarReto(idUsuario);
-        TransferUsuarioT usuario = consultarUsuario(idUsuario);
+        ArrayList<TransferTarea> tareas = saSuceso.consultarTareas(idUsuario);
+        TransferReto reto = saSuceso.consultarReto(idUsuario);
+        TransferUsuario usuario = consultarUsuario(idUsuario);
 
         PDFManager.generarPDF(usuario, reto, tareas);
     }
@@ -362,7 +362,7 @@ public class SAUsuarioImp implements SAUsuario {
 			//Consultar usuario
 			Usuario usuarioBDD = daoUsuario.queryForId(idUsuario);
 
-			TransferUsuarioT tUsuario = new TransferUsuarioT();
+			TransferUsuario tUsuario = new TransferUsuario();
 			tUsuario.setId(usuarioBDD.getId());
 			tUsuario.setNombre(usuarioBDD.getNombre());
 

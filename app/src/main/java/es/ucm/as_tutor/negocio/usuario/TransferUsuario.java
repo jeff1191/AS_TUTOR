@@ -3,7 +3,11 @@
  */
 package es.ucm.as_tutor.negocio.usuario;
 
-public class TransferUsuarioT {
+import java.io.Serializable;
+
+public class TransferUsuario implements Serializable{
+
+	static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -48,22 +52,22 @@ public class TransferUsuarioT {
 	//Informacion para el listado
 
 
-	public TransferUsuarioT(Integer id, String nombre, String avatar) {
+	public TransferUsuario(Integer id, String nombre, String avatar) {
 		this.id = id;
 		this.nombre = nombre;
 		this.avatar = avatar;
 	}
 
 	//Vacio
-	public TransferUsuarioT (){	}
+	public TransferUsuario(){	}
 
 	//Toda la informacion para el fragment detalle
-	public TransferUsuarioT(Integer id, String nombre, String correo, String avatar, String telefono,
-							Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
-							String direccion, String tipoPerfil, String notas, String nombrePadre,
-							String nombreMadre, String correoPadre, String correoMadre,
-							String telPadre, String telMadre, String centroAcademico,
-							String codigoSincronizacion) {
+	public TransferUsuario(Integer id, String nombre, String correo, String avatar, String telefono,
+						   Integer puntuacion, Integer puntuacionAnterior, String curso, String dni,
+						   String direccion, String tipoPerfil, String notas, String nombrePadre,
+						   String nombreMadre, String correoPadre, String correoMadre,
+						   String telPadre, String telMadre, String centroAcademico,
+						   String codigoSincronizacion) {
 		this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;

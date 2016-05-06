@@ -34,7 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
+import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
@@ -90,7 +90,7 @@ public class FragmentDetalleUsuario extends Fragment {
 
     public FragmentDetalleUsuario(){}
 
-    public static FragmentDetalleUsuario newInstance(TransferUsuarioT usuario) {
+    public static FragmentDetalleUsuario newInstance(TransferUsuario usuario) {
         FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
         idUsuario = usuario.getId();
         Log.e("testing", "usuario fragment detalle" + idUsuario);
@@ -228,7 +228,7 @@ public class FragmentDetalleUsuario extends Fragment {
                     notas = notasV.getText().toString();
                     centroEstudios = centroEstudiosV.getText().toString();
                     if(validarDatosUsuario()) {
-                        TransferUsuarioT usuario = new TransferUsuarioT();
+                        TransferUsuario usuario = new TransferUsuario();
                         usuario.setNombre(nombre);
                         usuario.setCorreo(correo);
                         usuario.setAvatar(avatar);
@@ -402,7 +402,7 @@ public class FragmentDetalleUsuario extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (validarDatosPadres(mail.getText().toString(), phone.getText().toString())) {
-                    TransferUsuarioT editUser = new TransferUsuarioT();
+                    TransferUsuario editUser = new TransferUsuario();
                     editUser.setId(idUsuario);
                     if (progenitor.equals("padre")) {
                         editUser.setNombrePadre(name.getText().toString());

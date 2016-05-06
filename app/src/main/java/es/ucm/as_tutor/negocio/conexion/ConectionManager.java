@@ -27,9 +27,9 @@ public class ConectionManager {
     private Thread socketServerThread;
     private Mensaje messageFromClient;
 
-    public ConectionManager(Mensaje message, String codigo){
+    public ConectionManager(Mensaje message){
         this.message = message;
-        this.codigo = codigo;
+        this.codigo = message.getUsuario().getCodigoSincronizacion();
     }
 
     public Mensaje getMensajeUsuario(){
@@ -44,10 +44,7 @@ public class ConectionManager {
     }
 
     public String getMessage(){
-        if (mensajePantalla != null)
             return mensajePantalla;
-        else
-            return "El mensaje es nulo";
     }
 
     public boolean sigueActivo(){
@@ -68,7 +65,7 @@ public class ConectionManager {
 
             try {
                 serverSocket = new ServerSocket(SocketServerPORT);
-
+                boolean ejecucion =true;
                 while (true) {
                     socket = serverSocket.accept();
                     dataInputStream = new ObjectInputStream(
@@ -80,33 +77,30 @@ public class ConectionManager {
                     //If no message sent from client, this code will block the program
                     messageFromClient = (Mensaje) dataInputStream.readObject();
 
-                    String[] s = messageFromClient.getTexto().split(":");
+                    String[] s = messageFromClient.getVerificar().split(":");
                     boolean primerMensaje = s[0].equals("Cod");
 
                     // Se establece la conexion
                     if (primerMensaje && s[1].equals(codigo)) {
                         Mensaje msgReply2 = new Mensaje("Permitido");
                         dataOutputStream.writeObject(msgReply2);
-
                         //Se rechaza la conexion
                     }else if(primerMensaje && !s[1].equals(codigo)) {
                         socket.close();
-
                         // Se procesa el mensaje
                     }else if(!primerMensaje){
-                        count++;
-                        mensajePantalla += "#" + count + " from " + socket.getInetAddress()
+                        mensajePantalla += socket.getInetAddress()
                                 + ":" + socket.getPort() + "\n"
-                                + "Msg from client: " + messageFromClient.getTexto() +
-                                "Numero " + messageFromClient.getNumero() +
-                                "Fecha " + messageFromClient.getFecha() + "\n";
+                                + "Msg from client: " + messageFromClient.getUsuario().getNombre()
+                                + " Puntuacion: " + messageFromClient.getTareas().get(0).getTextoAlarma() +
+                                " Fecha " + messageFromClient.getTareas().get(0).getTextoPregunta() + "\n";
 
 
                         dataOutputStream.writeObject(message);
                         socket.close();
                         serverSocket.close();
+
                         break;
-                        //interrupt();
                     }
                 }
 
@@ -122,6 +116,7 @@ public class ConectionManager {
                 if (socket != null) {
                     try {
                         socket.close();
+                        serverSocket.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
