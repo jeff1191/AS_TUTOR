@@ -21,7 +21,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import es.ucm.as_tutor.R;
-import es.ucm.as_tutor.integracion.DBHelper;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.ayuda.FragmentListadoAyuda;

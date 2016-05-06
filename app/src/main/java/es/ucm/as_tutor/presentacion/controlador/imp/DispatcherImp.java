@@ -1,22 +1,18 @@
 package es.ucm.as_tutor.presentacion.controlador.imp;
 
 import android.content.Intent;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.negocio.suceso.TransferTareaT;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
-import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Dispatcher;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
@@ -27,12 +23,8 @@ import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioE
 import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 import es.ucm.as_tutor.presentacion.vista.usuario.reto.FragmentDetalleReto;
 import es.ucm.as_tutor.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
-import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
-import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.CrearEventoConsultarUsuarios;
 import es.ucm.as_tutor.presentacion.vista.evento.FragmentDetalleEvento;
 import es.ucm.as_tutor.presentacion.vista.evento.FragmentListadoEvento;
-import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;
-import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -201,6 +193,10 @@ public class DispatcherImp extends Dispatcher {
 
                 FragmentDetalleUsuarioEvento fragmentEventoUsuario = FragmentDetalleUsuarioEvento.newInstance(usuario_actual,nombresEventos,asistenciaEventos);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
+                break;
+
+            case ListaComandos.SINCRONIZAR:
+
                 break;
         }
     }

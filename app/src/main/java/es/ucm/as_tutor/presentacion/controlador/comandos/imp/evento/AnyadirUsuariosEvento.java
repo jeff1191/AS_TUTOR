@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
-import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;

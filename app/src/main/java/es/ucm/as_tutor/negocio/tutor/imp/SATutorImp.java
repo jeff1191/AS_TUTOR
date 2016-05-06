@@ -1,7 +1,5 @@
 package es.ucm.as_tutor.negocio.tutor.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 

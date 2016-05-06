@@ -3,14 +3,8 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.stmt.query.In;
-
-import java.util.Collection;
 import java.util.Date;
 
-import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.Frecuencia;
 
 public class TransferTareaT {

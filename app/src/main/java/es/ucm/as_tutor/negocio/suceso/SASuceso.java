@@ -3,12 +3,6 @@
  */
 package es.ucm.as_tutor.negocio.suceso;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-
-import java.util.ArrayList;
-
-import es.ucm.as_tutor.integracion.DBHelper;
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import java.util.ArrayList;
 
 public interface SASuceso {

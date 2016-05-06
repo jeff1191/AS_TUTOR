@@ -38,7 +38,6 @@ import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
-import es.ucm.as_tutor.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
 
 public class FragmentDetalleUsuario extends Fragment {
 
@@ -477,6 +476,9 @@ public class FragmentDetalleUsuario extends Fragment {
             case R.id.eliminarUsuario:
                 DialogEliminarUsuario alertDialog = DialogEliminarUsuario.newInstance(idUsuario,nombre);
                 alertDialog.show(getActivity().getFragmentManager(), "Eliminar usuario");
+                break;
+            case R.id.sincronizarUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR,null); // Aqui iria el id usuario
                 break;
             default:
                 return super.onOptionsItemSelected(item);

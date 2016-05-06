@@ -39,4 +39,5 @@ public class ListaComandos {
     public static final String LISTADO_EVENTOS = "listadoEvento";
     public static final String CREAR_EVENTO_CONSULTAR_USUARIOS = "crearEventoConsultarUsuarios";
     public static final String CONSUTAR_USUARIOS_EVENTO = "consultarUsuariosEvento";
+    public static final String SINCRONIZAR = "sincronizar";
 }

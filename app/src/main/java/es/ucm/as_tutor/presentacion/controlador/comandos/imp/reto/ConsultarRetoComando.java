@@ -2,7 +2,6 @@ package es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto;
 
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
-import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
 

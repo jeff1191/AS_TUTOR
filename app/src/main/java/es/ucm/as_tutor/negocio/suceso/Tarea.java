@@ -7,7 +7,6 @@ package es.ucm.as_tutor.negocio.suceso;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
-import java.sql.Time;
 import java.util.Date;
 
 import es.ucm.as_tutor.negocio.usuario.Usuario;

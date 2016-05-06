@@ -6,6 +6,7 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.GuardarUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.ConsultarRetoComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetoComando;
+import es.ucm.as_tutor.presentacion.controlador.comandos.imp.sincronizacion.Sincronizar;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarEventosUsuario;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
@@ -25,7 +26,6 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tarea.EliminarTarea
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.ConsultarTutorComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.CrearTutorComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.tutor.EditarTutorComando;
-import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.AnyadirUsuariosEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarEvento;
 import es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento.ConsultarUsuariosEvento;
@@ -139,6 +139,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.GUARDAR_USUARIOS_EVENTO:
                 ret= new GuardarUsuariosEvento();
+                break;
+
+            case ListaComandos.SINCRONIZAR:
+                ret = new Sincronizar();
                 break;
 
         }

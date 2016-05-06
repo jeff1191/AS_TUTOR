@@ -1,7 +1,5 @@
 package es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento;
 
-import java.util.ArrayList;
-
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;

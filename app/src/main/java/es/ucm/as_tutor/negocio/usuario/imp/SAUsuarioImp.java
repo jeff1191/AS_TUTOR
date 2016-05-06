@@ -5,8 +5,6 @@ package es.ucm.as_tutor.negocio.usuario.imp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -23,7 +21,6 @@ import es.ucm.as_tutor.negocio.suceso.Evento;
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
 import es.ucm.as_tutor.negocio.suceso.Reto;
 import es.ucm.as_tutor.negocio.suceso.SASuceso;
-import es.ucm.as_tutor.negocio.suceso.Tarea;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferRetoT;
@@ -34,7 +31,6 @@ import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.negocio.usuario.Usuario;
 import es.ucm.as_tutor.negocio.utils.PDFManager;
 import es.ucm.as_tutor.negocio.utils.Perfil;
-import es.ucm.as_tutor.presentacion.controlador.comandos.imp.usuario.GenerarPDFComando;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 

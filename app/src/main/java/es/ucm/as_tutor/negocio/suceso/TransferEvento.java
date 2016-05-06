@@ -1,9 +1,6 @@
 package es.ucm.as_tutor.negocio.suceso;
 
 import java.util.Date;
-import java.util.List;
-
-import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 
 /**
  * Created by Jeffer on 15/04/2016.

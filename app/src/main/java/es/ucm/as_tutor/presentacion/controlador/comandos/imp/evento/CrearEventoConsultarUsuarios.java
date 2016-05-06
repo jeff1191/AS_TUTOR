@@ -1,10 +1,8 @@
 package es.ucm.as_tutor.presentacion.controlador.comandos.imp.evento;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
-import es.ucm.as_tutor.negocio.suceso.SASuceso;
 import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuarioT;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;

@@ -1,10 +1,6 @@
 package es.ucm.as_tutor.negocio.utils;
 
-import android.util.Log;
-
-import java.sql.Time;
 import java.util.Date;
-import java.util.Timer;
 
 /**
  * Created by msalitu on 15/04/2016.
