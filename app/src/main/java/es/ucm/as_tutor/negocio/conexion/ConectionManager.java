@@ -38,6 +38,7 @@ public class ConectionManager {
     public ConectionManager(Mensaje message){
         this.message = message;
         this.codigo = message.getUsuario().getCodigoSincronizacion();
+        Log.e("CODIGO_CONECTION_M", codigo);
     }
 
     public Mensaje getMensajeUsuario(){
@@ -62,9 +63,7 @@ public class ConectionManager {
         };
         socketServerThread= new Thread(new SocketServerThread());
        socketServerThread.start();
-       socketServerThread.run();
-
-
+//       socketServerThread.run();
     }
 
     public String getMessage(){
@@ -91,8 +90,6 @@ public class ConectionManager {
 
             try {
                 serverSocket = new ServerSocket(SocketServerPORT);
-                boolean ejecucion =true;
-                int a=1;
                 while (true) {
                     socket = serverSocket.accept();
                     dataInputStream = new ObjectInputStream(
@@ -129,9 +126,7 @@ public class ConectionManager {
                         
                         break;
                     }
-                a++;
                 }
-
             }catch (StreamCorruptedException e){
                 Log.e("StreamCorruptedExceptio", "mensaje nulo");
 
@@ -166,7 +161,7 @@ public class ConectionManager {
                     }
                 }
             }
-            handler.sendEmptyMessage(0);
+//            handler.sendEmptyMessage(0);
 
 
         }

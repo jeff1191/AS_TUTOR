@@ -16,7 +16,7 @@ public class Utils {
         progress.setCancelable(false);
         progress.show();
         Handler handler = new Handler();
-        
+
         handler.postDelayed(new Runnable() { //Pasan 2 segundos
             public void run() {
                 progress.dismiss();

@@ -35,7 +35,6 @@ import java.io.IOException;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
-import es.ucm.as_tutor.presentacion.Utils;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;

@@ -16,9 +16,6 @@ public class TransferEvento implements Serializable {
     private Date horaEvento;
 
     public TransferEvento(){}
-
-
-
     public TransferEvento(Integer id, String nombre, Date fecha, Date horaAlarma, Date horaEvento) {
         this.id = id;
         this.nombre = nombre;
