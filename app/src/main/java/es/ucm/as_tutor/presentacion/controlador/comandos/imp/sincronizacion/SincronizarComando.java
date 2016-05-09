@@ -4,9 +4,13 @@ import android.util.Log;
 
 import es.ucm.as_tutor.negocio.conexion.ConectionManager;
 import es.ucm.as_tutor.negocio.conexion.msg.Mensaje;
+import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
+import es.ucm.as_tutor.negocio.usuario.SAUsuario;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
+import es.ucm.as_tutor.presentacion.Utils;
 import es.ucm.as_tutor.presentacion.controlador.comandos.Command;
 import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
  * Created by Jeffer on 06/05/2016.
@@ -14,15 +18,16 @@ import es.ucm.as_tutor.presentacion.controlador.comandos.exceptions.commandExcep
 public class SincronizarComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
-        TransferUsuario usuarioSincro = new TransferUsuario();
-        usuarioSincro.setNombre("Megan Trainor");
-        usuarioSincro.setCodigoSincronizacion("VIC01");
+        SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
+        TransferUsuario usuarioSincro = saUsuario.consultarUsuario((Integer) datos);
+
         Mensaje pepe = new Mensaje();
         pepe.setUsuario(usuarioSincro);
         ConectionManager conectionManager = new ConectionManager(pepe);
         String mensaje="VACIO";
         conectionManager.lanzarHebra();
-        while(conectionManager.sigueActivo()){
+        //Utils.mostrarProgreso(Manager.getInstance().getActivity(), "Sincronización", "Cargando base de datos de " + usuarioSincro.getNombre(), 2);
+       while(conectionManager.sigueActivo()){
             Log.e("Comprueba", "Esperando");
             mensaje=conectionManager.getMessage();
         }

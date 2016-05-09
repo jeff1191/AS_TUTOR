@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import es.ucm.as_tutor.R;
+import es.ucm.as_tutor.negocio.conexion.msg.Mensaje;
 import es.ucm.as_tutor.negocio.suceso.TransferReto;
 import es.ucm.as_tutor.negocio.suceso.TransferTarea;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
 import es.ucm.as_tutor.negocio.utils.ParserTime;
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferUsuarioEvento;
+import es.ucm.as_tutor.presentacion.Utils;
 import es.ucm.as_tutor.presentacion.controlador.Dispatcher;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.BlankFragment;

@@ -2,6 +2,7 @@ package es.ucm.as_tutor.negocio.conexion.msg;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import es.ucm.as_tutor.negocio.suceso.TransferEvento;
 import es.ucm.as_tutor.negocio.suceso.TransferReto;
@@ -18,8 +19,8 @@ public class Mensaje implements Serializable{
     private String verificar;
     private TransferUsuario usuario;
     private TransferReto reto;
-    private ArrayList<TransferEvento> eventos;
-    private ArrayList<TransferTarea> tareas;
+    private List<TransferEvento> eventos;
+    private List<TransferTarea> tareas;
 
     public Mensaje(String verificar){
         this.verificar = verificar;
@@ -57,7 +58,7 @@ public class Mensaje implements Serializable{
         this.reto = reto;
     }
 
-    public ArrayList<TransferEvento> getEventos() {
+    public List<TransferEvento> getEventos() {
         return eventos;
     }
 
@@ -65,7 +66,7 @@ public class Mensaje implements Serializable{
         this.eventos = eventos;
     }
 
-    public ArrayList<TransferTarea> getTareas() {
+    public List<TransferTarea> getTareas() {
         return tareas;
     }
 

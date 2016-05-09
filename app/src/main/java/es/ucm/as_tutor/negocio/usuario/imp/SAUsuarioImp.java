@@ -227,7 +227,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user2.setCorreoPadre("correo@gmail.com");
 				user2.setCorreoMadre("correo@gmail.com");
 				user2.setTipoPerfil(Perfil.B);
-				user2.setCodigoSincronizacion("VIC001");
+				user2.setCodigoSincronizacion("VIC002");
 				user2.setPuntuacion(9);
 				user2.setPuntuacionAnterior(10);
 				usuario.create(user2);
@@ -248,7 +248,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user3.setCorreoPadre("correo@gmail.com");
 				user3.setCorreoMadre("correo@gmail.com");
 				user3.setTipoPerfil(Perfil.C);
-				user3.setCodigoSincronizacion("VIC001");
+				user3.setCodigoSincronizacion("VIC003");
 				user3.setPuntuacion(9);
 				user3.setPuntuacionAnterior(10);
 				usuario.create(user3);
@@ -269,7 +269,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user4.setCorreoPadre("correo@gmail.com");
 				user4.setCorreoMadre("correo@gmail.com");
 				user4.setTipoPerfil(Perfil.C);
-				user4.setCodigoSincronizacion("VIC001");
+				user4.setCodigoSincronizacion("VIC004");
 				user4.setPuntuacion(9);
 				user4.setPuntuacionAnterior(10);
 				usuario.create(user4);

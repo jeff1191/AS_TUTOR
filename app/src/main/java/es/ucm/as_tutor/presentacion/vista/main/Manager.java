@@ -1,5 +1,6 @@
 package es.ucm.as_tutor.presentacion.vista.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
@@ -24,6 +25,9 @@ public class Manager {
         activity = miActivity;
     }
 
+    public Activity getActivity(){
+        return activity;
+    }
     // Metodo que devuelve el context, se utiliza desde los servicios de aplicacion
     public Context getContext(){
         return activity.getApplicationContext();

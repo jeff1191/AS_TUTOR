@@ -35,6 +35,7 @@ import java.io.IOException;
 
 import es.ucm.as_tutor.R;
 import es.ucm.as_tutor.negocio.usuario.TransferUsuario;
+import es.ucm.as_tutor.presentacion.Utils;
 import es.ucm.as_tutor.presentacion.controlador.Controlador;
 import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
@@ -478,7 +479,8 @@ public class FragmentDetalleUsuario extends Fragment {
                 alertDialog.show(getActivity().getFragmentManager(), "Eliminar usuario");
                 break;
             case R.id.sincronizarUsuario:
-                Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR,null); // Aqui iria el id usuario
+
+                Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, idUsuario); // Aqui iria el id usuario
                 break;
             default:
                 return super.onOptionsItemSelected(item);

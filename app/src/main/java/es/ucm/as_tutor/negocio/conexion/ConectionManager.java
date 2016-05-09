@@ -1,5 +1,8 @@
 package es.ucm.as_tutor.negocio.conexion;
 
+import android.app.ProgressDialog;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
@@ -14,6 +17,7 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 import es.ucm.as_tutor.negocio.conexion.msg.Mensaje;
+import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
  * Created by msalitu on 05/05/2016.
@@ -26,6 +30,10 @@ public class ConectionManager {
     private String codigo;
     private Thread socketServerThread;
     private Mensaje messageFromClient;
+    private ProgressDialog progress;
+    private int increment = 1;
+    private int maximo = 100;
+    private Handler handler;
 
     public ConectionManager(Mensaje message){
         this.message = message;
@@ -39,8 +47,24 @@ public class ConectionManager {
     public void lanzarHebra(){
         if(socketServerThread != null && socketServerThread.isAlive())
             socketServerThread.interrupt();
+
+        progress = new ProgressDialog(Manager.getInstance().getActivity());
+        progress.setTitle("Sincronizando...");
+        progress.setMessage("Cargando base de datos de " + message.getUsuario().getNombre());
+        progress.setCancelable(false);
+        progress.show();
+
+        handler =  new Handler(){
+            public void handleMessage(Message msg){
+                //progress.setProgress((Integer)msg.obj);
+                progress.dismiss();
+            }
+        };
         socketServerThread= new Thread(new SocketServerThread());
-        socketServerThread.start();
+       socketServerThread.start();
+       socketServerThread.run();
+
+
     }
 
     public String getMessage(){
@@ -59,6 +83,8 @@ public class ConectionManager {
 
         @Override
         public void run() {
+
+
             Socket socket = null;
             ObjectInputStream dataInputStream = null;
             ObjectOutputStream dataOutputStream = null;
@@ -66,6 +92,7 @@ public class ConectionManager {
             try {
                 serverSocket = new ServerSocket(SocketServerPORT);
                 boolean ejecucion =true;
+                int a=1;
                 while (true) {
                     socket = serverSocket.accept();
                     dataInputStream = new ObjectInputStream(
@@ -99,9 +126,10 @@ public class ConectionManager {
                         dataOutputStream.writeObject(message);
                         socket.close();
                         serverSocket.close();
-
+                        
                         break;
                     }
+                a++;
                 }
 
             }catch (StreamCorruptedException e){
@@ -138,6 +166,9 @@ public class ConectionManager {
                     }
                 }
             }
+            handler.sendEmptyMessage(0);
+
+
         }
     }
 
