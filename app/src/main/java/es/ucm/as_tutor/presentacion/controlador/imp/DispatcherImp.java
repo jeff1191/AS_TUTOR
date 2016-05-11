@@ -195,9 +195,7 @@ public class DispatcherImp extends Dispatcher {
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentEventoUsuario).commit();
                 break;
 
-            case ListaComandos.SINCRONIZAR:
 
-                break;
         }
     }
 }

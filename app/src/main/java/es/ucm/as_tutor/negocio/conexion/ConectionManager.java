@@ -1,9 +1,7 @@
 package es.ucm.as_tutor.negocio.conexion;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
@@ -15,11 +13,15 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
-import java.util.concurrent.ExecutionException;
 
 import es.ucm.as_tutor.negocio.conexion.msg.Mensaje;
+import es.ucm.as_tutor.negocio.factoria.FactoriaSA;
+import es.ucm.as_tutor.negocio.suceso.SASuceso;
+import es.ucm.as_tutor.negocio.suceso.TransferReto;
+import es.ucm.as_tutor.negocio.usuario.SAUsuario;
+import es.ucm.as_tutor.presentacion.controlador.Controlador;
+import es.ucm.as_tutor.presentacion.controlador.ListaComandos;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
 
 /**
@@ -51,40 +53,21 @@ public class ConectionManager {
     public void lanzarHebra(){
         if(socketServerThread != null && socketServerThread.isAlive())
             socketServerThread.interrupt();
-/*
+
         progress = new ProgressDialog(Manager.getInstance().getActivity());
         progress.setTitle("Sincronizando...");
         progress.setMessage("Cargando base de datos de " + message.getUsuario().getNombre());
-        progress.setCancelable(false);
+        progress.setCancelable(true);
         progress.show();
 
-        handler =  new Handler(){
-            public void handleMessage(Message msg){
-                //progress.setProgress((Integer)msg.obj);
-                progress.dismiss();
-            }
-        };
         socketServerThread= new Thread(new SocketServerThread());
-       socketServerThread.start();
-//       socketServerThread.run();*/
+        socketServerThread.start();
+       /* while(socketServerThread.isAlive()){
+            // Log.e("Comprueba", "Esperando");
+        }*/
 
 
-
-
-        SocketServerTask  serverTask= new SocketServerTask();
-
-        try {
-            Mensaje respuesta = serverTask.execute().get(); //Respuesta del cliente
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        
-        
-        
-        
-        
+//       socketServerThread.run();
     }
 
     public String getMessage(){
@@ -125,26 +108,49 @@ public class ConectionManager {
                     String[] s = messageFromClient.getVerificar().split(":");
                     boolean primerMensaje = s[0].equals("Cod");
 
-                    // Se establece la conexion
+
                     if (primerMensaje && s[1].equals(codigo)) {
+                        Log.e("PERMITIDO","ENVIADO PERMITIDO");
                         Mensaje msgReply2 = new Mensaje("Permitido");
                         dataOutputStream.writeObject(msgReply2);
+                        socket.close();
                         //Se rechaza la conexion
                     }else if(primerMensaje && !s[1].equals(codigo)) {
+                        Log.e("RECHAZANDO ","USUARIO: " + messageFromClient.getUsuario().getCodigoSincronizacion());
                         socket.close();
                         // Se procesa el mensaje
                     }else if(!primerMensaje){
-                        mensajePantalla += socket.getInetAddress()
-                                + ":" + socket.getPort() + "\n"
-                                + "Msg from client: " + messageFromClient.getUsuario().getNombre()
-                                + " Puntuacion: " + messageFromClient.getTareas().get(0).getTextoAlarma() +
-                                " Fecha " + messageFromClient.getTareas().get(0).getTextoPregunta() + "\n";
+                        Log.e("SEGUNDO_MSG"," RECIBIENDO MENSAJE");
 
-
+                     // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
+                        Log.e("RESPUESTA A USUARIO"," ENVIANDO BDD DE MENSAJE "+ message.getUsuario().getNombre());
                         dataOutputStream.writeObject(message);
                         socket.close();
                         serverSocket.close();
 
+                        if(!messageFromClient.getVerificar().equals("registro")) {
+                            SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
+                            SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
+
+                            saUsuario.actualizarPuntuacion(messageFromClient.getUsuario());
+
+                            if (messageFromClient.getReto() == null) {
+                                //falta comando eliminar reto
+                            } else {
+                                Log.e("RETO", "CREANDO RETO " + messageFromClient.getReto().getContador());
+                                TransferReto actualizar = saSuceso.consultarReto(message.getUsuario().getId());
+                                actualizar.setContador(messageFromClient.getReto().getContador());
+
+                                actualizar.setIdUsuario(message.getUsuario().getId());
+                                saSuceso.crearReto(actualizar);
+                            }
+                            //SASuceso saEvento = FactoriaSA.getInstancia().nuevoSASuceso();
+                            // TransferReto retoUsuario = saEvento.consultarReto(usuarioSincro.getId());
+
+                            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
+                        }
+                        progress.dismiss();
+//                        Toast.makeText(Manager.getInstance().getActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -222,122 +228,6 @@ public class ConectionManager {
             ip += "Something Wrong! " + e.toString() + "\n";
         }
         return ip;
-    }
-
-
-
-    public class SocketServerTask extends AsyncTask<Mensaje , Mensaje, Mensaje> {
-        static final int SocketServerPORT = 8080;
-        private String dstAddress;
-        private int dstPort;
-        private Mensaje response = new Mensaje();
-
-        SocketServerTask() {
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progress = new ProgressDialog(Manager.getInstance().getActivity());
-            progress.setTitle("Sincronizando...");
-            progress.setMessage("Cargando base de datos de " + message.getUsuario().getNombre());
-            progress.setCancelable(false);
-            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progress.setProgress(0);
-            progress.show();
-        }
-
-        @Override
-        protected void onPostExecute(Mensaje result) {
-            progress.dismiss();
-            super.onPostExecute(result);
-        }
-
-        @Override
-        protected Mensaje doInBackground(Mensaje... params) {
-
-
-            Socket socket = null;
-            ObjectInputStream dataInputStream = null;
-            ObjectOutputStream dataOutputStream = null;
-
-            try {
-                serverSocket = new ServerSocket(SocketServerPORT);
-                while (true) {
-                    Log.e("Comprueba", "Esperando");
-                    socket = serverSocket.accept();
-                    dataInputStream = new ObjectInputStream(
-                            socket.getInputStream());
-                    dataOutputStream = new ObjectOutputStream(
-                            socket.getOutputStream());
-
-
-                    //If no message sent from client, this code will block the program
-                    messageFromClient = (Mensaje) dataInputStream.readObject();
-
-                    String[] s = messageFromClient.getVerificar().split(":");
-                    boolean primerMensaje = s[0].equals("Cod");
-
-                    // Se establece la conexion
-                    if (primerMensaje && s[1].equals(codigo)) {
-
-                        Mensaje mensajeServidor = new Mensaje("Permitido");
-                        dataOutputStream.writeObject(mensajeServidor);
-                        //Se rechaza la conexion
-                    }else if(primerMensaje && !s[1].equals(codigo)) {
-                        socket.close();
-                        // Se procesa el mensaje
-                    }else if(!primerMensaje){
-                        mensajePantalla += socket.getInetAddress()
-                                + ":" + socket.getPort() + "\n"
-                                + "Msg from client: " + messageFromClient.getUsuario().getNombre()
-                                + " Puntuacion: " + messageFromClient.getTareas().get(0).getTextoAlarma() +
-                                " Fecha " + messageFromClient.getTareas().get(0).getTextoPregunta() + "\n";
-
-
-                        dataOutputStream.writeObject(message);
-                        socket.close();
-                        serverSocket.close();
-
-                        break;
-                    }
-                }
-            }catch (StreamCorruptedException e){
-                Log.e("StreamCorruptedExceptio", "mensaje nulo");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                if (socket != null) {
-                    try {
-                        socket.close();
-                        serverSocket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if (dataInputStream != null) {
-                    try {
-                        dataInputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if (dataOutputStream != null) {
-                    try {
-                        dataOutputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            return messageFromClient;
-        }
     }
 
 

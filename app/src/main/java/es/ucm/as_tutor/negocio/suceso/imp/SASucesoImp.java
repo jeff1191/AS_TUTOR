@@ -404,7 +404,7 @@ public class SASucesoImp implements SASuceso {
             reto.setSuperado(transferReto.getSuperado());
             reto.setContador(transferReto.getContador());
             reto.setUsuario(usuario);
-            daoReto.create(reto);
+            daoReto.update(reto);
         } catch (SQLException e) {
             e.printStackTrace();
         }

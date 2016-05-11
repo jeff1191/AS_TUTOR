@@ -390,4 +390,17 @@ public class SAUsuarioImp implements SAUsuario {
 		return ret;
 	}
 
+	@Override
+	public void actualizarPuntuacion(TransferUsuario actualizaPuntuacion) {
+		try {
+			Dao<Usuario, Integer> daoUsuario  = getHelper().getUsuarioDao();
+			Usuario usuarioPuntuacion = daoUsuario.queryForId(actualizaPuntuacion.getId());
+
+			usuarioPuntuacion.setPuntuacion(actualizaPuntuacion.getPuntuacion());
+
+			daoUsuario.update(usuarioPuntuacion);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

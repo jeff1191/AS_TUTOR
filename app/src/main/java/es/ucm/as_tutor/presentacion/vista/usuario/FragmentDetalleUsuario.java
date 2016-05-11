@@ -479,7 +479,8 @@ public class FragmentDetalleUsuario extends Fragment {
                 break;
             case R.id.sincronizarUsuario:
 
-                Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, idUsuario); // Aqui iria el id usuario
+                Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, idUsuario);
+               // Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

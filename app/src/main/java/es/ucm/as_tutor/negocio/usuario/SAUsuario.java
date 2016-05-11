@@ -26,4 +26,6 @@ public interface SAUsuario {
 	public void enviarCorreo(Integer idUsuario);
 
 	public void generarPDF(Integer idUsuario);
+
+	public void actualizarPuntuacion(TransferUsuario actualizaPuntuacion);
 }
