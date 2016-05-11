@@ -1,6 +1,7 @@
 package es.ucm.as_tutor.negocio.conexion;
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -14,7 +15,9 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
+import java.util.concurrent.ExecutionException;
 
 import es.ucm.as_tutor.negocio.conexion.msg.Mensaje;
 import es.ucm.as_tutor.presentacion.vista.main.Manager;
@@ -48,7 +51,7 @@ public class ConectionManager {
     public void lanzarHebra(){
         if(socketServerThread != null && socketServerThread.isAlive())
             socketServerThread.interrupt();
-
+/*
         progress = new ProgressDialog(Manager.getInstance().getActivity());
         progress.setTitle("Sincronizando...");
         progress.setMessage("Cargando base de datos de " + message.getUsuario().getNombre());
@@ -63,7 +66,25 @@ public class ConectionManager {
         };
         socketServerThread= new Thread(new SocketServerThread());
        socketServerThread.start();
-//       socketServerThread.run();
+//       socketServerThread.run();*/
+
+
+
+
+        SocketServerTask  serverTask= new SocketServerTask();
+
+        try {
+            Mensaje respuesta = serverTask.execute().get(); //Respuesta del cliente
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        
     }
 
     public String getMessage(){
@@ -123,7 +144,7 @@ public class ConectionManager {
                         dataOutputStream.writeObject(message);
                         socket.close();
                         serverSocket.close();
-                        
+
                         break;
                     }
                 }
@@ -202,4 +223,122 @@ public class ConectionManager {
         }
         return ip;
     }
+
+
+
+    public class SocketServerTask extends AsyncTask<Mensaje , Mensaje, Mensaje> {
+        static final int SocketServerPORT = 8080;
+        private String dstAddress;
+        private int dstPort;
+        private Mensaje response = new Mensaje();
+
+        SocketServerTask() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = new ProgressDialog(Manager.getInstance().getActivity());
+            progress.setTitle("Sincronizando...");
+            progress.setMessage("Cargando base de datos de " + message.getUsuario().getNombre());
+            progress.setCancelable(false);
+            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progress.setProgress(0);
+            progress.show();
+        }
+
+        @Override
+        protected void onPostExecute(Mensaje result) {
+            progress.dismiss();
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected Mensaje doInBackground(Mensaje... params) {
+
+
+            Socket socket = null;
+            ObjectInputStream dataInputStream = null;
+            ObjectOutputStream dataOutputStream = null;
+
+            try {
+                serverSocket = new ServerSocket(SocketServerPORT);
+                while (true) {
+                    Log.e("Comprueba", "Esperando");
+                    socket = serverSocket.accept();
+                    dataInputStream = new ObjectInputStream(
+                            socket.getInputStream());
+                    dataOutputStream = new ObjectOutputStream(
+                            socket.getOutputStream());
+
+
+                    //If no message sent from client, this code will block the program
+                    messageFromClient = (Mensaje) dataInputStream.readObject();
+
+                    String[] s = messageFromClient.getVerificar().split(":");
+                    boolean primerMensaje = s[0].equals("Cod");
+
+                    // Se establece la conexion
+                    if (primerMensaje && s[1].equals(codigo)) {
+
+                        Mensaje mensajeServidor = new Mensaje("Permitido");
+                        dataOutputStream.writeObject(mensajeServidor);
+                        //Se rechaza la conexion
+                    }else if(primerMensaje && !s[1].equals(codigo)) {
+                        socket.close();
+                        // Se procesa el mensaje
+                    }else if(!primerMensaje){
+                        mensajePantalla += socket.getInetAddress()
+                                + ":" + socket.getPort() + "\n"
+                                + "Msg from client: " + messageFromClient.getUsuario().getNombre()
+                                + " Puntuacion: " + messageFromClient.getTareas().get(0).getTextoAlarma() +
+                                " Fecha " + messageFromClient.getTareas().get(0).getTextoPregunta() + "\n";
+
+
+                        dataOutputStream.writeObject(message);
+                        socket.close();
+                        serverSocket.close();
+
+                        break;
+                    }
+                }
+            }catch (StreamCorruptedException e){
+                Log.e("StreamCorruptedExceptio", "mensaje nulo");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (socket != null) {
+                    try {
+                        socket.close();
+                        serverSocket.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (dataInputStream != null) {
+                    try {
+                        dataInputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (dataOutputStream != null) {
+                    try {
+                        dataOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return messageFromClient;
+        }
+    }
+
+
 }

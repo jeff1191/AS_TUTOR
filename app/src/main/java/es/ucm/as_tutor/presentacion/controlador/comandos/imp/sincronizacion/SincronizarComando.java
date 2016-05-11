@@ -28,12 +28,12 @@ public class SincronizarComando implements Command {
       //  Utils.mostrarProgreso(Manager.getInstance().getActivity(), "Sincronización", "Cargando base de datos de " + usuarioSincro.getNombre(), 2);
         conectionManager.lanzarHebra();
 
-       while(conectionManager.sigueActivo()){
+      /* while(conectionManager.sigueActivo()){
            // Log.e("Comprueba", "Esperando");
             mensaje=conectionManager.getMessage();
         }
 
-        Log.e("COMPRUEBA", mensaje);
+        Log.e("COMPRUEBA", mensaje);*/
         return mensaje;
     }
 }
