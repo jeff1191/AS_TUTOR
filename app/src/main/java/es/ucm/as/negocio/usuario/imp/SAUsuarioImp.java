@@ -21,6 +21,7 @@ import es.ucm.as.negocio.suceso.Evento;
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.Reto;
 import es.ucm.as.negocio.suceso.SASuceso;
+import es.ucm.as.negocio.suceso.Tarea;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
@@ -30,6 +31,7 @@ import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.usuario.Usuario;
 import es.ucm.as.negocio.utils.PDFManager;
+import es.ucm.as.negocio.utils.ParserText;
 import es.ucm.as.negocio.utils.Perfil;
 import es.ucm.as.presentacion.vista.main.Manager;
 
@@ -90,6 +92,8 @@ public class SAUsuarioImp implements SAUsuario {
             String codigoSincronizacion = tutor.getCodigoSincronizacion()+usuario1.getId();
             usuario1.setCodigoSincronizacion(codigoSincronizacion);
 			daoUsuario.update(usuario1);
+			cargarTareasBBDD(usuario1.getId());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -277,8 +281,8 @@ public class SAUsuarioImp implements SAUsuario {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
+
 	public ArrayList<TransferUsuario> consultarUsuarios() {
 		ArrayList<TransferUsuario> ret = new ArrayList<TransferUsuario>();
 		Dao<Usuario, Integer> usuarios;
@@ -294,6 +298,33 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	public void cargarTareasBBDD(Integer idUsuario) {
+		ParserText p = new ParserText();
+		Dao<Tarea, Integer> tareaDao;
+		Dao<Usuario, Integer> usuarioDao;
+
+		try {
+			tareaDao = getHelper().getTareaDao();
+			usuarioDao = getHelper().getUsuarioDao();
+			Usuario usuario = usuarioDao.queryForId(idUsuario);
+
+			// lee del fichero que corresponda al perfil y convierte en tareas
+			p.readTareas(usuario.getTipoPerfil());
+			ArrayList<Tarea> tareasFichero = p.getTareas();
+
+			// crea las nuevas tareas en BBDD
+			for (int i = 0; i < tareasFichero.size(); i++){
+				Tarea t = tareasFichero.get(i);
+				t.setUsuario(usuario);
+				tareaDao.create(t);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
     @Override

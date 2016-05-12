@@ -5,6 +5,8 @@ package es.ucm.as.negocio.suceso;
 
 import java.util.ArrayList;
 
+import es.ucm.as.negocio.usuario.TransferUsuario;
+
 public interface SASuceso {
 
 	// Tarea

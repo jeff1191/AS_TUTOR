@@ -19,6 +19,8 @@ public interface SAUsuario {
 
 	public void crearUsuarios();
 
+	public void cargarTareasBBDD(Integer idUsuario);
+
 	public ArrayList<TransferUsuario> consultarUsuarios();
 
 	public ArrayList<TransferUsuarioEvento> consultarEventosUsuario(Integer idUsuario);

@@ -23,6 +23,7 @@ import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.usuario.Usuario;
+import es.ucm.as.negocio.utils.ParserText;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 
@@ -119,6 +120,8 @@ public class SASucesoImp implements SASuceso {
             e.printStackTrace();
         }
     }
+
+
 
     @Override
     public ArrayList<TransferTarea> consultarTareas(Integer idUsuario) {
