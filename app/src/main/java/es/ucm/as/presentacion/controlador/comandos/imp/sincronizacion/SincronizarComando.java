@@ -32,10 +32,10 @@ public class SincronizarComando implements Command {
         List<TransferEvento> eventosSincro = new ArrayList<>();
 
         for(int i=1; i < eventosBDD.size(); i++){
+            Log.e("ENVIANDO EVENTO: ", eventosBDD.get(i).getEvento().getNombre());
             eventosSincro.add(eventosBDD.get(i).getEvento());
         }
 
-        Log.e("COD: ", usuarioSincro.getCodigoSincronizacion());
 
         Mensaje pepe = new Mensaje();
         pepe.setUsuario(usuarioSincro);
