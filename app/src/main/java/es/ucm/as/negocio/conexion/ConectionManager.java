@@ -118,11 +118,10 @@ public class ConectionManager {
                     }else if(!primerMensaje){
                         Log.e("SEGUNDO_MSG"," RECIBIENDO MENSAJE");
 
+                        ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
+                        List<TransferEvento> actualizar = new ArrayList<>();
                      // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
-                        Log.e("RESPUESTA A USUARIO"," ENVIANDO BDD DE MENSAJE "+ message.getUsuario().getNombre());
-                        dataOutputStream.writeObject(message);
-                        socket.close();
-                        serverSocket.close();
+                       // Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getEventos().get(0).getNombre());
 
                         if(!messageFromClient.getVerificar().equals("registro")) {
                             SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
@@ -134,11 +133,11 @@ public class ConectionManager {
                                 //falta comando eliminar reto
                             } else {
                                 //Reto
-                                TransferReto actualizar = saSuceso.consultarReto(message.getUsuario().getId());
-                                actualizar.setContador(messageFromClient.getReto().getContador());
+                                TransferReto actualizarReto = saSuceso.consultarReto(message.getUsuario().getId());
+                                actualizarReto.setContador(messageFromClient.getReto().getContador());
 
-                                actualizar.setIdUsuario(message.getUsuario().getId());
-                                saSuceso.crearReto(actualizar);
+                                actualizarReto.setIdUsuario(message.getUsuario().getId());
+                                saSuceso.crearReto(actualizarReto);
 
                                 //Eventos
                                 ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
@@ -147,26 +146,30 @@ public class ConectionManager {
 
 
                                if(eventosSincro.size() > 0) {
-                                   Log.e("PRIMER_EVENTO", eventosSincro.get(0).getNombre());
 
-
-                                   ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
                                    String nombreEventoBDD;
                                    String nombreEventoSincro;
-                                   for (int i = 0; i < eventosUsuarioBDD.size(); i++) {
+                                   TransferUsuarioEvento usuario_e = new TransferUsuarioEvento(null, message.getUsuario());
+                                   eventosUsuarioFinal.add(usuario_e);
+                                   for (int i = 1; i < eventosUsuarioBDD.size(); i++) {
 
                                        nombreEventoBDD = eventosUsuarioBDD.get(i).getEvento().getNombre();
                                        for (int j = 0; j < eventosSincro.size(); j++) {
-                                           nombreEventoSincro = eventosUsuarioBDD.get(j).getEvento().getNombre();
-                                           if (nombreEventoBDD.equals(nombreEventoSincro)) {
-
-                                               TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
+                                           nombreEventoSincro = eventosSincro.get(j).getNombre();
+                                           if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
+                                                Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
+                                               TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosSincro.get(j), message.getUsuario());
                                                evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
                                                eventosUsuarioFinal.add(evento_usuario);
                                            }
                                        }
                                    }
-                                       saSuceso.crearUsuariosEvento(eventosUsuarioFinal);
+                                       saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
+                                   for(int i =1; i < eventosUsuarioFinal.size(); i++){
+                                       actualizar.add(eventosUsuarioFinal.get(i).getEvento());
+                                   }
+
+                                   message.setEventos(actualizar);
 
                                }
 
@@ -176,6 +179,11 @@ public class ConectionManager {
                             }
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
                         }
+
+
+                        dataOutputStream.writeObject(message);
+                        socket.close();
+                        serverSocket.close();
                         progress.dismiss();
 //                        Toast.makeText(Manager.getInstance().getActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
                         break;

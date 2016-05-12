@@ -156,6 +156,9 @@ public class FragmentDetalleEvento extends Fragment{
             textViewNombreEvento.setText(nombreEvento);
         }
         editTextNombreEvento.setText(nombreEvento);
+        if(accion.equals("guardar")){
+            editTextNombreEvento.setEnabled(false);
+        }
         editTextHoraAlarma.setText(horaAlarma);
         editTextHoraEvento.setText(horaEvento);
 
@@ -176,12 +179,10 @@ public class FragmentDetalleEvento extends Fragment{
 
 
 
-       customCalendar.setSelectedDate(currentCalendar.getTime());
+        customCalendar.setSelectedDate(currentCalendar.getTime());
         customCalendar.setCurrentDate(currentCalendar);
-
-
-
-customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
+        fechaActualEvento=currentCalendar.getTime();
+        customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
     @Override
     public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -191,8 +192,8 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
 
         errorNombre.show();
         fechaActualEvento = date.getCalendar().getTime();
-    }
-});
+        }
+    });
 
         if(accion.equals("guardar")){
             aceptar.setText("guardar");
@@ -203,8 +204,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
 
                     if(!editTextNombreEvento.getText().toString().matches("") &&
                             !editTextHoraAlarma.getText().toString().matches("") &&
-                            !editTextHoraEvento.getText().toString().matches("") &&
-                            fechaActualEvento != null) {
+                            !editTextHoraEvento.getText().toString().matches("")) {
 
                         try {
                             TransferEvento nuevoEvento = new TransferEvento();
@@ -282,8 +282,7 @@ customCalendar.setOnDateChangedListener(new OnDateSelectedListener() {
 
                 if(!editTextNombreEvento.getText().toString().matches("") &&
                         !editTextHoraAlarma.getText().toString().matches("") &&
-                        !editTextHoraEvento.getText().toString().matches("") &&
-                        fechaActualEvento != null) {
+                        !editTextHoraEvento.getText().toString().matches("")) {
 
                     try {
                         TransferEvento nuevoEvento = new TransferEvento();
