@@ -1,4 +1,4 @@
-package es.ucm.as.presentacion.vista.evento;
+package es.ucm.as.presentacion.vista.usuario.reto;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,13 +13,14 @@ import es.ucm.as.presentacion.controlador.ListaComandos;
 /**
  * Created by Jeffer on 13/04/2016.
  */
-public class DialogEliminarEvento extends DialogFragment {
+public class DialogEliminarReto extends DialogFragment {
 
-    public static DialogEliminarEvento newInstance(int idEvento, String nombreEvento) {
-        DialogEliminarEvento frag = new DialogEliminarEvento();
+    public static DialogEliminarReto newInstance(int idReto, String nombreReto, int idUsuario) {
+        DialogEliminarReto frag = new DialogEliminarReto();
         Bundle args = new Bundle();
-        args.putInt("idEvento", idEvento);
-        args.putString("nombreEvento", nombreEvento);
+        args.putInt("idReto", idReto);
+        args.putString("nombreReto", nombreReto);
+        args.putInt("idUser", idUsuario);
         frag.setArguments(args);
         return frag;
     }
@@ -28,13 +29,13 @@ public class DialogEliminarEvento extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
                // .setIcon(R.drawable.androidhappy)
-                .setTitle("Eliminar Evento")
-                .setMessage("¿Desea eliminar el evento: " + getArguments().getString("nombreEvento")+"?")
+                .setTitle("Eliminar Reto")
+                .setMessage("¿Desea eliminar el reto: " + getArguments().getString("nombreReto")+"?")
                 .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Evento eliminado CON ID: " + getArguments().getInt("idEvento"), Toast.LENGTH_SHORT).show();
-                        Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_EVENTO,getArguments().getInt("idEvento"));
-                        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS,null);
+                        Toast.makeText(getActivity(), "El reto ha sido eliminado con exito", Toast.LENGTH_SHORT).show();
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_RETO, getArguments().getInt("idReto"));
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, getArguments().getInt("idUser"));
                     }
                 })
 

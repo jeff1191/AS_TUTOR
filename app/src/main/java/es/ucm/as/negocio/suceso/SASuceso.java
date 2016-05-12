@@ -27,11 +27,13 @@ public interface SASuceso {
 
 	public TransferReto consultarReto(Integer idUsuario);
 
+	public void eliminarReto(Integer idReto);
+
 	// Evento
 
 	public boolean crearEvento(TransferEvento nuevoEvento);
 
-	public boolean eliminarEvento(TransferEvento eliminaEvento);
+	public boolean eliminarEvento(Integer idEvento);
 
 	public TransferEvento consultaEvento(TransferEvento consulta);
 

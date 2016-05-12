@@ -118,7 +118,7 @@ public class FragmentDetalleReto extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_reto_usuario, menu);
+        inflater.inflate(R.menu.menu_eliminar_reto_usuario, menu);
     }
 
     @Override
@@ -135,6 +135,10 @@ public class FragmentDetalleReto extends Fragment {
                 break;
             case R.id.enviarCorreo:
 
+                break;
+            case R.id.eliminarReto:
+                DialogEliminarReto alertDialog = DialogEliminarReto.newInstance(id,texto, idUsuario);
+                alertDialog.show(getActivity().getFragmentManager(), "Eliminar reto");
                 break;
             default:
                 return super.onOptionsItemSelected(item);
