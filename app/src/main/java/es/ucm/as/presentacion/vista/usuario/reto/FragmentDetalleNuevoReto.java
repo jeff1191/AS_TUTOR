@@ -3,6 +3,7 @@ package es.ucm.as.presentacion.vista.usuario.reto;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +43,7 @@ public class FragmentDetalleNuevoReto extends Fragment {
         FragmentDetalleNuevoReto frgNuevoReto = new FragmentDetalleNuevoReto();
 
         Bundle arguments = new Bundle();
+        if(reto.getIdUsuario() != null) {
         arguments.putInt("usuario", reto.getIdUsuario());
         try {
             TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
@@ -50,6 +52,7 @@ public class FragmentDetalleNuevoReto extends Fragment {
             arguments.putString("fotoUsuario", ret.getAvatar());
         } catch (commandException e) {
             e.printStackTrace();
+        }
         }
 
 
@@ -99,6 +102,8 @@ public class FragmentDetalleNuevoReto extends Fragment {
                     reto.setIdUsuario(idUsuario);
                     reto.setPremio(premio.getText().toString());
                     reto.setSuperado(false);
+                    Toast.makeText(getActivity(), "ID USUARIO  " + idUsuario
+                            + " ha sido creado con éxito", Toast.LENGTH_SHORT).show();
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETO, reto);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
                     Toast.makeText(getActivity(), "El reto " + textoReto.getText().toString()

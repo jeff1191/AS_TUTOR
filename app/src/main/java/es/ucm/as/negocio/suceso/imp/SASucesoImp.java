@@ -1,6 +1,8 @@
 
 package es.ucm.as.negocio.suceso.imp;
 
+import android.util.Log;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -396,14 +398,22 @@ public class SASucesoImp implements SASuceso {
             //Hay que asignarselo a ambos
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
-            Reto reto = new Reto();
+
             Usuario usuario = daoUsuario.queryForId(transferReto.getIdUsuario());
+
+            QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
+            rQb.where().eq("USUARIO", usuario);
+            Reto reto = rQb.queryForFirst();
+            if(reto == null)
+                reto = new Reto();
+
             reto.setTexto(transferReto.getTexto());
             reto.setPremio(transferReto.getPremio());
             reto.setSuperado(transferReto.getSuperado());
             reto.setContador(transferReto.getContador());
             reto.setUsuario(usuario);
-            daoReto.update(reto);
+            daoReto.createOrUpdate(reto);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -433,7 +443,6 @@ public class SASucesoImp implements SASuceso {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return ret;
     }
 

@@ -4,6 +4,7 @@ package es.ucm.as.presentacion.vista.usuario.reto;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,8 +44,8 @@ public class FragmentDetalleReto extends Fragment {
         FragmentDetalleReto frgReto = new FragmentDetalleReto();
 
         Bundle arguments = new Bundle();
-        arguments.putInt("id", reto.getId());
-        if(reto.getIdUsuario() != null) {
+
+            arguments.putInt("id", reto.getId());
             arguments.putInt("usuario", reto.getIdUsuario());
             try {
                 TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
@@ -54,8 +55,8 @@ public class FragmentDetalleReto extends Fragment {
             } catch (commandException e) {
                 e.printStackTrace();
             }
-        }
         arguments.putString("texto", reto.getTexto());
+        Log.e("FRAG_DETALLE", reto.getContador().toString());
         arguments.putInt("contador", reto.getContador());
         arguments.putBoolean("superado", reto.getSuperado());
         arguments.putString("premio", reto.getPremio());

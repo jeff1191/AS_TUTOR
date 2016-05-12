@@ -1,6 +1,7 @@
 package es.ucm.as.presentacion.controlador.imp;
 
 import android.content.Intent;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -169,7 +170,7 @@ public class DispatcherImp extends Dispatcher {
             // Reto
             case ListaComandos.CONSULTAR_RETO:
                 TransferReto reto = (TransferReto) datos;
-                if(reto.getId() == null){ //Si no hay reto al menos pasas los datos del usuario
+                if(reto.getTexto() == null){ //Si no hay reto al menos pasas los datos del usuario
                     FragmentDetalleNuevoReto fragmentNuevoReto = FragmentDetalleNuevoReto.newInstance(reto);
                     Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentNuevoReto).commit();
                 }

@@ -13,12 +13,16 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import es.ucm.as.negocio.conexion.msg.Mensaje;
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
+import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
+import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
@@ -30,15 +34,11 @@ import es.ucm.as.presentacion.vista.main.Manager;
 public class ConectionManager {
 
     private ServerSocket serverSocket;
-    private String mensajePantalla;
     private Mensaje message;
     private String codigo;
     private Thread socketServerThread;
     private Mensaje messageFromClient;
     private ProgressDialog progress;
-    private int increment = 1;
-    private int maximo = 100;
-    private Handler handler;
 
     public ConectionManager(Mensaje message){
         this.message = message;
@@ -68,10 +68,6 @@ public class ConectionManager {
 
 
 //       socketServerThread.run();
-    }
-
-    public String getMessage(){
-            return mensajePantalla;
     }
 
     public boolean sigueActivo(){
@@ -137,16 +133,38 @@ public class ConectionManager {
                             if (messageFromClient.getReto() == null) {
                                 //falta comando eliminar reto
                             } else {
-                                Log.e("RETO", "CREANDO RETO " + messageFromClient.getReto().getContador());
+                                //Reto
                                 TransferReto actualizar = saSuceso.consultarReto(message.getUsuario().getId());
                                 actualizar.setContador(messageFromClient.getReto().getContador());
 
                                 actualizar.setIdUsuario(message.getUsuario().getId());
                                 saSuceso.crearReto(actualizar);
-                            }
-                            //SASuceso saEvento = FactoriaSA.getInstancia().nuevoSASuceso();
-                            // TransferReto retoUsuario = saEvento.consultarReto(usuarioSincro.getId());
 
+                                //Eventos
+                                ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
+
+                                List<TransferEvento> eventosSincro = messageFromClient.getEventos();
+                                ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
+                                String nombreEventoBDD;
+                                String nombreEventoSincro;
+                                for(int i=0; i < eventosUsuarioBDD.size(); i++){
+
+                                    nombreEventoBDD= eventosUsuarioBDD.get(i).getEvento().getNombre();
+                                    for(int j=0; j < eventosSincro.size(); j++){
+                                        nombreEventoSincro= eventosUsuarioBDD.get(j).getEvento().getNombre();
+                                        if(nombreEventoBDD.equals(nombreEventoSincro)) {
+                                            TransferUsuarioEvento evento_f;
+
+                                        }
+                                    }
+                                }
+
+
+
+
+
+
+                            }
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
                         }
                         progress.dismiss();

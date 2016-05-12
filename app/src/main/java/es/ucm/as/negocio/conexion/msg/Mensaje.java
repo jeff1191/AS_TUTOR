@@ -28,14 +28,11 @@ public class Mensaje implements Serializable{
 
     public Mensaje(){
         this.verificar = "";
-        usuario = new TransferUsuario();
-        reto = new TransferReto();
-        eventos = new ArrayList<TransferEvento>();
-        tareas = new ArrayList<TransferTarea>();
+        this.usuario = new TransferUsuario();
     }
 
     public Mensaje(TransferUsuario usuario, TransferReto reto,
-                   ArrayList<TransferEvento> eventos, ArrayList<TransferTarea> tareas ){
+                   List<TransferEvento> eventos, List<TransferTarea> tareas ){
         this.verificar = "";
         this.usuario = usuario;
         this.reto = reto;
@@ -63,7 +60,7 @@ public class Mensaje implements Serializable{
         return eventos;
     }
 
-    public void setEventos(ArrayList<TransferEvento> eventos) {
+    public void setEventos(List<TransferEvento> eventos) {
         this.eventos = eventos;
     }
 
@@ -71,7 +68,7 @@ public class Mensaje implements Serializable{
         return tareas;
     }
 
-    public void setTareas(ArrayList<TransferTarea> tareas) {
+    public void setTareas(List<TransferTarea> tareas) {
         this.tareas = tareas;
     }
 
