@@ -33,7 +33,7 @@ public class DialogEliminarReto extends DialogFragment {
                 .setMessage("¿Desea eliminar el reto: " + getArguments().getString("nombreReto")+"?")
                 .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Reto eliminado con ID: " + getArguments().getInt("idReto"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "El reto ha sido eliminado con exito", Toast.LENGTH_SHORT).show();
                         Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_RETO, getArguments().getInt("idReto"));
                         Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, getArguments().getInt("idUser"));
                     }
