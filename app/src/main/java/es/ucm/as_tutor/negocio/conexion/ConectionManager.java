@@ -3,7 +3,6 @@ package es.ucm.as_tutor.negocio.conexion;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.concurrent.ExecutionException;
 
@@ -235,7 +233,6 @@ public class ConectionManager {
         SocketServerTask() {
         }
 
-        @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progress = new ProgressDialog(Manager.getInstance().getActivity());
@@ -256,7 +253,6 @@ public class ConectionManager {
         @Override
         protected Mensaje doInBackground(Mensaje... params) {
 
-
             Socket socket = null;
             ObjectInputStream dataInputStream = null;
             ObjectOutputStream dataOutputStream = null;
@@ -270,7 +266,6 @@ public class ConectionManager {
                             socket.getInputStream());
                     dataOutputStream = new ObjectOutputStream(
                             socket.getOutputStream());
-
 
                     //If no message sent from client, this code will block the program
                     messageFromClient = (Mensaje) dataInputStream.readObject();

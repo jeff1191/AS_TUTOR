@@ -181,12 +181,11 @@ public class SASucesoImp implements SASuceso {
 	}
 
 	@Override
-	public boolean eliminarEvento(TransferEvento eliminaEvento) {
+	public boolean eliminarEvento(Integer idEvento) {
 
 		try {
 			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
-			Evento eventoBDD = daoEvento.queryForId(eliminaEvento.getId());
-			daoEvento.delete(eventoBDD);
+			daoEvento.deleteById(idEvento);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -436,5 +435,15 @@ public class SASucesoImp implements SASuceso {
         }
 
         return ret;
+    }
+
+    @Override
+    public void eliminarReto(Integer idReto) {
+        try {
+            Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
+            daoReto.deleteById(idReto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

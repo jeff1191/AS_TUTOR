@@ -478,7 +478,6 @@ public class FragmentDetalleUsuario extends Fragment {
                 alertDialog.show(getActivity().getFragmentManager(), "Eliminar usuario");
                 break;
             case R.id.sincronizarUsuario:
-
                 Controlador.getInstancia().ejecutaComando(ListaComandos.SINCRONIZAR, idUsuario); // Aqui iria el id usuario
                 break;
             default:
