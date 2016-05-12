@@ -31,7 +31,6 @@ public class BlankFragment extends Fragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
         inflater.inflate(R.menu.menu_vacio, menu);

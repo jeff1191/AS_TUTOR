@@ -63,7 +63,7 @@ public class SASucesoImp implements SASuceso {
             tarea.setUsuario(usuario);
 
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
-            daoTarea.create(tarea);
+            daoTarea.createOrUpdate(tarea);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,6 +164,57 @@ public class SASucesoImp implements SASuceso {
             e.printStackTrace();
         }
         return ret;
+    }
+
+    @Override
+    public ArrayList<TransferTarea> consultarTareasHabilitadas(Integer idUsuario) {
+        ArrayList<TransferTarea> ret = new ArrayList<TransferTarea>();
+        try {
+            Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+            Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+
+            // Busca al usuario por su id
+            QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+            uQb.where().idEq(idUsuario);
+            Usuario usuario = uQb.queryForFirst();
+            // Busca las tareas de ese usuario
+            QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
+            tQb.where().eq("USUARIO" , usuario).and().eq("HABILITADA", true);;
+            List<Tarea> tareas = tQb.query();
+
+            // Las transformamos en transfers para devolverselas a la vista
+            for(int i = 0; i < tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+                TransferTarea transfer = new TransferTarea(
+                        tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
+                        tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
+                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
+                transfer.setId(tarea.getId());
+                ret.add(i, transfer);
+            }
+
+            // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
+            // para cuando no haya ninguna
+            if(tareas.size() == 0) {
+                TransferTarea fantasma = new TransferTarea();
+                fantasma.setIdUsuario(idUsuario);
+                ret.add(0, fantasma);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    @Override
+    public void guardarTareas(List<TransferTarea> tareasUsuario) {
+        // Para cada transfer se crea una tarea que se sobreescribe si ya estaba creada en BBDD
+        for(int i = 0; i < tareasUsuario.size(); i++){
+            TransferTarea transferTarea = tareasUsuario.get(i);
+            crearTarea(transferTarea);
+        }
     }
 
     // Evento

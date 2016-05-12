@@ -11,6 +11,7 @@ import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
+import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
@@ -37,11 +38,14 @@ public class SincronizarComando implements Command {
 
         Log.e("COD: ", usuarioSincro.getCodigoSincronizacion());
 
+        ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas((Integer) datos);
+
         Mensaje pepe = new Mensaje();
         pepe.setUsuario(usuarioSincro);
         pepe.setReto(retoSincro);
         Log.e("TAMANYO: ", eventosSincro.size()+"");
         pepe.setEventos(eventosSincro);
+        pepe.setTareas(tareasSincro);
 
         ConectionManager conectionManager = new ConectionManager(pepe);
         String mensaje="VACIO";

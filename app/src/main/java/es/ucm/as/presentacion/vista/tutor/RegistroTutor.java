@@ -19,7 +19,8 @@ public class RegistroTutor extends Activity {
     private EditText correoTutor;
     private EditText constrasenha;
     private EditText nombreTutor;
-    private ImageButton info;
+    private EditText pregunta;
+    private EditText respuesta;
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -30,6 +31,8 @@ public class RegistroTutor extends Activity {
         nombreTutor = (EditText) findViewById(R.id.nombreTutor);
         correoTutor = (EditText) findViewById(R.id.emailTutor);
         constrasenha = (EditText) findViewById(R.id.contrasenha);
+        pregunta = (EditText) findViewById(R.id.pregunta);
+        respuesta = (EditText) findViewById(R.id.respuesta);
     }
 
     public void realizarRegistro(View v) {
@@ -37,6 +40,9 @@ public class RegistroTutor extends Activity {
         String correo = String.valueOf(correoTutor.getText());
         String clave = String.valueOf(constrasenha.getText());
         String nombre = String.valueOf(nombreTutor.getText());
+        String preguntatx = String.valueOf(pregunta.getText());
+        String respuestax = String.valueOf(respuesta.getText());
+
         String codigoSync;
         if(nombre.length() >= 3)
             codigoSync = nombre.substring(0, 3);
@@ -49,6 +55,8 @@ public class RegistroTutor extends Activity {
             tutor.setCorreo(correo);
             tutor.setContrasenha(clave);
             tutor.setCodigoSincronizacion(codigoSync);
+            tutor.setPregunta(preguntatx);
+            tutor.setRespuesta(respuestax);
 
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TUTOR, tutor);
             Intent intent = new Intent(this, MainActivity.class);

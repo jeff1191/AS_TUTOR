@@ -4,6 +4,7 @@
 package es.ucm.as.negocio.suceso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import es.ucm.as.negocio.usuario.TransferUsuario;
 
@@ -21,6 +22,11 @@ public interface SASuceso {
 
 	public ArrayList<TransferTarea> consultarTareas(Integer idUsuario);
 
+    public ArrayList<TransferTarea> consultarTareasHabilitadas(Integer idUsuario);
+
+    public void guardarTareas(List<TransferTarea> tareasUsuario);
+
+
 	// Reto
 
 	public void crearRetos();
@@ -30,6 +36,7 @@ public interface SASuceso {
 	public TransferReto consultarReto(Integer idUsuario);
 
 	public void eliminarReto(Integer idReto);
+
 
 	// Evento
 

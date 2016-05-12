@@ -1,7 +1,6 @@
 package es.ucm.as.negocio.conexion;
 
 import android.app.ProgressDialog;
-import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
@@ -22,6 +21,7 @@ import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
+import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
@@ -170,8 +170,9 @@ public class ConectionManager {
 
                                }
 
-
-
+                                // Tareas
+                                List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
+                                saSuceso.guardarTareas(tareasUsuario);
 
                             }
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());

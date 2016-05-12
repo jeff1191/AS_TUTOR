@@ -45,13 +45,14 @@ public class Acceso extends AppCompatActivity {
 
         AlertDialog a = dialogVerificarAcceso(getLayoutInflater());
         a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        a.setCancelable(false);
+        a.setCanceledOnTouchOutside(false);
         a.show();
     }
 
     public AlertDialog dialogVerificarAcceso(final LayoutInflater inflater) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View v = inflater.inflate(R.layout.dialog_password, null);
-
         final EditText pwd1 = (EditText) v.findViewById(R.id.pwd1);
         final TextView recuperarPassword = (TextView) v.findViewById(R.id.recuperarPassword);
         recuperarPassword.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,6 @@ public class Acceso extends AppCompatActivity {
                 a.show();
             }
         });
-
 
         builder.setView(v);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -95,22 +95,22 @@ public class Acceso extends AppCompatActivity {
         View v = inflater.inflate(R.layout.dialog_password_restaurar, null);
 
         final TextView question = (TextView) v.findViewById(R.id.pregunta);
-        question.setText(preguntaSeguridad);
+        question.setText(this.preguntaSeguridad);
         final EditText answer = (EditText) v.findViewById(R.id.respuesta);
 
         builder.setView(v);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(answer.getText().toString().equals(respuestaSeguridad))
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                else{
-                    Toast errorNombre =
-                            Toast.makeText(getApplicationContext(),
-                                    "Respuesta incorrecta", Toast.LENGTH_SHORT);
-                    errorNombre.show();
-                    startActivity(new Intent(getApplicationContext(), Acceso.class));
-                }
+                    if (answer.getText().toString().equals(respuestaSeguridad))
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    else {
+                        Toast errorNombre =
+                                Toast.makeText(getApplicationContext(),
+                                        "Respuesta incorrecta", Toast.LENGTH_SHORT);
+                        errorNombre.show();
+                        startActivity(new Intent(getApplicationContext(), Acceso.class));
+                    }
             }
         });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
