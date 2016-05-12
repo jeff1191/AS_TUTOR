@@ -14,6 +14,7 @@ public class TransferEvento implements Serializable {
     private Date fecha; //Esto es lo que considero como el Texto en que se da la alarma real
     private Date horaAlarma;
     private Date horaEvento;
+    private String asistencia;
 
     public TransferEvento(){}
     public TransferEvento(Integer id, String nombre, Date fecha, Date horaAlarma, Date horaEvento) {
@@ -62,5 +63,12 @@ public class TransferEvento implements Serializable {
 
     public void setHoraEvento(Date horaEvento) {
         this.horaEvento = horaEvento;
+    }
+    public String getAsistencia() {
+        return asistencia;
+    }
+
+    public void setAsistencia(String asistencia) {
+        this.asistencia = asistencia;
     }
 }

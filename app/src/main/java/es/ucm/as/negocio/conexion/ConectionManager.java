@@ -144,22 +144,31 @@ public class ConectionManager {
                                 ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
 
                                 List<TransferEvento> eventosSincro = messageFromClient.getEventos();
-                                ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
-                                String nombreEventoBDD;
-                                String nombreEventoSincro;
-                                for(int i=0; i < eventosUsuarioBDD.size(); i++){
-
-                                    nombreEventoBDD= eventosUsuarioBDD.get(i).getEvento().getNombre();
-                                    for(int j=0; j < eventosSincro.size(); j++){
-                                        nombreEventoSincro= eventosUsuarioBDD.get(j).getEvento().getNombre();
-                                        if(nombreEventoBDD.equals(nombreEventoSincro)) {
-                                            TransferUsuarioEvento evento_f;
-
-                                        }
-                                    }
-                                }
 
 
+                               if(eventosSincro.size() > 0) {
+                                   Log.e("PRIMER_EVENTO", eventosSincro.get(0).getNombre());
+
+
+                                   ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
+                                   String nombreEventoBDD;
+                                   String nombreEventoSincro;
+                                   for (int i = 0; i < eventosUsuarioBDD.size(); i++) {
+
+                                       nombreEventoBDD = eventosUsuarioBDD.get(i).getEvento().getNombre();
+                                       for (int j = 0; j < eventosSincro.size(); j++) {
+                                           nombreEventoSincro = eventosUsuarioBDD.get(j).getEvento().getNombre();
+                                           if (nombreEventoBDD.equals(nombreEventoSincro)) {
+
+                                               TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
+                                               evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
+                                               eventosUsuarioFinal.add(evento_usuario);
+                                           }
+                                       }
+                                   }
+                                       saSuceso.crearUsuariosEvento(eventosUsuarioFinal);
+
+                               }
 
 
 

@@ -31,7 +31,7 @@ public class SincronizarComando implements Command {
         ArrayList<TransferUsuarioEvento> eventosBDD = saUsuario.consultarEventosUsuario((Integer) datos);
         List<TransferEvento> eventosSincro = new ArrayList<>();
 
-        for(int i=0; i < eventosBDD.size(); i++){
+        for(int i=1; i < eventosBDD.size(); i++){
             eventosSincro.add(eventosBDD.get(i).getEvento());
         }
 
@@ -40,6 +40,7 @@ public class SincronizarComando implements Command {
         Mensaje pepe = new Mensaje();
         pepe.setUsuario(usuarioSincro);
         pepe.setReto(retoSincro);
+        Log.e("TAMANYO: ", eventosSincro.size()+"");
         pepe.setEventos(eventosSincro);
 
         ConectionManager conectionManager = new ConectionManager(pepe);

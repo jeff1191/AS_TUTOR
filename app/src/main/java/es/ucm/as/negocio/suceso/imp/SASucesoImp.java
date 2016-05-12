@@ -265,6 +265,7 @@ public class SASucesoImp implements SASuceso {
 			List<UsuarioEvento> eventoUsuarios = tQb.where().eq("EVENTO", eventoBDD).query(); //tendremos todos los eventos con ID_EVENTO
 
 			List<Usuario> usuariosEventos = getHelper().lookupUsuariosForEvento(eventoBDD);
+            List<Usuario> usuariosBDD = daoUsuario.queryForAll();
             ret.add(new TransferUsuarioEvento(tEvento,null));//posicion 0 para el evento ( tiene que mostrarse en la vista)
 			for(int i = 0; i < usuariosEventos.size(); i++) {
 				TransferUsuario tUsuario= new TransferUsuario();
@@ -276,9 +277,6 @@ public class SASucesoImp implements SASuceso {
 				tRet.setAsistencia(eventoUsuarios.get(i).getAsistencia());
 				ret.add(tRet);
 			}
-
-
-			List<Usuario> usuariosBDD = daoUsuario.queryForAll();
 
 			for(int i=0; i < usuariosBDD.size(); i++){
 				boolean anyadir =true;
