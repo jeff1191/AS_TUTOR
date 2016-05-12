@@ -5,6 +5,7 @@ package es.ucm.as.negocio.usuario.imp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -419,6 +420,37 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	public void guardarEventosUsuario(ArrayList<TransferUsuarioEvento> eventosUsuario) {
+		if(eventosUsuario.size() > 0) {
+			try {
+				Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
+				Dao<UsuarioEvento, Integer> daoUsuarioEvento = getHelper().getUsuarioEventoDao();
+				Dao<Usuario, Integer> daoUsuario =  getHelper().getUsuarioDao();
+
+				QueryBuilder<Usuario, Integer> tQb = daoUsuario.queryBuilder();
+				tQb.where().eq("NOMBRE", eventosUsuario.get(0).getUsuario().getNombre());
+				Usuario usuarioBDD = tQb.queryForFirst(); // Obtenemos el usuario
+
+
+				QueryBuilder<UsuarioEvento, Integer> tQbUsuario_e = daoUsuarioEvento.queryBuilder();
+
+				List<UsuarioEvento> eventos_de_Usuario = tQbUsuario_e.where().eq("USUARIO", usuarioBDD).query(); //tendremos todos los eventos con ID_EVENTO
+				daoUsuarioEvento.delete(eventos_de_Usuario); //Quitamos todos sus eventos para volverlos añadir
+
+				for(int i=1; i < eventosUsuario.size(); i++){
+					UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
+					relacion.setAsistencia(eventosUsuario.get(i).getEvento().getAsistencia());
+					Log.e("EVENTO: ", eventosUsuario.get(i).getEvento().getNombre() +" " + eventosUsuario.get(i).getAsistencia());
+					daoUsuarioEvento.create(relacion);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

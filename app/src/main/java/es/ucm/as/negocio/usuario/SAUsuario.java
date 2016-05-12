@@ -24,7 +24,7 @@ public interface SAUsuario {
 	public ArrayList<TransferUsuario> consultarUsuarios();
 
 	public ArrayList<TransferUsuarioEvento> consultarEventosUsuario(Integer idUsuario);
-
+	public void guardarEventosUsuario(ArrayList<TransferUsuarioEvento> eventosUsuario);
 	public void enviarCorreo(Integer idUsuario);
 
 	public void generarPDF(Integer idUsuario);

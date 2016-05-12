@@ -3,6 +3,7 @@ package es.ucm.as.presentacion.controlador.comandos.imp.sincronizacion;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.ucm.as.negocio.conexion.ConectionManager;
@@ -33,10 +34,12 @@ public class SincronizarComando implements Command {
         List<TransferEvento> eventosSincro = new ArrayList<>();
 
         for(int i=1; i < eventosBDD.size(); i++){
-            eventosSincro.add(eventosBDD.get(i).getEvento());
+            Log.e("ENVIANDO EVENTO: ", eventosBDD.get(i).getEvento().getNombre());
+            TransferEvento e =  new TransferEvento(eventosBDD.get(i).getEvento().getId(), eventosBDD.get(i).getEvento().getNombre(), eventosBDD.get(i).getEvento().getFecha(),eventosBDD.get(i).getEvento().getHoraAlarma(), eventosBDD.get(i).getEvento().getHoraEvento());
+            e.setAsistencia(eventosBDD.get(i).getAsistencia());
+            eventosSincro.add(e);
         }
 
-        Log.e("COD: ", usuarioSincro.getCodigoSincronizacion());
 
         ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas((Integer) datos);
 
