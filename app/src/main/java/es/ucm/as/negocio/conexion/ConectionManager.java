@@ -24,6 +24,7 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.SAUsuario;
+import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.main.Manager;
@@ -121,16 +122,16 @@ public class ConectionManager {
                         ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
                         List<TransferEvento> actualizar = new ArrayList<>();
                      // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
-                        Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getTareas().get(0).getTextoPregunta());
+                     //   Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getTareas().get(0).getTextoPregunta());
 
 
                         if(!messageFromClient.getVerificar().equals("registro")) {
                             SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
                             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
 
-                            saUsuario.actualizarPuntuacion(messageFromClient.getUsuario());
-
-
+                            TransferUsuario transferUsuario = messageFromClient.getUsuario();
+                            transferUsuario.setId(message.getUsuario().getId());
+                            saUsuario.actualizarPuntuacion(transferUsuario);
 
                             if (messageFromClient.getReto() == null) {
                                 //falta comando eliminar reto
@@ -141,46 +142,47 @@ public class ConectionManager {
 
                                 actualizarReto.setIdUsuario(message.getUsuario().getId());
                                 saSuceso.crearReto(actualizarReto);
+                            }
+                            //Eventos
+                            ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
+                            List<TransferEvento> eventosSincro = messageFromClient.getEventos();
 
-                                //Eventos
-                                ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
+                           if(eventosSincro.size() > 0) {
 
-                                List<TransferEvento> eventosSincro = messageFromClient.getEventos();
+                               String nombreEventoBDD;
+                               String nombreEventoSincro;
+                               TransferUsuarioEvento usuario_e = new TransferUsuarioEvento(null, message.getUsuario());
+                               eventosUsuarioFinal.add(usuario_e);
+                               for (int i = 1; i < eventosUsuarioBDD.size(); i++) {
 
-
-                               if(eventosSincro.size() > 0) {
-
-                                   String nombreEventoBDD;
-                                   String nombreEventoSincro;
-                                   TransferUsuarioEvento usuario_e = new TransferUsuarioEvento(null, message.getUsuario());
-                                   eventosUsuarioFinal.add(usuario_e);
-                                   for (int i = 1; i < eventosUsuarioBDD.size(); i++) {
-
-                                       nombreEventoBDD = eventosUsuarioBDD.get(i).getEvento().getNombre();
-                                       for (int j = 0; j < eventosSincro.size(); j++) {
-                                           nombreEventoSincro = eventosSincro.get(j).getNombre();
-                                           if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
-                                                Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
-                                               TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosSincro.get(j), message.getUsuario());
-                                               evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
-                                               eventosUsuarioFinal.add(evento_usuario);
-                                           }
+                                   nombreEventoBDD = eventosUsuarioBDD.get(i).getEvento().getNombre();
+                                   for (int j = 0; j < eventosSincro.size(); j++) {
+                                       nombreEventoSincro = eventosSincro.get(j).getNombre();
+                                       if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
+                                            Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
+                                           TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosSincro.get(j), message.getUsuario());
+                                           evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
+                                           eventosUsuarioFinal.add(evento_usuario);
                                        }
                                    }
-                                       saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
-                                   for(int i =1; i < eventosUsuarioFinal.size(); i++){
-                                       actualizar.add(eventosUsuarioFinal.get(i).getEvento());
-                                   }
-
-                                   message.setEventos(actualizar);
-
+                               }
+                                   saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
+                               for(int i =1; i < eventosUsuarioFinal.size(); i++){
+                                   actualizar.add(eventosUsuarioFinal.get(i).getEvento());
                                }
 
-                                // Tareas
-                                List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
-                                saSuceso.guardarTareas(tareasUsuario);
+                               message.setEventos(actualizar);
 
-                            }
+                           }
+
+                            // Tareas
+                            List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
+                            for(int i= 0; i < tareasUsuario.size(); i++)
+                                tareasUsuario.get(i).setIdUsuario(message.getUsuario().getId());
+                            saSuceso.guardarTareas(tareasUsuario);
+                            ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
+                            message.setTareas(tareasSincro);
+
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
                         }
 
@@ -189,7 +191,7 @@ public class ConectionManager {
                         socket.close();
                         serverSocket.close();
                         progress.dismiss();
-//                        Toast.makeText(Manager.getInstance().getActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(Manager.getInstance().getActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }

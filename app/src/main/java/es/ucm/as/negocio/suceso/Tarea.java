@@ -23,10 +23,10 @@ public class Tarea {
 	@DatabaseField(columnName = "TEXTO_ALARMA")
 	private String textoAlarma;
 
-	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_STRING, format = "HH:mm")
+	@DatabaseField(columnName = "HORA_PREGUNTA", dataType = DataType.DATE_LONG, format = "dd/mm/yyyy HH:mm")
 	private Date horaPregunta;
 
-	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_STRING, format = "HH:mm")
+	@DatabaseField(columnName = "HORA_ALARMA", dataType = DataType.DATE_LONG, format = "dd/mm/yyyy HH:mm")
 	private Date horaAlarma;
 
 	@DatabaseField(columnName = "CONTADOR")

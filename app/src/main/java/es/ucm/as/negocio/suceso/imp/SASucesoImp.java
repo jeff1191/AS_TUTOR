@@ -214,7 +214,31 @@ public class SASucesoImp implements SASuceso {
         // Para cada transfer se crea una tarea que se sobreescribe si ya estaba creada en BBDD
         for(int i = 0; i < tareasUsuario.size(); i++){
             TransferTarea transferTarea = tareasUsuario.get(i);
-            crearTarea(transferTarea);
+            try {
+                //Busco usuario
+                Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
+                QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
+                uQb.where().idEq(transferTarea.getIdUsuario());
+                Usuario usuario = uQb.queryForFirst();
+                // Busco la tarea
+                Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
+                QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
+                tQb.where().eq("USUARIO" , usuario).and().eq("TEXTO_ALARMA", transferTarea.getTextoAlarma());
+                List<Tarea> listaBBDD = tQb.query();
+                if(listaBBDD.size() != 0) {
+                    Tarea tareaBBDD = listaBBDD.get(0);
+                    // Actualizo campos
+                    tareaBBDD.setNumSi(transferTarea.getNumSi());
+                    tareaBBDD.setNumNo(transferTarea.getNumNo());
+                    tareaBBDD.setContador(transferTarea.getContador());
+                    tareaBBDD.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
+                    // Guardo en BBDD
+                    daoTarea.update(tareaBBDD);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

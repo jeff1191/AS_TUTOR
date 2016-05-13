@@ -1,5 +1,8 @@
 package es.ucm.as.negocio.utils;
 
+import android.util.Log;
+
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -29,8 +32,10 @@ public class ParserTime {
     public static Date toDate(String time){
         Integer hour = hour(time);
         Integer min = min(time);
-        long ret = (hour*3600 + min*60)*1000;
-        Date d = new Date(ret);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, min);
+        Date d = c.getTime();
         return d;
     }
 

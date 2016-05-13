@@ -1,6 +1,8 @@
 package es.ucm.as.negocio.utils;
 
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -73,17 +75,17 @@ public class ParserText {
         ret.setTextoAlarma(textoAlarma);
         ret.setTextoPregunta(textoPregunta);
         ret.setFrecuenciaTarea(Frecuencia.DIARIA);
+        ret.setMejorar(30);
         try {
             Date e = Calendar.getInstance().getTime();
-            String concat = diaMes.format(e).toString();
-            String loquesea= concat+" "+horaAlarma;
-            ret.setHoraAlarma(horasMinutos.parse(loquesea));
-            loquesea= concat+" "+horaPregunta;
-            ret.setHoraPregunta(horasMinutos.parse(loquesea));
+            String diaactual = diaMes.format(e).toString();
+            String fechafinal= diaactual+" "+horaAlarma;
+            ret.setHoraAlarma(horasMinutos.parse(fechafinal));
+            fechafinal= diaactual+" "+horaPregunta;
+            ret.setHoraPregunta(horasMinutos.parse(fechafinal));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return ret;
     }
 }

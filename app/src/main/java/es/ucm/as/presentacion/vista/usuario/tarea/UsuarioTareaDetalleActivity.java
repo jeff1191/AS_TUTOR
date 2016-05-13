@@ -3,6 +3,7 @@ package es.ucm.as.presentacion.vista.usuario.tarea;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -59,7 +60,6 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         frecuenciasRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // TODO Auto-generated method stub
                 if (checkedId == R.id.diaria){
                     frecuencia = Frecuencia.DIARIA;
                     frecuenciasRadio.check(R.id.diaria);
@@ -76,15 +76,14 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         idUsuario = bundle.getInt("usuario");
         idTarea = bundle.getInt("idTarea");
+
         if (!bundle.get("nueva").equals("nueva")) { // Editar tarea
             nuevaTarea = false;
             completarCampos(bundle);
-        } else{                                     // Crear tarea
+        } else {                                     // Crear tarea
             nuevaTarea = true;
             seleccionaRadioButton("diaria");
         }
-
-
     }
 
     // Este metodo carga los valores de la BBDD en los campos
@@ -144,11 +143,13 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
     public void aceptar(View view){
         String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
         String pregunta_hour = horaPregunta.getCurrentHour() + ":" + horaPregunta.getCurrentMinute();
+
         TransferTarea transfer = new TransferTarea();
         transfer.setTextoAlarma(textoAlarma.getText().toString());
         transfer.setTextoPregunta(textoPregunta.getText().toString());
         transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));
         transfer.setHoraPregunta(ParserTime.toDate(pregunta_hour));
+
         transfer.setFrecuenciaTarea(frecuencia);
         transfer.setMejorar(Integer.parseInt(mejorar.getText().toString()));
         transfer.setNumSi(Integer.parseInt(si.getText().toString()));

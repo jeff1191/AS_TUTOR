@@ -1,23 +1,19 @@
-Alarma a las 9
-9:00
-Pregunta a las 9:10
-9:10
-Alarma a las 10:30
-10:00
-Pregunta a las 10:35
-10:35
-Alarma a las 11
-11:00
-Pregunta a las 11:03
-11:03
-Alarma a las 12
+Alarma a las 11.58
+11:58
+Pregunta a las 11.59
+11:59
+Alarma a las 12:00
 12:00
-Pregunta a las 12:15
+Pregunta a las 12:02
+12:02
+Alarma a las 12:15
 12:15
-Alarma a las 12
-12:00
-Pregunta a las 12:15
-12:15
+Pregunta a las 12:17
+12:17
+Alarma a las 12:30
+12:30
+Pregunta a las 12:30
+12:32
 Alarma a las 14
 14:00
 Pregunta a las 14:15
