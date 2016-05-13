@@ -163,14 +163,30 @@ public class ConectionManager {
                                            TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosSincro.get(j), message.getUsuario());
                                            evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
                                            eventosUsuarioFinal.add(evento_usuario);
-                                       }
+                                       }//nuevos eventos
                                    }
                                }
-                                   saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
+
+                               for(int i = 1; i < eventosUsuarioBDD.size(); i++){
+                                   boolean existeEvento=false;
+                                   TransferUsuarioEvento evento_usuario  ;
+                                        for(int j=1; j < eventosUsuarioFinal.size();j++ ){
+                                            if(eventosUsuarioBDD.get(j).getEvento().getNombre().equals(eventosUsuarioFinal.get(i).getEvento().getNombre())) {
+                                                existeEvento = true;
+                                            }
+                                        }
+                                   if(existeEvento == false){
+                                       evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
+                                       eventosUsuarioFinal.add(evento_usuario);
+                                   }
+                               }
+
                                for(int i =1; i < eventosUsuarioFinal.size(); i++){
                                    actualizar.add(eventosUsuarioFinal.get(i).getEvento());
                                }
 
+
+                               saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
                                message.setEventos(actualizar);
 
                            }
