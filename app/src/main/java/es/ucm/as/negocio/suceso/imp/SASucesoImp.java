@@ -180,7 +180,7 @@ public class SASucesoImp implements SASuceso {
             Usuario usuario = uQb.queryForFirst();
             // Busca las tareas de ese usuario
             QueryBuilder<Tarea, Integer> tQb = daoTarea.queryBuilder();
-            tQb.where().eq("USUARIO" , usuario).and().eq("HABILITADA", true);;
+            tQb.where().eq("USUARIO" , usuario).and().eq("HABILITADA", true);
             List<Tarea> tareas = tQb.query();
 
             // Las transformamos en transfers para devolverselas a la vista

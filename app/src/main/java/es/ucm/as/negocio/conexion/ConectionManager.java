@@ -160,7 +160,7 @@ public class ConectionManager {
                                        nombreEventoSincro = eventosSincro.get(j).getNombre();
                                        if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
                                             Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
-                                           TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosSincro.get(j), message.getUsuario());
+                                           TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
                                            evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
                                            eventosUsuarioFinal.add(evento_usuario);
                                        }//nuevos eventos
@@ -169,14 +169,15 @@ public class ConectionManager {
 
                                for(int i = 1; i < eventosUsuarioBDD.size(); i++){
                                    boolean existeEvento=false;
-                                   TransferUsuarioEvento evento_usuario  ;
+                                   TransferUsuarioEvento evento_usuario;
                                         for(int j=1; j < eventosUsuarioFinal.size();j++ ){
-                                            if(eventosUsuarioBDD.get(j).getEvento().getNombre().equals(eventosUsuarioFinal.get(i).getEvento().getNombre())) {
+                                            if(eventosUsuarioBDD.get(i).getEvento().getNombre().equals(eventosUsuarioFinal.get(j).getEvento().getNombre())) {
                                                 existeEvento = true;
                                             }
                                         }
                                    if(existeEvento == false){
                                        evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
+                                       evento_usuario.setAsistencia(eventosUsuarioBDD.get(i).getEvento().getAsistencia());
                                        eventosUsuarioFinal.add(evento_usuario);
                                    }
                                }
@@ -187,6 +188,7 @@ public class ConectionManager {
 
 
                                saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
+
                                message.setEventos(actualizar);
 
                            }

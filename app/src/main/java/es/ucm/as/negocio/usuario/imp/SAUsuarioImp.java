@@ -438,14 +438,22 @@ public class SAUsuarioImp implements SAUsuario {
 				QueryBuilder<UsuarioEvento, Integer> tQbUsuario_e = daoUsuarioEvento.queryBuilder();
 
 				List<UsuarioEvento> eventos_de_Usuario = tQbUsuario_e.where().eq("USUARIO", usuarioBDD).query(); //tendremos todos los eventos con ID_EVENTO
-				daoUsuarioEvento.delete(eventos_de_Usuario); //Quitamos todos sus eventos para volverlos añadir
+
+
+				List<Evento> eventos_uBDD= getHelper().lookupEventosForUsuario(usuarioBDD);
 
 				for(int i=1; i < eventosUsuario.size(); i++){
-					UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
+					Log.e("ID_EVENTO_FINAL", eventosUsuario.get(i).getEvento().getId()+"");
+					Evento eventoU =daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId());
+					//UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
+					UsuarioEvento relacion = tQbUsuario_e.where().eq("USUARIO" , usuarioBDD).and().eq("EVENTO", eventoU).queryForFirst();
 					relacion.setAsistencia(eventosUsuario.get(i).getEvento().getAsistencia());
-					Log.e("BDD: ", eventosUsuario.get(i).getEvento().getNombre() +" " + eventosUsuario.get(i).getAsistencia());
-					daoUsuarioEvento.create(relacion);
+
+					Log.e("BDD: ", "USUARIO: " + relacion.getUsuario().getNombre() + " id: " + relacion.getEvento().getId() + " " + relacion.getEvento().getNombreEvento() + " " + relacion.getAsistencia());
+
+					daoUsuarioEvento.createOrUpdate(relacion);
 				}
+				//daoUsuarioEvento.delete(eventos_de_Usuario); //Quitamos todos sus eventos para volverlos añadir
 
 			} catch (SQLException e) {
 				e.printStackTrace();
