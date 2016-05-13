@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="2.2"
         android:id="@+id/horaAlarma"
         android:gravity="center"
         android:text="22.00"
@@ -47,7 +47,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="2.2"
         android:id="@+id/horaPregunta"
         android:gravity="center"
         android:text="22.10"
@@ -95,7 +95,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
+        android:layout_weight="2"
         android:id="@+id/frecuencia"
         android:gravity="center"
         android:text="Diaria"
