@@ -133,16 +133,16 @@ public class ConectionManager {
                             transferUsuario.setId(message.getUsuario().getId());
                             saUsuario.actualizarPuntuacion(transferUsuario);
 
-                            if (messageFromClient.getReto() == null) {
-                                //falta comando eliminar reto
-                            } else {
-                                //Reto
-                                TransferReto actualizarReto = saSuceso.consultarReto(message.getUsuario().getId());
+                            //Reto
+                            TransferReto actualizarReto = saSuceso.consultarReto(message.getUsuario().getId());
+                            if (messageFromClient.getReto() != null) {
                                 actualizarReto.setContador(messageFromClient.getReto().getContador());
-
                                 actualizarReto.setIdUsuario(message.getUsuario().getId());
-                                saSuceso.crearReto(actualizarReto);
                             }
+                            saSuceso.crearReto(actualizarReto);
+                            message.setReto(actualizarReto);
+
+
                             //Eventos
                             ArrayList<TransferUsuarioEvento> eventosUsuarioBDD = saUsuario.consultarEventosUsuario(message.getUsuario().getId());
                             List<TransferEvento> eventosSincro = messageFromClient.getEventos();
