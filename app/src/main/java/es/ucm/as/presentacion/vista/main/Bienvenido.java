@@ -33,7 +33,7 @@ public class Bienvenido extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent().setClass(
-                        Bienvenido.this, Decision.class/*MainActivity.class*/);
+                        Bienvenido.this, Decision.class);
                 startActivity(mainIntent);
                 finish();
             }

@@ -77,6 +77,7 @@ public class SASucesoImp implements SASuceso {
         tarea.setTextoAlarma(transferTarea.getTextoAlarma());
         tarea.setHoraPregunta(transferTarea.getHoraPregunta());
         tarea.setHoraAlarma(transferTarea.getHoraAlarma());
+        Log.e("hora tarea", tarea.getHoraAlarma().toString());
         tarea.setMejorar(transferTarea.getMejorar());
         tarea.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
         tarea.setHabilitada(transferTarea.getHabilitada());

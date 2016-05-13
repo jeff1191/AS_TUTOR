@@ -121,13 +121,16 @@ public class ConectionManager {
                         ArrayList<TransferUsuarioEvento> eventosUsuarioFinal = new ArrayList<>();
                         List<TransferEvento> actualizar = new ArrayList<>();
                      // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
-                       // Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getEventos().get(0).getNombre());
+                        Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getTareas().get(0).getTextoPregunta());
+
 
                         if(!messageFromClient.getVerificar().equals("registro")) {
                             SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
                             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
 
                             saUsuario.actualizarPuntuacion(messageFromClient.getUsuario());
+
+
 
                             if (messageFromClient.getReto() == null) {
                                 //falta comando eliminar reto
@@ -181,8 +184,8 @@ public class ConectionManager {
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
                         }
 
-
                         dataOutputStream.writeObject(message);
+
                         socket.close();
                         serverSocket.close();
                         progress.dismiss();

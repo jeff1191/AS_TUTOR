@@ -36,7 +36,13 @@ public class TransferTarea implements Serializable {
 
 	private Integer idUsuario;
 
-	public TransferTarea(){ }
+	public TransferTarea(){
+		contador = 0;
+		numNo = 0;
+		numSi = 0;
+		habilitada = true;
+		frecuenciaTarea = Frecuencia.DIARIA;
+	}
 
     // Constructor sin id, adecuado para crear tareas
     public TransferTarea(String textoAlarma, Date horaAlarma,

@@ -49,6 +49,7 @@ public class SincronizarComando implements Command {
         Log.e("TAMANYO: ", eventosSincro.size()+"");
         pepe.setEventos(eventosSincro);
         pepe.setTareas(tareasSincro);
+        Log.e("tareas sinc comand", "size -> " + tareasSincro.size());
 
         ConectionManager conectionManager = new ConectionManager(pepe);
         String mensaje="VACIO";

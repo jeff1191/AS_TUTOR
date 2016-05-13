@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
 
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETOS, null); // Este hay q eliminarlo mas adelante
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIOS, null); // Este hay q eliminarlo mas adelante
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETOS, null); // Este hay q eliminarlo mas adelante
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIOS, null); // Este hay q eliminarlo mas adelante
         Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
 
     }
