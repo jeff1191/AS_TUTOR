@@ -443,7 +443,7 @@ public class SAUsuarioImp implements SAUsuario {
 				for(int i=1; i < eventosUsuario.size(); i++){
 					UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
 					relacion.setAsistencia(eventosUsuario.get(i).getEvento().getAsistencia());
-					Log.e("EVENTO: ", eventosUsuario.get(i).getEvento().getNombre() +" " + eventosUsuario.get(i).getAsistencia());
+					Log.e("BDD: ", eventosUsuario.get(i).getEvento().getNombre() +" " + eventosUsuario.get(i).getAsistencia());
 					daoUsuarioEvento.create(relacion);
 				}
 
