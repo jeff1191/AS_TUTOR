@@ -159,11 +159,11 @@ public class ConectionManager {
                                    for (int j = 0; j < eventosSincro.size(); j++) {
                                        nombreEventoSincro = eventosSincro.get(j).getNombre();
                                        if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
-                                            Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
+                                           //Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
                                            TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
                                            evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
                                            eventosUsuarioFinal.add(evento_usuario);
-                                       }//nuevos eventos
+                                       }
                                    }
                                }
 
@@ -176,13 +176,16 @@ public class ConectionManager {
                                             }
                                         }
                                    if(existeEvento == false){
+                                       //Aqui mete los nuevos
                                        evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
-                                       evento_usuario.setAsistencia(eventosUsuarioBDD.get(i).getEvento().getAsistencia());
+                                       evento_usuario.setAsistencia("NO");
                                        eventosUsuarioFinal.add(evento_usuario);
                                    }
                                }
 
                                for(int i =1; i < eventosUsuarioFinal.size(); i++){
+                                   eventosUsuarioFinal.get(i).getEvento().setAsistencia(eventosUsuarioFinal.get(i).getAsistencia());
+                                   //Log.e("EVENTO2ALUSER", eventosUsuarioFinal.get(i).getEvento().getNombre()+" "+eventosUsuarioFinal.get(i).getEvento().getAsistencia());
                                    actualizar.add(eventosUsuarioFinal.get(i).getEvento());
                                }
 
