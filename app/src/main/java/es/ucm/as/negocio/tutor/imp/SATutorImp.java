@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import es.ucm.as.integracion.DBHelper;
 import es.ucm.as.negocio.tutor.SATutor;
 import es.ucm.as.negocio.tutor.TransferTutor;
-import es.ucm.as.negocio.tutor.Tutor;
+import es.ucm.as.integracion.Tutor;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 public class SATutorImp implements SATutor {

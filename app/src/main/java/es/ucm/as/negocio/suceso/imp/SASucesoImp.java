@@ -12,18 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.negocio.UsuarioEvento;
-import es.ucm.as.negocio.suceso.Evento;
-import es.ucm.as.negocio.suceso.Reto;
+import es.ucm.as.integracion.UsuarioEvento;
+import es.ucm.as.integracion.Evento;
+import es.ucm.as.integracion.Reto;
 import es.ucm.as.negocio.suceso.SASuceso;
-import es.ucm.as.negocio.suceso.Tarea;
+import es.ucm.as.integracion.Tarea;
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.negocio.usuario.Usuario;
-import es.ucm.as.negocio.utils.ParserText;
+import es.ucm.as.integracion.Usuario;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 

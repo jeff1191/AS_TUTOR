@@ -1,5 +1,5 @@
 
-package es.ucm.as.negocio.tutor;
+package es.ucm.as.integracion;
 
 import com.j256.ormlite.field.DatabaseField;
 

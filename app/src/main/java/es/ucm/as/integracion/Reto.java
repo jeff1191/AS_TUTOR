@@ -1,11 +1,9 @@
 /**
  * 
  */
-package es.ucm.as.negocio.suceso;
+package es.ucm.as.integracion;
 
 import com.j256.ormlite.field.DatabaseField;
-
-import es.ucm.as.negocio.usuario.Usuario;
 
 
 public class Reto {

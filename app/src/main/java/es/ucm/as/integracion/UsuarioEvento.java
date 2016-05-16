@@ -1,9 +1,9 @@
-package es.ucm.as.negocio;
+package es.ucm.as.integracion;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import es.ucm.as.negocio.suceso.Evento;
-import es.ucm.as.negocio.usuario.Usuario;
+import es.ucm.as.integracion.Evento;
+import es.ucm.as.integracion.Usuario;
 
 /**
  * Created by Juan Lu on 31/03/2016.

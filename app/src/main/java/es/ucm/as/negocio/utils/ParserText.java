@@ -1,8 +1,6 @@
 package es.ucm.as.negocio.utils;
 
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import es.ucm.as.R;
-import es.ucm.as.negocio.suceso.Tarea;
+import es.ucm.as.integracion.Tarea;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 /**

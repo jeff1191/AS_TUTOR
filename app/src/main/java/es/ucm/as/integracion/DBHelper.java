@@ -14,13 +14,6 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.List;
 
-import es.ucm.as.negocio.UsuarioEvento;
-import es.ucm.as.negocio.suceso.Evento;
-import es.ucm.as.negocio.suceso.Reto;
-import es.ucm.as.negocio.suceso.Tarea;
-import es.ucm.as.negocio.tutor.Tutor;
-import es.ucm.as.negocio.usuario.Usuario;
-
 /**
  * Created by msalitu on 03/03/2016.
  */
