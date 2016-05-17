@@ -133,15 +133,10 @@ public class MainActivity extends AppCompatActivity {
                 NavDrawerLayout.closeDrawer(NavList);
                 break;
             case 2: // Eventos
-
-
                 //Fragmento en blanco
                 BlankFragment fragmentDetalleTarea = new BlankFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTarea).commit();
-
                 Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS,null);
-
-
 
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
@@ -152,14 +147,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3: // Mi perfil
                 menuActionBar.clear();
+                FragmentListadoTutor frgListadoTutor = new FragmentListadoTutor();
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgListado, frgListadoTutor).commit();
 
-                FragmentDetalleTutor fragmentDetalleTutor = new FragmentDetalleTutor();
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentDetalleTutor).commit();
-
-                FragmentListadoTutor fragmentListadoTutor = new FragmentListadoTutor();
-                //fragmentListadoTutor.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                getSupportFragmentManager().beginTransaction().replace(R.id.FrgListado, fragmentListadoTutor).commit();
-
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TUTOR, null);
                 NavList.setItemChecked(position, true);
                 NavList.setSelection(position);
                 setTitle(titulos[position - 1]);

@@ -137,7 +137,7 @@ public class ConectionManager {
                             TransferReto actualizarReto = saSuceso.consultarReto(message.getUsuario().getId());
                             if (messageFromClient.getReto() != null) {
                                 actualizarReto.setContador(messageFromClient.getReto().getContador());
-                                actualizarReto.setIdUsuario(message.getUsuario().getId());
+                                actualizarReto.setUsuario(message.getUsuario());
                             }
                             saSuceso.crearReto(actualizarReto);
                             message.setReto(actualizarReto);
@@ -199,7 +199,7 @@ public class ConectionManager {
                             // Tareas
                             List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
                             for(int i= 0; i < tareasUsuario.size(); i++)
-                                tareasUsuario.get(i).setIdUsuario(message.getUsuario().getId());
+                                tareasUsuario.get(i).setUsuario(message.getUsuario());
                             saSuceso.guardarTareas(tareasUsuario);
                             ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
                             message.setTareas(tareasSincro);

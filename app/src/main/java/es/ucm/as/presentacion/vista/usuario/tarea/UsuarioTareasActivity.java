@@ -70,7 +70,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         habilitada = new ArrayList<Integer>();
 
         // Coge de la BBDD
-        this.idUsuario = getIntent().getExtras().getInt("usuario");
+        this.idUsuario = getIntent().getExtras().getInt("idUsuario");
         this.textosAlarma = getIntent().getStringArrayListExtra("textosAlarma");
         this.textosPreguntas = getIntent().getStringArrayListExtra("textosPregunta");
         this.si = getIntent().getIntegerArrayListExtra("si");
@@ -82,16 +82,10 @@ public class UsuarioTareasActivity extends AppCompatActivity {
         this.horasPregunta = getIntent().getStringArrayListExtra("horaPreguntas");
         this.idsTareas = getIntent().getIntegerArrayListExtra("idsTareas");
 
-        // Para conseguir la informacion del usuario se ejecuta el comando de consulta
-        Command c = new ConsultarUsuarioComando();
-        try {
-            TransferUsuario usuario = (TransferUsuario) c.ejecutaComando(idUsuario);
-            nombreUsuario = usuario.getNombre();
-            puntuacionActual = usuario.getPuntuacion();
-            puntuacionAntes = usuario.getPuntuacionAnterior();
-        } catch (commandException e) {
-            Log.e("tareas", "excepcion usuario");
-        }
+        this.nombreUsuario = getIntent().getExtras().getString("nombreUsuario");
+        this.puntuacionActual = getIntent().getExtras().getInt("puntuacionActual");
+        this.puntuacionAntes = getIntent().getExtras().getInt("puntuacionAntes");
+
         //Titulo
         final TextView titulo = (TextView) findViewById(R.id.titulo);
         titulo.setText("Tareas de "+ nombreUsuario);

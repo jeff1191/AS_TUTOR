@@ -6,6 +6,7 @@ package es.ucm.as.negocio.suceso;
 import java.io.Serializable;
 import java.util.Date;
 
+import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.utils.Frecuencia;
 
 public class TransferTarea implements Serializable {
@@ -34,7 +35,7 @@ public class TransferTarea implements Serializable {
 
 	private Boolean habilitada;
 
-	private Integer idUsuario;
+	private TransferUsuario usuario;
 
 	public TransferTarea(){
 		contador = 0;
@@ -46,18 +47,18 @@ public class TransferTarea implements Serializable {
 
     // Constructor sin id, adecuado para crear tareas
     public TransferTarea(String textoAlarma, Date horaAlarma,
-						 String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUuario){
+						 String textoPregunta, Date horaPregunta, Integer mejorar, TransferUsuario usuario){
         this.textoAlarma = textoAlarma;
         this.horaAlarma = horaAlarma;
         this.textoPregunta = textoPregunta;
         this.horaPregunta = horaPregunta;
         this.mejorar = mejorar;
-		this.idUsuario = idUuario;
+		this.usuario = usuario;
     }
 
     // Constructor con id, adecuado para modificar tareas
     public TransferTarea(Integer id, String textoAlarma, Date horaAlarma,
-						 String textoPregunta, Date horaPregunta, Integer mejorar, Integer idUsuario,
+						 String textoPregunta, Date horaPregunta, Integer mejorar, TransferUsuario usuario,
 						 Integer contador, Frecuencia frecuencia, Integer numSi, Integer numNo,
 						 Boolean habilitada){
         this.id = id;
@@ -71,7 +72,7 @@ public class TransferTarea implements Serializable {
         this.numSi = numSi;
         this.numNo = numNo;
         this.habilitada = habilitada;
-		this.idUsuario = idUsuario;
+		this.usuario = usuario;
     }
 
 	public Integer getId() {
@@ -162,11 +163,13 @@ public class TransferTarea implements Serializable {
 		this.habilitada = habilitada;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public TransferUsuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(TransferUsuario usuario) {
+		this.usuario = usuario;
 	}
+
+
 }

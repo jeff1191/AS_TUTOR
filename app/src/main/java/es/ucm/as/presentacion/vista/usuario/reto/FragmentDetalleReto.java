@@ -45,16 +45,10 @@ public class FragmentDetalleReto extends Fragment {
 
         Bundle arguments = new Bundle();
 
-            arguments.putInt("id", reto.getId());
-            arguments.putInt("usuario", reto.getIdUsuario());
-            try {
-                TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
-                        .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
-                arguments.putString("nombreUsuario", ret.getNombre());
-                arguments.putString("fotoUsuario", ret.getAvatar());
-            } catch (commandException e) {
-                e.printStackTrace();
-            }
+        arguments.putInt("id", reto.getId());
+        arguments.putInt("usuario", reto.getUsuario().getId());
+        arguments.putString("nombreUsuario", reto.getUsuario().getNombre());
+        arguments.putString("fotoUsuario", reto.getUsuario().getAvatar());
         arguments.putString("texto", reto.getTexto());
         Log.e("FRAG_DETALLE", reto.getContador().toString());
         arguments.putInt("contador", reto.getContador());

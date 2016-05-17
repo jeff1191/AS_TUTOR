@@ -5,13 +5,15 @@ package es.ucm.as.negocio.suceso;
 
 import java.io.Serializable;
 
+import es.ucm.as.negocio.usuario.TransferUsuario;
+
 public class TransferReto implements Serializable {
 
 	static final long serialVersionUID = 1L;
 
 	private Integer id;
 
-	private Integer idUsuario;
+	private TransferUsuario usuario;
 
 	private Integer contador;
 
@@ -24,9 +26,9 @@ public class TransferReto implements Serializable {
 	public TransferReto() {
 	}
 
-	public TransferReto(Integer id, Integer idUsuario, Integer contador, String texto, Boolean superado, String premio) {
+	public TransferReto(Integer id, TransferUsuario usuario, Integer contador, String texto, Boolean superado, String premio) {
 		this.id = id;
-		this.idUsuario = idUsuario;
+		this.usuario = usuario;
 		this.contador = contador;
 		this.texto = texto;
 		this.superado = superado;
@@ -41,12 +43,12 @@ public class TransferReto implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public TransferUsuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(TransferUsuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Integer getContador() {

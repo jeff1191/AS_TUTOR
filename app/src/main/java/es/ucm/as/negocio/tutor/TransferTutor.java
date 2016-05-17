@@ -1,7 +1,11 @@
 
 package es.ucm.as.negocio.tutor;
 
-public class TransferTutor {
+import java.io.Serializable;
+
+public class TransferTutor implements Serializable{
+
+	static final long serialVersionUID = 1L;
 
 	private Integer id;
 

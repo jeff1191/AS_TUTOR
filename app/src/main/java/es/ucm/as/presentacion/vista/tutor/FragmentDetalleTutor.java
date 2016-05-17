@@ -1,6 +1,7 @@
 package es.ucm.as.presentacion.vista.tutor;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -15,7 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import es.ucm.as.R;
+import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
@@ -41,29 +46,33 @@ public class FragmentDetalleTutor extends Fragment {
     private EditText preguntav;
     private EditText respuestav;
 
+    public static FragmentDetalleTutor newInstance(TransferTutor tutor) {
+        FragmentDetalleTutor frgTutor = new FragmentDetalleTutor();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("perfil_tutor", tutor);
+        frgTutor.setArguments(bundle);
+        return frgTutor;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        Command c = new ConsultarTutorComando();
-        try {
-            TransferTutor tutor = (TransferTutor) c.ejecutaComando(null);
-            codigoSincronizacion = tutor.getCodigoSincronizacion();
-            nombre = tutor.getNombre();
-            email = tutor.getCorreo();
-            contrasenha = tutor.getContrasenha();
-            preguntaSeguridad = tutor.getPregunta();
-            respuestaSeguridad = tutor.getRespuesta();
-            codigo = tutor.getCodigoSincronizacion();
-        } catch (commandException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        TransferTutor tutor= (TransferTutor) bundle.getSerializable("perfil_tutor");
+        codigoSincronizacion = tutor.getCodigoSincronizacion();
+        nombre = tutor.getNombre();
+        email = tutor.getCorreo();
+        contrasenha = tutor.getContrasenha();
+        preguntaSeguridad = tutor.getPregunta();
+        respuestaSeguridad = tutor.getRespuesta();
+        codigo = tutor.getCodigoSincronizacion();
 
         View rootView = inflater.inflate(R.layout.fragment_detalle_tutor, container, false);
         nombrev = (EditText)rootView.findViewById(R.id.nombreTutor);

@@ -4,6 +4,7 @@ package es.ucm.as.integracion;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 
+import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.utils.Perfil;
 
 
@@ -228,5 +229,11 @@ public class Usuario {
 
     public void setCodigoSincronizacion(String codigoSincronizacion) {
         this.codigoSincronizacion = codigoSincronizacion;
+    }
+
+    public TransferUsuario convert_transfer() {
+        TransferUsuario ret = new TransferUsuario(id,nombre,correo,avatar,telefono,puntuacion,puntuacionAnterior,curso,dni,
+                direccion,tipoPerfil.toString(),notas,nombrePadre,nombreMadre,correoPadre,correoMadre,telfPadre,telfMadre,centroAcademico,codigoSincronizacion);
+        return ret;
     }
 }

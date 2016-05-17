@@ -15,6 +15,7 @@ import android.widget.TimePicker;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.utils.Frecuencia;
 import es.ucm.as.negocio.utils.ParserTime;
 import es.ucm.as.presentacion.controlador.Controlador;
@@ -156,7 +157,9 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
         transfer.setNumNo(Integer.parseInt(no.getText().toString()));
         transfer.setHabilitada(true);
         transfer.setId(idTarea);
-        transfer.setIdUsuario(idUsuario);
+        TransferUsuario t_usuario = new TransferUsuario();
+        t_usuario.setId(idUsuario);
+        transfer.setUsuario(t_usuario);
 
         if (nuevaTarea){
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);

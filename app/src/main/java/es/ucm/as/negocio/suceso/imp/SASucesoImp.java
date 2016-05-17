@@ -57,7 +57,7 @@ public class SASucesoImp implements SASuceso {
         try {
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
-            uQb.where().idEq(transferTarea.getIdUsuario());
+            uQb.where().idEq(transferTarea.getUsuario().getId());
             Usuario usuario = uQb.queryForFirst();
             tarea.setUsuario(usuario);
 
@@ -88,7 +88,7 @@ public class SASucesoImp implements SASuceso {
             // Se busca al usuario por su id para asignarselo a la tarea
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
-            uQb.where().idEq(transferTarea.getIdUsuario());
+            uQb.where().idEq(transferTarea.getUsuario().getId());
             Usuario usuario = uQb.queryForFirst();
             tarea.setUsuario(usuario);
             // Se actualiza la informacion de la tarea en la BBDD
@@ -146,7 +146,7 @@ public class SASucesoImp implements SASuceso {
                 TransferTarea transfer = new TransferTarea(
                         tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
                         tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
-                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        usuario.convert_transfer(), tarea.getContador(), tarea.getFrecuenciaTarea(),
                         tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
                 transfer.setId(tarea.getId());
                 ret.add(i, transfer);
@@ -156,7 +156,9 @@ public class SASucesoImp implements SASuceso {
             // para cuando no haya ninguna
             if(tareas.size() == 0) {
                 TransferTarea fantasma = new TransferTarea();
-                fantasma.setIdUsuario(idUsuario);
+                TransferUsuario usuario_f=new TransferUsuario();
+                usuario_f.setId(idUsuario);
+                fantasma.setUsuario(usuario_f);
                 ret.add(0, fantasma);
             }
 
@@ -188,7 +190,7 @@ public class SASucesoImp implements SASuceso {
                 TransferTarea transfer = new TransferTarea(
                         tarea.getId(), tarea.getTextoAlarma(), tarea.getHoraAlarma(),
                         tarea.getTextoPregunta(), tarea.getHoraPregunta(), tarea.getMejorar(),
-                        tarea.getUsuario().getId(), tarea.getContador(), tarea.getFrecuenciaTarea(),
+                        usuario.convert_transfer(), tarea.getContador(), tarea.getFrecuenciaTarea(),
                         tarea.getNumSi(), tarea.getNumNo(), tarea.getHabilitada());
                 transfer.setId(tarea.getId());
                 ret.add(i, transfer);
@@ -198,7 +200,9 @@ public class SASucesoImp implements SASuceso {
             // para cuando no haya ninguna
             if(tareas.size() == 0) {
                 TransferTarea fantasma = new TransferTarea();
-                fantasma.setIdUsuario(idUsuario);
+                TransferUsuario usuario_f=new TransferUsuario();
+                usuario_f.setId(idUsuario);
+                fantasma.setUsuario(usuario_f);
                 ret.add(0, fantasma);
             }
 
@@ -217,7 +221,7 @@ public class SASucesoImp implements SASuceso {
                 //Busco usuario
                 Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
                 QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
-                uQb.where().idEq(transferTarea.getIdUsuario());
+                uQb.where().idEq(transferTarea.getUsuario().getId());
                 Usuario usuario = uQb.queryForFirst();
                 // Busco la tarea
                 Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
@@ -475,7 +479,7 @@ public class SASucesoImp implements SASuceso {
             Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 
-            Usuario usuario = daoUsuario.queryForId(transferReto.getIdUsuario());
+            Usuario usuario = daoUsuario.queryForId(transferReto.getUsuario().getId());
 
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
             rQb.where().eq("USUARIO", usuario);
@@ -507,13 +511,15 @@ public class SASucesoImp implements SASuceso {
             Usuario usuario = uQb.queryForFirst();
             //Guarda el usuario en el transfer
             ret = new TransferReto();
-            ret.setIdUsuario(usuario.getId());
+            TransferUsuario t_usuario = usuario.convert_transfer();
+
+            ret.setUsuario(t_usuario);
             //Busca el reto de ese usuario
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
             rQb.where().eq("USUARIO", usuario);
             Reto r = rQb.queryForFirst();
             if (r != null)
-                ret = new TransferReto(r.getId(), r.getUsuario().getId(), r.getContador(),
+                ret = new TransferReto(r.getId(), r.getUsuario().convert_transfer(), r.getContador(),
                         r.getTexto(), r.getSuperado(), r.getPremio());
 
         } catch (SQLException e) {

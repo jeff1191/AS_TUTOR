@@ -483,7 +483,6 @@ public class FragmentDetalleUsuario extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
 }

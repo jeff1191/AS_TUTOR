@@ -19,17 +19,17 @@ import es.ucm.as.R;
  */
 public class AdaptadorTareas extends BaseAdapter {
 
-    Context context;
-    ArrayList<String> textosAlarma;
-    ArrayList<String> horasAlarma;
-    ArrayList<String> textosPreguntas;
-    ArrayList<String> horasPregunta;
-    ArrayList<Integer> si;
-    ArrayList<Integer> no;
-    ArrayList<Integer> total;
-    ArrayList<String> frecuencias;
-    ArrayList<Integer> habilitadas;
-    LayoutInflater inflater;
+    private Context context;
+    private ArrayList<String> textosAlarma;
+    private ArrayList<String> horasAlarma;
+    private ArrayList<String> textosPreguntas;
+    private ArrayList<String> horasPregunta;
+    private ArrayList<Integer> si;
+    private ArrayList<Integer> no;
+    private ArrayList<Integer> total;
+    private ArrayList<String> frecuencias;
+    private ArrayList<Integer> habilitadas;
+    private LayoutInflater inflater;
 
     public AdaptadorTareas(ArrayList<String> textosAlarma, ArrayList<String> horasAlarma,
                            ArrayList<String> textosPreguntas, ArrayList<String> horasPregunta,

@@ -10,6 +10,7 @@ import java.util.Date;
 import es.ucm.as.R;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.utils.ParserTime;
 import es.ucm.as.negocio.suceso.TransferEvento;
@@ -18,6 +19,8 @@ import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.main.BlankFragment;
 import es.ucm.as.presentacion.vista.main.Manager;
+import es.ucm.as.presentacion.vista.tutor.FragmentDetalleTutor;
+import es.ucm.as.presentacion.vista.tutor.FragmentListadoTutor;
 import es.ucm.as.presentacion.vista.usuario.FragmentDetalleUsuario;
 import es.ucm.as.presentacion.vista.usuario.FragmentListadoUsuario;
 import es.ucm.as.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
@@ -34,7 +37,13 @@ public class DispatcherImp extends Dispatcher {
     @Override
     public void dispatch(String accion, Object datos) {
 
-        switch(accion){
+        switch(accion){            // Eventos
+            case ListaComandos.CONSULTAR_TUTOR:
+                //Una vez que creas el evento pones el blankFragment
+                TransferTutor tutor = (TransferTutor) datos;
+                FragmentDetalleTutor frgDetalleTutor = FragmentDetalleTutor.newInstance(tutor);
+                Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleTutor).commit();
+                break;
             // Eventos
             case ListaComandos.CREAR_EVENTO:
               //Una vez que creas el evento pones el blankFragment
@@ -144,7 +153,10 @@ public class DispatcherImp extends Dispatcher {
                 iConsultarTareas.putIntegerArrayListExtra("mejorar", mejorar);
                 iConsultarTareas.putIntegerArrayListExtra("habilitada", habilitada);
                 iConsultarTareas.putIntegerArrayListExtra("idsTareas", id);
-                iConsultarTareas.putExtra("usuario", tareas.get(0).getIdUsuario());
+                iConsultarTareas.putExtra("idUsuario", tareas.get(0).getUsuario().getId());
+                iConsultarTareas.putExtra("nombreUsuario", tareas.get(0).getUsuario().getNombre());
+                iConsultarTareas.putExtra("puntuacionActual", tareas.get(0).getUsuario().getPuntuacion());
+                iConsultarTareas.putExtra("puntuacionAntes", tareas.get(0).getUsuario().getPuntuacionAnterior());
                 iConsultarTareas.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Manager.getInstance().getContext().startActivity(iConsultarTareas);
                 break;

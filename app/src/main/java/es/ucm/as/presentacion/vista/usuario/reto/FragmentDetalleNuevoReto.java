@@ -43,19 +43,11 @@ public class FragmentDetalleNuevoReto extends Fragment {
         FragmentDetalleNuevoReto frgNuevoReto = new FragmentDetalleNuevoReto();
 
         Bundle arguments = new Bundle();
-        if(reto.getIdUsuario() != null) {
-        arguments.putInt("usuario", reto.getIdUsuario());
-        try {
-            TransferUsuario ret = (TransferUsuario) FactoriaComandos.getInstancia()
-                    .getCommand(ListaComandos.CONSULTAR_USUARIO).ejecutaComando(reto.getIdUsuario());
-            arguments.putString("nombreUsuario", ret.getNombre());
-            arguments.putString("fotoUsuario", ret.getAvatar());
-        } catch (commandException e) {
-            e.printStackTrace();
+        if(reto.getUsuario().getId() != null) {
+            arguments.putInt("usuario", reto.getUsuario().getId());
+            arguments.putString("nombreUsuario", reto.getUsuario().getNombre());
+            arguments.putString("fotoUsuario", reto.getUsuario().getAvatar());
         }
-        }
-
-
         frgNuevoReto.setArguments(arguments);
 
         return frgNuevoReto;
@@ -99,7 +91,9 @@ public class FragmentDetalleNuevoReto extends Fragment {
                     TransferReto reto = new TransferReto();
                     reto.setTexto(textoReto.getText().toString());
                     reto.setContador(0);
-                    reto.setIdUsuario(idUsuario);
+                    TransferUsuario t_usuario = new TransferUsuario();
+                    t_usuario.setId(idUsuario);
+                    reto.setUsuario(t_usuario);
                     reto.setPremio(premio.getText().toString());
                     reto.setSuperado(false);
                     Toast.makeText(getActivity(), "ID USUARIO  " + idUsuario
