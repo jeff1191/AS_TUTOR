@@ -8,6 +8,7 @@ import es.ucm.as.presentacion.controlador.comandos.imp.reto.ConsultarRetoComando
 import es.ucm.as.presentacion.controlador.comandos.imp.reto.CrearRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.reto.EliminarRetoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.sincronizacion.SincronizarComando;
+import es.ucm.as.presentacion.controlador.comandos.imp.tutor.AccesoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarEventosUsuario;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
@@ -57,6 +58,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.EDITAR_TUTOR:
                 ret = new EditarTutorComando();
+                break;
+            case ListaComandos.ACCESO:
+                ret = new AccesoComando();
                 break;
 
             //Usuario

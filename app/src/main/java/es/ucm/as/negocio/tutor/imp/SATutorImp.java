@@ -9,6 +9,7 @@ import es.ucm.as.integracion.DBHelper;
 import es.ucm.as.negocio.tutor.SATutor;
 import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.integracion.Tutor;
+import es.ucm.as.negocio.utils.Encriptacion;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 public class SATutorImp implements SATutor {
@@ -33,7 +34,7 @@ public class SATutorImp implements SATutor {
                 ret.setNombre(tutor.getNombre());
                 ret.setCorreo(tutor.getCorreo());
                 ret.setCodigoSincronizacion(tutor.getCodigoSincronizacion());
-                ret.setContrasenha(tutor.getContrasenha());
+                ret.setContrasenha(Encriptacion.decrypt(tutor.getContrasenha()));
                 ret.setPregunta(tutor.getPregunta());
                 ret.setRespuesta(tutor.getRespuesta());
             }
@@ -52,7 +53,7 @@ public class SATutorImp implements SATutor {
             tutor.setNombre(transferTutor.getNombre());
             tutor.setCorreo(transferTutor.getCorreo());
             tutor.setCodigoSincronizacion(transferTutor.getCodigoSincronizacion());
-            tutor.setContrasenha(transferTutor.getContrasenha());
+            tutor.setContrasenha(Encriptacion.encrypt(transferTutor.getContrasenha()));
             tutor.setPregunta(transferTutor.getPregunta());
             tutor.setRespuesta(transferTutor.getRespuesta());
             daoTutor.update(tutor);
@@ -70,12 +71,18 @@ public class SATutorImp implements SATutor {
             tutor.setNombre(transferTutor.getNombre());
             tutor.setCorreo(transferTutor.getCorreo());
             tutor.setCodigoSincronizacion(transferTutor.getCodigoSincronizacion());
-            tutor.setContrasenha(transferTutor.getContrasenha());
+            tutor.setContrasenha(Encriptacion.encrypt(transferTutor.getContrasenha()));
             tutor.setPregunta(transferTutor.getPregunta());
             tutor.setRespuesta(transferTutor.getRespuesta());
             daoTutor.create(tutor);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean acceso(String clave) {
+        TransferTutor t = consultarTutor();
+        return t.getContrasenha().equals(clave);
     }
 }

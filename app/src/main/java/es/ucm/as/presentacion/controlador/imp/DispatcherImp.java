@@ -2,6 +2,7 @@ package es.ucm.as.presentacion.controlador.imp;
 
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.main.Acceso;
 import es.ucm.as.presentacion.vista.main.BlankFragment;
+import es.ucm.as.presentacion.vista.main.MainActivity;
 import es.ucm.as.presentacion.vista.main.Manager;
 import es.ucm.as.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as.presentacion.vista.tutor.FragmentListadoTutor;
@@ -61,6 +63,16 @@ public class DispatcherImp extends Dispatcher {
                     intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
                     Manager.getInstance().getContext().startActivity(intent);
                 }
+                break;
+            case ListaComandos.ACCESO:
+                //Una vez que creas el evento pones el blankFragment
+                TransferTutor acceso = (TransferTutor) datos;
+
+                Intent intent = new Intent(Manager.getInstance().getContext(), Acceso.class);
+                intent.putExtra("tutor", acceso);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Manager.getInstance().getContext().startActivity(intent);
+
                 break;
             // Eventos
             case ListaComandos.CREAR_EVENTO:

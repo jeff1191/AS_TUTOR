@@ -9,6 +9,7 @@ public class ListaComandos {
     public static final String CREAR_TUTOR = "crearTutor";
     public static final String EDITAR_TUTOR = "editarTutor";
     public static final String EXISTE_TUTOR = "existeTutor";
+    public static final String ACCESO = "acceso";
     // Usuario
     public static final String CREAR_USUARIOS = "crearUsuarios";
     public static final String CREAR_USUARIO = "crearUsuario";
@@ -41,4 +42,5 @@ public class ListaComandos {
     public static final String CREAR_EVENTO_CONSULTAR_USUARIOS = "crearEventoConsultarUsuarios";
     public static final String CONSUTAR_USUARIOS_EVENTO = "consultarUsuariosEvento";
     public static final String SINCRONIZAR = "sincronizar";
+
 }

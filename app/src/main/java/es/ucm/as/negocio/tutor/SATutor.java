@@ -8,4 +8,5 @@ public interface SATutor {
 
     public void crearTutor(TransferTutor transferTutor);
 
+    public boolean acceso(String clave);
 }

@@ -46,8 +46,12 @@ public class SincronizarComando implements Command {
         Mensaje pepe = new Mensaje();
         pepe.setUsuario(usuarioSincro);
         pepe.setReto(retoSincro);
-        Log.e("TAMANYO: ", eventosSincro.size()+"");
+
         pepe.setEventos(eventosSincro);
+        for(int i=0; i < tareasSincro.size();i++){
+            Log.e("REGISTRO_TAREA ", tareasSincro.get(i).getTextoAlarma() + " " + tareasSincro.get(i).getHoraPregunta());
+        }
+
         pepe.setTareas(tareasSincro);
         Log.e("tareas sinc comand", "size -> " + tareasSincro.size());
 

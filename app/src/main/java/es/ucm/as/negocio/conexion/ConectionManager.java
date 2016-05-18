@@ -258,8 +258,10 @@ public class ConectionManager {
             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
             // Tareas
             List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
-            for(int i= 0; i < tareasUsuario.size(); i++)
+            for(int i= 0; i < tareasUsuario.size(); i++) {
+                Log.e("TAREA||", tareasUsuario.get(i).getTextoAlarma()+ " "+ tareasUsuario.get(i).getHoraPregunta());
                 tareasUsuario.get(i).setUsuario(message.getUsuario());
+            }
             saSuceso.guardarTareas(tareasUsuario);
             ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
             message.setTareas(tareasSincro);

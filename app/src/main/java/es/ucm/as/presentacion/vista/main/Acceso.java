@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.tutor.TransferTutor;
+import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
@@ -24,9 +26,9 @@ import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
  */
 public class Acceso extends AppCompatActivity {
 
-    private String password;
-    private String preguntaSeguridad;
-    private String respuestaSeguridad;
+    private static String password;
+    private static String preguntaSeguridad;
+    private static String respuestaSeguridad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class Acceso extends AppCompatActivity {
         setContentView(R.layout.activity_acceso);
         Intent i = getIntent();
         TransferTutor tutor = (TransferTutor) i.getSerializableExtra("tutor");
+        Log.e("ACCESO", tutor.getContrasenha());
         password = tutor.getContrasenha();
         preguntaSeguridad = tutor.getPregunta();
         respuestaSeguridad = tutor.getRespuesta();
@@ -62,18 +65,16 @@ public class Acceso extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(pwd1.getText().toString().equals(password.toString())) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                if(password != null && password.equals(pwd1.getText().toString())) {
+                    Intent intent = new Intent( Manager.getInstance().getContext(), MainActivity.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Manager.getInstance().getContext().startActivity(intent);
                 }else{
                     Toast errorNombre =
-                            Toast.makeText(getApplicationContext(),
+                            Toast.makeText(Manager.getInstance().getContext(),
                                     "Clave incorrecta", Toast.LENGTH_SHORT);
                     errorNombre.show();
-                    Intent intent = new Intent(getApplicationContext(), Acceso.class);
-                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.ACCESO, null);
                 }
             }
         });
@@ -103,7 +104,7 @@ public class Acceso extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),
                                         "Respuesta incorrecta", Toast.LENGTH_SHORT);
                         errorNombre.show();
-                        startActivity(new Intent(getApplicationContext(), Acceso.class));
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.ACCESO, null);
                     }
             }
         });
