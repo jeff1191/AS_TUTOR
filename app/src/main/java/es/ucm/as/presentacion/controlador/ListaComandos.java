@@ -8,6 +8,7 @@ public class ListaComandos {
     public static final String CONSULTAR_TUTOR = "consultarTutor";
     public static final String CREAR_TUTOR = "crearTutor";
     public static final String EDITAR_TUTOR = "editarTutor";
+    public static final String EXISTE_TUTOR = "existeTutor";
     // Usuario
     public static final String CREAR_USUARIOS = "crearUsuarios";
     public static final String CREAR_USUARIO = "crearUsuario";

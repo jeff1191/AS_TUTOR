@@ -16,10 +16,8 @@ public class Manager {
     public static Manager getInstance() {
         return ourInstance;
     }
-
     // Constructor privado del singleton
     private Manager() { }
-
     // Metodo que cambia la activity, se utiliza desde las propias activities
     public void setActivity(AppCompatActivity miActivity){
         activity = miActivity;

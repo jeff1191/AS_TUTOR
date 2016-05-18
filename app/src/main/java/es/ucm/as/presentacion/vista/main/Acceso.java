@@ -32,17 +32,11 @@ public class Acceso extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceso);
-
-        Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_TUTOR);
-        try {
-            TransferTutor tutor = (TransferTutor) c.ejecutaComando(null);
-            password = tutor.getContrasenha();
-            preguntaSeguridad = tutor.getPregunta();
-            respuestaSeguridad = tutor.getRespuesta();
-        } catch (commandException e) {
-            e.printStackTrace();
-        }
-
+        Intent i = getIntent();
+        TransferTutor tutor = (TransferTutor) i.getSerializableExtra("tutor");
+        password = tutor.getContrasenha();
+        preguntaSeguridad = tutor.getPregunta();
+        respuestaSeguridad = tutor.getRespuesta();
         AlertDialog a = dialogVerificarAcceso(getLayoutInflater());
         a.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         a.setCancelable(false);

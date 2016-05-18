@@ -51,15 +51,12 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
-
             ArrayList<String> listaEventos = bundle.getStringArrayList("listaEventos");
             ArrayList<String> listaUsuariosAsistencia = bundle.getStringArrayList("listaEventosAsistencia");
             nombreUsuario = bundle.getString("nombreUsuario");
             adapter = new AdaptadorUsuarioEventos(getActivity());
             adapter.setEventos(listaEventos);
             adapter.setAsistencia(listaUsuariosAsistencia);
-
-
         }
     }
 

@@ -49,6 +49,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.CONSULTAR_TUTOR:
                 ret = new ConsultarTutorComando();
                 break;
+            case ListaComandos.EXISTE_TUTOR:
+                ret = new ConsultarTutorComando();
+                break;
             case ListaComandos.CREAR_TUTOR:
                 ret = new CrearTutorComando();
                 break;

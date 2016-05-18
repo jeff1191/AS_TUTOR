@@ -78,27 +78,9 @@ public class FragmentListadoEvento extends Fragment {
         listadoEvento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-
-                /*ArrayList<String> nombresUsuarios = new ArrayList<String>();
-                ArrayList<String> asistenciaUsuarios = new ArrayList<String>();
-                ArrayList<Integer> usuariosActivos = new ArrayList<Integer>();
-
-
-                cargarDatos(pos, nombresUsuarios, usuariosActivos, asistenciaUsuarios);*/
-                //Toast.makeText(getActivity().getApplicationContext(), "Opcion " + listaEventos.get(pos) + " ID: " + idsEventos.get(pos), Toast.LENGTH_SHORT).show();
-               /* Toast errorNombre =
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                "Opcion " + listaEventos.get(pos)+ " ID: " + idsEventos.get(pos) , Toast.LENGTH_SHORT);
-                errorNombre.show();*/
-                TransferEvento consultar = new TransferEvento();
-                consultar.setId(idsEventos.get(pos)); // Busco por id
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTO, consultar);
-                //  FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance("PEPE","12:00","13:00",nombresUsuarios,asistenciaUsuarios,usuariosActivos);
-
-
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
-
-                /*************************************************************************/
+            TransferEvento consultar = new TransferEvento();
+            consultar.setId(idsEventos.get(pos)); // Busco por id
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTO, consultar);
             }
         });
 

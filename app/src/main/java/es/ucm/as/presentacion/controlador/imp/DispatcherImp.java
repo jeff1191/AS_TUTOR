@@ -17,10 +17,12 @@ import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.vista.main.Acceso;
 import es.ucm.as.presentacion.vista.main.BlankFragment;
 import es.ucm.as.presentacion.vista.main.Manager;
 import es.ucm.as.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as.presentacion.vista.tutor.FragmentListadoTutor;
+import es.ucm.as.presentacion.vista.tutor.RegistroTutor;
 import es.ucm.as.presentacion.vista.usuario.FragmentDetalleUsuario;
 import es.ucm.as.presentacion.vista.usuario.FragmentListadoUsuario;
 import es.ucm.as.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
@@ -37,12 +39,28 @@ public class DispatcherImp extends Dispatcher {
     @Override
     public void dispatch(String accion, Object datos) {
 
-        switch(accion){            // Eventos
+        switch(accion){
+            //Tutor
             case ListaComandos.CONSULTAR_TUTOR:
                 //Una vez que creas el evento pones el blankFragment
                 TransferTutor tutor = (TransferTutor) datos;
                 FragmentDetalleTutor frgDetalleTutor = FragmentDetalleTutor.newInstance(tutor);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleTutor).commit();
+                break;
+            case ListaComandos.EXISTE_TUTOR:
+                //Una vez que creas el evento pones el blankFragment
+                TransferTutor existe_tutor = (TransferTutor) datos;
+                if (existe_tutor.getNombre() == null){
+                    Intent intent = new Intent(Manager.getInstance().getContext(), RegistroTutor.class);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Manager.getInstance().getContext().startActivity(intent);
+                }
+                 else{
+                    Intent intent = new Intent(Manager.getInstance().getContext(), Acceso.class);
+                    intent.putExtra("tutor", existe_tutor);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Manager.getInstance().getContext().startActivity(intent);
+                }
                 break;
             // Eventos
             case ListaComandos.CREAR_EVENTO:

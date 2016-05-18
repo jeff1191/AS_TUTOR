@@ -16,7 +16,5 @@ public class DetalleActivity extends AppCompatActivity {
         FragmentDetalleUsuario detalle =
                 (FragmentDetalleUsuario)getSupportFragmentManager()
                         .findFragmentById(R.id.FrgDetalle);
-       // detalle.mostrarDetalle(getIntent().getStringExtra("Detalle Texto"));
-        //detalle.mostrarDetalle(getIntent().getStringExtra(EXTRA_TEXTO));
     }
 }
