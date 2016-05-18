@@ -63,14 +63,11 @@ public class SAUsuarioImp implements SAUsuario {
 			usuario.setDni(transferUsuario.getDni());
 			usuario.setDireccion(transferUsuario.getDireccion());
 			switch (transferUsuario.getTipoPerfil()){
-				case "A":
-					usuario.setTipoPerfil(Perfil.A);
+				case "Estandar":
+					usuario.setTipoPerfil(Perfil.Estandar);
 					break;
-				case "B":
-					usuario.setTipoPerfil(Perfil.B);
-					break;
-				case "C":
-					usuario.setTipoPerfil(Perfil.C);
+				case "Chica":
+					usuario.setTipoPerfil(Perfil.Chica);
 					break;
 			}
 			usuario.setNotas(transferUsuario.getNotas());
@@ -210,7 +207,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user1.setTelfMadre("666666666");
 				user1.setCorreoPadre("correo@gmail.com");
 				user1.setCorreoMadre("correo@gmail.com");
-				user1.setTipoPerfil(Perfil.A);
+				user1.setTipoPerfil(Perfil.Chica);
 				user1.setCodigoSincronizacion("VIC001");
 				user1.setPuntuacion(9);
 				user1.setPuntuacionAnterior(10);
@@ -231,7 +228,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user2.setTelfMadre("888888888");
 				user2.setCorreoPadre("correo@gmail.com");
 				user2.setCorreoMadre("correo@gmail.com");
-				user2.setTipoPerfil(Perfil.B);
+				user2.setTipoPerfil(Perfil.Estandar);
 				user2.setCodigoSincronizacion("VIC002");
 				user2.setPuntuacion(9);
 				user2.setPuntuacionAnterior(10);
@@ -252,7 +249,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user3.setTelfMadre("666666666");
 				user3.setCorreoPadre("correo@gmail.com");
 				user3.setCorreoMadre("correo@gmail.com");
-				user3.setTipoPerfil(Perfil.C);
+				user3.setTipoPerfil(Perfil.Estandar);
 				user3.setCodigoSincronizacion("VIC003");
 				user3.setPuntuacion(9);
 				user3.setPuntuacionAnterior(10);
@@ -273,7 +270,7 @@ public class SAUsuarioImp implements SAUsuario {
 				user4.setTelfMadre("666666666");
 				user4.setCorreoPadre("correo@gmail.com");
 				user4.setCorreoMadre("correo@gmail.com");
-				user4.setTipoPerfil(Perfil.C);
+				user4.setTipoPerfil(Perfil.Chica);
 				user4.setCodigoSincronizacion("VIC004");
 				user4.setPuntuacion(9);
 				user4.setPuntuacionAnterior(10);
