@@ -80,7 +80,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
     private String telefonoMadre;
     private String correoPadre;
     private String correoMadre;
-    private String[] nombresPerfiles={ Perfil.A.toString(), Perfil.B.toString(), Perfil.C.toString()};
+    private String[] nombresPerfiles={ Perfil.Estandar.toString(), Perfil.Chica.toString()};
 
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";

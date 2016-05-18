@@ -37,11 +37,10 @@ public class ParserText {
         String horaAlarma;
         try {
             // Si no se ha seleccionado perfil se pone por defecto el A
-            Integer archivo = R.raw.perfil_a;;
-            if(tipo == Perfil.B)
-                archivo = R.raw.perfil_b;
-            else if(tipo == Perfil.C)
-                archivo = R.raw.perfil_c;
+            Integer archivo = R.raw.perfil_estandar;
+            if(tipo == Perfil.Chica)
+                archivo = R.raw.perfil_chica;
+
 
             InputStream fraw = Manager.getInstance().getContext().getResources().openRawResource(archivo);
 

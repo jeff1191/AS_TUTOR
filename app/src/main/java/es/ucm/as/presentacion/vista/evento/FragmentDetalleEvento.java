@@ -2,6 +2,7 @@ package es.ucm.as.presentacion.vista.evento;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.suceso.TransferEvento;
@@ -215,10 +217,10 @@ public class FragmentDetalleEvento extends Fragment{
                             Date horaAlarmaEnvio = df_envio_datos.parse(editTextHoraAlarma.getText().toString());
                             Date horaEventoEnvio = df_envio_datos.parse(editTextHoraEvento.getText().toString());
                             if(horaEventoEnvio.after(horaAlarmaEnvio) && horaAlarmaEnvio.getTime() != horaEventoEnvio.getTime()) {
-                                nuevoEvento.setHoraAlarma(horaAlarmaEnvio);
-                                nuevoEvento.setHoraEvento(horaEventoEnvio);
+                                nuevoEvento.setHoraAlarma(arregloDatesEvento(fechaActualEvento,horaAlarmaEnvio));
+                                nuevoEvento.setHoraEvento(arregloDatesEvento(fechaActualEvento,horaEventoEnvio));
                                 Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_EVENTO, nuevoEvento);
-//Añadir usuarios al evento
+                                //Añadir usuarios al evento
                                 List<TransferUsuarioEvento> listaUsuarios = new ArrayList<TransferUsuarioEvento>();
                                 TransferUsuarioEvento evento = new TransferUsuarioEvento(nuevoEvento, null);
                                 listaUsuarios.add(evento);
@@ -292,8 +294,8 @@ public class FragmentDetalleEvento extends Fragment{
                         Date horaAlarmaEnvio = df_envio_datos.parse(editTextHoraAlarma.getText().toString());
                         Date horaEventoEnvio = df_envio_datos.parse(editTextHoraEvento.getText().toString());
                         if(horaEventoEnvio.after(horaAlarmaEnvio) && horaAlarmaEnvio.getTime() != horaEventoEnvio.getTime()) {
-                            nuevoEvento.setHoraAlarma(horaAlarmaEnvio);
-                            nuevoEvento.setHoraEvento(horaEventoEnvio);
+                            nuevoEvento.setHoraAlarma(arregloDatesEvento(fechaActualEvento,horaAlarmaEnvio));
+                            nuevoEvento.setHoraEvento(arregloDatesEvento(fechaActualEvento,horaEventoEnvio));
                             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_EVENTO, nuevoEvento);
 
                             //Añadir usuarios al evento
@@ -355,10 +357,27 @@ public class FragmentDetalleEvento extends Fragment{
         });
 
 
-
-
-
         return rootView;
+    }
+
+    public Date arregloDatesEvento(Date evento, Date hora){
+
+        Log.e("horas", evento.toString()+" "+hora.toString());
+
+        SimpleDateFormat horasMinutos = new SimpleDateFormat("HH:mm");
+        StringTokenizer tokens = new StringTokenizer(horasMinutos.format
+                (hora),":");
+        Integer h = Integer.parseInt(tokens.nextToken());
+        Integer m =  Integer.parseInt(tokens.nextToken());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(evento);
+        calendar.set(Calendar.HOUR_OF_DAY, h);
+        calendar.set(Calendar.MINUTE, m);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
     }
 
     @Override

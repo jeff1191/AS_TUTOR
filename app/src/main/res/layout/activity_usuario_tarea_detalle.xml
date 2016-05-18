@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="TAREA"
+        android:text="NUEVA TAREA"
+        android:textStyle="bold"
         android:gravity="center" />
 
     <!-- Layout con el texto y la hora para alarmas y preguntas-->
@@ -281,6 +282,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
             android:id="@+id/botonCancelar"
             android:onClick="cancelar"
             android:text="Cancelar"
@@ -291,6 +294,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
             android:id="@+id/botonAceptar"
             android:onClick="aceptar"
             android:text="ACEPTAR"
