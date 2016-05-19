@@ -258,7 +258,7 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
         if (!nombre.matches("") && !perfil.matches(""))
             return true;
         else
-            mostrarMensajeError("Algún campo obligatorio es vacío");
+            mostrarMensajeError("El campo del nombre del usuario no puede estar vacío");
 
         return false;
     }

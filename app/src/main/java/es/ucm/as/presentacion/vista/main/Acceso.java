@@ -36,7 +36,6 @@ public class Acceso extends AppCompatActivity {
         setContentView(R.layout.activity_acceso);
         Intent i = getIntent();
         TransferTutor tutor = (TransferTutor) i.getSerializableExtra("tutor");
-        Log.e("ACCESO", tutor.getContrasenha());
         password = tutor.getContrasenha();
         preguntaSeguridad = tutor.getPregunta();
         respuestaSeguridad = tutor.getRespuesta();

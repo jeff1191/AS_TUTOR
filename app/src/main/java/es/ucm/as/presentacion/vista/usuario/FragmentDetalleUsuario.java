@@ -13,7 +13,6 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -93,7 +92,6 @@ public class FragmentDetalleUsuario extends Fragment {
     public static FragmentDetalleUsuario newInstance(TransferUsuario usuario) {
         FragmentDetalleUsuario frgUsuario = new FragmentDetalleUsuario();
         idUsuario = usuario.getId();
-        Log.e("testing", "usuario fragment detalle" + idUsuario);
         Bundle arguments = new Bundle();
         arguments.putString("nombre", usuario.getNombre());
         arguments.putString("correo", usuario.getCorreo());

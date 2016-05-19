@@ -44,7 +44,7 @@ class AdaptadorUsuarios extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View item = inflater.inflate(R.layout.row_usuarios, null);
+        View item = inflater.inflate(R.layout.row_usuarios, parent, false);
 
         TextView nombreUser= (TextView)item.findViewById(R.id.nombreUsuarioLista);
         nombreUser.setText(nombres.get(position));

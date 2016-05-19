@@ -3,7 +3,6 @@ package es.ucm.as.presentacion.vista.usuario;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -96,7 +95,6 @@ public class FragmentListadoUsuario extends Fragment {
 		listadoUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-				Log.e("testing", "ID en listao" + ids.get(pos));
 				Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, ids.get(pos));
 			}
 		});
