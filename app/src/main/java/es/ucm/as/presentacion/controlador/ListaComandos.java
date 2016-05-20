@@ -19,6 +19,7 @@ public class ListaComandos {
     public static final String EDITAR_USUARIO = "editarUsuario";
     public static final String ENVIAR_CORREO = "enviarCorreo";
     public static final String GENERAR_PDF = "generarPDF";
+    public static final String CONSULTAR_USUARIO_ACTIVITY = "consultarUsuarioActivity";
     // Tarea
     public static final String CREAR_TAREA = "crearTarea";
     public static final String EDITAR_TAREA = "editarTarea";

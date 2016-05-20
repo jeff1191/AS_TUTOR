@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.usuario.TransferUsuario;
+import es.ucm.as.presentacion.controlador.Controlador;
+import es.ucm.as.presentacion.controlador.ListaComandos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +27,7 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
 
     private ListView listViewEventos;
     private String nombreUsuario;
+    private Integer idUsuario;
     private AdaptadorUsuarioEventos adapter;
 
     public FragmentDetalleUsuarioEvento() {
@@ -34,6 +38,7 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
                                                     ArrayList<String> asistenciaEventos) {
         FragmentDetalleUsuarioEvento frgDetalleEvento = new FragmentDetalleUsuarioEvento();
         Bundle bundle = new Bundle();
+        bundle.putInt("id", usuario.getId());
         if(nombresEventos.size() != 0)
             bundle.putString("nombreUsuario","Eventos de " + usuario.getNombre());
         else
@@ -51,6 +56,7 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
         setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle != null) {
+            idUsuario = bundle.getInt("id");
             ArrayList<String> listaEventos = bundle.getStringArrayList("listaEventos");
             ArrayList<String> listaUsuariosAsistencia = bundle.getStringArrayList("listaEventosAsistencia");
             nombreUsuario = bundle.getString("nombreUsuario");
@@ -76,11 +82,34 @@ public class FragmentDetalleUsuarioEvento extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_eventos_usuario, menu);
+        inflater.inflate(R.menu.menu_sucesos_usuario, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.usuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, idUsuario);
+                break;
+            case R.id.tareasUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+                break;
+            case R.id.retoUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
+                break;
+            case R.id.eventosUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTOS_USUARIO,idUsuario);
+                break;
+            case R.id.enviarCorreo:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 }

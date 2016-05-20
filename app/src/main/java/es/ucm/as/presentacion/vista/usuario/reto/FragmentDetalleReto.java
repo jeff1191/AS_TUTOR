@@ -22,6 +22,7 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as.presentacion.vista.usuario.DialogEliminarUsuario;
 
 /**
  * Created by Juan Lu on 07/04/2016.
@@ -125,15 +126,18 @@ public class FragmentDetalleReto extends Fragment {
             case R.id.tareasUsuario:
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                 break;
+            case R.id.retoUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
+                break;
             case R.id.eventosUsuario:
-
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTOS_USUARIO,idUsuario);
                 break;
             case R.id.enviarCorreo:
-
+                Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
                 break;
             case R.id.eliminarReto:
-                DialogEliminarReto alertDialog = DialogEliminarReto.newInstance(id,texto, idUsuario);
-                alertDialog.show(getActivity().getFragmentManager(), "Eliminar reto");
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_RETO, idUsuario);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

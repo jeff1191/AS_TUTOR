@@ -204,6 +204,14 @@ public class DispatcherImp extends Dispatcher {
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleU).commit();
                 break;
 
+            case ListaComandos.CONSULTAR_USUARIO_ACTIVITY:
+                TransferUsuario user = (TransferUsuario) datos;
+                Intent inActivity= new Intent(Manager.getInstance().getContext(), MainActivity.class);
+                inActivity.putExtra("usuario", user);
+                inActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Manager.getInstance().getContext().startActivity(inActivity);
+                break;
+
             case ListaComandos.ELIMINAR_USUARIO:
                 BlankFragment fragmentoBlanco = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentoBlanco).commit();

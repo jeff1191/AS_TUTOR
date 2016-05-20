@@ -132,8 +132,7 @@ public class UsuarioTareasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case android.R.id.home:
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO_ACTIVITY, idUsuario);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

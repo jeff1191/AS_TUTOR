@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import es.ucm.as.R;
+import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.ayuda.FragmentListadoAyuda;
@@ -109,9 +110,11 @@ public class MainActivity extends AppCompatActivity {
         // Luego carga los usuarios de la base de datos
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
-
-        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);
-
+        if(getIntent().getExtras() != null) {
+            TransferUsuario transferUsuario = (TransferUsuario)getIntent().getExtras().getSerializable("usuario");
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO,transferUsuario.getId());
+        }
+        Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS,null);
     }
 
     private void MostrarFragment(int position) {

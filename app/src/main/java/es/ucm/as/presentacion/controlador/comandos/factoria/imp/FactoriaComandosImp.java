@@ -76,6 +76,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
                 break;
+            case ListaComandos.CONSULTAR_USUARIO_ACTIVITY:
+                ret = new ConsultarUsuarioComando();
+                break;
             case ListaComandos.ELIMINAR_USUARIO:
                 ret = new EliminarUsuarioComando();
                 break;

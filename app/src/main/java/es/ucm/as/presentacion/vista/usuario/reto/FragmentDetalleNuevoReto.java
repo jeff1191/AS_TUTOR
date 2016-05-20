@@ -24,6 +24,7 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
+import es.ucm.as.presentacion.vista.usuario.DialogEliminarUsuario;
 
 /**
  * Created by Juan Lu on 07/04/2016.
@@ -123,7 +124,7 @@ public class FragmentDetalleNuevoReto extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_reto_usuario, menu);
+        inflater.inflate(R.menu.menu_sucesos_usuario, menu);
     }
 
     @Override
@@ -135,11 +136,15 @@ public class FragmentDetalleNuevoReto extends Fragment {
             case R.id.tareasUsuario:
                 Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
                 break;
+            case R.id.retoUsuario:
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
+                break;
             case R.id.eventosUsuario:
-
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_EVENTOS_USUARIO,idUsuario);
                 break;
             case R.id.enviarCorreo:
-
+                Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, idUsuario);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
