@@ -80,6 +80,7 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
         if (!bundle.get("nueva").equals("nueva")) { // Editar tarea
             nuevaTarea = false;
+            textoAlarma.setEnabled(false);
             completarCampos(bundle);
         } else {                                     // Crear tarea
             nuevaTarea = true;
