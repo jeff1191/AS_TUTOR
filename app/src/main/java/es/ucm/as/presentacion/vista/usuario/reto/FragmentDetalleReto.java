@@ -137,12 +137,12 @@ public class FragmentDetalleReto extends Fragment {
                 Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, idUsuario);
                 break;
             case R.id.eliminarReto:
-                Controlador.getInstancia().ejecutaComando(ListaComandos.ELIMINAR_RETO, idUsuario);
+                DialogEliminarReto alertDialog = DialogEliminarReto.newInstance(id,texto, idUsuario);
+                alertDialog.show(getActivity().getFragmentManager(), "Eliminar reto");
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
     }
-
 }

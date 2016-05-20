@@ -382,9 +382,8 @@ public class FragmentDetalleEvento extends Fragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
-        menu.clear(); //poner otro menu
+        menu.clear();
         inflater.inflate(R.menu.menu_main_eventos, menu);
     }
 

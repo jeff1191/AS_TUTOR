@@ -154,12 +154,14 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                         public void onClick(DialogInterface dialog, int item) {
                             if (items[item].equals("Hacer foto")) {
                                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivityForResult(intent, CAMARA);
                             } else if (items[item].equals("Elegir de la galeria")) {
                                 Intent intent = new Intent(
                                         Intent.ACTION_PICK,
                                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 intent.setType("image/*");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivityForResult(
                                         Intent.createChooser(intent, "Select File"),
                                         SELECCIONAR_GALERIA);
