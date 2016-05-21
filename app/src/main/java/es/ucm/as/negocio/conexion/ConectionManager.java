@@ -129,6 +129,8 @@ public class ConectionManager {
                             sincronizarTarea();
                         }
 
+                        for(int i = 0; i < message.getTareas().size();i++)
+                            Log.e("CONECTION-MAN", message.getTareas().get(i).getTextoAlarma() + " a las " + message.getTareas().get(i).getHoraAlarma().toString());
                         dataOutputStream.writeObject(message);
 
                         socket.close();
@@ -258,10 +260,9 @@ public class ConectionManager {
             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
             // Tareas
             List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
-            for(int i= 0; i < tareasUsuario.size(); i++) {
-                Log.e("TAREA||", tareasUsuario.get(i).getTextoAlarma()+ " "+ tareasUsuario.get(i).getHoraPregunta());
+            for(int i= 0; i < tareasUsuario.size(); i++)
                 tareasUsuario.get(i).setUsuario(message.getUsuario());
-            }
+
             saSuceso.guardarTareas(tareasUsuario);
             ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
             message.setTareas(tareasSincro);
