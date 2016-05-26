@@ -104,10 +104,6 @@
             android:layout_height="0dp"
             android:layout_weight="3">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"></LinearLayout>
             <ListView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -115,10 +111,6 @@
                 android:background="@color/listado"
                 android:choiceMode="singleChoice"
                 android:id="@+id/listViewUsuariosEvento" />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"></LinearLayout>
 
         </LinearLayout>
 
