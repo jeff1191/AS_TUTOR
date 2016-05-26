@@ -4,22 +4,22 @@
     android:layout_width="fill_parent"
     android:background="@color/listadoHeader">
 
-
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:text="Nombre"
         android:id="@+id/head_nombre_usuario"
         android:focusable="false"
+        android:gravity="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
     </TextView>
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:paddingLeft="20dp"
         android:text="Asistirá"
         android:id="@+id/head_asistira"
         android:focusable="false"
@@ -31,9 +31,10 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
+        android:layout_marginRight="5dp"
         android:id="@+id/head_tipo_habilitada"
         android:text="Invitar"
-        android:gravity="right"
+        android:gravity="center"
         android:focusable="false"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium">
     </TextView>

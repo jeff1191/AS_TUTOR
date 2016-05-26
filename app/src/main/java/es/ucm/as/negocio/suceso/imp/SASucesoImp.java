@@ -1,8 +1,6 @@
 
 package es.ucm.as.negocio.suceso.imp;
 
-import android.util.Log;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -76,7 +74,6 @@ public class SASucesoImp implements SASuceso {
         tarea.setTextoAlarma(transferTarea.getTextoAlarma());
         tarea.setHoraPregunta(transferTarea.getHoraPregunta());
         tarea.setHoraAlarma(transferTarea.getHoraAlarma());
-        Log.e("hora tarea", tarea.getHoraAlarma().toString());
         tarea.setMejorar(transferTarea.getMejorar());
         tarea.setFrecuenciaTarea(transferTarea.getFrecuenciaTarea());
         tarea.setHabilitada(transferTarea.getHabilitada());

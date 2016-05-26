@@ -1,7 +1,6 @@
 package es.ucm.as.negocio.conexion;
 
 import android.app.ProgressDialog;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -44,7 +43,6 @@ public class ConectionManager {
     public ConectionManager(Mensaje message){
         this.message = message;
         this.codigo = message.getUsuario().getCodigoSincronizacion();
-        Log.e("CODIGO_CONECTION_M", codigo);
     }
 
     public Mensaje getMensajeUsuario(){
@@ -107,17 +105,14 @@ public class ConectionManager {
 
 
                     if (primerMensaje && s[1].equals(codigo)) {
-                        Log.e("PERMITIDO","ENVIADO PERMITIDO");
                         Mensaje msgReply2 = new Mensaje("Permitido");
                         dataOutputStream.writeObject(msgReply2);
                         socket.close();
                         //Se rechaza la conexion
                     }else if(primerMensaje && !s[1].equals(codigo)) {
-                        Log.e("RECHAZANDO ","USUARIO: " + messageFromClient.getUsuario().getCodigoSincronizacion());
                         socket.close();
                         // Se procesa el mensaje
                     }else if(!primerMensaje){
-                        Log.e("SEGUNDO_MSG"," RECIBIENDO MENSAJE");
 
                      // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
                      //   Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getTareas().get(0).getTextoPregunta());
@@ -139,7 +134,6 @@ public class ConectionManager {
                     }
                 }
             }catch (StreamCorruptedException e){
-                Log.e("StreamCorruptedExceptio", "mensaje nulo");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -258,10 +252,9 @@ public class ConectionManager {
             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
             // Tareas
             List<TransferTarea> tareasUsuario = messageFromClient.getTareas();
-            for(int i= 0; i < tareasUsuario.size(); i++) {
-                Log.e("TAREA||", tareasUsuario.get(i).getTextoAlarma()+ " "+ tareasUsuario.get(i).getHoraPregunta());
+            for(int i= 0; i < tareasUsuario.size(); i++)
                 tareasUsuario.get(i).setUsuario(message.getUsuario());
-            }
+
             saSuceso.guardarTareas(tareasUsuario);
             ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
             message.setTareas(tareasSincro);

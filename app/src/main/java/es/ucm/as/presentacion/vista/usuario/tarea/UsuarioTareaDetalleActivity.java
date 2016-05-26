@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.suceso.TransferTarea;
@@ -142,31 +143,37 @@ public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
 
     public void aceptar(View view){
-        String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
-        String pregunta_hour = horaPregunta.getCurrentHour() + ":" + horaPregunta.getCurrentMinute();
 
-        TransferTarea transfer = new TransferTarea();
-        transfer.setTextoAlarma(textoAlarma.getText().toString());
-        transfer.setTextoPregunta(textoPregunta.getText().toString());
-        transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));
-        transfer.setHoraPregunta(ParserTime.toDate(pregunta_hour));
+        if(textoAlarma.getText().toString().matches("")) {
+            Toast.makeText(getApplicationContext(), "El campo del texto de la alarma es obligatorio",
+                    Toast.LENGTH_SHORT).show();
+        }else {
+            String alarm_hour = horaAlarma.getCurrentHour() + ":" + horaAlarma.getCurrentMinute();
+            String pregunta_hour = horaPregunta.getCurrentHour() + ":" + horaPregunta.getCurrentMinute();
 
-        transfer.setFrecuenciaTarea(frecuencia);
-        transfer.setMejorar(Integer.parseInt(mejorar.getText().toString()));
-        transfer.setNumSi(Integer.parseInt(si.getText().toString()));
-        transfer.setNumNo(Integer.parseInt(no.getText().toString()));
-        transfer.setHabilitada(true);
-        transfer.setId(idTarea);
-        TransferUsuario t_usuario = new TransferUsuario();
-        t_usuario.setId(idUsuario);
-        transfer.setUsuario(t_usuario);
+            TransferTarea transfer = new TransferTarea();
+            transfer.setTextoAlarma(textoAlarma.getText().toString());
+            transfer.setTextoPregunta(textoPregunta.getText().toString());
+            transfer.setHoraAlarma(ParserTime.toDate(alarm_hour));
+            transfer.setHoraPregunta(ParserTime.toDate(pregunta_hour));
 
-        if (nuevaTarea){
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
-        }else{
-            Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+            transfer.setFrecuenciaTarea(frecuencia);
+            transfer.setMejorar(Integer.parseInt(mejorar.getText().toString()));
+            transfer.setNumSi(Integer.parseInt(si.getText().toString()));
+            transfer.setNumNo(Integer.parseInt(no.getText().toString()));
+            transfer.setHabilitada(true);
+            transfer.setId(idTarea);
+            TransferUsuario t_usuario = new TransferUsuario();
+            t_usuario.setId(idUsuario);
+            transfer.setUsuario(t_usuario);
+
+            if (nuevaTarea) {
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_TAREA, transfer);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+            } else {
+                Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_TAREA, transfer);
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_TAREAS, idUsuario);
+            }
         }
     }
 
