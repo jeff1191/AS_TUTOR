@@ -171,15 +171,10 @@ public class FragmentDetalleEvento extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapterListadoUsuarios.cambiaCheck(position - 1); // Si tienes header sino cambiaCheck(position);
-                // Toast.makeText(getActivity(), "POSITION: " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
         // Fin Listado de usuarios del evento*/
-
-        Toast.makeText(getActivity(), "CALENDARIO: " + currentCalendar.get(Calendar.DAY_OF_MONTH), Toast.LENGTH_SHORT).show();
-
-
 
         customCalendar.setSelectedDate(currentCalendar.getTime());
         customCalendar.setCurrentDate(currentCalendar);
@@ -188,11 +183,6 @@ public class FragmentDetalleEvento extends Fragment{
     @Override
     public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        Toast errorNombre =
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "FECHA: "+ df.format(date.getCalendar().getTime()), Toast.LENGTH_SHORT);
-
-        errorNombre.show();
         fechaActualEvento = date.getCalendar().getTime();
         }
     });
@@ -384,9 +374,13 @@ public class FragmentDetalleEvento extends Fragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
         super.onCreateOptionsMenu(menu, inflater);
-        menu.clear(); //poner otro menu
-        inflater.inflate(R.menu.menu_main_eventos, menu);
-    }
+        menu.clear();
+        if(accion.equals("guardar"))
+          inflater.inflate(R.menu.menu_main_eventos, menu);
+        else//Crear
+          inflater.inflate(R.menu.menu_vacio, menu);
+
+}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
