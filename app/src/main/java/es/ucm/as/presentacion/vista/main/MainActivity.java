@@ -25,7 +25,6 @@ import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.ayuda.FragmentListadoAyuda;
-import es.ucm.as.presentacion.vista.tutor.FragmentDetalleTutor;
 import es.ucm.as.presentacion.vista.tutor.FragmentListadoTutor;
 
 

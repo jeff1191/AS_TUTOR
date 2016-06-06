@@ -277,7 +277,7 @@ public class FragmentDetalleUsuario extends Fragment {
         if (!nombre.matches(""))
             return true;
         else
-            mostrarMensajeError("El campo nombre no puede servacío");
+            mostrarMensajeError("El campo nombre no puede ser vacío");
 
         return false;
     }

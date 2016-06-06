@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import es.ucm.as.R;
@@ -76,7 +75,7 @@ public class RegistroTutor extends Activity {
             } else
                 mostrarMensajeError("Campo email inválido");
         } else
-            mostrarMensajeError("Algún campo está vacío");
+            mostrarMensajeError("Algún campo obligatorio está vacío");
 
         return false;
     }

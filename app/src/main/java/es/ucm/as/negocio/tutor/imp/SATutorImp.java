@@ -79,10 +79,4 @@ public class SATutorImp implements SATutor {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public boolean acceso(String clave) {
-        TransferTutor t = consultarTutor();
-        return t.getContrasenha().equals(clave);
-    }
 }

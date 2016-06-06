@@ -1,7 +1,6 @@
 package es.ucm.as.presentacion.vista.tutor;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -16,17 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 import es.ucm.as.R;
-import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.imp.tutor.ConsultarTutorComando;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 /**
@@ -152,7 +144,7 @@ public class FragmentDetalleTutor extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if(pwd1.getText().toString().equals(pwd2.getText().toString())) {
                     contrasenha = pwd1.getText().toString();
-                    Log.e("contraseña cambiada", contrasenha);
+                    Log.e("Contraseña cambiada", contrasenha);
                 }else{
                     Toast toast = Toast.makeText(Manager.getInstance().getContext(),
                             "Las contraseñas no coinciden", Toast.LENGTH_SHORT);

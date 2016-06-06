@@ -7,6 +7,4 @@ public interface SATutor {
     public void editarTutor(TransferTutor transferTutor);
 
     public void crearTutor(TransferTutor transferTutor);
-
-    public boolean acceso(String clave);
 }
