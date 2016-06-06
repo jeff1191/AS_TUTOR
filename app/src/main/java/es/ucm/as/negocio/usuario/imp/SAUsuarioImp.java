@@ -5,7 +5,6 @@ package es.ucm.as.negocio.usuario.imp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -440,13 +439,10 @@ public class SAUsuarioImp implements SAUsuario {
 				List<Evento> eventos_uBDD= getHelper().lookupEventosForUsuario(usuarioBDD);
 
 				for(int i=1; i < eventosUsuario.size(); i++){
-					Log.e("ID_EVENTO_FINAL", eventosUsuario.get(i).getEvento().getId()+"");
 					Evento eventoU =daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId());
 					//UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
 					UsuarioEvento relacion = tQbUsuario_e.where().eq("USUARIO" , usuarioBDD).and().eq("EVENTO", eventoU).queryForFirst();
 					relacion.setAsistencia(eventosUsuario.get(i).getEvento().getAsistencia());
-
-					Log.e("BDD: ", "USUARIO: " + relacion.getUsuario().getNombre() + " id: " + relacion.getEvento().getId() + " " + relacion.getEvento().getNombreEvento() + " " + relacion.getAsistencia());
 
 					daoUsuarioEvento.createOrUpdate(relacion);
 				}

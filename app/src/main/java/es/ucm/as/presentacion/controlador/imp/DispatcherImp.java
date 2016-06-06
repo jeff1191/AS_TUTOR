@@ -1,29 +1,29 @@
 package es.ucm.as.presentacion.controlador.imp;
 
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import es.ucm.as.R;
+import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
+import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.negocio.utils.ParserTime;
-import es.ucm.as.negocio.suceso.TransferEvento;
-import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.presentacion.controlador.Dispatcher;
 import es.ucm.as.presentacion.controlador.ListaComandos;
+import es.ucm.as.presentacion.vista.evento.FragmentDetalleEvento;
+import es.ucm.as.presentacion.vista.evento.FragmentListadoEvento;
 import es.ucm.as.presentacion.vista.main.Acceso;
 import es.ucm.as.presentacion.vista.main.BlankFragment;
 import es.ucm.as.presentacion.vista.main.MainActivity;
 import es.ucm.as.presentacion.vista.main.Manager;
 import es.ucm.as.presentacion.vista.tutor.FragmentDetalleTutor;
-import es.ucm.as.presentacion.vista.tutor.FragmentListadoTutor;
 import es.ucm.as.presentacion.vista.tutor.RegistroTutor;
 import es.ucm.as.presentacion.vista.usuario.FragmentDetalleUsuario;
 import es.ucm.as.presentacion.vista.usuario.FragmentListadoUsuario;
@@ -31,8 +31,6 @@ import es.ucm.as.presentacion.vista.usuario.evento.FragmentDetalleUsuarioEvento;
 import es.ucm.as.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 import es.ucm.as.presentacion.vista.usuario.reto.FragmentDetalleReto;
 import es.ucm.as.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
-import es.ucm.as.presentacion.vista.evento.FragmentDetalleEvento;
-import es.ucm.as.presentacion.vista.evento.FragmentListadoEvento;
 
 /**
  * Created by Jeffer on 02/03/2016.
@@ -103,10 +101,15 @@ public class DispatcherImp extends Dispatcher {
                     usuariosActivos.add(info.get(i).getActivo());
                 }
 
-
                 TransferEvento consulta = info.get(0).getEvento();//Sabemos que estamaos consultando evento, por lo tanto no hay nullPointer
 
-                FragmentDetalleEvento frgDetalleE = FragmentDetalleEvento.newInstance(consulta,nombresUsuarios, idsUsuarios, asistenciaUsuarios,usuariosActivos,"guardar");
+                FragmentDetalleEvento frgDetalleE;
+                //Log.e("ccc", consulta.getFecha()+" "+Calendar.getInstance().getTime()+" "+consulta.getFecha().after(Calendar.getInstance().getTime()));
+                if(!consulta.getFecha().after(Calendar.getInstance().getTime()))
+                    frgDetalleE = FragmentDetalleEvento.newInstance(consulta, nombresUsuarios, idsUsuarios, asistenciaUsuarios, usuariosActivos, "pasado");
+                else
+                    frgDetalleE = FragmentDetalleEvento.newInstance(consulta,nombresUsuarios, idsUsuarios, asistenciaUsuarios,usuariosActivos,"guardar");
+
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleE).commit();
                 break;
 
