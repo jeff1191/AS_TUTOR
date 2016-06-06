@@ -61,12 +61,6 @@ public class ConectionManager {
 
         socketServerThread= new Thread(new SocketServerThread());
         socketServerThread.start();
-       /* while(socketServerThread.isAlive()){
-            // Log.e("Comprueba", "Esperando");
-        }*/
-
-
-//       socketServerThread.run();
     }
 
     public boolean sigueActivo(){
