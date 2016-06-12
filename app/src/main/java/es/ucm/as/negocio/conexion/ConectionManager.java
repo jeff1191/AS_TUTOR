@@ -119,9 +119,11 @@ public class ConectionManager {
                             sincronizarTarea();
                         }
 
-                        for(int i = 0; i < message.getTareas().size();i++)
-                            Log.e("CONECTION-MAN", message.getTareas().get(i).getTextoAlarma() + " a las " + message.getTareas().get(i).getHoraAlarma().toString());
+
+                        //for (int i = 0; i < message.getTareas().size(); i++)
+                            //Log.e("CONECTION-MAN", message.getTareas().get(i).getTextoAlarma() + " a las " + message.getTareas().get(i).getHoraAlarma().toString());
                         dataOutputStream.writeObject(message);
+
 
                         socket.close();
                         serverSocket.close();
@@ -182,9 +184,9 @@ public class ConectionManager {
             if (messageFromClient.getReto() != null) {
                 actualizarReto.setContador(messageFromClient.getReto().getContador());
                 actualizarReto.setUsuario(message.getUsuario());
+                saSuceso.crearReto(actualizarReto);
+                message.setReto(actualizarReto);
             }
-            saSuceso.crearReto(actualizarReto);
-            message.setReto(actualizarReto);
         }
 
         public void sincronizarEvento() {

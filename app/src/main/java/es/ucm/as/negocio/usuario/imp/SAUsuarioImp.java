@@ -68,6 +68,8 @@ public class SAUsuarioImp implements SAUsuario {
 				case "Chica":
 					usuario.setTipoPerfil(Perfil.Chica);
 					break;
+				case "Vacío":
+					usuario.setTipoPerfil(Perfil.Vacío);
 			}
 			usuario.setNotas(transferUsuario.getNotas());
 			usuario.setNombrePadre(transferUsuario.getNombrePadre());
@@ -213,16 +215,17 @@ public class SAUsuarioImp implements SAUsuario {
 			Usuario usuario = usuarioDao.queryForId(idUsuario);
 
 			// lee del fichero que corresponda al perfil y convierte en tareas
-			p.readTareas(usuario.getTipoPerfil());
-			ArrayList<Tarea> tareasFichero = p.getTareas();
+            if(!usuario.getTipoPerfil().equals(Perfil.Vacío)) {
+                p.readTareas(usuario.getTipoPerfil());
+                ArrayList<Tarea> tareasFichero = p.getTareas();
 
-			// crea las nuevas tareas en BBDD
-			for (int i = 0; i < tareasFichero.size(); i++){
-				Tarea t = tareasFichero.get(i);
-				t.setUsuario(usuario);
-				tareaDao.create(t);
-			}
-
+                // crea las nuevas tareas en BBDD
+                for (int i = 0; i < tareasFichero.size(); i++) {
+                    Tarea t = tareasFichero.get(i);
+                    t.setUsuario(usuario);
+                    tareaDao.create(t);
+                }
+            }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
