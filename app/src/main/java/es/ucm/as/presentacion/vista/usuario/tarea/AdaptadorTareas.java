@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import es.ucm.as.R;
 
 /**
- * Created by msalitu on 02/04/2016.
  * Esta clase se corresponde con una fila de la tabla de tareas que tiene cada usuario
  */
 public class AdaptadorTareas extends BaseAdapter {

@@ -9,9 +9,7 @@ import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 
-/**
- * Created by Jeffer on 15/04/2016.
- */
+
 public class ConsultarEvento implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {

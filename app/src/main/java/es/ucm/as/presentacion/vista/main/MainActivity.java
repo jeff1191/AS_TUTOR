@@ -81,14 +81,11 @@ public class MainActivity extends AppCompatActivity {
                 R.string.hello_world
         ) {
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
-                Log.e("Cerrando drawer", "!!");
+                //Log.e("Cerrando drawer", "!!");
             }
-
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
-                Log.e("Abriendo drawe", "!!");
+                //Log.e("Abriendo drawe", "!!");
             }
         };
 
@@ -192,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             NavDrawerLayout.closeDrawer(NavList);
         } else {
             //Si el fragment es nulo mostramos un mensaje de error.
-            Log.e("Error  ", "MostrarFragment" + position);
+            //Log.e("Error  ", "MostrarFragment" + position);
         }
     }
 

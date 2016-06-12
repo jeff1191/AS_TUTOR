@@ -14,9 +14,6 @@ import es.ucm.as.R;
 import es.ucm.as.integracion.Tarea;
 import es.ucm.as.presentacion.vista.main.Manager;
 
-/**
- * Created by msalitu on 14/03/2016.
- */
 public class ParserText {
 
     private ArrayList<Tarea> tareas;
@@ -62,8 +59,6 @@ public class ParserText {
             ex.printStackTrace();
         }
     }
-
-
     /*A partir de dos Strings crea una pregunta con esos textos de alarma y pregunta*/
     public Tarea toTarea(String textoAlarma, String textoPregunta, String horaAlarma, String horaPregunta){
         Tarea ret = new Tarea();

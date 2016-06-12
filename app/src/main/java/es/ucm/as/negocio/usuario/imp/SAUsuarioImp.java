@@ -104,8 +104,6 @@ public class SAUsuarioImp implements SAUsuario {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Dao<Reto, Integer> daoReto = getHelper().getRetoDao();
 			Usuario usuario = daoUsuario.queryForId(usuarioMod.getId());
-			//Aqui buscar los campos modificados y machacharlos
-			//¿Que tiene mas sentido... pasar todo o ver aqui que campos no son nulos?
 			if(usuarioMod.getNombreMadre() == null && usuarioMod.getNombrePadre() == null
 					&& usuarioMod.getNombre() != null){
 				//Implica que viene de detalleUsuario
@@ -134,7 +132,6 @@ public class SAUsuarioImp implements SAUsuario {
 					usuario.setTelfMadre(usuarioMod.getTelMadre());
 				}
 			} else {
-				//Sincronizacion (Tal vez otro comando?)
 				usuario.setPuntuacion(usuarioMod.getPuntuacion());
 				usuario.setPuntuacionAnterior(usuarioMod.getPuntuacionAnterior());
 			}
@@ -182,7 +179,6 @@ public class SAUsuarioImp implements SAUsuario {
 		}
 
 		return ret;
-
 	}
 
 
@@ -302,11 +298,10 @@ public class SAUsuarioImp implements SAUsuario {
 			tUsuario.setNombre(usuarioBDD.getNombre());
 
 			QueryBuilder<UsuarioEvento, Integer> tQb = daoUsuarioEvento.queryBuilder();
-
 			List<UsuarioEvento> eventosUsuarioTabla = tQb.where().eq("USUARIO", usuarioBDD).query(); //tendremos todos los eventos con ID_EVENTO
-
 			List<Evento> usuarioEventos = getHelper().lookupEventosForUsuario(usuarioBDD); //tenemos los usuarios de ese evento
 			ret.add(new TransferUsuarioEvento(null,tUsuario));
+
 			for(int i = 0; i < usuarioEventos.size(); i++) {
 				TransferEvento tEvento= new TransferEvento();
 				tEvento.setId(usuarioEventos.get(i).getId());
@@ -337,23 +332,16 @@ public class SAUsuarioImp implements SAUsuario {
 				tQb.where().eq("NOMBRE", eventosUsuario.get(0).getUsuario().getNombre());
 				Usuario usuarioBDD = tQb.queryForFirst(); // Obtenemos el usuario
 
-
 				QueryBuilder<UsuarioEvento, Integer> tQbUsuario_e = daoUsuarioEvento.queryBuilder();
-
 				List<UsuarioEvento> eventos_de_Usuario = tQbUsuario_e.where().eq("USUARIO", usuarioBDD).query(); //tendremos todos los eventos con ID_EVENTO
-
-
 				List<Evento> eventos_uBDD= getHelper().lookupEventosForUsuario(usuarioBDD);
 
 				for(int i=1; i < eventosUsuario.size(); i++){
 					Evento eventoU =daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId());
-					//UsuarioEvento relacion = new UsuarioEvento( daoEvento.queryForId(eventosUsuario.get(i).getEvento().getId()),usuarioBDD);
 					UsuarioEvento relacion = tQbUsuario_e.where().eq("USUARIO" , usuarioBDD).and().eq("EVENTO", eventoU).queryForFirst();
 					relacion.setAsistencia(eventosUsuario.get(i).getEvento().getAsistencia());
-
 					daoUsuarioEvento.createOrUpdate(relacion);
 				}
-				//daoUsuarioEvento.delete(eventos_de_Usuario); //Quitamos todos sus eventos para volverlos añadir
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -366,9 +354,7 @@ public class SAUsuarioImp implements SAUsuario {
 		try {
 			Dao<Usuario, Integer> daoUsuario  = getHelper().getUsuarioDao();
 			Usuario usuarioPuntuacion = daoUsuario.queryForId(actualizaPuntuacion.getId());
-
 			usuarioPuntuacion.setPuntuacion(actualizaPuntuacion.getPuntuacion());
-
 			daoUsuario.update(usuarioPuntuacion);
 		} catch (SQLException e) {
 			e.printStackTrace();

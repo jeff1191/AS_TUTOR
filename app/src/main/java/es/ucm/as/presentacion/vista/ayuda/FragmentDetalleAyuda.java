@@ -12,9 +12,6 @@ import android.widget.TextView;
 
 import es.ucm.as.R;
 
-/**
- * Created by msalitu on 10/04/2016.
- */
 public class FragmentDetalleAyuda extends Fragment {
 
     private TextView titulo;
@@ -75,9 +72,20 @@ public class FragmentDetalleAyuda extends Fragment {
             case 7: //enviar informe
                 pantallazo.setImageResource(R.drawable.a_enviar_informe);
                 break;*/
+            case 8:
+                pantallazo.setImageResource(R.drawable.a_crear_evento);
+                break;
+            case 9:
+                pantallazo.setImageResource(R.drawable.a_editar_evento);
+                break;
+            case 10:
+                pantallazo.setImageResource(R.drawable.a_editar_evento);
+                break;
+            case 11:
+                pantallazo.setImageResource(R.drawable.a_miperfil);
+                break;
             default:
                 pantallazo.setImageResource(R.drawable.a_crear_tarea);
-                break;
         }
     }
 

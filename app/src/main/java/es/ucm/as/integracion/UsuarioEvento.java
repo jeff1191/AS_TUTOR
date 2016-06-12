@@ -5,9 +5,6 @@ import com.j256.ormlite.field.DatabaseField;
 import es.ucm.as.integracion.Evento;
 import es.ucm.as.integracion.Usuario;
 
-/**
- * Created by Juan Lu on 31/03/2016.
- */
 public class UsuarioEvento {
 
     @DatabaseField(generatedId = true, columnName = "ID")

@@ -29,9 +29,6 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.main.Manager;
 
-/**
- * Created by msalitu on 05/05/2016.
- */
 public class ConectionManager {
 
     private ServerSocket serverSocket;
@@ -91,8 +88,6 @@ public class ConectionManager {
                     dataOutputStream = new ObjectOutputStream(
                             socket.getOutputStream());
 
-
-                    //If no message sent from client, this code will block the program
                     messageFromClient = (Mensaje) dataInputStream.readObject();
 
                     String[] s = messageFromClient.getVerificar().split(":");
@@ -108,27 +103,16 @@ public class ConectionManager {
                         socket.close();
                         // Se procesa el mensaje
                     }else if(!primerMensaje){
-
-                     // Log.e("ENVIANDO RETO********", message.getReto().getTexto());
-                     //   Log.e("ANTES DEL WRITE OBJECT", " ENVIANDO BDD DE MENSAJE " + message.getTareas().get(0).getTextoPregunta());
-
-
+                        //Se envian los datos hacia al usuario
                         if(!messageFromClient.getVerificar().equals("registro")) {
                             sincronizarReto();
                             sincronizarEvento();
                             sincronizarTarea();
                         }
-
-
-                        //for (int i = 0; i < message.getTareas().size(); i++)
-                            //Log.e("CONECTION-MAN", message.getTareas().get(i).getTextoAlarma() + " a las " + message.getTareas().get(i).getHoraAlarma().toString());
                         dataOutputStream.writeObject(message);
-
-
                         socket.close();
                         serverSocket.close();
                         progress.dismiss();
-                    //  Toast.makeText(Manager.getInstance().getActivity(), "Datos actualizados", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -165,12 +149,7 @@ public class ConectionManager {
                     }
                 }
             }
-//            handler.sendEmptyMessage(0);
-
-
         }
-
-
         public void sincronizarReto(){
             SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
             SASuceso saSuceso = FactoriaSA.getInstancia().nuevoSASuceso();
@@ -199,25 +178,21 @@ public class ConectionManager {
             List<TransferEvento> eventosSincro = messageFromClient.getEventos();
 
             if (eventosSincro.size() > 0) {
-
                 String nombreEventoBDD;
                 String nombreEventoSincro;
                 TransferUsuarioEvento usuario_e = new TransferUsuarioEvento(null, message.getUsuario());
                 eventosUsuarioFinal.add(usuario_e);
                 for (int i = 1; i < eventosUsuarioBDD.size(); i++) {
-
                     nombreEventoBDD = eventosUsuarioBDD.get(i).getEvento().getNombre();
                     for (int j = 0; j < eventosSincro.size(); j++) {
                         nombreEventoSincro = eventosSincro.get(j).getNombre();
-                        if (nombreEventoBDD.equals(nombreEventoSincro)/* && eventosSincro.get(j).getAsistencia().equalsIgnoreCase("SI")*/) {
-                            //Log.e("EVENTOS: ", "sincro: "+ eventosSincro.get(j).getNombre()+ " asiste: "+ eventosSincro.get(j).getAsistencia());
+                        if (nombreEventoBDD.equals(nombreEventoSincro)) {
                             TransferUsuarioEvento evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
                             evento_usuario.setAsistencia(eventosSincro.get(j).getAsistencia());
                             eventosUsuarioFinal.add(evento_usuario);
                         }
                     }
                 }
-
                 for (int i = 1; i < eventosUsuarioBDD.size(); i++) {
                     boolean existeEvento = false;
                     TransferUsuarioEvento evento_usuario;
@@ -227,24 +202,18 @@ public class ConectionManager {
                         }
                     }
                     if (existeEvento == false) {
-                        //Aqui mete los nuevos
+                        //nuevos eventos
                         evento_usuario = new TransferUsuarioEvento(eventosUsuarioBDD.get(i).getEvento(), message.getUsuario());
                         evento_usuario.setAsistencia("NO");
                         eventosUsuarioFinal.add(evento_usuario);
                     }
                 }
-
                 for (int i = 1; i < eventosUsuarioFinal.size(); i++) {
                     eventosUsuarioFinal.get(i).getEvento().setAsistencia(eventosUsuarioFinal.get(i).getAsistencia());
-                    //Log.e("EVENTO2ALUSER", eventosUsuarioFinal.get(i).getEvento().getNombre()+" "+eventosUsuarioFinal.get(i).getEvento().getAsistencia());
                     actualizar.add(eventosUsuarioFinal.get(i).getEvento());
                 }
-
-
                 saUsuario.guardarEventosUsuario(eventosUsuarioFinal);
-
                 message.setEventos(actualizar);
-
             }
         }
         public void sincronizarTarea(){
@@ -257,9 +226,7 @@ public class ConectionManager {
             saSuceso.guardarTareas(tareasUsuario);
             ArrayList<TransferTarea> tareasSincro = saSuceso.consultarTareasHabilitadas(message.getUsuario().getId());
             message.setTareas(tareasSincro);
-
             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, messageFromClient.getUsuario().getId());
-
         }
 
 

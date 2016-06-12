@@ -22,9 +22,7 @@ import es.ucm.as.negocio.utils.ParserTime;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * Created by msalitu on 06/04/2016.
- */
+
 public class UsuarioTareaDetalleActivity extends AppCompatActivity {
 
     private boolean nuevaTarea;

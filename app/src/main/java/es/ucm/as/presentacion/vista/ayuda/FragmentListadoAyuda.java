@@ -11,9 +11,6 @@ import android.widget.ListView;
 
 import es.ucm.as.R;
 
-/**
- * Created by msalitu on 10/04/2016.
- */
 public class FragmentListadoAyuda extends Fragment {
 
     private ListView listadoAyuda;

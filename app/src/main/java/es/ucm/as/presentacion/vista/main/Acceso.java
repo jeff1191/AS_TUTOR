@@ -21,9 +21,6 @@ import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
-/**
- * Created by Juan Lu on 14/04/2016.
- */
 public class Acceso extends AppCompatActivity {
 
     private static String password;

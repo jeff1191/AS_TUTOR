@@ -11,7 +11,6 @@ import es.ucm.as.presentacion.controlador.comandos.imp.sincronizacion.Sincroniza
 import es.ucm.as.presentacion.controlador.comandos.imp.tutor.AccesoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarEventosUsuario;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.reto.CrearRetosComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.CrearUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.EditarUsuarioComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.EliminarUsuarioComando;
@@ -36,9 +35,6 @@ import es.ucm.as.presentacion.controlador.comandos.imp.evento.EliminarEventoComa
 import es.ucm.as.presentacion.controlador.comandos.imp.evento.GuardarEventoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.evento.ListadoEventoComando;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class FactoriaComandosImp extends FactoriaComandos {
     @Override
     public Command getCommand(String comando) {
@@ -107,9 +103,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
 
             // Reto
-            case ListaComandos.CREAR_RETOS:
-                ret = new CrearRetosComando();
-                break;
             case ListaComandos.CREAR_RETO:
                 ret = new CrearRetoComando();
                 break;
@@ -148,7 +141,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.GUARDAR_USUARIOS_EVENTO:
                 ret= new GuardarUsuariosEvento();
                 break;
-
             case ListaComandos.SINCRONIZAR:
                 ret = new SincronizarComando();
                 break;

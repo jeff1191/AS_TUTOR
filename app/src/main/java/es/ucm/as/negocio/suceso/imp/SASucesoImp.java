@@ -105,7 +105,6 @@ public class SASucesoImp implements SASuceso {
             e.printStackTrace();
         }
     }
-
     @Override
     public void deshabilitarTarea(Integer idTarea) {
         try {
@@ -117,14 +116,10 @@ public class SASucesoImp implements SASuceso {
             e.printStackTrace();
         }
     }
-
-
-
     @Override
     public ArrayList<TransferTarea> consultarTareas(Integer idUsuario) {
         ArrayList<TransferTarea> ret = new ArrayList<TransferTarea>();
         try {
-
             Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
             Dao<Tarea, Integer> daoTarea = getHelper().getTareaDao();
 
@@ -148,7 +143,6 @@ public class SASucesoImp implements SASuceso {
                 transfer.setId(tarea.getId());
                 ret.add(i, transfer);
             }
-
             // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
             // para cuando no haya ninguna
             if(tareas.size() == 0) {
@@ -192,7 +186,6 @@ public class SASucesoImp implements SASuceso {
                 transfer.setId(tarea.getId());
                 ret.add(i, transfer);
             }
-
             // En la primera posicion se almacena una tarea fantasma que solo tiene el id de usuario
             // para cuando no haya ninguna
             if(tareas.size() == 0) {
@@ -279,8 +272,6 @@ public class SASucesoImp implements SASuceso {
 		try {
 			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
 			Evento eventoBDD = daoEvento.queryForId(consulta.getId());
-
-
 			ret = new TransferEvento(eventoBDD.getId(),eventoBDD.getNombreEvento(),
 					eventoBDD.getFecha(),eventoBDD.getHoraAlarma(),eventoBDD.getHoraEvento());
 
@@ -309,7 +300,6 @@ public class SASucesoImp implements SASuceso {
 	@Override
 	public ArrayList<TransferEvento> listadoEventos() {
 		ArrayList<TransferEvento> ret = new ArrayList<TransferEvento>();
-
 		try {
 			Dao<Evento, Integer> daoEvento =  getHelper().getEventoDao();
 			List<Evento> eventosBDD = daoEvento.queryForAll();
@@ -374,7 +364,6 @@ public class SASucesoImp implements SASuceso {
 				}
 			}
 
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -399,13 +388,9 @@ public class SASucesoImp implements SASuceso {
 					relacion.setAsistencia("NO");
 					daoUsuarioEvento.create(relacion);
 				}
-
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
-
 		}
 	}
 
@@ -437,35 +422,6 @@ public class SASucesoImp implements SASuceso {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-    }
-    // Reto
-
-    public void crearRetos(){
-        Dao<Reto, Integer> reto;
-        try {
-            reto = getHelper().getRetoDao();
-            Usuario u = new Usuario();
-            if(!reto.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
-                Reto reto1 = new Reto();
-                reto1.setContador(3);
-                reto1.setTexto("Dar un beso de buenas noches a mama");
-                reto1.setSuperado(false);
-                u.setId(1);
-                reto1.setUsuario(u);
-                reto1.setPremio("Kitkat");
-                reto.create(reto1);
-                Reto reto2 = new Reto();
-                reto2.setContador(5);
-                reto2.setTexto("Lavarse las manos antes de comer");
-                reto2.setSuperado(false);
-                u.setId(3);
-                reto2.setUsuario(u);
-                reto2.setPremio("");
-                reto.create(reto2);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -510,7 +466,10 @@ public class SASucesoImp implements SASuceso {
             //Busca el reto de ese usuario
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
             rQb.where().eq("USUARIO", usuario);
+
             Reto r = rQb.queryForFirst();
+            ret= new TransferReto();
+            ret.setUsuario(usuario.convert_transfer());
             if (r != null)
                 ret = new TransferReto(r.getId(), r.getUsuario().convert_transfer(), r.getContador(),
                         r.getTexto(), r.getSuperado(), r.getPremio());

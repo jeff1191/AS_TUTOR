@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Handler;
 
-/**
- * Created by Jeffer on 09/05/2016.
- */
 public class Utils {
 
     public static void mostrarProgreso(Activity activity, String titulo, String descripcion, int segundos){

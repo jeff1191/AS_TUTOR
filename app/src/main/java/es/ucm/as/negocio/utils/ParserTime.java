@@ -1,14 +1,9 @@
 package es.ucm.as.negocio.utils;
 
-import android.util.Log;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by msalitu on 15/04/2016.
- */
 public class ParserTime {
 
     // Forma el string a partir de dos enteros: la hora y el minuto
@@ -45,5 +40,4 @@ public class ParserTime {
         String ret = date.toString().substring(10, 16);
         return ret;
     }
-
 }

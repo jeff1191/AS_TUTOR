@@ -2,9 +2,6 @@ package es.ucm.as.negocio.utils;
 
 import se.simbio.encryption.Encryption;
 
-/**
- * Created by Jeffer on 18/05/2016.
- */
 public class Encriptacion {
     private static final String KEY = "$3creTKeeeyYAsAs";
     private static final String SALT = "3st@EzUn@S@lt";
@@ -16,9 +13,7 @@ public class Encriptacion {
     }
 
     public static String decrypt(String string) {
-        // doesnt work on server (requires gradle build)
         Encryption encryption = Encryption.getDefault(KEY, SALT, IV);
-
         String ret = encryption.decryptOrNull(string);
         return ret;
     }

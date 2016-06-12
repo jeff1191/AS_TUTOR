@@ -10,9 +10,6 @@ import android.widget.Toast;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * Created by Jeffer on 13/04/2016.
- */
 public class DialogEliminarEvento extends DialogFragment {
 
     public static DialogEliminarEvento newInstance(int idEvento, String nombreEvento) {
@@ -27,7 +24,6 @@ public class DialogEliminarEvento extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-               // .setIcon(R.drawable.androidhappy)
                 .setTitle("Eliminar Evento")
                 .setMessage("¿Desea eliminar el evento: " + getArguments().getString("nombreEvento")+"?")
                 .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {

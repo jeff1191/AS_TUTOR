@@ -101,11 +101,9 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menu.clear();
         getActivity().getMenuInflater().inflate(R.menu.menu_vacio, menu);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -312,11 +310,8 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
             correoValido = false;
             mostrarMensajeError("Campo telefono de la madre inválido");
         }
-
-
         return dniValido && correoValido && telefonoValido;
     }
-
 
     private void mostrarMensajeError(String msg) {
         Toast errorNombre =
@@ -374,6 +369,4 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
             }
         }
     }
-
-
 }

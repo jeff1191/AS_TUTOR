@@ -1,8 +1,5 @@
 package es.ucm.as.presentacion.controlador;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
 public class ListaComandos {
     // Tutor
     public static final String CONSULTAR_TUTOR = "consultarTutor";

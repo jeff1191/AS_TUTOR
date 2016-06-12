@@ -8,9 +8,7 @@ import android.support.v7.app.AlertDialog;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * Created by Jeffer on 13/04/2016.
- */
+
 public class DialogEliminarTarea extends DialogFragment {
 
     public static DialogEliminarTarea newInstance(String tarea, Integer idTarea, Integer idUsuario) {

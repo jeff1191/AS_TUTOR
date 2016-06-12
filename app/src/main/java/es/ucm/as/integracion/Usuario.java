@@ -9,8 +9,6 @@ import es.ucm.as.negocio.utils.Perfil;
 
 
 public class Usuario {
-
-
     @DatabaseField(generatedId = true, columnName = "ID")
     private Integer id;
 

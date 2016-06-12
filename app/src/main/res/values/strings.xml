@@ -52,6 +52,17 @@
         <!--7 enviar informe-->
         <item>¿Cómo envío el informe de un usuario?</item>
 
+        <!--8 nuevo evento-->
+        <item>¿Cómo añado un nuevo evento?</item>
+
+        <!--9 invitar/desinvitar evento-->
+        <item>Enviar/cancelar invitación a un usuario a un evento</item>
+
+        <!--10 editar/eliminar evento-->
+        <item>¿Cómo edito/elimino un evento?</item>
+
+        <!--11 cambiar contraseña, info-->
+        <item>¿Cómo cambio mi contraseña/datos personales?</item>
 
     </string-array>
 
@@ -104,6 +115,25 @@
         En el menú de la parte superior derecha tienes la opción "Enviar correo". Al seleccionarla
         se te abrirá tu aplicación de correo con uno redactado por defecto con un PDF adjunto con la
         informacón de tu alumno para que se lo envíes a quien quieras.</item>
+
+        <!--8 nuevo evento-->
+        <item>En la sección EVENTOS debes pulsar sobre el botón rosa "+" que aparece en la parte inferior del listado.
+            Después debes rellenar los campos y seleccionar los usuarios a los que quieres invitar al evento</item>
+
+        <!--9 invitar/desinvitar evento-->
+        <item>En la sección EVENTOS debes seleccionar el evento al cual quieres invitar al usuario.
+            A continuación podrás ver los detalles del mismo y en concreto una lista con todos los
+        usuarios de tu sistema. Si seleccionas la fila del usuario en cuestión se marcará la casilla
+        de la columna de la izquierda lo cual te indica que tu usuario está invitado.</item>
+
+        <!--10 editar/eliminar evento-->
+       <item>En la sección EVENTOS debes seleccionar el evento que quieres editar/eliminar.
+            A continuación podrás ver los detalles del evento y editar sus campos ó eliminar el evento pulsando
+            sobre la papelera en la esquina superior derecha.</item>
+
+        <!--11 cambiar contraseña, info-->
+       <item>Para cambiar tus datos personales/contraseña debes seleccionar la pestaña "Mi perfil" en el menú que aparece en la parte
+            superior izquierda. A continuación podrás la información del tutor, pregunta de seguridad y contraseña</item>
 
     </string-array>
 

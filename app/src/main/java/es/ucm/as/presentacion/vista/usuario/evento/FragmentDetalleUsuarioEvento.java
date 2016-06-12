@@ -19,9 +19,6 @@ import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentDetalleUsuarioEvento extends Fragment {
 
 
