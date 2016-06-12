@@ -11,7 +11,6 @@ public class ListaComandos {
     public static final String EXISTE_TUTOR = "existeTutor";
     public static final String ACCESO = "acceso";
     // Usuario
-    public static final String CREAR_USUARIOS = "crearUsuarios";
     public static final String CREAR_USUARIO = "crearUsuario";
     public static final String LISTADO_USUARIOS = "listadoUsuarios";
     public static final String CONSULTAR_USUARIO = "consultarUsuario";

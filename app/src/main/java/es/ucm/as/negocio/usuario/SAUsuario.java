@@ -17,14 +17,14 @@ public interface SAUsuario {
 
 	public TransferUsuario consultarUsuario(Integer idUsuario);
 
-	public void crearUsuarios();
-
 	public void cargarTareasBBDD(Integer idUsuario);
 
 	public ArrayList<TransferUsuario> consultarUsuarios();
 
 	public ArrayList<TransferUsuarioEvento> consultarEventosUsuario(Integer idUsuario);
+
 	public void guardarEventosUsuario(ArrayList<TransferUsuarioEvento> eventosUsuario);
+
 	public void enviarCorreo(Integer idUsuario);
 
 	public void generarPDF(Integer idUsuario);

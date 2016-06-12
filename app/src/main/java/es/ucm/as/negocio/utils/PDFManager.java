@@ -4,6 +4,7 @@ package es.ucm.as.negocio.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -115,14 +116,17 @@ public class PDFManager {
             // Mostramos el reto
             document.add(new Paragraph("Reto", chapterFont));
             document.add(new Paragraph("\n", paragraphFont));
-            document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
-            if(reto.getPremio() != null)
-                document.add(new Paragraph("Premio: "+ reto.getPremio(), paragraphFont));
-            document.add(new Paragraph("Contador: " + reto.getContador().toString() + "/30" , paragraphFont));
-            if (reto.getSuperado())
-                document.add(new Paragraph("Superado" , paragraphFont));
-            else
-                document.add(new Paragraph("No superado" , paragraphFont));
+            if(reto != null) {
+                document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
+                if (reto.getPremio() != null)
+                    document.add(new Paragraph("Premio: " + reto.getPremio(), paragraphFont));
+                document.add(new Paragraph("Contador: " + reto.getContador().toString() + "/30", paragraphFont));
+                if (reto.getSuperado())
+                    document.add(new Paragraph("Superado", paragraphFont));
+                else
+                    document.add(new Paragraph("No superado", paragraphFont));
+            }else
+                document.add(new Paragraph("No tiene ningún reto asignado\n", paragraphFont));
             document.add(new Paragraph("\n", paragraphFont));
 
 

@@ -1,6 +1,7 @@
 package es.ucm.as.negocio.conexion;
 
 import android.app.ProgressDialog;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

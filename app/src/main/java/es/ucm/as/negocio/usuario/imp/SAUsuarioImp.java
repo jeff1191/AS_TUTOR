@@ -183,102 +183,6 @@ public class SAUsuarioImp implements SAUsuario {
 
 	}
 
-	public void crearUsuarios(){
-		Dao<Usuario, Integer> usuario;
-		Dao<Reto, Integer> reto;
-		try {
-			usuario = getHelper().getUsuarioDao();
-			reto = getHelper().getRetoDao();
-			if(!usuario.idExists(1)) { // Si no hay un usuario en la base de datos, que se creen
-				Usuario user1 = new Usuario();
-				user1.setNombre("María Salgado");
-				user1.setAvatar("");
-				user1.setDni("12345678Q");
-				user1.setDireccion("C/ Alacala 46, 6ºA");
-				user1.setTelefono("678678678");
-				user1.setCorreo("correo@gmail.com");
-				user1.setCentroAcademico("Colegio del Pilar");
-				user1.setCurso("4º ESO");
-				user1.setNotas("Le gusta el chocolate");
-				user1.setNombrePadre("Manuel");
-				user1.setNombreMadre("Carmen");
-				user1.setTelfPadre("666666666");
-				user1.setTelfMadre("666666666");
-				user1.setCorreoPadre("correo@gmail.com");
-				user1.setCorreoMadre("correo@gmail.com");
-				user1.setTipoPerfil(Perfil.Chica);
-				user1.setCodigoSincronizacion("VIC001");
-				user1.setPuntuacion(9);
-				user1.setPuntuacionAnterior(10);
-				usuario.create(user1);
-				Usuario user2 = new Usuario();
-				user2.setNombre("Juanlu Armas");
-				user2.setAvatar("");
-				user2.setDni("12345678Q");
-				user2.setDireccion("C/ Alacala 46, 6ºA");
-				user2.setTelefono("678678678");
-				user2.setCorreo("correo@gmail.com");
-				user2.setCentroAcademico("Colegio del Pilar");
-				user2.setCurso("4º ESO");
-				user2.setNotas("Le gusta el chocolate");
-				user2.setNombrePadre("Manuel");
-				user2.setNombreMadre("Carmen");
-				user2.setTelfPadre("666666666");
-				user2.setTelfMadre("888888888");
-				user2.setCorreoPadre("correo@gmail.com");
-				user2.setCorreoMadre("correo@gmail.com");
-				user2.setTipoPerfil(Perfil.Estandar);
-				user2.setCodigoSincronizacion("VIC002");
-				user2.setPuntuacion(9);
-				user2.setPuntuacionAnterior(10);
-				usuario.create(user2);
-				Usuario user3 = new Usuario();
-				user3.setNombre("Jefferson Almache");
-				user3.setAvatar("");
-				user3.setDni("12345678Q");
-				user3.setDireccion("C/ Alacala 46, 6ºA");
-				user3.setTelefono("678678678");
-				user3.setCorreo("correo@gmail.com");
-				user3.setCentroAcademico("Colegio del Pilar");
-				user3.setCurso("4º ESO");
-				user3.setNotas("Le gusta el chocolate");
-				user3.setNombrePadre("Manuel");
-				user3.setNombreMadre("Carmen");
-				user3.setTelfPadre("666666666");
-				user3.setTelfMadre("666666666");
-				user3.setCorreoPadre("correo@gmail.com");
-				user3.setCorreoMadre("correo@gmail.com");
-				user3.setTipoPerfil(Perfil.Estandar);
-				user3.setCodigoSincronizacion("VIC003");
-				user3.setPuntuacion(9);
-				user3.setPuntuacionAnterior(10);
-				usuario.create(user3);
-				Usuario user4 = new Usuario();
-				user4.setNombre("Clara Paules");
-				user4.setAvatar("");
-				user4.setDni("12345678Q");
-				user4.setDireccion("C/ Alacala 46, 6ºA");
-				user4.setTelefono("678678678");
-				user4.setCorreo("correo@gmail.com");
-				user4.setCentroAcademico("Colegio del Pilar");
-				user4.setCurso("4º ESO");
-				user4.setNotas("Le gusta el chocolate");
-				user4.setNombrePadre("Manuel");
-				user4.setNombreMadre("Carmen");
-				user4.setTelfPadre("666666666");
-				user4.setTelfMadre("666666666");
-				user4.setCorreoPadre("correo@gmail.com");
-				user4.setCorreoMadre("correo@gmail.com");
-				user4.setTipoPerfil(Perfil.Chica);
-				user4.setCodigoSincronizacion("VIC004");
-				user4.setPuntuacion(9);
-				user4.setPuntuacionAnterior(10);
-				usuario.create(user4);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public ArrayList<TransferUsuario> consultarUsuarios() {
 		ArrayList<TransferUsuario> ret = new ArrayList<TransferUsuario>();
@@ -369,7 +273,7 @@ public class SAUsuarioImp implements SAUsuario {
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "¡Hola " + nombreTutor + "!\n " +
                     "Este es el progreso de "+ nombreUsuario +" hasta el momento.\n\nEnviado desde AS");
 
-            Uri uri = Uri.parse( new File("file://" + "/storage/sdcard/Download/AS/Informe.pdf").toString());
+            Uri uri = Uri.parse( new File("file:///storage/emulated/0/Download/AS/Informe.pdf").toString());
 
             emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
             Manager.getInstance().getContext().startActivity(emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

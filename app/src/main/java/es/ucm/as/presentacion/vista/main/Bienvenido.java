@@ -13,7 +13,6 @@ import es.ucm.as.R;
 
 public class Bienvenido extends AppCompatActivity {
     private static final long DELAY = 2000;
-    public boolean sincronizacion = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
