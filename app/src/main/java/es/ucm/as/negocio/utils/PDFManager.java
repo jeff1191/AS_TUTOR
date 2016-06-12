@@ -112,7 +112,7 @@ public class PDFManager {
             // Mostramos el reto
             document.add(new Paragraph("Reto", chapterFont));
             document.add(new Paragraph("\n", paragraphFont));
-            if(reto != null) {
+            if(reto.getTexto() != null) {
                 document.add(new Paragraph("Texto: " + reto.getTexto(), paragraphFont));
                 if (reto.getPremio() != null)
                     document.add(new Paragraph("Premio: " + reto.getPremio(), paragraphFont));
