@@ -14,9 +14,6 @@ import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.vista.tutor.RegistroTutor;
 
 
-/**
- * Created by msalitu on 17/03/2016.
- */
 public class Decision extends AppCompatActivity {
 
     @Override

@@ -10,9 +10,6 @@ import android.widget.Toast;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * Created by Jeffer on 13/04/2016.
- */
 public class DialogEliminarReto extends DialogFragment {
 
     public static DialogEliminarReto newInstance(int idReto, String nombreReto, int idUsuario) {
@@ -28,7 +25,6 @@ public class DialogEliminarReto extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-               // .setIcon(R.drawable.androidhappy)
                 .setTitle("Eliminar Reto")
                 .setMessage("¿Desea eliminar el reto: " + getArguments().getString("nombreReto")+"?")
                 .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {

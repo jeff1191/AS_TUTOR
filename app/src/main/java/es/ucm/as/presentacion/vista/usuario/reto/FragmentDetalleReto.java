@@ -24,9 +24,6 @@ import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.vista.usuario.DialogEliminarUsuario;
 
-/**
- * Created by Juan Lu on 07/04/2016.
- */
 public class FragmentDetalleReto extends Fragment {
 
     private Integer id;

@@ -10,9 +10,6 @@ import android.widget.Toast;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 
-/**
- * Created by Juan Lu on 24/04/2016.
- */
 public class DialogEliminarUsuario extends DialogFragment {
 
     public static DialogEliminarUsuario newInstance(int idUsuario, String nombreUsuario) {

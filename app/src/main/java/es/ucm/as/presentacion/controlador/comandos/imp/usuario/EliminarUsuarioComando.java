@@ -5,9 +5,6 @@ import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 
-/**
- * Created by Juan Lu on 21/04/2016.
- */
 public class EliminarUsuarioComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {

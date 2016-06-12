@@ -21,9 +21,6 @@ import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
 import es.ucm.as.presentacion.vista.main.Manager;
 
-/**
- * Created by Juan Lu on 12/04/2016.
- */
 public class FragmentDetalleTutor extends Fragment {
 
     private String codigoSincronizacion;

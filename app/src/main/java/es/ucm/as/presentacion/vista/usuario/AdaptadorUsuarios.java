@@ -14,9 +14,7 @@ import java.util.ArrayList;
 
 import es.ucm.as.R;
 
-/**
- * Created by Jeffer on 19/03/2016.
- */
+
 class AdaptadorUsuarios extends BaseAdapter {
 
         private LayoutInflater inflater;

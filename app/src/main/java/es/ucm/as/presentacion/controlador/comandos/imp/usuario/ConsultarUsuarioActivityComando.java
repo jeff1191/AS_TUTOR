@@ -5,9 +5,7 @@ import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 
-/**
- * Created by Juan Lu on 20/04/2016.
- */
+
 public class ConsultarUsuarioActivityComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {

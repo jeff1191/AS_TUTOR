@@ -74,7 +74,7 @@ public class FragmentDetalleEvento extends Fragment{
             idEventoActivo = evento.getId();
             fechaActualEvento = evento.getFecha();
             bundle.putString("nombreEvento", evento.getNombre());
-            bundle.putString("horaAlarma", formatHora.format(evento.getHoraAlarma())); //PARSEAR
+            bundle.putString("horaAlarma", formatHora.format(evento.getHoraAlarma()));
             bundle.putString("horaEvento", formatHora.format(evento.getHoraEvento()));
             bundle.putString("fechaEvento", formatFecha.format(evento.getFecha()));
         }
@@ -125,8 +125,6 @@ public class FragmentDetalleEvento extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         rootView = inflater.inflate(R.layout.fragment_detalle_evento, container, false);
         listaEventoUsuarios = (ListView) rootView.findViewById(R.id.listViewUsuariosEvento);
         View header = inflater.inflate(R.layout.row_evento_listado_header, listaEventoUsuarios, false);
@@ -137,15 +135,11 @@ public class FragmentDetalleEvento extends Fragment{
         final EditText editTextHoraAlarma = (EditText) rootView.findViewById(R.id.editTextHoraAlarma);
         final EditText editTextHoraEvento = (EditText) rootView.findViewById(R.id.editTextHoraEvento);
         customCalendar = (MaterialCalendarView) rootView.findViewById(R.id.calendar_view);
-        //CALENDARIO
-        //Initialize CustomCalendarView from layout
-        // calendarView = (CalendarView) rootView.findViewById(R.id.calendar_view);
+
         String dia;
         String mes;
         String anyo;
         currentCalendar = Calendar.getInstance(Locale.getDefault());
-
-        //Log.e("ccc", accion);
 
         if(accion.equals("pasado")){
             dia = fechaEvento.substring(0, 2);
@@ -175,7 +169,7 @@ public class FragmentDetalleEvento extends Fragment{
         else {
             if (nombreEvento.equals(""))
                 textViewNombreEvento.setText("Nuevo evento");
-            else { //Listado del evento seleccionado (Necesitamos la fecha)
+            else {
                 dia = fechaEvento.substring(0, 2);
                 mes = fechaEvento.substring(3, 5);
                 anyo = fechaEvento.substring(6);
@@ -203,7 +197,6 @@ public class FragmentDetalleEvento extends Fragment{
             });
 
             // Fin Listado de usuarios del evento*/
-
             customCalendar.setSelectedDate(currentCalendar.getTime());
             customCalendar.setCurrentDate(currentCalendar);
             customCalendar.setMinimumDate(Calendar.getInstance().getTime());
@@ -222,7 +215,6 @@ public class FragmentDetalleEvento extends Fragment{
                     @Override
                     public void onClick(View v) {
                         // Guardar
-
                         if (!editTextNombreEvento.getText().toString().matches("") &&
                                 !editTextHoraAlarma.getText().toString().matches("") &&
                                 !editTextHoraEvento.getText().toString().matches("")) {
@@ -257,9 +249,6 @@ public class FragmentDetalleEvento extends Fragment{
                                         }
 
                                     }
-                                    if (listaUsuarios.size() == 0) { // Si ha desmarcado todos los usuarios, necesitamos el evento para quitar todos sus elems
-
-                                    }
 
                                     Controlador.getInstancia().ejecutaComando(ListaComandos.GUARDAR_USUARIOS_EVENTO, listaUsuarios);
                                     Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_EVENTOS, null);
@@ -274,7 +263,6 @@ public class FragmentDetalleEvento extends Fragment{
                                 Toast errorNombre =
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Error: Formato incorrecto de hora", Toast.LENGTH_SHORT);
-
                                 errorNombre.show();
                             }
 
@@ -283,11 +271,8 @@ public class FragmentDetalleEvento extends Fragment{
                             Toast errorNombre =
                                     Toast.makeText(getActivity().getApplicationContext(),
                                             "Error: Campo/s vacíos", Toast.LENGTH_SHORT);
-
                             errorNombre.show();
                         }
-
-
                     }
                 });
             } else {
@@ -296,7 +281,6 @@ public class FragmentDetalleEvento extends Fragment{
                     @Override
                     public void onClick(View v) {
                         // Crear
-
                         if (!editTextNombreEvento.getText().toString().matches("") &&
                                 !editTextHoraAlarma.getText().toString().matches("") &&
                                 !editTextHoraEvento.getText().toString().matches("")) {
@@ -354,13 +338,9 @@ public class FragmentDetalleEvento extends Fragment{
 
                             errorNombre.show();
                         }
-
-
                     }
                 });
             }
-
-
             cancelar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -369,7 +349,6 @@ public class FragmentDetalleEvento extends Fragment{
                 }
             });
         }
-
         return rootView;
 
     }

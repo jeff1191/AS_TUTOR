@@ -8,10 +8,7 @@ import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-
-/**
- * Created by msalitu on 28/04/2016.
- */
+//Cbjeto que se envía a traves de los sockets(sincronización)
 public class Mensaje implements Serializable{
 
     static final long serialVersionUID = 1L;

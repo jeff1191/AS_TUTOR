@@ -4,7 +4,6 @@ package es.ucm.as.negocio.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,9 +34,6 @@ import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.vista.main.Manager;
 
-/**
- * Created by msalitu on 23/04/2016.
- */
 public class PDFManager {
 
     private final static String NOMBRE_DOCUMENTO = "Informe.pdf";

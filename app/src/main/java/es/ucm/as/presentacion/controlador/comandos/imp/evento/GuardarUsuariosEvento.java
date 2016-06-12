@@ -8,9 +8,7 @@ import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.presentacion.controlador.comandos.Command;
 import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
 
-/**
- * Created by Jeffer on 21/04/2016.
- */
+
 public class GuardarUsuariosEvento implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {

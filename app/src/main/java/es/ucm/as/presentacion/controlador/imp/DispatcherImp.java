@@ -32,9 +32,7 @@ import es.ucm.as.presentacion.vista.usuario.reto.FragmentDetalleNuevoReto;
 import es.ucm.as.presentacion.vista.usuario.reto.FragmentDetalleReto;
 import es.ucm.as.presentacion.vista.usuario.tarea.UsuarioTareasActivity;
 
-/**
- * Created by Jeffer on 02/03/2016.
- */
+
 public class DispatcherImp extends Dispatcher {
     @Override
     public void dispatch(String accion, Object datos) {
@@ -42,13 +40,11 @@ public class DispatcherImp extends Dispatcher {
         switch(accion){
             //Tutor
             case ListaComandos.CONSULTAR_TUTOR:
-                //Una vez que creas el evento pones el blankFragment
                 TransferTutor tutor = (TransferTutor) datos;
                 FragmentDetalleTutor frgDetalleTutor = FragmentDetalleTutor.newInstance(tutor);
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, frgDetalleTutor).commit();
                 break;
             case ListaComandos.EXISTE_TUTOR:
-                //Una vez que creas el evento pones el blankFragment
                 TransferTutor existe_tutor = (TransferTutor) datos;
                 if (existe_tutor.getNombre() == null){
                     Intent intent = new Intent(Manager.getInstance().getContext(), RegistroTutor.class);
@@ -63,7 +59,6 @@ public class DispatcherImp extends Dispatcher {
                 }
                 break;
             case ListaComandos.ACCESO:
-                //Una vez que creas el evento pones el blankFragment
                 TransferTutor acceso = (TransferTutor) datos;
 
                 Intent intent = new Intent(Manager.getInstance().getContext(), Acceso.class);
@@ -74,7 +69,6 @@ public class DispatcherImp extends Dispatcher {
                 break;
             // Eventos
             case ListaComandos.CREAR_EVENTO:
-              //Una vez que creas el evento pones el blankFragment
                 BlankFragment bk1 = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, bk1).commit();
                 break;
@@ -85,8 +79,6 @@ public class DispatcherImp extends Dispatcher {
                 break;
 
             case ListaComandos.CONSULTAR_EVENTO:
-                //REllenar las lista con los usuarios.
-
                 ArrayList<TransferUsuarioEvento> info = (ArrayList<TransferUsuarioEvento>) datos;
 
                 ArrayList<String> nombresUsuarios = new ArrayList<String>();
@@ -104,7 +96,6 @@ public class DispatcherImp extends Dispatcher {
                 TransferEvento consulta = info.get(0).getEvento();//Sabemos que estamaos consultando evento, por lo tanto no hay nullPointer
 
                 FragmentDetalleEvento frgDetalleE;
-                //Log.e("ccc", consulta.getFecha()+" "+Calendar.getInstance().getTime()+" "+consulta.getFecha().after(Calendar.getInstance().getTime()));
                 if(!consulta.getFecha().after(Calendar.getInstance().getTime()))
                     frgDetalleE = FragmentDetalleEvento.newInstance(consulta, nombresUsuarios, idsUsuarios, asistenciaUsuarios, usuariosActivos, "pasado");
                 else
@@ -114,7 +105,6 @@ public class DispatcherImp extends Dispatcher {
                 break;
 
             case ListaComandos.GUARDAR_EVENTO:
-                //Una vez que creas el evento pones el blankFragment
                 BlankFragment bk2 = new BlankFragment();
                 Manager.getInstance().getFragmentManager().beginTransaction().replace(R.id.FrgDetalle, bk2).commit();
                 break;

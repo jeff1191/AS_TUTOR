@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import es.ucm.as.negocio.usuario.TransferUsuario;
 
-/**
- * Created by Jeffer on 21/04/2016.
- */
 public class TransferUsuarioEvento implements Serializable {
 
     static final long serialVersionUID = 1L;

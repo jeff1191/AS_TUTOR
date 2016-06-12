@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import es.ucm.as.R;
 
-/**
- * Created by Juan Lu on 12/04/2016.
- */
 public class FragmentListadoTutor extends Fragment {
 
     @Override

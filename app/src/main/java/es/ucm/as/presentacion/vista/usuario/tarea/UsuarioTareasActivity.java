@@ -28,9 +28,6 @@ import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioC
 import es.ucm.as.presentacion.vista.main.MainActivity;
 import es.ucm.as.presentacion.vista.main.Manager;
 
-/**
- * Created by msalitu on 01/04/2016.
- */
 public class UsuarioTareasActivity extends AppCompatActivity {
 
     private Integer idUsuario;
@@ -180,8 +177,6 @@ public class UsuarioTareasActivity extends AppCompatActivity {
             builder.show();
         }
     }
-
-
     // Metodo on click del boton "+" material design
     public void nuevaTarea(View view){
         Intent nuevaTarea = new Intent(this, UsuarioTareaDetalleActivity.class);

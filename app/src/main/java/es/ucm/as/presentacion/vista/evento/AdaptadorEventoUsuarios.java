@@ -28,7 +28,6 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
 
     public void addItem(final String item, boolean activado, int i) {
         nombresUsuarios.add(item);
-        //itemSelection[i]=activado;
         usuariosActivos.add(i,activado);
         notifyDataSetChanged();
     }
@@ -78,8 +77,7 @@ public class AdaptadorEventoUsuarios  extends BaseAdapter {
         return usuariosActivos.size();
     }
 
-    public void cambiaCheck(int i/*, boolean b*/) {
-   // itemSelection[i] = !itemSelection[i] ;
+    public void cambiaCheck(int i) {
         usuariosActivos.set(i,!usuariosActivos.get(i));
         notifyDataSetChanged();
     }

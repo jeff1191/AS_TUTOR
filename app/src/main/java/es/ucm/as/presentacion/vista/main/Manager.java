@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by msalitu on 15/04/2016.
- */
 
 public class Manager {
     private static Manager ourInstance = new Manager();
