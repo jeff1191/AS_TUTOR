@@ -60,21 +60,21 @@ public class FragmentDetalleAyuda extends Fragment {
             case 2: //editar/deshabilitar/eliminar tarea
                 pantallazo.setImageResource(R.drawable.a_editar_tarea);
                 break;
-            /*case 3: //sincronizar
+            case 3: //sincronizar
                 pantallazo.setImageResource(R.drawable.a_sincronizar);
                 break;
             case 4: //editar usuario
                 pantallazo.setImageResource(R.drawable.a_editar_usuario);
                 break;
             case 5: //reto usuario
-                pantallazo.setImageResource(R.drawable.a_reto_usuario);
+                pantallazo.setImageResource(R.drawable.a_reto);
                 break;
             case 6: //ver eventos usuario
                 pantallazo.setImageResource(R.drawable.a_eventos_usuario);
                 break;
             case 7: //enviar informe
                 pantallazo.setImageResource(R.drawable.a_enviar_informe);
-                break;*/
+                break;
             default:
                 pantallazo.setImageResource(R.drawable.a_crear_tarea);
                 break;

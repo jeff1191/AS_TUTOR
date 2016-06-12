@@ -91,7 +91,12 @@
         guardar.</item>
 
         <!--5 reto usuario-->
-        <item>¿Cómo gestionar el reto de un usuario?</item>
+        <item>En la sección USUARIO debes seleccionar el usuario al que quieres añadir, ver o eliminar el reto.
+            Un reto es un desafío que se le propone al alumno y que debe conseguir realizar 30 veces. Tan
+            solo puede responder SI (+1) o NO (-1). Puedes motivarle añadiendo un premio. Para añadir, ver
+            o eliminar el reto debes pulsar sobre el icono de menú de usuario de la parte superior y a continuación
+            seleccionar "RETO". En esta versión solamente puedes asignar un reto a cada usuario.
+        </item>
 
         <!--6 ver eventos usuario-->
         <item>En la sección EVENTOS debes seleccionar el evento al cual quieres invitar al usuario.
