@@ -108,7 +108,6 @@ public class PDFManager {
             document.add(table);
             document.add(new Paragraph("\n", paragraphFont));
 
-
             // Mostramos el reto
             document.add(new Paragraph("Reto", chapterFont));
             document.add(new Paragraph("\n", paragraphFont));
