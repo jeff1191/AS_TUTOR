@@ -18,7 +18,6 @@ import es.ucm.as.presentacion.controlador.comandos.imp.usuario.EliminarUsuarioCo
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.EnviarCorreoComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.GenerarPDFComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ListadoUsuariosComando;
-import es.ucm.as.presentacion.controlador.comandos.imp.usuario.CrearUsuariosComando;
 import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 import es.ucm.as.presentacion.controlador.comandos.imp.tarea.ConsultarTareasComando;
 import es.ucm.as.presentacion.controlador.comandos.imp.tarea.CrearTareaComando;
@@ -61,11 +60,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.ACCESO:
                 ret = new AccesoComando();
-                break;
-
-            //Usuario
-            case ListaComandos.CREAR_USUARIOS:
-                ret = new CrearUsuariosComando();
                 break;
             case ListaComandos.CREAR_USUARIO:
                 ret = new CrearUsuarioComando();

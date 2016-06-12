@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by msalitu on 15/04/2016.
@@ -35,6 +36,7 @@ public class ParserTime {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY, hour);
         c.set(Calendar.MINUTE, min);
+        c.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
         Date d = c.getTime();
         return d;
     }

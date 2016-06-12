@@ -4,6 +4,13 @@
     tools:context=".MainActivity">
 
     <item
+        android:id="@+id/eliminarReto"
+        android:icon="@drawable/ic_action_discard_dark"
+        android:orderInCategory="10"
+        app:showAsAction="ifRoom|withText"
+        android:title=""/>
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="101"
         app:showAsAction="always"
@@ -19,8 +26,7 @@
             <item android:id="@+id/tareasUsuario"
                 android:icon="@drawable/ic_action_event"
                 app:showAsAction="ifRoom"
-                android:title="Tareas"
-                />
+                android:title="Tareas" />
 
             <item android:id="@+id/retoUsuario"
                 android:icon="@drawable/ic_flag_gray_48dp"
@@ -43,11 +49,6 @@
 
     </item>
 
-    <item
-        android:id="@+id/eliminarReto"
-        android:icon="@drawable/ic_action_discard_dark"
-        android:orderInCategory="10"
-        app:showAsAction="ifRoom|withText"
-        android:title=""/>
+
 
 </menu>

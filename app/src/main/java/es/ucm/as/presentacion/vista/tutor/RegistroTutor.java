@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import es.ucm.as.R;
@@ -17,6 +18,7 @@ public class RegistroTutor extends Activity {
 
     private EditText correoTutor;
     private EditText constrasenha;
+    private EditText constrasenha2;
     private EditText nombreTutor;
     private EditText pregunta;
     private EditText respuesta;
@@ -30,6 +32,7 @@ public class RegistroTutor extends Activity {
         nombreTutor = (EditText) findViewById(R.id.nombreTutor);
         correoTutor = (EditText) findViewById(R.id.emailTutor);
         constrasenha = (EditText) findViewById(R.id.contrasenha);
+        constrasenha2 = (EditText) findViewById(R.id.contrasenha2);
         pregunta = (EditText) findViewById(R.id.pregunta);
         respuesta = (EditText) findViewById(R.id.respuesta);
     }
@@ -38,17 +41,19 @@ public class RegistroTutor extends Activity {
         //Leer los datos del "fomulario"
         String correo = String.valueOf(correoTutor.getText());
         String clave = String.valueOf(constrasenha.getText());
+        String clave2 = String.valueOf(constrasenha2.getText());
         String nombre = String.valueOf(nombreTutor.getText());
         String preguntatx = String.valueOf(pregunta.getText());
         String respuestax = String.valueOf(respuesta.getText());
 
+        correo=correo.replaceAll("\\s",""); //quitar espacios de sobra
         String codigoSync;
         if(nombre.length() >= 3)
             codigoSync = nombre.substring(0, 3);
         else
             codigoSync = nombre.substring(0, 0);
 
-        if (datosValidos(codigoSync, correo, clave)) {
+        if (datosValidos(codigoSync, correo, clave, clave2, preguntatx, respuestax)) {
             TransferTutor tutor = new TransferTutor();
             tutor.setNombre(nombre);
             tutor.setCorreo(correo);
@@ -64,18 +69,23 @@ public class RegistroTutor extends Activity {
         }
     }
 
-    private boolean datosValidos(String nombre, String correo, String clave) {
-        if (!nombre.toString().matches("") &&
-                !correo.toString().matches("") &&
-                !clave.toString().matches("")) {
-            if(nombre.toString().length()<3)
-                mostrarMensajeError("El nombre debe tener al menos 3 letras");
-            else if (correo.toString().matches(PATRON_EMAIL)) {
-                return true;
+    private boolean datosValidos(String nombre, String correo, String clave, String clave2, String preguntatx, String respuestatx) {
+            if (!nombre.toString().matches("") &&
+                    !correo.toString().matches("") &&
+                    !clave.toString().matches("") &&
+                    !preguntatx.toString().matches("") &&
+                    !respuestatx.toString().matches("")) {
+                if (nombre.toString().length() < 3)
+                    mostrarMensajeError("El nombre debe tener al menos 3 letras");
+                else if (correo.toString().matches(PATRON_EMAIL)){
+                        if(clave.equals(clave2))
+                            return true;
+                        else
+                            mostrarMensajeError("Las contraseñas no coinciden");
+                } else
+                    mostrarMensajeError("Campo email inválido");
             } else
-                mostrarMensajeError("Campo email inválido");
-        } else
-            mostrarMensajeError("Algún campo obligatorio está vacío");
+                mostrarMensajeError("Algún campo está vacío");
 
         return false;
     }

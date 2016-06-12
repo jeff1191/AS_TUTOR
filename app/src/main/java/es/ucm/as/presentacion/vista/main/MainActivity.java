@@ -2,6 +2,7 @@ package es.ucm.as.presentacion.vista.main;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -109,10 +110,11 @@ public class MainActivity extends AppCompatActivity {
         // Luego carga los usuarios de la base de datos
         BlankFragment fragmentBlank = new BlankFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FrgDetalle, fragmentBlank).commit();
-        if(getIntent().getExtras() != null) {
+
+        /*if(getIntent().getExtras() != null) {
             TransferUsuario transferUsuario = (TransferUsuario)getIntent().getExtras().getSerializable("usuario");
             Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO,transferUsuario.getId());
-        }
+        }*/
         Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS,null);
     }
 
@@ -223,6 +225,14 @@ public class MainActivity extends AppCompatActivity {
         menuActionBar.clear();
         getMenuInflater().inflate(R.menu.menu_vacio, menuActionBar);
         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_EVENTO_CONSULTAR_USUARIOS,null);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (android.support.v4.app.Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }

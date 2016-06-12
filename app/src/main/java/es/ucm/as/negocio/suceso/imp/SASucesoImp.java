@@ -506,11 +506,7 @@ public class SASucesoImp implements SASuceso {
             QueryBuilder<Usuario, Integer> uQb = daoUsuario.queryBuilder();
             uQb.where().idEq(idUsuario);
             Usuario usuario = uQb.queryForFirst();
-            //Guarda el usuario en el transfer
-            ret = new TransferReto();
-            TransferUsuario t_usuario = usuario.convert_transfer();
 
-            ret.setUsuario(t_usuario);
             //Busca el reto de ese usuario
             QueryBuilder<Reto, Integer> rQb = daoReto.queryBuilder();
             rQb.where().eq("USUARIO", usuario);

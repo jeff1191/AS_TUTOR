@@ -5,5 +5,6 @@ package es.ucm.as.negocio.utils;
  */
 public enum Perfil {
     Estandar,
-    Chica
+    Chica,
+    Vacío
 }

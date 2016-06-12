@@ -66,7 +66,7 @@ public class Acceso extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if(password != null && password.equals(pwd1.getText().toString())) {
                     Intent intent = new Intent( Manager.getInstance().getContext(), MainActivity.class);
-                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
                     Manager.getInstance().getContext().startActivity(intent);
                 }else{
                     Toast errorNombre =
