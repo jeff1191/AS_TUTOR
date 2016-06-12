@@ -86,6 +86,7 @@ public class FragmentDetalleAyuda extends Fragment {
                 break;
             default:
                 pantallazo.setImageResource(R.drawable.a_crear_tarea);
+                break;
         }
     }
 

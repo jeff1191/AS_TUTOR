@@ -137,8 +137,9 @@
             sobre la papelera en la esquina superior derecha.</item>
 
         <!--11 cambiar contraseña, info-->
-       <item>Para cambiar tus datos personales/contraseña debes seleccionar la pestaña "Mi perfil" en el menú que aparece en la parte
-            superior izquierda. A continuación podrás la información del tutor, pregunta de seguridad y contraseña</item>
+       <item>Para cambiar tus datos personales/contraseña debes seleccionar la pestaña "Mi perfil"
+           en el menú que aparece en la parte superior izquierda. A continuación podrás cambiar
+           tu información, tu pregunta y respuesta de seguridad y tu contraseña de acceso a la aplicación</item>
 
     </string-array>
 
