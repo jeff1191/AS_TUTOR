@@ -194,15 +194,15 @@ public class FragmentDetalleUsuario extends Fragment {
                         public void onClick(DialogInterface dialog, int item) {
                             if (items[item].equals("Hacer foto")) {
                                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, CAMARA);
+                                getActivity().startActivityForResult(intent, CAMARA);
+                                //getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, intent, CAMARA);
                             } else if (items[item].equals("Elegir de la galeria")) {
                                 Intent intent = new Intent(
                                         Intent.ACTION_PICK,
                                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 intent.setType("image/*");
-                                startActivityForResult(
-                                        Intent.createChooser(intent, "Select File"),
-                                        SELECCIONAR_GALERIA);
+                                getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
+                               // getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
                             } else if (items[item].equals("Imagen por defecto")) {
                                 avatarV.setImageResource(R.drawable.avatar);
                                 avatar="";
@@ -326,7 +326,7 @@ public class FragmentDetalleUsuario extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+       // super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_OK) {
             if (requestCode == CAMARA) {
                 Bitmap imagen = (Bitmap) data.getExtras().get("data");
@@ -350,7 +350,7 @@ public class FragmentDetalleUsuario extends Fragment {
             } else if (requestCode == SELECCIONAR_GALERIA) {
                 Uri selectedImageUri = data.getData();
                 String[] projection = {MediaStore.MediaColumns.DATA};
-                CursorLoader cursorLoader = new CursorLoader(Manager.getInstance().getContext(),
+                CursorLoader cursorLoader = new CursorLoader(getActivity(),
                         selectedImageUri, projection, null, null, null);
                 Cursor cursor = cursorLoader.loadInBackground();
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
