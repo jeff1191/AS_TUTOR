@@ -32,27 +32,34 @@
             android:label="@string/title_activity_detalle_activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="standard"/>
         <activity
             android:name="es.ucm.as.presentacion.vista.main.MainActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="standard"/>
         <activity
             android:name="es.ucm.as.presentacion.vista.usuario.tarea.UsuarioTareasActivity"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="landscape"/>
-        <activity android:name="es.ucm.as.presentacion.vista.main.Decision" />
+            android:screenOrientation="landscape"
+            android:launchMode="standard"/>
+        <activity android:name="es.ucm.as.presentacion.vista.main.Decision"
+            android:launchMode="standard"/>
         <activity
             android:name="es.ucm.as.presentacion.vista.tutor.RegistroTutor"
             android:label="@string/title_activity_registro"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:launchMode="standard"/>
         <activity
             android:name="es.ucm.as.presentacion.vista.usuario.tarea.UsuarioTareaDetalleActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:launchMode="standard"/>
         <activity android:name="es.ucm.as.presentacion.vista.main.Acceso"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:launchMode="standard"/>
     </application>
 
 </manifest>

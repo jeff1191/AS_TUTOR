@@ -195,14 +195,17 @@ public class FragmentDetalleUsuario extends Fragment {
                             if (items[item].equals("Hacer foto")) {
                                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                                 getActivity().startActivityForResult(intent, CAMARA);
-                                //getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, intent, CAMARA);
+                                //Manager.getInstance().getActivity().startActivityForResult(intent, CAMARA);
+                               // getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, intent, CAMARA);
                             } else if (items[item].equals("Elegir de la galeria")) {
                                 Intent intent = new Intent(
                                         Intent.ACTION_PICK,
                                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                //intent.putExtra(MediaStore.EXTRA_OUTPUT, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                 intent.setType("image/*");
                                 getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
-                               // getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
+                                //Manager.getInstance().getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
+                               //getActivity().startActivityFromFragment(FragmentDetalleUsuario.this, Intent.createChooser(intent, "Select File"), SELECCIONAR_GALERIA);
                             } else if (items[item].equals("Imagen por defecto")) {
                                 avatarV.setImageResource(R.drawable.avatar);
                                 avatar="";
@@ -265,7 +268,55 @@ public class FragmentDetalleUsuario extends Fragment {
 
             return rootView;
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+         //super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == CAMARA) {
+                Bitmap imagen = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                avatarV.setImageBitmap(imagen);
+                avatar = destination.getPath();
+            } else if (requestCode == SELECCIONAR_GALERIA) {
+                Uri selectedImageUri = data.getData();
+                String[] projection = {MediaStore.MediaColumns.DATA};
+                CursorLoader cursorLoader = new CursorLoader(Manager.getInstance().getActivity(),
+                        selectedImageUri, projection, null, null, null);
+                Cursor cursor = cursorLoader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                String selectedImagePath = cursor.getString(column_index);
+                Bitmap bm;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImagePath, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                avatarV.setImageBitmap(bm);
+                avatar=selectedImagePath;
+            }
+        }
+    }
     private void mostrarMensajeError(String msg) {
         Toast errorNombre =
                 Toast.makeText(Manager.getInstance().getContext().getApplicationContext(),
@@ -324,55 +375,6 @@ public class FragmentDetalleUsuario extends Fragment {
         return dniValido && correoValido && telefonoValido;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       // super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
-            if (requestCode == CAMARA) {
-                Bitmap imagen = (Bitmap) data.getExtras().get("data");
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-                File destination = new File(Environment.getExternalStorageDirectory(),
-                        System.currentTimeMillis() + ".jpg");
-                FileOutputStream fo;
-                try {
-                    destination.createNewFile();
-                    fo = new FileOutputStream(destination);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                avatarV.setImageBitmap(imagen);
-                avatar = destination.getPath();
-            } else if (requestCode == SELECCIONAR_GALERIA) {
-                Uri selectedImageUri = data.getData();
-                String[] projection = {MediaStore.MediaColumns.DATA};
-                CursorLoader cursorLoader = new CursorLoader(getActivity(),
-                        selectedImageUri, projection, null, null, null);
-                Cursor cursor = cursorLoader.loadInBackground();
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-                cursor.moveToFirst();
-                String selectedImagePath = cursor.getString(column_index);
-                Bitmap bm;
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(selectedImagePath, options);
-                final int REQUIRED_SIZE = 200;
-                int scale = 1;
-                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-                    scale *= 2;
-                options.inSampleSize = scale;
-                options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(selectedImagePath, options);
-                avatarV.setImageBitmap(bm);
-                avatar=selectedImagePath;
-            }
-        }
-    }
 
     public AlertDialog createInfoProgenitoresDialogo(final String progenitor, LayoutInflater inflater) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
