@@ -43,6 +43,7 @@ public class RegistroTutor extends Activity {
         String preguntatx = String.valueOf(pregunta.getText());
         String respuestax = String.valueOf(respuesta.getText());
 
+        correo=correo.replaceAll("\\s",""); //quitar espacios de sobra
         String codigoSync;
         if(nombre.length() >= 3)
             codigoSync = nombre.substring(0, 3);
