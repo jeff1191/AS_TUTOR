@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.ucm.as.negocio.usuario.imp;
 
 import android.content.Intent;
@@ -16,20 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as.integracion.DBHelper;
-import es.ucm.as.integracion.UsuarioEvento;
 import es.ucm.as.integracion.Evento;
-import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.integracion.Reto;
-import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.integracion.Tarea;
+import es.ucm.as.integracion.Tutor;
+import es.ucm.as.integracion.Usuario;
+import es.ucm.as.integracion.UsuarioEvento;
+import es.ucm.as.negocio.factoria.FactoriaSA;
+import es.ucm.as.negocio.suceso.SASuceso;
 import es.ucm.as.negocio.suceso.TransferEvento;
-import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
-import es.ucm.as.integracion.Tutor;
+import es.ucm.as.negocio.suceso.TransferUsuarioEvento;
 import es.ucm.as.negocio.usuario.SAUsuario;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-import es.ucm.as.integracion.Usuario;
 import es.ucm.as.negocio.utils.PDFManager;
 import es.ucm.as.negocio.utils.ParserText;
 import es.ucm.as.negocio.utils.Perfil;
@@ -52,6 +49,7 @@ public class SAUsuarioImp implements SAUsuario {
 		try {
 			Dao<Usuario, Integer> daoUsuario = getHelper().getUsuarioDao();
 			Usuario usuario = new Usuario();
+
 			usuario.setNombre(transferUsuario.getNombre());
 			usuario.setCorreo(transferUsuario.getCorreo());
 			usuario.setAvatar(transferUsuario.getAvatar());
@@ -86,8 +84,12 @@ public class SAUsuarioImp implements SAUsuario {
             daoUsuario.create(usuario);
 
             List<Usuario> aux = daoUsuario.queryForEq("NOMBRE", usuario.getNombre());
-            Usuario usuario1 = aux.get(0);
-
+			Usuario usuario1;
+			if(!aux.isEmpty()) {
+				usuario1 = aux.get(aux.size()-1);
+			}else{
+				usuario1 = aux.get(0);
+			}
             String codigoSincronizacion = tutor.getCodigoSincronizacion()+usuario1.getId();
             usuario1.setCodigoSincronizacion(codigoSincronizacion);
 			daoUsuario.update(usuario1);

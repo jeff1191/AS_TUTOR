@@ -1,8 +1,4 @@
-/**
- * 
- */
 package es.ucm.as.negocio.factoria.imp;
-
 
 import es.ucm.as.negocio.factoria.FactoriaSA;
 import es.ucm.as.negocio.suceso.SASuceso;

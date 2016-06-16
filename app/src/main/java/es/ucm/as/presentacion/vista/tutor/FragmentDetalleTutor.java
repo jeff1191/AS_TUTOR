@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -141,14 +140,11 @@ public class FragmentDetalleTutor extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if(pwd1.getText().toString().equals(pwd2.getText().toString())) {
                     contrasenha = pwd1.getText().toString();
-                    Log.e("Contraseña cambiada", contrasenha);
                 }else{
                     Toast toast = Toast.makeText(Manager.getInstance().getContext(),
                             "Las contraseñas no coinciden", Toast.LENGTH_SHORT);
                     toast.show();
                 }
-
-                Log.e("contraseña", contrasenha);
             }
         });
         builder.setNegativeButton("Cancelar",

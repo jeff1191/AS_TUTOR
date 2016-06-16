@@ -1,12 +1,7 @@
-/**
- * 
- */
 package es.ucm.as.negocio.suceso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import es.ucm.as.negocio.usuario.TransferUsuario;
 
 public interface SASuceso {
 

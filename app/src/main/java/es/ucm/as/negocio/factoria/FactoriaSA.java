@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.ucm.as.negocio.factoria;
 
 import es.ucm.as.negocio.factoria.imp.FactoriaSAImp;

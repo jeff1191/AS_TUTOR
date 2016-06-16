@@ -3,7 +3,6 @@ package es.ucm.as.presentacion.vista.usuario.reto;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,9 +21,6 @@ import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.as.presentacion.vista.usuario.DialogEliminarUsuario;
 
 public class FragmentDetalleNuevoReto extends Fragment {
 
@@ -94,8 +90,6 @@ public class FragmentDetalleNuevoReto extends Fragment {
                     reto.setUsuario(t_usuario);
                     reto.setPremio(premio.getText().toString());
                     reto.setSuperado(false);
-                    Toast.makeText(getActivity(), "ID USUARIO  " + idUsuario
-                            + " ha sido creado con éxito", Toast.LENGTH_SHORT).show();
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_RETO, reto);
                     Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_RETO, idUsuario);
                     Toast.makeText(getActivity(), "El reto " + textoReto.getText().toString()

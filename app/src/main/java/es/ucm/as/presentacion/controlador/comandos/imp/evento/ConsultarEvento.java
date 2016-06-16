@@ -14,7 +14,6 @@ public class ConsultarEvento implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso sa = FactoriaSA.getInstancia().nuevoSASuceso();
-        //TransferEvento ret = sa.consultaEvento((TransferEvento) datos);
         ArrayList<TransferUsuarioEvento> ret = sa.consultarUsuariosEvento((TransferEvento) datos);
         return ret;
     }

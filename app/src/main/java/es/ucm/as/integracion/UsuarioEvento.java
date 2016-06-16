@@ -2,8 +2,6 @@ package es.ucm.as.integracion;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import es.ucm.as.integracion.Evento;
-import es.ucm.as.integracion.Usuario;
 
 public class UsuarioEvento {
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,13 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.ucm.as.R;
-import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.imp.usuario.ConsultarUsuarioComando;
-import es.ucm.as.presentacion.vista.main.MainActivity;
 import es.ucm.as.presentacion.vista.main.Manager;
 
 public class UsuarioTareasActivity extends AppCompatActivity {

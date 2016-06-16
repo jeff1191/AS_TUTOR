@@ -1,6 +1,5 @@
 package es.ucm.as.presentacion.vista.usuario.evento;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

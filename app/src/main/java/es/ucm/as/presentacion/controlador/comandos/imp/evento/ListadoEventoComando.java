@@ -13,7 +13,6 @@ public class ListadoEventoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso sa = FactoriaSA.getInstancia().nuevoSASuceso();
-
         ArrayList<TransferEvento> ret = sa.listadoEventos();
         return ret;
     }

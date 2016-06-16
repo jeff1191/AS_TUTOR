@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.ucm.as.negocio.usuario;
 
 import java.io.Serializable;

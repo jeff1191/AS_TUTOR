@@ -1,6 +1,3 @@
-/**
- * 
- */
 package es.ucm.as.negocio.suceso;
 
 import java.io.Serializable;

@@ -1,7 +1,6 @@
 package es.ucm.as.presentacion.controlador.comandos.imp.sincronizacion;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import es.ucm.as.negocio.conexion.ConectionManager;

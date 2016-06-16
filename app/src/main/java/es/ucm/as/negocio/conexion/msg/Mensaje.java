@@ -1,14 +1,14 @@
 package es.ucm.as.negocio.conexion.msg;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.as.negocio.suceso.TransferEvento;
 import es.ucm.as.negocio.suceso.TransferReto;
 import es.ucm.as.negocio.suceso.TransferTarea;
 import es.ucm.as.negocio.usuario.TransferUsuario;
-//Cbjeto que se envía a traves de los sockets(sincronización)
+
+//Objeto que se envía a traves de los sockets(sincronización)
 public class Mensaje implements Serializable{
 
     static final long serialVersionUID = 1L;

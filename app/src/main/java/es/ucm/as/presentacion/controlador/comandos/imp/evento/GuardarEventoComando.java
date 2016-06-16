@@ -11,8 +11,6 @@ public class GuardarEventoComando implements Command {
     @Override
     public Object ejecutaComando(Object datos) throws commandException {
         SASuceso sa = FactoriaSA.getInstancia().nuevoSASuceso();
-        //SAUsuario sa2 = FactoriaSA.getInstancia().nuevoSAUsuario();
-       // sa2.listadoUsuarios();
         return sa.guardarEvento((TransferEvento) datos);
     }
 }

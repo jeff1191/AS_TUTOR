@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,9 +16,6 @@ import es.ucm.as.R;
 import es.ucm.as.negocio.tutor.TransferTutor;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.Command;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 public class Acceso extends AppCompatActivity {
 

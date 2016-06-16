@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.usuario.TransferUsuario;
@@ -221,7 +222,10 @@ public class FragmentDetalleNuevoUsuario extends Fragment {
                         usuario.setTelPadre(telefonoPadre);
                         usuario.setTelMadre(telefonoMadre);
                         usuario.setCentroAcademico(centroEstudios);
-                        usuario.setCodigoSincronizacion("111"); // Esto hay que mejorarlo
+                        long time = new Date().getTime();
+                        String tmpStr = String.valueOf(time);
+                        String last4Str = tmpStr.substring(tmpStr.length() - 5);
+                        usuario.setCodigoSincronizacion(last4Str);
 
                         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, usuario);
                         Controlador.getInstancia().ejecutaComando(ListaComandos.LISTADO_USUARIOS, null);

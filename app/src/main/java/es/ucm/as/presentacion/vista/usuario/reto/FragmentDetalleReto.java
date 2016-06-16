@@ -1,10 +1,8 @@
 package es.ucm.as.presentacion.vista.usuario.reto;
 
-
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +15,8 @@ import android.widget.TextView;
 
 import es.ucm.as.R;
 import es.ucm.as.negocio.suceso.TransferReto;
-import es.ucm.as.negocio.usuario.TransferUsuario;
 import es.ucm.as.presentacion.controlador.Controlador;
 import es.ucm.as.presentacion.controlador.ListaComandos;
-import es.ucm.as.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.as.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.as.presentacion.vista.usuario.DialogEliminarUsuario;
 
 public class FragmentDetalleReto extends Fragment {
 
@@ -48,7 +42,6 @@ public class FragmentDetalleReto extends Fragment {
         arguments.putString("nombreUsuario", reto.getUsuario().getNombre());
         arguments.putString("fotoUsuario", reto.getUsuario().getAvatar());
         arguments.putString("texto", reto.getTexto());
-        Log.e("FRAG_DETALLE", reto.getContador().toString());
         arguments.putInt("contador", reto.getContador());
         arguments.putBoolean("superado", reto.getSuperado());
         arguments.putString("premio", reto.getPremio());

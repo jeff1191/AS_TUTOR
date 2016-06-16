@@ -1,4 +1,3 @@
-
 package es.ucm.as.negocio.suceso.imp;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
