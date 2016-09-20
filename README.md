@@ -5,7 +5,6 @@ centralizar y gestionar toda la información de sus alumnos creando tareas, reto
 
 La información es almacenada localmente en cada dispositivo. Ambas aplicaciones se comunican para sincronizar los datos mediante sockets usando la tecnología WIFI. Esto permite tener un seguimiento del progreso de cada alumno desde la aplicación tutor.
 
-La implementación se ha realizado mediante una arquitectura multicapa que utiliza patrones de ingeniería del software para facilitar cualquier extensión o adaptación de la funcionalidad del sistema.
 
 ![Alt text](https://lh6.googleusercontent.com/c5OedFqtc1JjvTc8tuSCYMVp0M2rhLT7frm6pa3F0o3DF6lldVLhl9TGWrLBrJ7bGYTJ1wnS4kHnyV8=w1366-h585?raw=true "Esquema general")
 
